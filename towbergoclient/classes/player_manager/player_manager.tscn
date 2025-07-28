@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://b1t4uq2j5hxhb"]
+
+[ext_resource type="Script" uid="uid://b0rqrqcovgs4t" path="res://classes/player_manager/player_manager.gd" id="1_pmf7c"]
+
+[node name="PlayerManager" type="Node2D"]
+y_sort_enabled = true
+script = ExtResource("1_pmf7c")

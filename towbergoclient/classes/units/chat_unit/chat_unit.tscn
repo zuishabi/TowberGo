@@ -1,0 +1,15 @@
+[gd_scene load_steps=2 format=3 uid="uid://ctuydb4kab7cs"]
+
+[ext_resource type="Script" uid="uid://dmu15fd4taxw0" path="res://classes/units/chat_unit/chat_unit.gd" id="1_0dx6i"]
+
+[node name="ChatUnit" type="PanelContainer"]
+offset_right = 195.0
+offset_bottom = 40.0
+script = ExtResource("1_0dx6i")
+
+[node name="RichTextLabel" type="RichTextLabel" parent="."]
+layout_mode = 2
+size_flags_horizontal = 3
+bbcode_enabled = true
+fit_content = true
+scroll_active = false

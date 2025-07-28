@@ -1,0 +1,21 @@
+name:
+  TowberGo
+services:
+  mysql:
+    restart: always
+    container_name: towbergo-mysql
+    image: mysql
+    networks:
+      - TowberGo
+    ports:
+      - "3306:3306"
+    environment:
+      - MYSQL_ROOT_PASSWORD=861214959
+    volumes:
+      - TowberGo:/var/lib/mysql
+
+volumes:
+  TowberGo:
+
+networks:
+  TowberGo:

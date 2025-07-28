@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=3 uid="uid://uxbcavfkowgv"]
+
+[ext_resource type="Script" uid="uid://dqkal84v3u8ep" path="res://classes/log/log.gd" id="1_cs1qp"]
+
+[node name="Log" type="RichTextLabel"]
+offset_right = 40.0
+offset_bottom = 40.0
+bbcode_enabled = true
+fit_content = true
+script = ExtResource("1_cs1qp")

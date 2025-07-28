@@ -1,0 +1,68 @@
+syntax = "proto3";
+
+package packets;
+
+option go_package = "pkg/packets";
+
+message LoginRequestMessage{
+  string username = 1;
+  string password = 2;
+}
+
+message RegisterRequestMessage{
+  string username = 1;
+  string password = 2;
+}
+
+message OKResponseMessage{}
+
+message DenyResponseMessage{
+  string reason = 1;
+}
+
+message LoginSuccessMessage{
+  string username = 1;
+  uint32 uid = 2;
+}
+
+message PlayerEnterAreaRequestMessage{
+  string area_name = 1;
+  uint32 entrance_id = 2;
+}
+
+message PlayerEnterAreaMessage{
+  string username = 2;
+  float x = 3;
+  float y = 4;
+}
+
+message PlayerLeaveAreaMessage{}
+
+message PlayerMoveMessage{
+  float from_x = 1;
+  float from_y = 2;
+  float to_x = 3;
+  float to_y = 4;
+}
+
+message ChatMessage{
+  string content = 1;
+  string username = 2;
+  uint32 type = 3; // 记录当前聊天内容的类型，0为当前区域，1为全局
+}
+
+message Packet{
+  uint32 uid = 1;
+  oneof msg{
+    LoginRequestMessage login_request = 2;
+    RegisterRequestMessage register_request = 3;
+    OKResponseMessage ok_response = 4;
+    DenyResponseMessage deny_response = 5;
+    LoginSuccessMessage login_success = 6;
+    PlayerEnterAreaMessage player_enter = 7;
+    PlayerLeaveAreaMessage player_leave = 8;
+    PlayerMoveMessage player_movement = 9;
+    PlayerEnterAreaRequestMessage player_enter_request = 10;
+    ChatMessage chat = 11;
+  }
+}

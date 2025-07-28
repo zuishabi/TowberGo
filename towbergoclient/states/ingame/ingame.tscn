@@ -1,0 +1,104 @@
+[gd_scene load_steps=11 format=3 uid="uid://cc083armwg684"]
+
+[ext_resource type="Script" uid="uid://dd0d3amb3xsju" path="res://states/ingame/ingame.gd" id="1_b7vyf"]
+[ext_resource type="PackedScene" uid="uid://7e1771outtfj" path="res://classes/windows/window.tscn" id="2_0uskn"]
+[ext_resource type="PackedScene" uid="uid://b1t4uq2j5hxhb" path="res://classes/player_manager/player_manager.tscn" id="3_q22go"]
+[ext_resource type="Texture2D" uid="uid://50fi05fbttk" path="res://assets/ui/buttons/bag.tres" id="4_dkhh3"]
+[ext_resource type="Script" uid="uid://bjdgqw06eaafd" path="res://states/ingame/area_manager.gd" id="4_wuwgw"]
+[ext_resource type="Script" uid="uid://cthcc2x5fsq5x" path="res://states/ingame/ui.gd" id="5_ll2wp"]
+[ext_resource type="Script" uid="uid://c1tt0l650qu13" path="res://states/ingame/chat_box.gd" id="6_ube6o"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ube6o"]
+
+[sub_resource type="Gradient" id="Gradient_ube6o"]
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_dkhh3"]
+gradient = SubResource("Gradient_ube6o")
+
+[node name="Ingame" type="Node2D"]
+y_sort_enabled = true
+script = ExtResource("1_b7vyf")
+
+[node name="UI" type="CanvasLayer" parent="."]
+script = ExtResource("5_ll2wp")
+
+[node name="ChatBox" type="PanelContainer" parent="UI"]
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_right = 359.0
+grow_vertical = 0
+focus_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxEmpty_ube6o")
+script = ExtResource("6_ube6o")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="UI/ChatBox"]
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="Close" type="Button" parent="UI/ChatBox/VBoxContainer"]
+layout_mode = 2
+icon = SubResource("GradientTexture1D_dkhh3")
+icon_alignment = 1
+
+[node name="ContentsContainer" type="PanelContainer" parent="UI/ChatBox/VBoxContainer"]
+custom_minimum_size = Vector2(0, 180)
+layout_mode = 2
+
+[node name="ScrollContainer" type="ScrollContainer" parent="UI/ChatBox/VBoxContainer/ContentsContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="VBoxContainer" type="VBoxContainer" parent="UI/ChatBox/VBoxContainer/ContentsContainer/ScrollContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="TabBar" type="TabBar" parent="UI/ChatBox/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 13
+current_tab = 0
+tab_count = 2
+tab_0/title = "区域"
+tab_1/title = "全服"
+
+[node name="LineEdit" type="LineEdit" parent="UI/ChatBox/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 26
+placeholder_text = "最多20个字符"
+max_length = 20
+expand_to_text_length = true
+
+[node name="FuntionList" type="PanelContainer" parent="UI"]
+custom_minimum_size = Vector2(0, 40)
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 820.0
+offset_top = -14.0
+grow_horizontal = 2
+grow_vertical = 0
+
+[node name="HBoxContainer" type="HBoxContainer" parent="UI/FuntionList"]
+layout_mode = 2
+
+[node name="Bag" type="TextureButton" parent="UI/FuntionList/HBoxContainer"]
+custom_minimum_size = Vector2(40, 0)
+layout_mode = 2
+texture_normal = ExtResource("4_dkhh3")
+texture_hover = ExtResource("4_dkhh3")
+stretch_mode = 0
+
+[node name="Window" parent="." instance=ExtResource("2_0uskn")]
+visible = false
+
+[node name="AreaManager" type="Node2D" parent="."]
+y_sort_enabled = true
+script = ExtResource("4_wuwgw")
+
+[node name="PlayerManager" parent="." instance=ExtResource("3_q22go")]
+
+[connection signal="pressed" from="UI/ChatBox/VBoxContainer/Close" to="UI/ChatBox" method="_on_close_pressed"]
+[connection signal="tab_changed" from="UI/ChatBox/VBoxContainer/TabBar" to="UI/ChatBox" method="_on_tab_bar_tab_changed"]
+[connection signal="text_submitted" from="UI/ChatBox/VBoxContainer/LineEdit" to="UI/ChatBox" method="_on_line_edit_text_submitted"]
