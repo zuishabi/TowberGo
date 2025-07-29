@@ -16,7 +16,6 @@ func _ready():
 	enter_request.set_area_name("InitialVillage")
 	enter_request.set_entrance_id(0)
 	WS.send(packet)
-	_area_manager.set_current_area(_area_manager.AREA.INITIAL_VILLAGE)
 
 func _on_connection_closed():
 	_window.show_confirm("connection closed")
@@ -30,6 +29,8 @@ func _on_ws_packted_received(msg:packets.Packet):
 		_handle_player_leave(msg.get_uid(),msg.get_player_leave())
 	elif msg.has_chat():
 		_handle_chat(msg.get_uid(),msg.get_chat())
+	elif msg.has_player_enter_area_response():
+		_handle_player_enter_area_response(msg.get_player_enter_area_response())
 
 func _handle_player_enter(sender_id:int,msg:packets.PlayerEnterAreaMessage):
 	var new_actor:Actor = ACTOR.instantiate()
@@ -38,6 +39,8 @@ func _handle_player_enter(sender_id:int,msg:packets.PlayerEnterAreaMessage):
 	new_actor.global_position = Vector2(msg.get_x(),msg.get_y())
 	new_actor._target_pos = new_actor.global_position
 	_player_manager.add_player(new_actor)
+	if new_actor.is_self:
+		new_actor.set_camera_limit(_area_manager.current_area.limit)
 
 func _handle_player_movement(sender_id:int,msg:packets.PlayerMoveMessage):
 	_player_manager.player_move(sender_id,Vector2(msg.get_from_x(),msg.get_from_y()),Vector2(msg.get_to_x(),msg.get_to_y()))
@@ -47,3 +50,9 @@ func _handle_player_leave(sender_id:int,msg:packets.PlayerLeaveAreaMessage):
 
 func _handle_chat(sender_id:int,msg:packets.ChatMessage):
 	_chat_box.add_chat(msg.get_username(),msg.get_content(),msg.get_type())
+
+func _handle_player_enter_area_response(msg:packets.PlayerEnterAreaResponseMessage):
+	if msg.get_success():
+		_area_manager.set_current_area(msg.get_area_name())
+	else:
+		print(msg.get_reason())

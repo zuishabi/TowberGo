@@ -46,3 +46,7 @@ func _unhandled_input(event:InputEvent):
 		movement.set_to_y(target.y)
 		WS.send(packet)
 		_target_pos = target
+
+func set_camera_limit(limit:Vector2i):
+	_camera_2d.limit_bottom = limit.y
+	_camera_2d.limit_right = limit.x

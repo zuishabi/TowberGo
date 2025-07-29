@@ -309,6 +309,66 @@ func (x *PlayerEnterAreaRequestMessage) GetEntranceId() uint32 {
 	return 0
 }
 
+type PlayerEnterAreaResponseMessage struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	AreaName      string                 `protobuf:"bytes,1,opt,name=area_name,json=areaName,proto3" json:"area_name,omitempty"`
+	Success       bool                   `protobuf:"varint,2,opt,name=success,proto3" json:"success,omitempty"`
+	Reason        string                 `protobuf:"bytes,3,opt,name=reason,proto3" json:"reason,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *PlayerEnterAreaResponseMessage) Reset() {
+	*x = PlayerEnterAreaResponseMessage{}
+	mi := &file_packets_proto_msgTypes[6]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *PlayerEnterAreaResponseMessage) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*PlayerEnterAreaResponseMessage) ProtoMessage() {}
+
+func (x *PlayerEnterAreaResponseMessage) ProtoReflect() protoreflect.Message {
+	mi := &file_packets_proto_msgTypes[6]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use PlayerEnterAreaResponseMessage.ProtoReflect.Descriptor instead.
+func (*PlayerEnterAreaResponseMessage) Descriptor() ([]byte, []int) {
+	return file_packets_proto_rawDescGZIP(), []int{6}
+}
+
+func (x *PlayerEnterAreaResponseMessage) GetAreaName() string {
+	if x != nil {
+		return x.AreaName
+	}
+	return ""
+}
+
+func (x *PlayerEnterAreaResponseMessage) GetSuccess() bool {
+	if x != nil {
+		return x.Success
+	}
+	return false
+}
+
+func (x *PlayerEnterAreaResponseMessage) GetReason() string {
+	if x != nil {
+		return x.Reason
+	}
+	return ""
+}
+
 type PlayerEnterAreaMessage struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Username      string                 `protobuf:"bytes,2,opt,name=username,proto3" json:"username,omitempty"`
@@ -320,7 +380,7 @@ type PlayerEnterAreaMessage struct {
 
 func (x *PlayerEnterAreaMessage) Reset() {
 	*x = PlayerEnterAreaMessage{}
-	mi := &file_packets_proto_msgTypes[6]
+	mi := &file_packets_proto_msgTypes[7]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -332,7 +392,7 @@ func (x *PlayerEnterAreaMessage) String() string {
 func (*PlayerEnterAreaMessage) ProtoMessage() {}
 
 func (x *PlayerEnterAreaMessage) ProtoReflect() protoreflect.Message {
-	mi := &file_packets_proto_msgTypes[6]
+	mi := &file_packets_proto_msgTypes[7]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -345,7 +405,7 @@ func (x *PlayerEnterAreaMessage) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use PlayerEnterAreaMessage.ProtoReflect.Descriptor instead.
 func (*PlayerEnterAreaMessage) Descriptor() ([]byte, []int) {
-	return file_packets_proto_rawDescGZIP(), []int{6}
+	return file_packets_proto_rawDescGZIP(), []int{7}
 }
 
 func (x *PlayerEnterAreaMessage) GetUsername() string {
@@ -377,7 +437,7 @@ type PlayerLeaveAreaMessage struct {
 
 func (x *PlayerLeaveAreaMessage) Reset() {
 	*x = PlayerLeaveAreaMessage{}
-	mi := &file_packets_proto_msgTypes[7]
+	mi := &file_packets_proto_msgTypes[8]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -389,7 +449,7 @@ func (x *PlayerLeaveAreaMessage) String() string {
 func (*PlayerLeaveAreaMessage) ProtoMessage() {}
 
 func (x *PlayerLeaveAreaMessage) ProtoReflect() protoreflect.Message {
-	mi := &file_packets_proto_msgTypes[7]
+	mi := &file_packets_proto_msgTypes[8]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -402,7 +462,7 @@ func (x *PlayerLeaveAreaMessage) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use PlayerLeaveAreaMessage.ProtoReflect.Descriptor instead.
 func (*PlayerLeaveAreaMessage) Descriptor() ([]byte, []int) {
-	return file_packets_proto_rawDescGZIP(), []int{7}
+	return file_packets_proto_rawDescGZIP(), []int{8}
 }
 
 type PlayerMoveMessage struct {
@@ -417,7 +477,7 @@ type PlayerMoveMessage struct {
 
 func (x *PlayerMoveMessage) Reset() {
 	*x = PlayerMoveMessage{}
-	mi := &file_packets_proto_msgTypes[8]
+	mi := &file_packets_proto_msgTypes[9]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -429,7 +489,7 @@ func (x *PlayerMoveMessage) String() string {
 func (*PlayerMoveMessage) ProtoMessage() {}
 
 func (x *PlayerMoveMessage) ProtoReflect() protoreflect.Message {
-	mi := &file_packets_proto_msgTypes[8]
+	mi := &file_packets_proto_msgTypes[9]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -442,7 +502,7 @@ func (x *PlayerMoveMessage) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use PlayerMoveMessage.ProtoReflect.Descriptor instead.
 func (*PlayerMoveMessage) Descriptor() ([]byte, []int) {
-	return file_packets_proto_rawDescGZIP(), []int{8}
+	return file_packets_proto_rawDescGZIP(), []int{9}
 }
 
 func (x *PlayerMoveMessage) GetFromX() float32 {
@@ -484,7 +544,7 @@ type ChatMessage struct {
 
 func (x *ChatMessage) Reset() {
 	*x = ChatMessage{}
-	mi := &file_packets_proto_msgTypes[9]
+	mi := &file_packets_proto_msgTypes[10]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -496,7 +556,7 @@ func (x *ChatMessage) String() string {
 func (*ChatMessage) ProtoMessage() {}
 
 func (x *ChatMessage) ProtoReflect() protoreflect.Message {
-	mi := &file_packets_proto_msgTypes[9]
+	mi := &file_packets_proto_msgTypes[10]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -509,7 +569,7 @@ func (x *ChatMessage) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ChatMessage.ProtoReflect.Descriptor instead.
 func (*ChatMessage) Descriptor() ([]byte, []int) {
-	return file_packets_proto_rawDescGZIP(), []int{9}
+	return file_packets_proto_rawDescGZIP(), []int{10}
 }
 
 func (x *ChatMessage) GetContent() string {
@@ -548,6 +608,7 @@ type Packet struct {
 	//	*Packet_PlayerMovement
 	//	*Packet_PlayerEnterRequest
 	//	*Packet_Chat
+	//	*Packet_PlayerEnterAreaResponse
 	Msg           isPacket_Msg `protobuf_oneof:"msg"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -555,7 +616,7 @@ type Packet struct {
 
 func (x *Packet) Reset() {
 	*x = Packet{}
-	mi := &file_packets_proto_msgTypes[10]
+	mi := &file_packets_proto_msgTypes[11]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -567,7 +628,7 @@ func (x *Packet) String() string {
 func (*Packet) ProtoMessage() {}
 
 func (x *Packet) ProtoReflect() protoreflect.Message {
-	mi := &file_packets_proto_msgTypes[10]
+	mi := &file_packets_proto_msgTypes[11]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -580,7 +641,7 @@ func (x *Packet) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use Packet.ProtoReflect.Descriptor instead.
 func (*Packet) Descriptor() ([]byte, []int) {
-	return file_packets_proto_rawDescGZIP(), []int{10}
+	return file_packets_proto_rawDescGZIP(), []int{11}
 }
 
 func (x *Packet) GetUid() uint32 {
@@ -687,6 +748,15 @@ func (x *Packet) GetChat() *ChatMessage {
 	return nil
 }
 
+func (x *Packet) GetPlayerEnterAreaResponse() *PlayerEnterAreaResponseMessage {
+	if x != nil {
+		if x, ok := x.Msg.(*Packet_PlayerEnterAreaResponse); ok {
+			return x.PlayerEnterAreaResponse
+		}
+	}
+	return nil
+}
+
 type isPacket_Msg interface {
 	isPacket_Msg()
 }
@@ -731,6 +801,10 @@ type Packet_Chat struct {
 	Chat *ChatMessage `protobuf:"bytes,11,opt,name=chat,proto3,oneof"`
 }
 
+type Packet_PlayerEnterAreaResponse struct {
+	PlayerEnterAreaResponse *PlayerEnterAreaResponseMessage `protobuf:"bytes,12,opt,name=player_enter_area_response,json=playerEnterAreaResponse,proto3,oneof"`
+}
+
 func (*Packet_LoginRequest) isPacket_Msg() {}
 
 func (*Packet_RegisterRequest) isPacket_Msg() {}
@@ -750,6 +824,8 @@ func (*Packet_PlayerMovement) isPacket_Msg() {}
 func (*Packet_PlayerEnterRequest) isPacket_Msg() {}
 
 func (*Packet_Chat) isPacket_Msg() {}
+
+func (*Packet_PlayerEnterAreaResponse) isPacket_Msg() {}
 
 var File_packets_proto protoreflect.FileDescriptor
 
@@ -771,7 +847,11 @@ const file_packets_proto_rawDesc = "" +
 	"\x1dPlayerEnterAreaRequestMessage\x12\x1b\n" +
 	"\tarea_name\x18\x01 \x01(\tR\bareaName\x12\x1f\n" +
 	"\ventrance_id\x18\x02 \x01(\rR\n" +
-	"entranceId\"P\n" +
+	"entranceId\"o\n" +
+	"\x1ePlayerEnterAreaResponseMessage\x12\x1b\n" +
+	"\tarea_name\x18\x01 \x01(\tR\bareaName\x12\x18\n" +
+	"\asuccess\x18\x02 \x01(\bR\asuccess\x12\x16\n" +
+	"\x06reason\x18\x03 \x01(\tR\x06reason\"P\n" +
 	"\x16PlayerEnterAreaMessage\x12\x1a\n" +
 	"\busername\x18\x02 \x01(\tR\busername\x12\f\n" +
 	"\x01x\x18\x03 \x01(\x02R\x01x\x12\f\n" +
@@ -785,7 +865,7 @@ const file_packets_proto_rawDesc = "" +
 	"\vChatMessage\x12\x18\n" +
 	"\acontent\x18\x01 \x01(\tR\acontent\x12\x1a\n" +
 	"\busername\x18\x02 \x01(\tR\busername\x12\x12\n" +
-	"\x04type\x18\x03 \x01(\rR\x04type\"\xd8\x05\n" +
+	"\x04type\x18\x03 \x01(\rR\x04type\"\xc0\x06\n" +
 	"\x06Packet\x12\x10\n" +
 	"\x03uid\x18\x01 \x01(\rR\x03uid\x12C\n" +
 	"\rlogin_request\x18\x02 \x01(\v2\x1c.packets.LoginRequestMessageH\x00R\floginRequest\x12L\n" +
@@ -799,7 +879,8 @@ const file_packets_proto_rawDesc = "" +
 	"\x0fplayer_movement\x18\t \x01(\v2\x1a.packets.PlayerMoveMessageH\x00R\x0eplayerMovement\x12Z\n" +
 	"\x14player_enter_request\x18\n" +
 	" \x01(\v2&.packets.PlayerEnterAreaRequestMessageH\x00R\x12playerEnterRequest\x12*\n" +
-	"\x04chat\x18\v \x01(\v2\x14.packets.ChatMessageH\x00R\x04chatB\x05\n" +
+	"\x04chat\x18\v \x01(\v2\x14.packets.ChatMessageH\x00R\x04chat\x12f\n" +
+	"\x1aplayer_enter_area_response\x18\f \x01(\v2'.packets.PlayerEnterAreaResponseMessageH\x00R\x17playerEnterAreaResponseB\x05\n" +
 	"\x03msgB\rZ\vpkg/packetsb\x06proto3"
 
 var (
@@ -814,19 +895,20 @@ func file_packets_proto_rawDescGZIP() []byte {
 	return file_packets_proto_rawDescData
 }
 
-var file_packets_proto_msgTypes = make([]protoimpl.MessageInfo, 11)
+var file_packets_proto_msgTypes = make([]protoimpl.MessageInfo, 12)
 var file_packets_proto_goTypes = []any{
-	(*LoginRequestMessage)(nil),           // 0: packets.LoginRequestMessage
-	(*RegisterRequestMessage)(nil),        // 1: packets.RegisterRequestMessage
-	(*OKResponseMessage)(nil),             // 2: packets.OKResponseMessage
-	(*DenyResponseMessage)(nil),           // 3: packets.DenyResponseMessage
-	(*LoginSuccessMessage)(nil),           // 4: packets.LoginSuccessMessage
-	(*PlayerEnterAreaRequestMessage)(nil), // 5: packets.PlayerEnterAreaRequestMessage
-	(*PlayerEnterAreaMessage)(nil),        // 6: packets.PlayerEnterAreaMessage
-	(*PlayerLeaveAreaMessage)(nil),        // 7: packets.PlayerLeaveAreaMessage
-	(*PlayerMoveMessage)(nil),             // 8: packets.PlayerMoveMessage
-	(*ChatMessage)(nil),                   // 9: packets.ChatMessage
-	(*Packet)(nil),                        // 10: packets.Packet
+	(*LoginRequestMessage)(nil),            // 0: packets.LoginRequestMessage
+	(*RegisterRequestMessage)(nil),         // 1: packets.RegisterRequestMessage
+	(*OKResponseMessage)(nil),              // 2: packets.OKResponseMessage
+	(*DenyResponseMessage)(nil),            // 3: packets.DenyResponseMessage
+	(*LoginSuccessMessage)(nil),            // 4: packets.LoginSuccessMessage
+	(*PlayerEnterAreaRequestMessage)(nil),  // 5: packets.PlayerEnterAreaRequestMessage
+	(*PlayerEnterAreaResponseMessage)(nil), // 6: packets.PlayerEnterAreaResponseMessage
+	(*PlayerEnterAreaMessage)(nil),         // 7: packets.PlayerEnterAreaMessage
+	(*PlayerLeaveAreaMessage)(nil),         // 8: packets.PlayerLeaveAreaMessage
+	(*PlayerMoveMessage)(nil),              // 9: packets.PlayerMoveMessage
+	(*ChatMessage)(nil),                    // 10: packets.ChatMessage
+	(*Packet)(nil),                         // 11: packets.Packet
 }
 var file_packets_proto_depIdxs = []int32{
 	0,  // 0: packets.Packet.login_request:type_name -> packets.LoginRequestMessage
@@ -834,16 +916,17 @@ var file_packets_proto_depIdxs = []int32{
 	2,  // 2: packets.Packet.ok_response:type_name -> packets.OKResponseMessage
 	3,  // 3: packets.Packet.deny_response:type_name -> packets.DenyResponseMessage
 	4,  // 4: packets.Packet.login_success:type_name -> packets.LoginSuccessMessage
-	6,  // 5: packets.Packet.player_enter:type_name -> packets.PlayerEnterAreaMessage
-	7,  // 6: packets.Packet.player_leave:type_name -> packets.PlayerLeaveAreaMessage
-	8,  // 7: packets.Packet.player_movement:type_name -> packets.PlayerMoveMessage
+	7,  // 5: packets.Packet.player_enter:type_name -> packets.PlayerEnterAreaMessage
+	8,  // 6: packets.Packet.player_leave:type_name -> packets.PlayerLeaveAreaMessage
+	9,  // 7: packets.Packet.player_movement:type_name -> packets.PlayerMoveMessage
 	5,  // 8: packets.Packet.player_enter_request:type_name -> packets.PlayerEnterAreaRequestMessage
-	9,  // 9: packets.Packet.chat:type_name -> packets.ChatMessage
-	10, // [10:10] is the sub-list for method output_type
-	10, // [10:10] is the sub-list for method input_type
-	10, // [10:10] is the sub-list for extension type_name
-	10, // [10:10] is the sub-list for extension extendee
-	0,  // [0:10] is the sub-list for field type_name
+	10, // 9: packets.Packet.chat:type_name -> packets.ChatMessage
+	6,  // 10: packets.Packet.player_enter_area_response:type_name -> packets.PlayerEnterAreaResponseMessage
+	11, // [11:11] is the sub-list for method output_type
+	11, // [11:11] is the sub-list for method input_type
+	11, // [11:11] is the sub-list for extension type_name
+	11, // [11:11] is the sub-list for extension extendee
+	0,  // [0:11] is the sub-list for field type_name
 }
 
 func init() { file_packets_proto_init() }
@@ -851,7 +934,7 @@ func file_packets_proto_init() {
 	if File_packets_proto != nil {
 		return
 	}
-	file_packets_proto_msgTypes[10].OneofWrappers = []any{
+	file_packets_proto_msgTypes[11].OneofWrappers = []any{
 		(*Packet_LoginRequest)(nil),
 		(*Packet_RegisterRequest)(nil),
 		(*Packet_OkResponse)(nil),
@@ -862,6 +945,7 @@ func file_packets_proto_init() {
 		(*Packet_PlayerMovement)(nil),
 		(*Packet_PlayerEnterRequest)(nil),
 		(*Packet_Chat)(nil),
+		(*Packet_PlayerEnterAreaResponse)(nil),
 	}
 	type x struct{}
 	out := protoimpl.TypeBuilder{
@@ -869,7 +953,7 @@ func file_packets_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_packets_proto_rawDesc), len(file_packets_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   11,
+			NumMessages:   12,
 			NumExtensions: 0,
 			NumServices:   0,
 		},

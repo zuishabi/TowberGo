@@ -2,6 +2,7 @@ package areas
 
 import (
 	"TowberGoServer/internal/containers"
+	"TowberGoServer/internal/game/objects"
 	"TowberGoServer/pkg/packets"
 )
 
@@ -28,4 +29,8 @@ func (v *InitialVillage) ProcessMessage(senderID uint32, message packets.Msg) {
 
 func (v *InitialVillage) Initialize() {
 	v.BaseArea.Initialize(v)
+}
+
+func (v *InitialVillage) CheckCanEnter(player *objects.Player) (bool, string) {
+	return true, ""
 }

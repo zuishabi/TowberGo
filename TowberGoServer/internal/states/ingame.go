@@ -6,6 +6,7 @@ import (
 	"TowberGoServer/internal/game/areas"
 	"TowberGoServer/internal/game/objects"
 	"TowberGoServer/pkg/packets"
+	"fmt"
 )
 
 type InGame struct {
@@ -32,13 +33,18 @@ func (g *InGame) HandleMessage(senderID uint32, message packets.Msg) {
 	switch message := message.(type) {
 	case *packets.Packet_PlayerEnterRequest:
 		// 处理玩家加入区域请求，首先将玩家移除当前区域
+		area := areas.AreaMgr.Get(message.PlayerEnterRequest.AreaName)
+		if area == nil {
+			fmt.Println("no current area")
+			return
+		}
+		success, reason := area.CheckCanEnter(g.Player)
+		rsp := packets.NewPlayerEnterAreaResponse(success, reason, area.Name())
+		g.client.SocketSend(rsp)
 		if g.Player.Area != nil {
 			g.Player.Area.RemovePlayer(g.Player.UID)
 		}
-		area := areas.AreaMgr.Get(message.PlayerEnterRequest.AreaName)
-		if area != nil {
-			area.AddPlayer(g.Player, message.PlayerEnterRequest.EntranceId)
-		}
+		area.AddPlayer(g.Player, message.PlayerEnterRequest.EntranceId)
 	case *packets.Packet_Chat:
 		if message.Chat.Type == 1 {
 			g.handleChatMessage(senderID, message)

@@ -2,6 +2,7 @@ package areas
 
 import (
 	"TowberGoServer/internal/containers"
+	"TowberGoServer/internal/game/objects"
 	"TowberGoServer/pkg/packets"
 )
 
@@ -14,7 +15,7 @@ func (a *AdventureHub) Initialize() {
 }
 
 func (a *AdventureHub) GetEntrance(id uint32) containers.Vector2 {
-	return containers.Vector2{X: 20, Y: 20}
+	return containers.Vector2{X: 152, Y: 240}
 }
 
 func (a *AdventureHub) Name() string {
@@ -25,4 +26,8 @@ func (a *AdventureHub) ProcessMessage(senderID uint32, message packets.Msg) {
 	if a.BaseArea.ProcessMessage(senderID, message) {
 		return
 	}
+}
+
+func (a *AdventureHub) CheckCanEnter(player *objects.Player) (bool, string) {
+	return true, ""
 }

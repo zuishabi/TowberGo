@@ -14,4 +14,5 @@ type Area interface {
 	// ProcessMessage 将消息传递给area处理
 	ProcessMessage(uid uint32, packet packets.Msg)
 	Initialize()
+	CheckCanEnter(player *Player) (bool, string)
 }

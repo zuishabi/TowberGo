@@ -30,6 +30,12 @@ message PlayerEnterAreaRequestMessage{
   uint32 entrance_id = 2;
 }
 
+message PlayerEnterAreaResponseMessage{
+  string area_name = 1;
+  bool success = 2;
+  string reason = 3;
+}
+
 message PlayerEnterAreaMessage{
   string username = 2;
   float x = 3;
@@ -64,5 +70,6 @@ message Packet{
     PlayerMoveMessage player_movement = 9;
     PlayerEnterAreaRequestMessage player_enter_request = 10;
     ChatMessage chat = 11;
+    PlayerEnterAreaResponseMessage player_enter_area_response = 12;
   }
 }
