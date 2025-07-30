@@ -1,12 +1,16 @@
-[gd_scene load_steps=11 format=3 uid="uid://cc083armwg684"]
+[gd_scene load_steps=16 format=3 uid="uid://cc083armwg684"]
 
 [ext_resource type="Script" uid="uid://dd0d3amb3xsju" path="res://states/ingame/ingame.gd" id="1_b7vyf"]
 [ext_resource type="PackedScene" uid="uid://7e1771outtfj" path="res://classes/windows/window.tscn" id="2_0uskn"]
 [ext_resource type="PackedScene" uid="uid://b1t4uq2j5hxhb" path="res://classes/player_manager/player_manager.tscn" id="3_q22go"]
 [ext_resource type="Texture2D" uid="uid://50fi05fbttk" path="res://assets/ui/buttons/bag.tres" id="4_dkhh3"]
+[ext_resource type="Script" uid="uid://5pwl5mg7wvpe" path="res://states/ingame/funtion_list.gd" id="4_m5k0h"]
 [ext_resource type="Script" uid="uid://bjdgqw06eaafd" path="res://states/ingame/area_manager.gd" id="4_wuwgw"]
+[ext_resource type="Texture2D" uid="uid://cc6vxy00cg8ok" path="res://assets/ui/buttons/mail.tres" id="5_hnl16"]
 [ext_resource type="Script" uid="uid://cthcc2x5fsq5x" path="res://states/ingame/ui.gd" id="5_ll2wp"]
+[ext_resource type="Script" uid="uid://2ksn7negljkc" path="res://states/ingame/mail.gd" id="6_3gvbx"]
 [ext_resource type="Script" uid="uid://c1tt0l650qu13" path="res://states/ingame/chat_box.gd" id="6_ube6o"]
+[ext_resource type="Script" uid="uid://bhqct7aucjh8f" path="res://states/ingame/content.gd" id="7_m5k0h"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ube6o"]
 
@@ -14,6 +18,13 @@
 
 [sub_resource type="GradientTexture1D" id="GradientTexture1D_dkhh3"]
 gradient = SubResource("Gradient_ube6o")
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_hnl16"]
+content_margin_left = 5.0
+content_margin_top = 5.0
+content_margin_right = 5.0
+content_margin_bottom = 5.0
+bg_color = Color(0.380392, 0.380392, 0.380392, 0.686275)
 
 [node name="Ingame" type="Node2D"]
 y_sort_enabled = true
@@ -70,7 +81,7 @@ max_length = 20
 expand_to_text_length = true
 
 [node name="FuntionList" type="PanelContainer" parent="UI"]
-custom_minimum_size = Vector2(0, 40)
+custom_minimum_size = Vector2(0, 50)
 anchors_preset = 12
 anchor_top = 1.0
 anchor_right = 1.0
@@ -79,6 +90,8 @@ offset_left = 820.0
 offset_top = -14.0
 grow_horizontal = 2
 grow_vertical = 0
+theme_override_styles/panel = SubResource("StyleBoxFlat_hnl16")
+script = ExtResource("4_m5k0h")
 
 [node name="HBoxContainer" type="HBoxContainer" parent="UI/FuntionList"]
 layout_mode = 2
@@ -86,9 +99,86 @@ layout_mode = 2
 [node name="Bag" type="TextureButton" parent="UI/FuntionList/HBoxContainer"]
 custom_minimum_size = Vector2(40, 0)
 layout_mode = 2
+mouse_default_cursor_shape = 2
 texture_normal = ExtResource("4_dkhh3")
 texture_hover = ExtResource("4_dkhh3")
 stretch_mode = 0
+
+[node name="Mail" type="TextureButton" parent="UI/FuntionList/HBoxContainer"]
+custom_minimum_size = Vector2(40, 0)
+layout_mode = 2
+mouse_default_cursor_shape = 2
+texture_normal = ExtResource("5_hnl16")
+texture_hover = ExtResource("5_hnl16")
+stretch_mode = 0
+
+[node name="Mail" type="Window" parent="UI"]
+initial_position = 1
+size = Vector2i(600, 400)
+transient = true
+exclusive = true
+unresizable = true
+script = ExtResource("6_3gvbx")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="UI/Mail"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ListScroll" type="ScrollContainer" parent="UI/Mail/HBoxContainer"]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+
+[node name="List" type="VBoxContainer" parent="UI/Mail/HBoxContainer/ListScroll"]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="ContentScroll" type="ScrollContainer" parent="UI/Mail/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Content" type="VBoxContainer" parent="UI/Mail/HBoxContainer/ContentScroll"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_constants/separation = 5
+script = ExtResource("7_m5k0h")
+
+[node name="Title" type="Label" parent="UI/Mail/HBoxContainer/ContentScroll/Content"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 26
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="MainContent" type="RichTextLabel" parent="UI/Mail/HBoxContainer/ContentScroll/Content"]
+layout_mode = 2
+theme_override_font_sizes/normal_font_size = 13
+fit_content = true
+
+[node name="ItemList" type="ItemList" parent="UI/Mail/HBoxContainer/ContentScroll/Content"]
+layout_mode = 2
+size_flags_horizontal = 4
+auto_width = true
+auto_height = true
+max_columns = 5
+icon_mode = 0
+fixed_icon_size = Vector2i(32, 32)
+
+[node name="Buttons" type="HBoxContainer" parent="UI/Mail/HBoxContainer/ContentScroll/Content"]
+layout_mode = 2
+alignment = 1
+
+[node name="Collect" type="Button" parent="UI/Mail/HBoxContainer/ContentScroll/Content/Buttons"]
+layout_mode = 2
+text = "Collect"
+
+[node name="Delete" type="Button" parent="UI/Mail/HBoxContainer/ContentScroll/Content/Buttons"]
+layout_mode = 2
+text = "Delete"
 
 [node name="Window" parent="." instance=ExtResource("2_0uskn")]
 visible = false
@@ -102,3 +192,7 @@ script = ExtResource("4_wuwgw")
 [connection signal="pressed" from="UI/ChatBox/VBoxContainer/Close" to="UI/ChatBox" method="_on_close_pressed"]
 [connection signal="tab_changed" from="UI/ChatBox/VBoxContainer/TabBar" to="UI/ChatBox" method="_on_tab_bar_tab_changed"]
 [connection signal="text_submitted" from="UI/ChatBox/VBoxContainer/LineEdit" to="UI/ChatBox" method="_on_line_edit_text_submitted"]
+[connection signal="pressed" from="UI/FuntionList/HBoxContainer/Mail" to="UI" method="_on_mail_pressed"]
+[connection signal="close_requested" from="UI/Mail" to="UI/Mail" method="_on_close_requested"]
+[connection signal="pressed" from="UI/Mail/HBoxContainer/ContentScroll/Content/Buttons/Collect" to="UI/Mail/HBoxContainer/ContentScroll/Content" method="_on_collect_pressed"]
+[connection signal="pressed" from="UI/Mail/HBoxContainer/ContentScroll/Content/Buttons/Delete" to="UI/Mail/HBoxContainer/ContentScroll/Content" method="_on_delete_pressed"]

@@ -7,6 +7,7 @@ const ACTOR = preload("res://classes/actor/actor.tscn")
 @onready var _player_manager = $PlayerManager
 @onready var _area_manager = $AreaManager
 @onready var _chat_box = $UI/ChatBox
+@onready var _mail_window = $UI/Mail
 
 func _ready():
 	WS.packet_received.connect(_on_ws_packted_received)
@@ -31,6 +32,10 @@ func _on_ws_packted_received(msg:packets.Packet):
 		_handle_chat(msg.get_uid(),msg.get_chat())
 	elif msg.has_player_enter_area_response():
 		_handle_player_enter_area_response(msg.get_player_enter_area_response())
+	elif msg.has_mail():
+		_handle_mail(msg.get_mail())
+	elif msg.has_mail_collect_response():
+		_handle_mail_collect_response(msg.get_mail_collect_response())
 
 func _handle_player_enter(sender_id:int,msg:packets.PlayerEnterAreaMessage):
 	var new_actor:Actor = ACTOR.instantiate()
@@ -56,3 +61,15 @@ func _handle_player_enter_area_response(msg:packets.PlayerEnterAreaResponseMessa
 		_area_manager.set_current_area(msg.get_area_name())
 	else:
 		print(msg.get_reason())
+
+func _handle_mail(msg:packets.MailMessage):
+	var items:Array[BaseItem]
+	for i in msg.get_items():
+		items.append(ItemManager.generate_items(i.get_id(),i.get_count()))
+	_mail_window.add_mail(msg.get_titles(),msg.get_contents(),msg.get_sender(),items,msg.get_id())
+
+func _handle_mail_collect_response(msg:packets.MailCollectResponseMessage):
+	if !msg.get_success():
+		_window.show_confirm(msg.get_reason())
+	else:
+		_mail_window.delete_mail(msg.get_id())

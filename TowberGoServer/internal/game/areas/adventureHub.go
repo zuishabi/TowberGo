@@ -7,7 +7,7 @@ import (
 )
 
 type AdventureHub struct {
-	BaseArea
+	objects.BaseArea
 }
 
 func (a *AdventureHub) Initialize() {

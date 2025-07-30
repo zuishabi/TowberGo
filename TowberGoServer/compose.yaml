@@ -13,7 +13,16 @@ services:
       - MYSQL_ROOT_PASSWORD=861214959
     volumes:
       - TowberGo:/var/lib/mysql
-
+  redis:
+    container_name: towbergo-redis
+    restart: always
+    image: bitnami/redis
+    networks:
+      - TowberGo
+    ports:
+      - "6379:6379"
+    environment:
+      - REDIS_PASSWORD=861214959
 volumes:
   TowberGo:
 

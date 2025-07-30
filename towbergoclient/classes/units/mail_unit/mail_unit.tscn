@@ -1,0 +1,36 @@
+[gd_scene load_steps=3 format=3 uid="uid://binve2tt6kn53"]
+
+[ext_resource type="Script" uid="uid://di3tina1dlfy" path="res://classes/units/mail_unit/mail_unit.gd" id="1_ghhec"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_3gvbx"]
+content_margin_left = 2.0
+content_margin_top = 2.0
+content_margin_right = 2.0
+content_margin_bottom = 2.0
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+
+[node name="MailUnit" type="PanelContainer"]
+custom_minimum_size = Vector2(200, 0)
+offset_right = 40.0
+offset_bottom = 40.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_3gvbx")
+script = ExtResource("1_ghhec")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="Title" type="Label" parent="VBoxContainer"]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+theme_override_font_sizes/font_size = 26
+text_overrun_behavior = 3
+
+[node name="Sender" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 13
+
+[connection signal="gui_input" from="." to="." method="_on_gui_input"]

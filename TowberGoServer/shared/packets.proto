@@ -57,6 +57,35 @@ message ChatMessage{
   uint32 type = 3; // 记录当前聊天内容的类型，0为当前区域，1为全局
 }
 
+message MailRequestMessage{}
+
+message MailMessage{
+  uint32 id = 1;
+  string titles = 2;
+  string contents = 3;
+  string sender = 4;
+  repeated ItemMessage items = 5;
+}
+
+message MailCollectMessage{
+  uint32 id = 1;
+}
+
+message MailCollectResponseMessage{
+  bool success = 1;
+  string reason = 2;
+  uint32 id = 3;
+}
+
+message MailDeleteMessage{
+  uint32 id = 1;
+}
+
+message ItemMessage{
+  uint32 id = 1;
+  uint32 count = 2;
+}
+
 message Packet{
   uint32 uid = 1;
   oneof msg{
@@ -71,5 +100,10 @@ message Packet{
     PlayerEnterAreaRequestMessage player_enter_request = 10;
     ChatMessage chat = 11;
     PlayerEnterAreaResponseMessage player_enter_area_response = 12;
+    MailMessage mail = 13;
+    MailRequestMessage mail_request = 14;
+    MailCollectMessage mail_collect = 15;
+    MailDeleteMessage mail_delete = 16;
+    MailCollectResponseMessage mail_collect_response = 17;
   }
 }

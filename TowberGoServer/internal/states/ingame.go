@@ -3,9 +3,9 @@ package states
 import (
 	"TowberGoServer/internal"
 	"TowberGoServer/internal/containers"
-	"TowberGoServer/internal/game/areas"
 	"TowberGoServer/internal/game/objects"
 	"TowberGoServer/pkg/packets"
+	"TowberGoServer/pkg/utils"
 	"fmt"
 )
 
@@ -33,13 +33,13 @@ func (g *InGame) HandleMessage(senderID uint32, message packets.Msg) {
 	switch message := message.(type) {
 	case *packets.Packet_PlayerEnterRequest:
 		// 处理玩家加入区域请求，首先将玩家移除当前区域
-		area := areas.AreaMgr.Get(message.PlayerEnterRequest.AreaName)
+		area := objects.AreaMgr.Get(message.PlayerEnterRequest.AreaName)
 		if area == nil {
 			fmt.Println("no current area")
 			return
 		}
 		success, reason := area.CheckCanEnter(g.Player)
-		rsp := packets.NewPlayerEnterAreaResponse(success, reason, area.Name())
+		rsp := utils.NewPlayerEnterAreaResponse(success, reason, area.Name())
 		g.client.SocketSend(rsp)
 		if g.Player.Area != nil {
 			g.Player.Area.RemovePlayer(g.Player.UID)
@@ -57,7 +57,16 @@ func (g *InGame) HandleMessage(senderID uint32, message packets.Msg) {
 			Y: message.PlayerMovement.ToY,
 		}
 		g.Player.Area.ProcessMessage(senderID, message)
+	case *packets.Packet_MailRequest:
+		g.handleMailRequest()
+	case *packets.Packet_MailDelete:
+		g.handleMailDelete(message.MailDelete.Id)
+	case *packets.Packet_MailCollect:
+		g.handleMailCollect(message.MailCollect.Id)
 	default:
+		if g.Player.Area == nil {
+			return
+		}
 		g.Player.Area.ProcessMessage(senderID, message)
 	}
 }
@@ -67,6 +76,33 @@ func (g *InGame) handleChatMessage(senderID uint32, message *packets.Packet_Chat
 	g.client.Hub().LoginClients.ForEach(func(id uint32, client internal.ClientInterface) {
 		client.SocketSendAs(message, senderID)
 	})
+}
+
+func (g *InGame) handleMailRequest() {
+	mails := objects.MailManager.GetMails(g.Player.UID)
+	for i := range mails {
+		msg := utils.NewMailMessages(&mails[i])
+		g.client.SocketSend(msg)
+	}
+}
+
+// 处理删除邮件
+func (g *InGame) handleMailDelete(id uint32) {
+	objects.MailManager.DeleteMail(g.Player.UID, id)
+}
+
+// 处理收集邮件内容
+func (g *InGame) handleMailCollect(id uint32) {
+	rsp := &packets.Packet_MailCollectResponse{MailCollectResponse: &packets.MailCollectResponseMessage{
+		Success: true,
+		Reason:  "",
+		Id:      id,
+	}}
+	if err := objects.MailManager.CollectMail(); err != nil {
+		rsp.MailCollectResponse.Success = false
+		rsp.MailCollectResponse.Reason = err.Error()
+	}
+	g.client.SocketSend(rsp)
 }
 
 func (g *InGame) OnExit() {

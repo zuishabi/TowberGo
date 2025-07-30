@@ -1379,6 +1379,384 @@ class ChatMessage:
 			return PB_ERR.PARSE_INCOMPLETE
 		return result
 	
+class MailRequestMessage:
+	func _init():
+		var service
+		
+	var data = {}
+	
+	func _to_string() -> String:
+		return PBPacker.message_to_string(data)
+		
+	func to_bytes() -> PackedByteArray:
+		return PBPacker.pack_message(data)
+		
+	func from_bytes(bytes : PackedByteArray, offset : int = 0, limit : int = -1) -> int:
+		var cur_limit = bytes.size()
+		if limit != -1:
+			cur_limit = limit
+		var result = PBPacker.unpack_message(data, bytes, offset, cur_limit)
+		if result == cur_limit:
+			if PBPacker.check_required(data):
+				if limit == -1:
+					return PB_ERR.NO_ERRORS
+			else:
+				return PB_ERR.REQUIRED_FIELDS
+		elif limit == -1 && result > 0:
+			return PB_ERR.PARSE_INCOMPLETE
+		return result
+	
+class MailMessage:
+	func _init():
+		var service
+		
+		__id = PBField.new("id", PB_DATA_TYPE.UINT32, PB_RULE.OPTIONAL, 1, true, DEFAULT_VALUES_3[PB_DATA_TYPE.UINT32])
+		service = PBServiceField.new()
+		service.field = __id
+		data[__id.tag] = service
+		
+		__titles = PBField.new("titles", PB_DATA_TYPE.STRING, PB_RULE.OPTIONAL, 2, true, DEFAULT_VALUES_3[PB_DATA_TYPE.STRING])
+		service = PBServiceField.new()
+		service.field = __titles
+		data[__titles.tag] = service
+		
+		__contents = PBField.new("contents", PB_DATA_TYPE.STRING, PB_RULE.OPTIONAL, 3, true, DEFAULT_VALUES_3[PB_DATA_TYPE.STRING])
+		service = PBServiceField.new()
+		service.field = __contents
+		data[__contents.tag] = service
+		
+		__sender = PBField.new("sender", PB_DATA_TYPE.STRING, PB_RULE.OPTIONAL, 4, true, DEFAULT_VALUES_3[PB_DATA_TYPE.STRING])
+		service = PBServiceField.new()
+		service.field = __sender
+		data[__sender.tag] = service
+		
+		var __items_default: Array[ItemMessage] = []
+		__items = PBField.new("items", PB_DATA_TYPE.MESSAGE, PB_RULE.REPEATED, 5, true, __items_default)
+		service = PBServiceField.new()
+		service.field = __items
+		service.func_ref = Callable(self, "add_items")
+		data[__items.tag] = service
+		
+	var data = {}
+	
+	var __id: PBField
+	func has_id() -> bool:
+		if __id.value != null:
+			return true
+		return false
+	func get_id() -> int:
+		return __id.value
+	func clear_id() -> void:
+		data[1].state = PB_SERVICE_STATE.UNFILLED
+		__id.value = DEFAULT_VALUES_3[PB_DATA_TYPE.UINT32]
+	func set_id(value : int) -> void:
+		__id.value = value
+	
+	var __titles: PBField
+	func has_titles() -> bool:
+		if __titles.value != null:
+			return true
+		return false
+	func get_titles() -> String:
+		return __titles.value
+	func clear_titles() -> void:
+		data[2].state = PB_SERVICE_STATE.UNFILLED
+		__titles.value = DEFAULT_VALUES_3[PB_DATA_TYPE.STRING]
+	func set_titles(value : String) -> void:
+		__titles.value = value
+	
+	var __contents: PBField
+	func has_contents() -> bool:
+		if __contents.value != null:
+			return true
+		return false
+	func get_contents() -> String:
+		return __contents.value
+	func clear_contents() -> void:
+		data[3].state = PB_SERVICE_STATE.UNFILLED
+		__contents.value = DEFAULT_VALUES_3[PB_DATA_TYPE.STRING]
+	func set_contents(value : String) -> void:
+		__contents.value = value
+	
+	var __sender: PBField
+	func has_sender() -> bool:
+		if __sender.value != null:
+			return true
+		return false
+	func get_sender() -> String:
+		return __sender.value
+	func clear_sender() -> void:
+		data[4].state = PB_SERVICE_STATE.UNFILLED
+		__sender.value = DEFAULT_VALUES_3[PB_DATA_TYPE.STRING]
+	func set_sender(value : String) -> void:
+		__sender.value = value
+	
+	var __items: PBField
+	func get_items() -> Array[ItemMessage]:
+		return __items.value
+	func clear_items() -> void:
+		data[5].state = PB_SERVICE_STATE.UNFILLED
+		__items.value.clear()
+	func add_items() -> ItemMessage:
+		var element = ItemMessage.new()
+		__items.value.append(element)
+		return element
+	
+	func _to_string() -> String:
+		return PBPacker.message_to_string(data)
+		
+	func to_bytes() -> PackedByteArray:
+		return PBPacker.pack_message(data)
+		
+	func from_bytes(bytes : PackedByteArray, offset : int = 0, limit : int = -1) -> int:
+		var cur_limit = bytes.size()
+		if limit != -1:
+			cur_limit = limit
+		var result = PBPacker.unpack_message(data, bytes, offset, cur_limit)
+		if result == cur_limit:
+			if PBPacker.check_required(data):
+				if limit == -1:
+					return PB_ERR.NO_ERRORS
+			else:
+				return PB_ERR.REQUIRED_FIELDS
+		elif limit == -1 && result > 0:
+			return PB_ERR.PARSE_INCOMPLETE
+		return result
+	
+class MailCollectMessage:
+	func _init():
+		var service
+		
+		__id = PBField.new("id", PB_DATA_TYPE.UINT32, PB_RULE.OPTIONAL, 1, true, DEFAULT_VALUES_3[PB_DATA_TYPE.UINT32])
+		service = PBServiceField.new()
+		service.field = __id
+		data[__id.tag] = service
+		
+	var data = {}
+	
+	var __id: PBField
+	func has_id() -> bool:
+		if __id.value != null:
+			return true
+		return false
+	func get_id() -> int:
+		return __id.value
+	func clear_id() -> void:
+		data[1].state = PB_SERVICE_STATE.UNFILLED
+		__id.value = DEFAULT_VALUES_3[PB_DATA_TYPE.UINT32]
+	func set_id(value : int) -> void:
+		__id.value = value
+	
+	func _to_string() -> String:
+		return PBPacker.message_to_string(data)
+		
+	func to_bytes() -> PackedByteArray:
+		return PBPacker.pack_message(data)
+		
+	func from_bytes(bytes : PackedByteArray, offset : int = 0, limit : int = -1) -> int:
+		var cur_limit = bytes.size()
+		if limit != -1:
+			cur_limit = limit
+		var result = PBPacker.unpack_message(data, bytes, offset, cur_limit)
+		if result == cur_limit:
+			if PBPacker.check_required(data):
+				if limit == -1:
+					return PB_ERR.NO_ERRORS
+			else:
+				return PB_ERR.REQUIRED_FIELDS
+		elif limit == -1 && result > 0:
+			return PB_ERR.PARSE_INCOMPLETE
+		return result
+	
+class MailCollectResponseMessage:
+	func _init():
+		var service
+		
+		__success = PBField.new("success", PB_DATA_TYPE.BOOL, PB_RULE.OPTIONAL, 1, true, DEFAULT_VALUES_3[PB_DATA_TYPE.BOOL])
+		service = PBServiceField.new()
+		service.field = __success
+		data[__success.tag] = service
+		
+		__reason = PBField.new("reason", PB_DATA_TYPE.STRING, PB_RULE.OPTIONAL, 2, true, DEFAULT_VALUES_3[PB_DATA_TYPE.STRING])
+		service = PBServiceField.new()
+		service.field = __reason
+		data[__reason.tag] = service
+		
+		__id = PBField.new("id", PB_DATA_TYPE.UINT32, PB_RULE.OPTIONAL, 3, true, DEFAULT_VALUES_3[PB_DATA_TYPE.UINT32])
+		service = PBServiceField.new()
+		service.field = __id
+		data[__id.tag] = service
+		
+	var data = {}
+	
+	var __success: PBField
+	func has_success() -> bool:
+		if __success.value != null:
+			return true
+		return false
+	func get_success() -> bool:
+		return __success.value
+	func clear_success() -> void:
+		data[1].state = PB_SERVICE_STATE.UNFILLED
+		__success.value = DEFAULT_VALUES_3[PB_DATA_TYPE.BOOL]
+	func set_success(value : bool) -> void:
+		__success.value = value
+	
+	var __reason: PBField
+	func has_reason() -> bool:
+		if __reason.value != null:
+			return true
+		return false
+	func get_reason() -> String:
+		return __reason.value
+	func clear_reason() -> void:
+		data[2].state = PB_SERVICE_STATE.UNFILLED
+		__reason.value = DEFAULT_VALUES_3[PB_DATA_TYPE.STRING]
+	func set_reason(value : String) -> void:
+		__reason.value = value
+	
+	var __id: PBField
+	func has_id() -> bool:
+		if __id.value != null:
+			return true
+		return false
+	func get_id() -> int:
+		return __id.value
+	func clear_id() -> void:
+		data[3].state = PB_SERVICE_STATE.UNFILLED
+		__id.value = DEFAULT_VALUES_3[PB_DATA_TYPE.UINT32]
+	func set_id(value : int) -> void:
+		__id.value = value
+	
+	func _to_string() -> String:
+		return PBPacker.message_to_string(data)
+		
+	func to_bytes() -> PackedByteArray:
+		return PBPacker.pack_message(data)
+		
+	func from_bytes(bytes : PackedByteArray, offset : int = 0, limit : int = -1) -> int:
+		var cur_limit = bytes.size()
+		if limit != -1:
+			cur_limit = limit
+		var result = PBPacker.unpack_message(data, bytes, offset, cur_limit)
+		if result == cur_limit:
+			if PBPacker.check_required(data):
+				if limit == -1:
+					return PB_ERR.NO_ERRORS
+			else:
+				return PB_ERR.REQUIRED_FIELDS
+		elif limit == -1 && result > 0:
+			return PB_ERR.PARSE_INCOMPLETE
+		return result
+	
+class MailDeleteMessage:
+	func _init():
+		var service
+		
+		__id = PBField.new("id", PB_DATA_TYPE.UINT32, PB_RULE.OPTIONAL, 1, true, DEFAULT_VALUES_3[PB_DATA_TYPE.UINT32])
+		service = PBServiceField.new()
+		service.field = __id
+		data[__id.tag] = service
+		
+	var data = {}
+	
+	var __id: PBField
+	func has_id() -> bool:
+		if __id.value != null:
+			return true
+		return false
+	func get_id() -> int:
+		return __id.value
+	func clear_id() -> void:
+		data[1].state = PB_SERVICE_STATE.UNFILLED
+		__id.value = DEFAULT_VALUES_3[PB_DATA_TYPE.UINT32]
+	func set_id(value : int) -> void:
+		__id.value = value
+	
+	func _to_string() -> String:
+		return PBPacker.message_to_string(data)
+		
+	func to_bytes() -> PackedByteArray:
+		return PBPacker.pack_message(data)
+		
+	func from_bytes(bytes : PackedByteArray, offset : int = 0, limit : int = -1) -> int:
+		var cur_limit = bytes.size()
+		if limit != -1:
+			cur_limit = limit
+		var result = PBPacker.unpack_message(data, bytes, offset, cur_limit)
+		if result == cur_limit:
+			if PBPacker.check_required(data):
+				if limit == -1:
+					return PB_ERR.NO_ERRORS
+			else:
+				return PB_ERR.REQUIRED_FIELDS
+		elif limit == -1 && result > 0:
+			return PB_ERR.PARSE_INCOMPLETE
+		return result
+	
+class ItemMessage:
+	func _init():
+		var service
+		
+		__id = PBField.new("id", PB_DATA_TYPE.UINT32, PB_RULE.OPTIONAL, 1, true, DEFAULT_VALUES_3[PB_DATA_TYPE.UINT32])
+		service = PBServiceField.new()
+		service.field = __id
+		data[__id.tag] = service
+		
+		__count = PBField.new("count", PB_DATA_TYPE.UINT32, PB_RULE.OPTIONAL, 2, true, DEFAULT_VALUES_3[PB_DATA_TYPE.UINT32])
+		service = PBServiceField.new()
+		service.field = __count
+		data[__count.tag] = service
+		
+	var data = {}
+	
+	var __id: PBField
+	func has_id() -> bool:
+		if __id.value != null:
+			return true
+		return false
+	func get_id() -> int:
+		return __id.value
+	func clear_id() -> void:
+		data[1].state = PB_SERVICE_STATE.UNFILLED
+		__id.value = DEFAULT_VALUES_3[PB_DATA_TYPE.UINT32]
+	func set_id(value : int) -> void:
+		__id.value = value
+	
+	var __count: PBField
+	func has_count() -> bool:
+		if __count.value != null:
+			return true
+		return false
+	func get_count() -> int:
+		return __count.value
+	func clear_count() -> void:
+		data[2].state = PB_SERVICE_STATE.UNFILLED
+		__count.value = DEFAULT_VALUES_3[PB_DATA_TYPE.UINT32]
+	func set_count(value : int) -> void:
+		__count.value = value
+	
+	func _to_string() -> String:
+		return PBPacker.message_to_string(data)
+		
+	func to_bytes() -> PackedByteArray:
+		return PBPacker.pack_message(data)
+		
+	func from_bytes(bytes : PackedByteArray, offset : int = 0, limit : int = -1) -> int:
+		var cur_limit = bytes.size()
+		if limit != -1:
+			cur_limit = limit
+		var result = PBPacker.unpack_message(data, bytes, offset, cur_limit)
+		if result == cur_limit:
+			if PBPacker.check_required(data):
+				if limit == -1:
+					return PB_ERR.NO_ERRORS
+			else:
+				return PB_ERR.REQUIRED_FIELDS
+		elif limit == -1 && result > 0:
+			return PB_ERR.PARSE_INCOMPLETE
+		return result
+	
 class Packet:
 	func _init():
 		var service
@@ -1454,6 +1832,36 @@ class Packet:
 		service.func_ref = Callable(self, "new_player_enter_area_response")
 		data[__player_enter_area_response.tag] = service
 		
+		__mail = PBField.new("mail", PB_DATA_TYPE.MESSAGE, PB_RULE.OPTIONAL, 13, true, DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE])
+		service = PBServiceField.new()
+		service.field = __mail
+		service.func_ref = Callable(self, "new_mail")
+		data[__mail.tag] = service
+		
+		__mail_request = PBField.new("mail_request", PB_DATA_TYPE.MESSAGE, PB_RULE.OPTIONAL, 14, true, DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE])
+		service = PBServiceField.new()
+		service.field = __mail_request
+		service.func_ref = Callable(self, "new_mail_request")
+		data[__mail_request.tag] = service
+		
+		__mail_collect = PBField.new("mail_collect", PB_DATA_TYPE.MESSAGE, PB_RULE.OPTIONAL, 15, true, DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE])
+		service = PBServiceField.new()
+		service.field = __mail_collect
+		service.func_ref = Callable(self, "new_mail_collect")
+		data[__mail_collect.tag] = service
+		
+		__mail_delete = PBField.new("mail_delete", PB_DATA_TYPE.MESSAGE, PB_RULE.OPTIONAL, 16, true, DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE])
+		service = PBServiceField.new()
+		service.field = __mail_delete
+		service.func_ref = Callable(self, "new_mail_delete")
+		data[__mail_delete.tag] = service
+		
+		__mail_collect_response = PBField.new("mail_collect_response", PB_DATA_TYPE.MESSAGE, PB_RULE.OPTIONAL, 17, true, DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE])
+		service = PBServiceField.new()
+		service.field = __mail_collect_response
+		service.func_ref = Callable(self, "new_mail_collect_response")
+		data[__mail_collect_response.tag] = service
+		
 	var data = {}
 	
 	var __uid: PBField
@@ -1501,6 +1909,16 @@ class Packet:
 		data[11].state = PB_SERVICE_STATE.UNFILLED
 		__player_enter_area_response.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
 		data[12].state = PB_SERVICE_STATE.UNFILLED
+		__mail.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
+		data[13].state = PB_SERVICE_STATE.UNFILLED
+		__mail_request.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
+		data[14].state = PB_SERVICE_STATE.UNFILLED
+		__mail_collect.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
+		data[15].state = PB_SERVICE_STATE.UNFILLED
+		__mail_delete.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
+		data[16].state = PB_SERVICE_STATE.UNFILLED
+		__mail_collect_response.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
+		data[17].state = PB_SERVICE_STATE.UNFILLED
 		__login_request.value = LoginRequestMessage.new()
 		return __login_request.value
 	
@@ -1536,6 +1954,16 @@ class Packet:
 		data[11].state = PB_SERVICE_STATE.UNFILLED
 		__player_enter_area_response.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
 		data[12].state = PB_SERVICE_STATE.UNFILLED
+		__mail.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
+		data[13].state = PB_SERVICE_STATE.UNFILLED
+		__mail_request.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
+		data[14].state = PB_SERVICE_STATE.UNFILLED
+		__mail_collect.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
+		data[15].state = PB_SERVICE_STATE.UNFILLED
+		__mail_delete.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
+		data[16].state = PB_SERVICE_STATE.UNFILLED
+		__mail_collect_response.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
+		data[17].state = PB_SERVICE_STATE.UNFILLED
 		__register_request.value = RegisterRequestMessage.new()
 		return __register_request.value
 	
@@ -1571,6 +1999,16 @@ class Packet:
 		data[11].state = PB_SERVICE_STATE.UNFILLED
 		__player_enter_area_response.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
 		data[12].state = PB_SERVICE_STATE.UNFILLED
+		__mail.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
+		data[13].state = PB_SERVICE_STATE.UNFILLED
+		__mail_request.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
+		data[14].state = PB_SERVICE_STATE.UNFILLED
+		__mail_collect.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
+		data[15].state = PB_SERVICE_STATE.UNFILLED
+		__mail_delete.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
+		data[16].state = PB_SERVICE_STATE.UNFILLED
+		__mail_collect_response.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
+		data[17].state = PB_SERVICE_STATE.UNFILLED
 		__ok_response.value = OKResponseMessage.new()
 		return __ok_response.value
 	
@@ -1606,6 +2044,16 @@ class Packet:
 		data[11].state = PB_SERVICE_STATE.UNFILLED
 		__player_enter_area_response.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
 		data[12].state = PB_SERVICE_STATE.UNFILLED
+		__mail.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
+		data[13].state = PB_SERVICE_STATE.UNFILLED
+		__mail_request.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
+		data[14].state = PB_SERVICE_STATE.UNFILLED
+		__mail_collect.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
+		data[15].state = PB_SERVICE_STATE.UNFILLED
+		__mail_delete.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
+		data[16].state = PB_SERVICE_STATE.UNFILLED
+		__mail_collect_response.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
+		data[17].state = PB_SERVICE_STATE.UNFILLED
 		__deny_response.value = DenyResponseMessage.new()
 		return __deny_response.value
 	
@@ -1641,6 +2089,16 @@ class Packet:
 		data[11].state = PB_SERVICE_STATE.UNFILLED
 		__player_enter_area_response.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
 		data[12].state = PB_SERVICE_STATE.UNFILLED
+		__mail.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
+		data[13].state = PB_SERVICE_STATE.UNFILLED
+		__mail_request.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
+		data[14].state = PB_SERVICE_STATE.UNFILLED
+		__mail_collect.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
+		data[15].state = PB_SERVICE_STATE.UNFILLED
+		__mail_delete.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
+		data[16].state = PB_SERVICE_STATE.UNFILLED
+		__mail_collect_response.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
+		data[17].state = PB_SERVICE_STATE.UNFILLED
 		__login_success.value = LoginSuccessMessage.new()
 		return __login_success.value
 	
@@ -1676,6 +2134,16 @@ class Packet:
 		data[11].state = PB_SERVICE_STATE.UNFILLED
 		__player_enter_area_response.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
 		data[12].state = PB_SERVICE_STATE.UNFILLED
+		__mail.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
+		data[13].state = PB_SERVICE_STATE.UNFILLED
+		__mail_request.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
+		data[14].state = PB_SERVICE_STATE.UNFILLED
+		__mail_collect.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
+		data[15].state = PB_SERVICE_STATE.UNFILLED
+		__mail_delete.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
+		data[16].state = PB_SERVICE_STATE.UNFILLED
+		__mail_collect_response.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
+		data[17].state = PB_SERVICE_STATE.UNFILLED
 		__player_enter.value = PlayerEnterAreaMessage.new()
 		return __player_enter.value
 	
@@ -1711,6 +2179,16 @@ class Packet:
 		data[11].state = PB_SERVICE_STATE.UNFILLED
 		__player_enter_area_response.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
 		data[12].state = PB_SERVICE_STATE.UNFILLED
+		__mail.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
+		data[13].state = PB_SERVICE_STATE.UNFILLED
+		__mail_request.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
+		data[14].state = PB_SERVICE_STATE.UNFILLED
+		__mail_collect.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
+		data[15].state = PB_SERVICE_STATE.UNFILLED
+		__mail_delete.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
+		data[16].state = PB_SERVICE_STATE.UNFILLED
+		__mail_collect_response.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
+		data[17].state = PB_SERVICE_STATE.UNFILLED
 		__player_leave.value = PlayerLeaveAreaMessage.new()
 		return __player_leave.value
 	
@@ -1746,6 +2224,16 @@ class Packet:
 		data[11].state = PB_SERVICE_STATE.UNFILLED
 		__player_enter_area_response.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
 		data[12].state = PB_SERVICE_STATE.UNFILLED
+		__mail.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
+		data[13].state = PB_SERVICE_STATE.UNFILLED
+		__mail_request.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
+		data[14].state = PB_SERVICE_STATE.UNFILLED
+		__mail_collect.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
+		data[15].state = PB_SERVICE_STATE.UNFILLED
+		__mail_delete.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
+		data[16].state = PB_SERVICE_STATE.UNFILLED
+		__mail_collect_response.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
+		data[17].state = PB_SERVICE_STATE.UNFILLED
 		__player_movement.value = PlayerMoveMessage.new()
 		return __player_movement.value
 	
@@ -1781,6 +2269,16 @@ class Packet:
 		data[11].state = PB_SERVICE_STATE.UNFILLED
 		__player_enter_area_response.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
 		data[12].state = PB_SERVICE_STATE.UNFILLED
+		__mail.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
+		data[13].state = PB_SERVICE_STATE.UNFILLED
+		__mail_request.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
+		data[14].state = PB_SERVICE_STATE.UNFILLED
+		__mail_collect.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
+		data[15].state = PB_SERVICE_STATE.UNFILLED
+		__mail_delete.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
+		data[16].state = PB_SERVICE_STATE.UNFILLED
+		__mail_collect_response.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
+		data[17].state = PB_SERVICE_STATE.UNFILLED
 		__player_enter_request.value = PlayerEnterAreaRequestMessage.new()
 		return __player_enter_request.value
 	
@@ -1816,6 +2314,16 @@ class Packet:
 		data[11].state = PB_SERVICE_STATE.FILLED
 		__player_enter_area_response.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
 		data[12].state = PB_SERVICE_STATE.UNFILLED
+		__mail.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
+		data[13].state = PB_SERVICE_STATE.UNFILLED
+		__mail_request.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
+		data[14].state = PB_SERVICE_STATE.UNFILLED
+		__mail_collect.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
+		data[15].state = PB_SERVICE_STATE.UNFILLED
+		__mail_delete.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
+		data[16].state = PB_SERVICE_STATE.UNFILLED
+		__mail_collect_response.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
+		data[17].state = PB_SERVICE_STATE.UNFILLED
 		__chat.value = ChatMessage.new()
 		return __chat.value
 	
@@ -1851,8 +2359,243 @@ class Packet:
 		__chat.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
 		data[11].state = PB_SERVICE_STATE.UNFILLED
 		data[12].state = PB_SERVICE_STATE.FILLED
+		__mail.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
+		data[13].state = PB_SERVICE_STATE.UNFILLED
+		__mail_request.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
+		data[14].state = PB_SERVICE_STATE.UNFILLED
+		__mail_collect.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
+		data[15].state = PB_SERVICE_STATE.UNFILLED
+		__mail_delete.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
+		data[16].state = PB_SERVICE_STATE.UNFILLED
+		__mail_collect_response.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
+		data[17].state = PB_SERVICE_STATE.UNFILLED
 		__player_enter_area_response.value = PlayerEnterAreaResponseMessage.new()
 		return __player_enter_area_response.value
+	
+	var __mail: PBField
+	func has_mail() -> bool:
+		if __mail.value != null:
+			return true
+		return false
+	func get_mail() -> MailMessage:
+		return __mail.value
+	func clear_mail() -> void:
+		data[13].state = PB_SERVICE_STATE.UNFILLED
+		__mail.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
+	func new_mail() -> MailMessage:
+		__login_request.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
+		data[2].state = PB_SERVICE_STATE.UNFILLED
+		__register_request.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
+		data[3].state = PB_SERVICE_STATE.UNFILLED
+		__ok_response.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
+		data[4].state = PB_SERVICE_STATE.UNFILLED
+		__deny_response.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
+		data[5].state = PB_SERVICE_STATE.UNFILLED
+		__login_success.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
+		data[6].state = PB_SERVICE_STATE.UNFILLED
+		__player_enter.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
+		data[7].state = PB_SERVICE_STATE.UNFILLED
+		__player_leave.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
+		data[8].state = PB_SERVICE_STATE.UNFILLED
+		__player_movement.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
+		data[9].state = PB_SERVICE_STATE.UNFILLED
+		__player_enter_request.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
+		data[10].state = PB_SERVICE_STATE.UNFILLED
+		__chat.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
+		data[11].state = PB_SERVICE_STATE.UNFILLED
+		__player_enter_area_response.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
+		data[12].state = PB_SERVICE_STATE.UNFILLED
+		data[13].state = PB_SERVICE_STATE.FILLED
+		__mail_request.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
+		data[14].state = PB_SERVICE_STATE.UNFILLED
+		__mail_collect.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
+		data[15].state = PB_SERVICE_STATE.UNFILLED
+		__mail_delete.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
+		data[16].state = PB_SERVICE_STATE.UNFILLED
+		__mail_collect_response.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
+		data[17].state = PB_SERVICE_STATE.UNFILLED
+		__mail.value = MailMessage.new()
+		return __mail.value
+	
+	var __mail_request: PBField
+	func has_mail_request() -> bool:
+		if __mail_request.value != null:
+			return true
+		return false
+	func get_mail_request() -> MailRequestMessage:
+		return __mail_request.value
+	func clear_mail_request() -> void:
+		data[14].state = PB_SERVICE_STATE.UNFILLED
+		__mail_request.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
+	func new_mail_request() -> MailRequestMessage:
+		__login_request.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
+		data[2].state = PB_SERVICE_STATE.UNFILLED
+		__register_request.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
+		data[3].state = PB_SERVICE_STATE.UNFILLED
+		__ok_response.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
+		data[4].state = PB_SERVICE_STATE.UNFILLED
+		__deny_response.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
+		data[5].state = PB_SERVICE_STATE.UNFILLED
+		__login_success.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
+		data[6].state = PB_SERVICE_STATE.UNFILLED
+		__player_enter.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
+		data[7].state = PB_SERVICE_STATE.UNFILLED
+		__player_leave.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
+		data[8].state = PB_SERVICE_STATE.UNFILLED
+		__player_movement.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
+		data[9].state = PB_SERVICE_STATE.UNFILLED
+		__player_enter_request.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
+		data[10].state = PB_SERVICE_STATE.UNFILLED
+		__chat.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
+		data[11].state = PB_SERVICE_STATE.UNFILLED
+		__player_enter_area_response.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
+		data[12].state = PB_SERVICE_STATE.UNFILLED
+		__mail.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
+		data[13].state = PB_SERVICE_STATE.UNFILLED
+		data[14].state = PB_SERVICE_STATE.FILLED
+		__mail_collect.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
+		data[15].state = PB_SERVICE_STATE.UNFILLED
+		__mail_delete.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
+		data[16].state = PB_SERVICE_STATE.UNFILLED
+		__mail_collect_response.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
+		data[17].state = PB_SERVICE_STATE.UNFILLED
+		__mail_request.value = MailRequestMessage.new()
+		return __mail_request.value
+	
+	var __mail_collect: PBField
+	func has_mail_collect() -> bool:
+		if __mail_collect.value != null:
+			return true
+		return false
+	func get_mail_collect() -> MailCollectMessage:
+		return __mail_collect.value
+	func clear_mail_collect() -> void:
+		data[15].state = PB_SERVICE_STATE.UNFILLED
+		__mail_collect.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
+	func new_mail_collect() -> MailCollectMessage:
+		__login_request.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
+		data[2].state = PB_SERVICE_STATE.UNFILLED
+		__register_request.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
+		data[3].state = PB_SERVICE_STATE.UNFILLED
+		__ok_response.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
+		data[4].state = PB_SERVICE_STATE.UNFILLED
+		__deny_response.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
+		data[5].state = PB_SERVICE_STATE.UNFILLED
+		__login_success.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
+		data[6].state = PB_SERVICE_STATE.UNFILLED
+		__player_enter.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
+		data[7].state = PB_SERVICE_STATE.UNFILLED
+		__player_leave.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
+		data[8].state = PB_SERVICE_STATE.UNFILLED
+		__player_movement.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
+		data[9].state = PB_SERVICE_STATE.UNFILLED
+		__player_enter_request.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
+		data[10].state = PB_SERVICE_STATE.UNFILLED
+		__chat.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
+		data[11].state = PB_SERVICE_STATE.UNFILLED
+		__player_enter_area_response.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
+		data[12].state = PB_SERVICE_STATE.UNFILLED
+		__mail.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
+		data[13].state = PB_SERVICE_STATE.UNFILLED
+		__mail_request.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
+		data[14].state = PB_SERVICE_STATE.UNFILLED
+		data[15].state = PB_SERVICE_STATE.FILLED
+		__mail_delete.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
+		data[16].state = PB_SERVICE_STATE.UNFILLED
+		__mail_collect_response.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
+		data[17].state = PB_SERVICE_STATE.UNFILLED
+		__mail_collect.value = MailCollectMessage.new()
+		return __mail_collect.value
+	
+	var __mail_delete: PBField
+	func has_mail_delete() -> bool:
+		if __mail_delete.value != null:
+			return true
+		return false
+	func get_mail_delete() -> MailDeleteMessage:
+		return __mail_delete.value
+	func clear_mail_delete() -> void:
+		data[16].state = PB_SERVICE_STATE.UNFILLED
+		__mail_delete.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
+	func new_mail_delete() -> MailDeleteMessage:
+		__login_request.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
+		data[2].state = PB_SERVICE_STATE.UNFILLED
+		__register_request.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
+		data[3].state = PB_SERVICE_STATE.UNFILLED
+		__ok_response.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
+		data[4].state = PB_SERVICE_STATE.UNFILLED
+		__deny_response.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
+		data[5].state = PB_SERVICE_STATE.UNFILLED
+		__login_success.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
+		data[6].state = PB_SERVICE_STATE.UNFILLED
+		__player_enter.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
+		data[7].state = PB_SERVICE_STATE.UNFILLED
+		__player_leave.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
+		data[8].state = PB_SERVICE_STATE.UNFILLED
+		__player_movement.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
+		data[9].state = PB_SERVICE_STATE.UNFILLED
+		__player_enter_request.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
+		data[10].state = PB_SERVICE_STATE.UNFILLED
+		__chat.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
+		data[11].state = PB_SERVICE_STATE.UNFILLED
+		__player_enter_area_response.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
+		data[12].state = PB_SERVICE_STATE.UNFILLED
+		__mail.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
+		data[13].state = PB_SERVICE_STATE.UNFILLED
+		__mail_request.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
+		data[14].state = PB_SERVICE_STATE.UNFILLED
+		__mail_collect.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
+		data[15].state = PB_SERVICE_STATE.UNFILLED
+		data[16].state = PB_SERVICE_STATE.FILLED
+		__mail_collect_response.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
+		data[17].state = PB_SERVICE_STATE.UNFILLED
+		__mail_delete.value = MailDeleteMessage.new()
+		return __mail_delete.value
+	
+	var __mail_collect_response: PBField
+	func has_mail_collect_response() -> bool:
+		if __mail_collect_response.value != null:
+			return true
+		return false
+	func get_mail_collect_response() -> MailCollectResponseMessage:
+		return __mail_collect_response.value
+	func clear_mail_collect_response() -> void:
+		data[17].state = PB_SERVICE_STATE.UNFILLED
+		__mail_collect_response.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
+	func new_mail_collect_response() -> MailCollectResponseMessage:
+		__login_request.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
+		data[2].state = PB_SERVICE_STATE.UNFILLED
+		__register_request.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
+		data[3].state = PB_SERVICE_STATE.UNFILLED
+		__ok_response.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
+		data[4].state = PB_SERVICE_STATE.UNFILLED
+		__deny_response.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
+		data[5].state = PB_SERVICE_STATE.UNFILLED
+		__login_success.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
+		data[6].state = PB_SERVICE_STATE.UNFILLED
+		__player_enter.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
+		data[7].state = PB_SERVICE_STATE.UNFILLED
+		__player_leave.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
+		data[8].state = PB_SERVICE_STATE.UNFILLED
+		__player_movement.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
+		data[9].state = PB_SERVICE_STATE.UNFILLED
+		__player_enter_request.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
+		data[10].state = PB_SERVICE_STATE.UNFILLED
+		__chat.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
+		data[11].state = PB_SERVICE_STATE.UNFILLED
+		__player_enter_area_response.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
+		data[12].state = PB_SERVICE_STATE.UNFILLED
+		__mail.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
+		data[13].state = PB_SERVICE_STATE.UNFILLED
+		__mail_request.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
+		data[14].state = PB_SERVICE_STATE.UNFILLED
+		__mail_collect.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
+		data[15].state = PB_SERVICE_STATE.UNFILLED
+		__mail_delete.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
+		data[16].state = PB_SERVICE_STATE.UNFILLED
+		data[17].state = PB_SERVICE_STATE.FILLED
+		__mail_collect_response.value = MailCollectResponseMessage.new()
+		return __mail_collect_response.value
 	
 	func _to_string() -> String:
 		return PBPacker.message_to_string(data)

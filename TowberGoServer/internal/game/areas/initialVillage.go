@@ -7,7 +7,7 @@ import (
 )
 
 type InitialVillage struct {
-	BaseArea
+	objects.BaseArea
 }
 
 func (v *InitialVillage) GetEntrance(id uint32) containers.Vector2 {

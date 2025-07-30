@@ -61,10 +61,10 @@ func main() {
 	hub := internal.NewHub()
 
 	// 创建areaMgr并进行初始化
-	areas.AreaMgr = areas.NewAreaMgr(hub, []objects.Area{
+	objects.AreaMgr = objects.NewAreaMgr(hub, []objects.Area{
 		&areas.InitialVillage{}, &areas.AdventureHub{},
 	})
-	areas.AreaMgr.Initialize()
+	objects.AreaMgr.Initialize()
 
 	// 定义websocket处理
 	http.HandleFunc("/ws", func(w http.ResponseWriter, r *http.Request) {

@@ -593,6 +593,318 @@ func (x *ChatMessage) GetType() uint32 {
 	return 0
 }
 
+type MailRequestMessage struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *MailRequestMessage) Reset() {
+	*x = MailRequestMessage{}
+	mi := &file_packets_proto_msgTypes[11]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *MailRequestMessage) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*MailRequestMessage) ProtoMessage() {}
+
+func (x *MailRequestMessage) ProtoReflect() protoreflect.Message {
+	mi := &file_packets_proto_msgTypes[11]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use MailRequestMessage.ProtoReflect.Descriptor instead.
+func (*MailRequestMessage) Descriptor() ([]byte, []int) {
+	return file_packets_proto_rawDescGZIP(), []int{11}
+}
+
+type MailMessage struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Id            uint32                 `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
+	Titles        string                 `protobuf:"bytes,2,opt,name=titles,proto3" json:"titles,omitempty"`
+	Contents      string                 `protobuf:"bytes,3,opt,name=contents,proto3" json:"contents,omitempty"`
+	Sender        string                 `protobuf:"bytes,4,opt,name=sender,proto3" json:"sender,omitempty"`
+	Items         []*ItemMessage         `protobuf:"bytes,5,rep,name=items,proto3" json:"items,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *MailMessage) Reset() {
+	*x = MailMessage{}
+	mi := &file_packets_proto_msgTypes[12]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *MailMessage) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*MailMessage) ProtoMessage() {}
+
+func (x *MailMessage) ProtoReflect() protoreflect.Message {
+	mi := &file_packets_proto_msgTypes[12]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use MailMessage.ProtoReflect.Descriptor instead.
+func (*MailMessage) Descriptor() ([]byte, []int) {
+	return file_packets_proto_rawDescGZIP(), []int{12}
+}
+
+func (x *MailMessage) GetId() uint32 {
+	if x != nil {
+		return x.Id
+	}
+	return 0
+}
+
+func (x *MailMessage) GetTitles() string {
+	if x != nil {
+		return x.Titles
+	}
+	return ""
+}
+
+func (x *MailMessage) GetContents() string {
+	if x != nil {
+		return x.Contents
+	}
+	return ""
+}
+
+func (x *MailMessage) GetSender() string {
+	if x != nil {
+		return x.Sender
+	}
+	return ""
+}
+
+func (x *MailMessage) GetItems() []*ItemMessage {
+	if x != nil {
+		return x.Items
+	}
+	return nil
+}
+
+type MailCollectMessage struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Id            uint32                 `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *MailCollectMessage) Reset() {
+	*x = MailCollectMessage{}
+	mi := &file_packets_proto_msgTypes[13]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *MailCollectMessage) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*MailCollectMessage) ProtoMessage() {}
+
+func (x *MailCollectMessage) ProtoReflect() protoreflect.Message {
+	mi := &file_packets_proto_msgTypes[13]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use MailCollectMessage.ProtoReflect.Descriptor instead.
+func (*MailCollectMessage) Descriptor() ([]byte, []int) {
+	return file_packets_proto_rawDescGZIP(), []int{13}
+}
+
+func (x *MailCollectMessage) GetId() uint32 {
+	if x != nil {
+		return x.Id
+	}
+	return 0
+}
+
+type MailCollectResponseMessage struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Success       bool                   `protobuf:"varint,1,opt,name=success,proto3" json:"success,omitempty"`
+	Reason        string                 `protobuf:"bytes,2,opt,name=reason,proto3" json:"reason,omitempty"`
+	Id            uint32                 `protobuf:"varint,3,opt,name=id,proto3" json:"id,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *MailCollectResponseMessage) Reset() {
+	*x = MailCollectResponseMessage{}
+	mi := &file_packets_proto_msgTypes[14]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *MailCollectResponseMessage) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*MailCollectResponseMessage) ProtoMessage() {}
+
+func (x *MailCollectResponseMessage) ProtoReflect() protoreflect.Message {
+	mi := &file_packets_proto_msgTypes[14]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use MailCollectResponseMessage.ProtoReflect.Descriptor instead.
+func (*MailCollectResponseMessage) Descriptor() ([]byte, []int) {
+	return file_packets_proto_rawDescGZIP(), []int{14}
+}
+
+func (x *MailCollectResponseMessage) GetSuccess() bool {
+	if x != nil {
+		return x.Success
+	}
+	return false
+}
+
+func (x *MailCollectResponseMessage) GetReason() string {
+	if x != nil {
+		return x.Reason
+	}
+	return ""
+}
+
+func (x *MailCollectResponseMessage) GetId() uint32 {
+	if x != nil {
+		return x.Id
+	}
+	return 0
+}
+
+type MailDeleteMessage struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Id            uint32                 `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *MailDeleteMessage) Reset() {
+	*x = MailDeleteMessage{}
+	mi := &file_packets_proto_msgTypes[15]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *MailDeleteMessage) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*MailDeleteMessage) ProtoMessage() {}
+
+func (x *MailDeleteMessage) ProtoReflect() protoreflect.Message {
+	mi := &file_packets_proto_msgTypes[15]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use MailDeleteMessage.ProtoReflect.Descriptor instead.
+func (*MailDeleteMessage) Descriptor() ([]byte, []int) {
+	return file_packets_proto_rawDescGZIP(), []int{15}
+}
+
+func (x *MailDeleteMessage) GetId() uint32 {
+	if x != nil {
+		return x.Id
+	}
+	return 0
+}
+
+type ItemMessage struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Id            uint32                 `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
+	Count         uint32                 `protobuf:"varint,2,opt,name=count,proto3" json:"count,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *ItemMessage) Reset() {
+	*x = ItemMessage{}
+	mi := &file_packets_proto_msgTypes[16]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ItemMessage) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ItemMessage) ProtoMessage() {}
+
+func (x *ItemMessage) ProtoReflect() protoreflect.Message {
+	mi := &file_packets_proto_msgTypes[16]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ItemMessage.ProtoReflect.Descriptor instead.
+func (*ItemMessage) Descriptor() ([]byte, []int) {
+	return file_packets_proto_rawDescGZIP(), []int{16}
+}
+
+func (x *ItemMessage) GetId() uint32 {
+	if x != nil {
+		return x.Id
+	}
+	return 0
+}
+
+func (x *ItemMessage) GetCount() uint32 {
+	if x != nil {
+		return x.Count
+	}
+	return 0
+}
+
 type Packet struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	Uid   uint32                 `protobuf:"varint,1,opt,name=uid,proto3" json:"uid,omitempty"`
@@ -609,6 +921,11 @@ type Packet struct {
 	//	*Packet_PlayerEnterRequest
 	//	*Packet_Chat
 	//	*Packet_PlayerEnterAreaResponse
+	//	*Packet_Mail
+	//	*Packet_MailRequest
+	//	*Packet_MailCollect
+	//	*Packet_MailDelete
+	//	*Packet_MailCollectResponse
 	Msg           isPacket_Msg `protobuf_oneof:"msg"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -616,7 +933,7 @@ type Packet struct {
 
 func (x *Packet) Reset() {
 	*x = Packet{}
-	mi := &file_packets_proto_msgTypes[11]
+	mi := &file_packets_proto_msgTypes[17]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -628,7 +945,7 @@ func (x *Packet) String() string {
 func (*Packet) ProtoMessage() {}
 
 func (x *Packet) ProtoReflect() protoreflect.Message {
-	mi := &file_packets_proto_msgTypes[11]
+	mi := &file_packets_proto_msgTypes[17]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -641,7 +958,7 @@ func (x *Packet) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use Packet.ProtoReflect.Descriptor instead.
 func (*Packet) Descriptor() ([]byte, []int) {
-	return file_packets_proto_rawDescGZIP(), []int{11}
+	return file_packets_proto_rawDescGZIP(), []int{17}
 }
 
 func (x *Packet) GetUid() uint32 {
@@ -757,6 +1074,51 @@ func (x *Packet) GetPlayerEnterAreaResponse() *PlayerEnterAreaResponseMessage {
 	return nil
 }
 
+func (x *Packet) GetMail() *MailMessage {
+	if x != nil {
+		if x, ok := x.Msg.(*Packet_Mail); ok {
+			return x.Mail
+		}
+	}
+	return nil
+}
+
+func (x *Packet) GetMailRequest() *MailRequestMessage {
+	if x != nil {
+		if x, ok := x.Msg.(*Packet_MailRequest); ok {
+			return x.MailRequest
+		}
+	}
+	return nil
+}
+
+func (x *Packet) GetMailCollect() *MailCollectMessage {
+	if x != nil {
+		if x, ok := x.Msg.(*Packet_MailCollect); ok {
+			return x.MailCollect
+		}
+	}
+	return nil
+}
+
+func (x *Packet) GetMailDelete() *MailDeleteMessage {
+	if x != nil {
+		if x, ok := x.Msg.(*Packet_MailDelete); ok {
+			return x.MailDelete
+		}
+	}
+	return nil
+}
+
+func (x *Packet) GetMailCollectResponse() *MailCollectResponseMessage {
+	if x != nil {
+		if x, ok := x.Msg.(*Packet_MailCollectResponse); ok {
+			return x.MailCollectResponse
+		}
+	}
+	return nil
+}
+
 type isPacket_Msg interface {
 	isPacket_Msg()
 }
@@ -805,6 +1167,26 @@ type Packet_PlayerEnterAreaResponse struct {
 	PlayerEnterAreaResponse *PlayerEnterAreaResponseMessage `protobuf:"bytes,12,opt,name=player_enter_area_response,json=playerEnterAreaResponse,proto3,oneof"`
 }
 
+type Packet_Mail struct {
+	Mail *MailMessage `protobuf:"bytes,13,opt,name=mail,proto3,oneof"`
+}
+
+type Packet_MailRequest struct {
+	MailRequest *MailRequestMessage `protobuf:"bytes,14,opt,name=mail_request,json=mailRequest,proto3,oneof"`
+}
+
+type Packet_MailCollect struct {
+	MailCollect *MailCollectMessage `protobuf:"bytes,15,opt,name=mail_collect,json=mailCollect,proto3,oneof"`
+}
+
+type Packet_MailDelete struct {
+	MailDelete *MailDeleteMessage `protobuf:"bytes,16,opt,name=mail_delete,json=mailDelete,proto3,oneof"`
+}
+
+type Packet_MailCollectResponse struct {
+	MailCollectResponse *MailCollectResponseMessage `protobuf:"bytes,17,opt,name=mail_collect_response,json=mailCollectResponse,proto3,oneof"`
+}
+
 func (*Packet_LoginRequest) isPacket_Msg() {}
 
 func (*Packet_RegisterRequest) isPacket_Msg() {}
@@ -826,6 +1208,16 @@ func (*Packet_PlayerEnterRequest) isPacket_Msg() {}
 func (*Packet_Chat) isPacket_Msg() {}
 
 func (*Packet_PlayerEnterAreaResponse) isPacket_Msg() {}
+
+func (*Packet_Mail) isPacket_Msg() {}
+
+func (*Packet_MailRequest) isPacket_Msg() {}
+
+func (*Packet_MailCollect) isPacket_Msg() {}
+
+func (*Packet_MailDelete) isPacket_Msg() {}
+
+func (*Packet_MailCollectResponse) isPacket_Msg() {}
 
 var File_packets_proto protoreflect.FileDescriptor
 
@@ -865,7 +1257,25 @@ const file_packets_proto_rawDesc = "" +
 	"\vChatMessage\x12\x18\n" +
 	"\acontent\x18\x01 \x01(\tR\acontent\x12\x1a\n" +
 	"\busername\x18\x02 \x01(\tR\busername\x12\x12\n" +
-	"\x04type\x18\x03 \x01(\rR\x04type\"\xc0\x06\n" +
+	"\x04type\x18\x03 \x01(\rR\x04type\"\x14\n" +
+	"\x12MailRequestMessage\"\x95\x01\n" +
+	"\vMailMessage\x12\x0e\n" +
+	"\x02id\x18\x01 \x01(\rR\x02id\x12\x16\n" +
+	"\x06titles\x18\x02 \x01(\tR\x06titles\x12\x1a\n" +
+	"\bcontents\x18\x03 \x01(\tR\bcontents\x12\x16\n" +
+	"\x06sender\x18\x04 \x01(\tR\x06sender\x12*\n" +
+	"\x05items\x18\x05 \x03(\v2\x14.packets.ItemMessageR\x05items\"$\n" +
+	"\x12MailCollectMessage\x12\x0e\n" +
+	"\x02id\x18\x01 \x01(\rR\x02id\"^\n" +
+	"\x1aMailCollectResponseMessage\x12\x18\n" +
+	"\asuccess\x18\x01 \x01(\bR\asuccess\x12\x16\n" +
+	"\x06reason\x18\x02 \x01(\tR\x06reason\x12\x0e\n" +
+	"\x02id\x18\x03 \x01(\rR\x02id\"#\n" +
+	"\x11MailDeleteMessage\x12\x0e\n" +
+	"\x02id\x18\x01 \x01(\rR\x02id\"3\n" +
+	"\vItemMessage\x12\x0e\n" +
+	"\x02id\x18\x01 \x01(\rR\x02id\x12\x14\n" +
+	"\x05count\x18\x02 \x01(\rR\x05count\"\x8a\t\n" +
 	"\x06Packet\x12\x10\n" +
 	"\x03uid\x18\x01 \x01(\rR\x03uid\x12C\n" +
 	"\rlogin_request\x18\x02 \x01(\v2\x1c.packets.LoginRequestMessageH\x00R\floginRequest\x12L\n" +
@@ -880,7 +1290,13 @@ const file_packets_proto_rawDesc = "" +
 	"\x14player_enter_request\x18\n" +
 	" \x01(\v2&.packets.PlayerEnterAreaRequestMessageH\x00R\x12playerEnterRequest\x12*\n" +
 	"\x04chat\x18\v \x01(\v2\x14.packets.ChatMessageH\x00R\x04chat\x12f\n" +
-	"\x1aplayer_enter_area_response\x18\f \x01(\v2'.packets.PlayerEnterAreaResponseMessageH\x00R\x17playerEnterAreaResponseB\x05\n" +
+	"\x1aplayer_enter_area_response\x18\f \x01(\v2'.packets.PlayerEnterAreaResponseMessageH\x00R\x17playerEnterAreaResponse\x12*\n" +
+	"\x04mail\x18\r \x01(\v2\x14.packets.MailMessageH\x00R\x04mail\x12@\n" +
+	"\fmail_request\x18\x0e \x01(\v2\x1b.packets.MailRequestMessageH\x00R\vmailRequest\x12@\n" +
+	"\fmail_collect\x18\x0f \x01(\v2\x1b.packets.MailCollectMessageH\x00R\vmailCollect\x12=\n" +
+	"\vmail_delete\x18\x10 \x01(\v2\x1a.packets.MailDeleteMessageH\x00R\n" +
+	"mailDelete\x12Y\n" +
+	"\x15mail_collect_response\x18\x11 \x01(\v2#.packets.MailCollectResponseMessageH\x00R\x13mailCollectResponseB\x05\n" +
 	"\x03msgB\rZ\vpkg/packetsb\x06proto3"
 
 var (
@@ -895,7 +1311,7 @@ func file_packets_proto_rawDescGZIP() []byte {
 	return file_packets_proto_rawDescData
 }
 
-var file_packets_proto_msgTypes = make([]protoimpl.MessageInfo, 12)
+var file_packets_proto_msgTypes = make([]protoimpl.MessageInfo, 18)
 var file_packets_proto_goTypes = []any{
 	(*LoginRequestMessage)(nil),            // 0: packets.LoginRequestMessage
 	(*RegisterRequestMessage)(nil),         // 1: packets.RegisterRequestMessage
@@ -908,25 +1324,37 @@ var file_packets_proto_goTypes = []any{
 	(*PlayerLeaveAreaMessage)(nil),         // 8: packets.PlayerLeaveAreaMessage
 	(*PlayerMoveMessage)(nil),              // 9: packets.PlayerMoveMessage
 	(*ChatMessage)(nil),                    // 10: packets.ChatMessage
-	(*Packet)(nil),                         // 11: packets.Packet
+	(*MailRequestMessage)(nil),             // 11: packets.MailRequestMessage
+	(*MailMessage)(nil),                    // 12: packets.MailMessage
+	(*MailCollectMessage)(nil),             // 13: packets.MailCollectMessage
+	(*MailCollectResponseMessage)(nil),     // 14: packets.MailCollectResponseMessage
+	(*MailDeleteMessage)(nil),              // 15: packets.MailDeleteMessage
+	(*ItemMessage)(nil),                    // 16: packets.ItemMessage
+	(*Packet)(nil),                         // 17: packets.Packet
 }
 var file_packets_proto_depIdxs = []int32{
-	0,  // 0: packets.Packet.login_request:type_name -> packets.LoginRequestMessage
-	1,  // 1: packets.Packet.register_request:type_name -> packets.RegisterRequestMessage
-	2,  // 2: packets.Packet.ok_response:type_name -> packets.OKResponseMessage
-	3,  // 3: packets.Packet.deny_response:type_name -> packets.DenyResponseMessage
-	4,  // 4: packets.Packet.login_success:type_name -> packets.LoginSuccessMessage
-	7,  // 5: packets.Packet.player_enter:type_name -> packets.PlayerEnterAreaMessage
-	8,  // 6: packets.Packet.player_leave:type_name -> packets.PlayerLeaveAreaMessage
-	9,  // 7: packets.Packet.player_movement:type_name -> packets.PlayerMoveMessage
-	5,  // 8: packets.Packet.player_enter_request:type_name -> packets.PlayerEnterAreaRequestMessage
-	10, // 9: packets.Packet.chat:type_name -> packets.ChatMessage
-	6,  // 10: packets.Packet.player_enter_area_response:type_name -> packets.PlayerEnterAreaResponseMessage
-	11, // [11:11] is the sub-list for method output_type
-	11, // [11:11] is the sub-list for method input_type
-	11, // [11:11] is the sub-list for extension type_name
-	11, // [11:11] is the sub-list for extension extendee
-	0,  // [0:11] is the sub-list for field type_name
+	16, // 0: packets.MailMessage.items:type_name -> packets.ItemMessage
+	0,  // 1: packets.Packet.login_request:type_name -> packets.LoginRequestMessage
+	1,  // 2: packets.Packet.register_request:type_name -> packets.RegisterRequestMessage
+	2,  // 3: packets.Packet.ok_response:type_name -> packets.OKResponseMessage
+	3,  // 4: packets.Packet.deny_response:type_name -> packets.DenyResponseMessage
+	4,  // 5: packets.Packet.login_success:type_name -> packets.LoginSuccessMessage
+	7,  // 6: packets.Packet.player_enter:type_name -> packets.PlayerEnterAreaMessage
+	8,  // 7: packets.Packet.player_leave:type_name -> packets.PlayerLeaveAreaMessage
+	9,  // 8: packets.Packet.player_movement:type_name -> packets.PlayerMoveMessage
+	5,  // 9: packets.Packet.player_enter_request:type_name -> packets.PlayerEnterAreaRequestMessage
+	10, // 10: packets.Packet.chat:type_name -> packets.ChatMessage
+	6,  // 11: packets.Packet.player_enter_area_response:type_name -> packets.PlayerEnterAreaResponseMessage
+	12, // 12: packets.Packet.mail:type_name -> packets.MailMessage
+	11, // 13: packets.Packet.mail_request:type_name -> packets.MailRequestMessage
+	13, // 14: packets.Packet.mail_collect:type_name -> packets.MailCollectMessage
+	15, // 15: packets.Packet.mail_delete:type_name -> packets.MailDeleteMessage
+	14, // 16: packets.Packet.mail_collect_response:type_name -> packets.MailCollectResponseMessage
+	17, // [17:17] is the sub-list for method output_type
+	17, // [17:17] is the sub-list for method input_type
+	17, // [17:17] is the sub-list for extension type_name
+	17, // [17:17] is the sub-list for extension extendee
+	0,  // [0:17] is the sub-list for field type_name
 }
 
 func init() { file_packets_proto_init() }
@@ -934,7 +1362,7 @@ func file_packets_proto_init() {
 	if File_packets_proto != nil {
 		return
 	}
-	file_packets_proto_msgTypes[11].OneofWrappers = []any{
+	file_packets_proto_msgTypes[17].OneofWrappers = []any{
 		(*Packet_LoginRequest)(nil),
 		(*Packet_RegisterRequest)(nil),
 		(*Packet_OkResponse)(nil),
@@ -946,6 +1374,11 @@ func file_packets_proto_init() {
 		(*Packet_PlayerEnterRequest)(nil),
 		(*Packet_Chat)(nil),
 		(*Packet_PlayerEnterAreaResponse)(nil),
+		(*Packet_Mail)(nil),
+		(*Packet_MailRequest)(nil),
+		(*Packet_MailCollect)(nil),
+		(*Packet_MailDelete)(nil),
+		(*Packet_MailCollectResponse)(nil),
 	}
 	type x struct{}
 	out := protoimpl.TypeBuilder{
@@ -953,7 +1386,7 @@ func file_packets_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_packets_proto_rawDesc), len(file_packets_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   12,
+			NumMessages:   18,
 			NumExtensions: 0,
 			NumServices:   0,
 		},
