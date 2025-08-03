@@ -1,0 +1,129 @@
+[gd_scene load_steps=7 format=3 uid="uid://b0w10b3j7y3cs"]
+
+[ext_resource type="Script" uid="uid://qov0q0jvn4ub" path="res://classes/units/bag/bag.gd" id="1_in751"]
+[ext_resource type="Texture2D" uid="uid://cbft5w2sanv77" path="res://assets/ui/buttons/close.tres" id="2_6cmg0"]
+[ext_resource type="Texture2D" uid="uid://jwrp3m3e3k4p" path="res://assets/ui/UI assets (1x).png" id="2_jdrh8"]
+[ext_resource type="Texture2D" uid="uid://ccxxem3ww8nct" path="res://assets/ui/buttons/close_hover.tres" id="3_jdrh8"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dibll"]
+atlas = ExtResource("2_jdrh8")
+region = Rect2(198, 6, 36, 36)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_pfcnr"]
+texture = SubResource("AtlasTexture_dibll")
+texture_margin_left = 10.0
+texture_margin_top = 10.0
+texture_margin_right = 10.0
+texture_margin_bottom = 10.0
+
+[node name="Bag" type="Window"]
+auto_translate_mode = 1
+canvas_item_default_texture_filter = 0
+initial_position = 1
+size = Vector2i(600, 400)
+unresizable = true
+borderless = true
+script = ExtResource("1_in751")
+
+[node name="PanelContainer" type="PanelContainer" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxTexture_pfcnr")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/margin_left = 12
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 12
+theme_override_constants/margin_bottom = 10
+
+[node name="ScrollContainer" type="ScrollContainer" parent="HBoxContainer/MarginContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="GridContainer" type="GridContainer" parent="HBoxContainer/MarginContainer/ScrollContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+columns = 5
+
+[node name="Detail" type="PanelContainer" parent="HBoxContainer"]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="HBoxContainer/Detail"]
+layout_mode = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 5
+
+[node name="ScrollContainer" type="ScrollContainer" parent="HBoxContainer/Detail/MarginContainer"]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer/Detail/MarginContainer/ScrollContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_constants/separation = 10
+
+[node name="ItemName" type="Label" parent="HBoxContainer/Detail/MarginContainer/ScrollContainer/VBoxContainer"]
+layout_mode = 2
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="TextureRect" type="TextureRect" parent="HBoxContainer/Detail/MarginContainer/ScrollContainer/VBoxContainer"]
+custom_minimum_size = Vector2(128, 128)
+layout_mode = 2
+size_flags_horizontal = 4
+expand_mode = 1
+
+[node name="MarginContainer" type="MarginContainer" parent="HBoxContainer/Detail/MarginContainer/ScrollContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="RichTextLabel" type="RichTextLabel" parent="HBoxContainer/Detail/MarginContainer/ScrollContainer/VBoxContainer/MarginContainer"]
+layout_mode = 2
+theme_override_font_sizes/normal_font_size = 13
+fit_content = true
+
+[node name="HBoxContainer" type="HBoxContainer" parent="HBoxContainer/Detail/MarginContainer/ScrollContainer/VBoxContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="SpinBox" type="SpinBox" parent="HBoxContainer/Detail/MarginContainer/ScrollContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+max_value = 999.0
+
+[node name="Use" type="Button" parent="HBoxContainer/Detail/MarginContainer/ScrollContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+text = "Use"
+
+[node name="Close" type="TextureButton" parent="."]
+custom_minimum_size = Vector2(20, 20)
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -22.0
+offset_top = 4.0
+offset_right = -2.0
+offset_bottom = 24.0
+grow_horizontal = 0
+texture_normal = ExtResource("2_6cmg0")
+texture_hover = ExtResource("3_jdrh8")
+stretch_mode = 0
+
+[connection signal="pressed" from="HBoxContainer/Detail/MarginContainer/ScrollContainer/VBoxContainer/HBoxContainer/Use" to="." method="_on_use_pressed"]
+[connection signal="pressed" from="Close" to="." method="_on_close_requested"]

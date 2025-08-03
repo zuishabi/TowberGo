@@ -4,7 +4,6 @@ import (
 	"TowberGoServer/internal/db"
 	"context"
 	"encoding/json"
-	"errors"
 	"fmt"
 	"strconv"
 )
@@ -68,8 +67,25 @@ func (m *MailManagerStruct) DeleteMail(uid uint32, mailID uint32) {
 	}
 }
 
-func (m *MailManagerStruct) CollectMail() error {
-	return errors.New("the collect function has not complete")
+func (m *MailManagerStruct) CollectMail(player *Player, mailID uint32) error {
+	ctx := context.Background()
+	result, err := db.Rdb.HGet(ctx, fmt.Sprintf("player:%d:mail", player.UID), fmt.Sprint(mailID)).Result()
+	if err != nil {
+		return err
+	}
+	mail := &Mail{}
+	_ = json.Unmarshal([]byte(result), mail)
+	for i := range mail.Items {
+		if err := ItemManager.AddItem(player, mail.Items[i].ID, int(mail.Items[i].Count)); err != nil {
+			mail.Items = mail.Items[i:]
+			// 更新 Redis 中的邮件内容
+			mailJson, _ := json.Marshal(mail)
+			db.Rdb.HSet(ctx, fmt.Sprintf("player:%d:mail", player.UID), fmt.Sprint(mailID), mailJson)
+			return err
+		}
+	}
+	m.DeleteMail(player.UID, mailID)
+	return nil
 }
 
 func (m *MailManagerStruct) GetMails(uid uint32) []Mail {

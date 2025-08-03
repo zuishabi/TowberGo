@@ -63,6 +63,10 @@ func (g *InGame) HandleMessage(senderID uint32, message packets.Msg) {
 		g.handleMailDelete(message.MailDelete.Id)
 	case *packets.Packet_MailCollect:
 		g.handleMailCollect(message.MailCollect.Id)
+	case *packets.Packet_BagRequest:
+		g.handleBagRequestMessage()
+	case *packets.Packet_UseBagItemRequest:
+		g.handleUseBagItemMessage(message.UseBagItemRequest)
 	default:
 		if g.Player.Area == nil {
 			return
@@ -98,11 +102,33 @@ func (g *InGame) handleMailCollect(id uint32) {
 		Reason:  "",
 		Id:      id,
 	}}
-	if err := objects.MailManager.CollectMail(); err != nil {
+	if err := objects.MailManager.CollectMail(g.Player, id); err != nil {
 		rsp.MailCollectResponse.Success = false
 		rsp.MailCollectResponse.Reason = err.Error()
 	}
 	g.client.SocketSend(rsp)
+}
+
+// 发送背包物品
+func (g *InGame) handleBagRequestMessage() {
+	bags := objects.ItemManager.GetBags(g.Player)
+	msg := utils.NewBagMessage(bags)
+	g.client.SocketSend(msg)
+}
+
+// 处理使用背包物品
+func (g *InGame) handleUseBagItemMessage(msg *packets.UseBagItemRequestMessage) {
+	item := objects.BaseItem{
+		ID:    msg.GetId(),
+		Count: int(msg.GetCount()),
+	}
+	rsp := packets.Packet_UseBagItemResponse{}
+	if err := item.Convert().Use(g.Player, int(msg.Count)); err != nil {
+		rsp.UseBagItemResponse = &packets.UseBagItemResponseMessage{Reason: err.Error(), Success: false}
+	} else {
+		rsp.UseBagItemResponse = &packets.UseBagItemResponseMessage{Success: true}
+	}
+	g.client.SocketSend(&rsp)
 }
 
 func (g *InGame) OnExit() {

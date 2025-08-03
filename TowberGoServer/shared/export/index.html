@@ -92,7 +92,15 @@ body {
 		</style>
 		<link id="-gd-engine-icon" rel="icon" type="image/png" href="index.icon.png" />
 <link rel="apple-touch-icon" href="index.apple-touch-icon.png"/>
-
+<script>
+const VERSION = "1.0.2.1"; 
+document.addEventListener("DOMContentLoaded", function() {
+    const scripts = document.querySelectorAll('script[src*="index.js"]');
+    if (scripts.length) {
+        scripts[0].src = scripts[0].src + "?v=" + VERSION;
+    }
+});
+</script>
 	</head>
 	<body>
 		<canvas id="canvas">
@@ -111,7 +119,7 @@ body {
 
 		<script src="index.js"></script>
 		<script>
-const GODOT_CONFIG = {"args":[],"canvasResizePolicy":2,"ensureCrossOriginIsolationHeaders":true,"executable":"index","experimentalVK":true,"fileSizes":{"index.pck":1231120,"index.wasm":52126319},"focusCanvas":true,"gdextensionLibs":[]};
+const GODOT_CONFIG = {"args":[],"canvasResizePolicy":2,"ensureCrossOriginIsolationHeaders":true,"executable":"index","experimentalVK":true,"fileSizes":{"index.pck":1268016,"index.wasm":52126319},"focusCanvas":true,"gdextensionLibs":[]};
 const GODOT_THREADS_ENABLED = false;
 const engine = new Engine(GODOT_CONFIG);
 

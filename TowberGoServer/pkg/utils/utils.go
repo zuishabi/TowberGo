@@ -19,7 +19,7 @@ func NewMailMessages(mail *objects.Mail) packets.Msg {
 	for i := range mail.Items {
 		items[i] = &packets.ItemMessage{}
 		items[i].Id = mail.Items[i].ID
-		items[i].Count = mail.Items[i].Count
+		items[i].Count = int64(mail.Items[i].Count)
 	}
 	msg := &packets.Packet_Mail{Mail: &packets.MailMessage{
 		Id:       mail.ID,
@@ -29,4 +29,17 @@ func NewMailMessages(mail *objects.Mail) packets.Msg {
 		Items:    items,
 	}}
 	return msg
+}
+
+func NewBagMessage(items []objects.BaseItem) packets.Msg {
+	ids := make([]uint32, len(items))
+	counts := make([]int64, len(items))
+	for i, v := range items {
+		ids[i] = v.ID
+		counts[i] = int64(v.Count)
+	}
+	return &packets.Packet_Bag{Bag: &packets.BagMessage{
+		Id:    ids,
+		Count: counts,
+	}}
 }

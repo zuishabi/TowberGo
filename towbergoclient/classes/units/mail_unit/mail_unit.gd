@@ -20,7 +20,6 @@ func update(title:String,content:String,sender:String,items:Array[BaseItem],id:i
 	_title_text.text = content
 	_sender_text.text = sender
 	mail_id = id
-	print(mail_id)
 
 func _on_gui_input(event:InputEvent):
 	if event.is_action_pressed("left_mouse"):

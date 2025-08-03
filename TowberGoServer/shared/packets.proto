@@ -1,8 +1,8 @@
 syntax = "proto3";
-
 package packets;
 
 option go_package = "pkg/packets";
+
 
 message LoginRequestMessage{
   string username = 1;
@@ -83,7 +83,34 @@ message MailDeleteMessage{
 
 message ItemMessage{
   uint32 id = 1;
-  uint32 count = 2;
+  int64 count = 2;
+}
+
+message BagRequestMessage{}
+
+message BagMessage{
+  repeated uint32 id = 1;
+  repeated int64 count = 2;
+}
+
+message AddBagItemMessage{
+  uint32 id = 1;
+  int64 count = 2;
+}
+
+message DeleteBagItemMessage{
+  uint32 id = 1;
+  int64 count = 2;
+}
+
+message UseBagItemRequestMessage{
+  uint32 id = 1;
+  int64 count = 2;
+}
+
+message UseBagItemResponseMessage{
+  bool success = 1;
+  string reason = 2;
 }
 
 message Packet{
@@ -105,5 +132,27 @@ message Packet{
     MailCollectMessage mail_collect = 15;
     MailDeleteMessage mail_delete = 16;
     MailCollectResponseMessage mail_collect_response = 17;
+    BagRequestMessage bag_request = 18;
+    BagMessage bag = 19;
+    AddBagItemMessage add_bag_item = 20;
+    DeleteBagItemMessage delete_bag_item = 21;
+    UseBagItemRequestMessage use_bag_item_request = 22;
+    UseBagItemResponseMessage use_bag_item_response = 23;
+    UiPacket ui_packet = 24;
   }
+}
+
+message UiPacket{
+  oneof msg {
+    OpenUIMessage open_ui = 1;
+    InitialPetRequestMessage initial_pet_request = 2;
+  }
+}
+
+message OpenUIMessage{
+  string path = 1;
+}
+
+message InitialPetRequestMessage{
+  uint32 request_id = 1;
 }

@@ -12,6 +12,7 @@ func _ready():
 
 func show_window():
 	self.show()
+	self.move_to_center()
 	_content.refresh()
 	_content.hide()
 	for i in _list.get_children():
@@ -39,3 +40,7 @@ func show_mail(mail:MailUnit):
 
 func _on_close_requested():
 	self.hide()
+
+func _input(event):
+	if self.visible && event.is_action_pressed("esc") && self.has_focus():
+		self.hide()

@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://cc083armwg684"]
+[gd_scene load_steps=22 format=3 uid="uid://cc083armwg684"]
 
 [ext_resource type="Script" uid="uid://dd0d3amb3xsju" path="res://states/ingame/ingame.gd" id="1_b7vyf"]
 [ext_resource type="PackedScene" uid="uid://7e1771outtfj" path="res://classes/windows/window.tscn" id="2_0uskn"]
@@ -10,7 +10,12 @@
 [ext_resource type="Script" uid="uid://cthcc2x5fsq5x" path="res://states/ingame/ui.gd" id="5_ll2wp"]
 [ext_resource type="Script" uid="uid://2ksn7negljkc" path="res://states/ingame/mail.gd" id="6_3gvbx"]
 [ext_resource type="Script" uid="uid://c1tt0l650qu13" path="res://states/ingame/chat_box.gd" id="6_ube6o"]
+[ext_resource type="Texture2D" uid="uid://p45qw6phudsu" path="res://assets/ui/buttons/pets.tres" id="7_3s3we"]
 [ext_resource type="Script" uid="uid://bhqct7aucjh8f" path="res://states/ingame/content.gd" id="7_m5k0h"]
+[ext_resource type="Texture2D" uid="uid://jwrp3m3e3k4p" path="res://assets/ui/UI assets (1x).png" id="9_fk5r0"]
+[ext_resource type="PackedScene" uid="uid://b0w10b3j7y3cs" path="res://classes/units/bag/bag.tscn" id="9_sqgb6"]
+[ext_resource type="Texture2D" uid="uid://cbft5w2sanv77" path="res://assets/ui/buttons/close.tres" id="10_2apfk"]
+[ext_resource type="Texture2D" uid="uid://ccxxem3ww8nct" path="res://assets/ui/buttons/close_hover.tres" id="11_4a0li"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ube6o"]
 
@@ -25,6 +30,10 @@ content_margin_top = 5.0
 content_margin_right = 5.0
 content_margin_bottom = 5.0
 bg_color = Color(0.380392, 0.380392, 0.380392, 0.686275)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mbso2"]
+atlas = ExtResource("9_fk5r0")
+region = Rect2(291, 4, 42, 40)
 
 [node name="Ingame" type="Node2D"]
 y_sort_enabled = true
@@ -112,12 +121,22 @@ texture_normal = ExtResource("5_hnl16")
 texture_hover = ExtResource("5_hnl16")
 stretch_mode = 0
 
+[node name="Pets" type="TextureButton" parent="UI/FuntionList/HBoxContainer"]
+custom_minimum_size = Vector2(40, 0)
+layout_mode = 2
+mouse_default_cursor_shape = 2
+texture_normal = ExtResource("7_3s3we")
+texture_hover = ExtResource("7_3s3we")
+stretch_mode = 0
+
 [node name="Mail" type="Window" parent="UI"]
+transparent_bg = true
+canvas_item_default_texture_filter = 0
 initial_position = 1
 size = Vector2i(600, 400)
-transient = true
-exclusive = true
 unresizable = true
+borderless = true
+transparent = true
 script = ExtResource("6_3gvbx")
 
 [node name="HBoxContainer" type="HBoxContainer" parent="UI/Mail"]
@@ -180,8 +199,39 @@ text = "Collect"
 layout_mode = 2
 text = "Delete"
 
+[node name="NinePatchRect" type="NinePatchRect" parent="UI/Mail"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource("AtlasTexture_mbso2")
+patch_margin_left = 20
+patch_margin_top = 20
+patch_margin_right = 20
+patch_margin_bottom = 20
+
+[node name="Close" type="TextureButton" parent="UI/Mail/NinePatchRect"]
+custom_minimum_size = Vector2(20, 20)
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -31.0
+offset_top = 10.0
+offset_right = -11.0
+offset_bottom = 30.0
+grow_horizontal = 0
+texture_normal = ExtResource("10_2apfk")
+texture_hover = ExtResource("11_4a0li")
+stretch_mode = 0
+
+[node name="Bag" parent="UI" instance=ExtResource("9_sqgb6")]
+visible = false
+
 [node name="Window" parent="." instance=ExtResource("2_0uskn")]
 visible = false
+always_on_top = true
 
 [node name="AreaManager" type="Node2D" parent="."]
 y_sort_enabled = true
@@ -192,7 +242,10 @@ script = ExtResource("4_wuwgw")
 [connection signal="pressed" from="UI/ChatBox/VBoxContainer/Close" to="UI/ChatBox" method="_on_close_pressed"]
 [connection signal="tab_changed" from="UI/ChatBox/VBoxContainer/TabBar" to="UI/ChatBox" method="_on_tab_bar_tab_changed"]
 [connection signal="text_submitted" from="UI/ChatBox/VBoxContainer/LineEdit" to="UI/ChatBox" method="_on_line_edit_text_submitted"]
+[connection signal="pressed" from="UI/FuntionList/HBoxContainer/Bag" to="UI" method="_on_bag_pressed"]
 [connection signal="pressed" from="UI/FuntionList/HBoxContainer/Mail" to="UI" method="_on_mail_pressed"]
 [connection signal="close_requested" from="UI/Mail" to="UI/Mail" method="_on_close_requested"]
 [connection signal="pressed" from="UI/Mail/HBoxContainer/ContentScroll/Content/Buttons/Collect" to="UI/Mail/HBoxContainer/ContentScroll/Content" method="_on_collect_pressed"]
 [connection signal="pressed" from="UI/Mail/HBoxContainer/ContentScroll/Content/Buttons/Delete" to="UI/Mail/HBoxContainer/ContentScroll/Content" method="_on_delete_pressed"]
+[connection signal="pressed" from="UI/Mail/NinePatchRect/Close" to="UI/Mail" method="_on_close_requested"]
+[connection signal="close_requested" from="UI/Bag" to="UI/Bag" method="_on_close_requested"]

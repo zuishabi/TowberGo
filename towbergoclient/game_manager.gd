@@ -10,6 +10,9 @@ var _states_scenes:Dictionary[State,String] = {
 	State.INGAME: "res://states/ingame/ingame.tscn",
 }
 
+signal show_confirm(text:String,callable:Callable)
+signal show_choose(text:String,confirm:Callable,cancel:Callable)
+
 var id:int
 var username:String
 var _current_scene_root:Node

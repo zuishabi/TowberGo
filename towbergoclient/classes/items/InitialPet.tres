@@ -13,4 +13,5 @@ item_id = 1
 item_name = "Initial Pet"
 item_texture = SubResource("AtlasTexture_yp0p0")
 item_description = "get one of the intial pet"
+can_use = true
 metadata/_custom_type_script = "uid://ktffe5rakam5"

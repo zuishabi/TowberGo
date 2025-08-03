@@ -8,8 +8,12 @@ const ACTOR = preload("res://classes/actor/actor.tscn")
 @onready var _area_manager = $AreaManager
 @onready var _chat_box = $UI/ChatBox
 @onready var _mail_window = $UI/Mail
+@onready var _bag_window = $UI/Bag
+@onready var _ui = $UI
 
 func _ready():
+	GameManager.show_choose.connect(_window.show_choose)
+	GameManager.show_confirm.connect(_window.show_confirm)
 	WS.packet_received.connect(_on_ws_packted_received)
 	WS.connection_closed.connect(_on_connection_closed)
 	var packet := packets.Packet.new()
@@ -36,6 +40,14 @@ func _on_ws_packted_received(msg:packets.Packet):
 		_handle_mail(msg.get_mail())
 	elif msg.has_mail_collect_response():
 		_handle_mail_collect_response(msg.get_mail_collect_response())
+	elif msg.has_deny_response():
+		_handle_deny_response(msg.get_deny_response().get_reason())
+	elif msg.has_bag():
+		_handle_bag_message(msg.get_bag())
+	elif msg.has_use_bag_item_response():
+		_handle_use_bag_response(msg.get_use_bag_item_response().get_success(),msg.get_use_bag_item_response().get_reason())
+	elif msg.has_ui_packet():
+		_handle_ui_message(msg.get_ui_packet())
 
 func _handle_player_enter(sender_id:int,msg:packets.PlayerEnterAreaMessage):
 	var new_actor:Actor = ACTOR.instantiate()
@@ -73,3 +85,24 @@ func _handle_mail_collect_response(msg:packets.MailCollectResponseMessage):
 		_window.show_confirm(msg.get_reason())
 	else:
 		_mail_window.delete_mail(msg.get_id())
+
+func _handle_deny_response(reason:String):
+	_window.show_confirm(reason)
+
+func _handle_bag_message(msg:packets.BagMessage):
+	for i:int in msg.get_id().size():
+		PlayerManager.item_bag[i] = ItemManager.generate_items(msg.get_id()[i],msg.get_count()[i])
+	_bag_window.update()
+
+func _handle_use_bag_response(success:bool,reason:String):
+	if !success:
+		_window.show_confirm(reason)
+
+func _handle_ui_message(msg:packets.UiPacket):
+	if msg.has_open_ui():
+		_handle_open_ui(msg.get_open_ui().get_path())
+
+func _handle_open_ui(path:String):
+	var ui:PackedScene = load("res://classes/units/ui/"+path+"/"+path+".tscn")
+	var object := ui.instantiate()
+	_ui.add_child(object)

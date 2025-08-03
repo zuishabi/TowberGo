@@ -5,6 +5,7 @@ import (
 	"TowberGoServer/internal/clients"
 	"TowberGoServer/internal/game/areas"
 	"TowberGoServer/internal/game/objects"
+	"TowberGoServer/internal/list"
 	"flag"
 	"fmt"
 	"github.com/joho/godotenv"
@@ -12,6 +13,7 @@ import (
 	"net/http"
 	"os"
 	"strconv"
+	"strings"
 )
 
 type config struct {
@@ -66,6 +68,9 @@ func main() {
 	})
 	objects.AreaMgr.Initialize()
 
+	// 创建itemManager并进行初始化
+	objects.ItemManager = &objects.ItemManagerStruct{ItemMap: list.ItemList}
+
 	// 定义websocket处理
 	http.HandleFunc("/ws", func(w http.ResponseWriter, r *http.Request) {
 		hub.Serve(clients.NewWebSocketClient, w, r)
@@ -73,7 +78,8 @@ func main() {
 	go hub.Run()
 	addr := fmt.Sprintf(":%d", cfg.Port)
 	log.Printf("Starting server on %s", addr)
-	err = http.ListenAndServeTLS(addr, cfg.Cert, cfg.Key, nil)
+	//err = http.ListenAndServeTLS(addr, cfg.Cert, cfg.Key, nil)
+	err = http.ListenAndServe(addr, nil)
 	if err != nil {
 		log.Fatalf("failed to start server:%v", err)
 	}
@@ -81,8 +87,12 @@ func main() {
 
 func addHeaders(next http.Handler) http.Handler {
 	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		if strings.HasSuffix(r.URL.Path, ".wasm") {
+			w.Header().Set("Content-Type", "application/wasm")
+		}
 		w.Header().Set("Cross-Origin-Opener-Policy", "same-origin")
 		w.Header().Set("Cross-Origin-Embedder-Policy", "require-corp")
+		w.Header().Set("X-Content-Type-Options", "nosniff")
 		next.ServeHTTP(w, r)
 	})
 }

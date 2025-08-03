@@ -16,7 +16,7 @@ func _ready():
 	WS.connected_to_server.connect(_on_ws_connected_to_server)
 	WS.connection_closed.connect(_on_connection_closed)
 	WS.packet_received.connect(_on_ws_packted_received)
-	if WS.connect_to_url("wss://www.zuishabi.top/ws",TLSOptions.client(MY_TRUSTED_CAS)) != OK:
+	if WS.connect_to_url("ws://127.0.0.1:8880/ws",null) != OK:
 		_log.error("can not connect to the server...")
 	else:
 		_log.success("connecting to the server...")
