@@ -70,6 +70,11 @@ func (c *Connected) handleRegisterRequest(senderID uint32, message *packets.Pack
 		return
 	}
 	c.client.Db().Create(&userInfo)
+
+	// 创建玩家的宠物背包
+	petBag := db.EquippedPets{ID: userInfo.ID}
+	c.client.Db().Create(&petBag)
+	
 	c.client.SocketSend(&packets.Packet_OkResponse{OkResponse: &packets.OKResponseMessage{}})
 	objects.MailManager.SendMail(userInfo.ID, &objects.Mail{
 		Title:   "new player's reward",

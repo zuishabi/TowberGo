@@ -29,6 +29,16 @@ func (g *InGame) OnEnter() {
 
 }
 
+func (g *InGame) OnExit() {
+
+}
+
+func (g *InGame) ClearResources() {
+	if g.Player.Area != nil {
+		g.Player.Area.RemovePlayer(g.Player.UID)
+	}
+}
+
 func (g *InGame) HandleMessage(senderID uint32, message packets.Msg) {
 	switch message := message.(type) {
 	case *packets.Packet_PlayerEnterRequest:
@@ -67,6 +77,8 @@ func (g *InGame) HandleMessage(senderID uint32, message packets.Msg) {
 		g.handleBagRequestMessage()
 	case *packets.Packet_UseBagItemRequest:
 		g.handleUseBagItemMessage(message.UseBagItemRequest)
+	case *packets.Packet_UiPacket:
+		g.handleUiPacket(senderID, message.UiPacket.Msg)
 	default:
 		if g.Player.Area == nil {
 			return
@@ -131,12 +143,17 @@ func (g *InGame) handleUseBagItemMessage(msg *packets.UseBagItemRequestMessage) 
 	g.client.SocketSend(&rsp)
 }
 
-func (g *InGame) OnExit() {
+//---------------------------------------------------------处理ui信息----------------------------------------------------
 
+func (g *InGame) handleUiPacket(senderID uint32, msg packets.UIMsg) {
+	switch message := msg.(type) {
+	case *packets.UiPacket_InitialPetRequest:
+		g.handleInitialPetRequest(message.InitialPetRequest)
+	}
 }
 
-func (g *InGame) ClearResources() {
-	if g.Player.Area != nil {
-		g.Player.Area.RemovePlayer(g.Player.UID)
+func (g *InGame) handleInitialPetRequest(msg *packets.InitialPetRequestMessage) {
+	if err := objects.ItemManager.DeleteItem(g.Player, msg.RequestId, 1); err != nil {
+		// TODO 使用初始礼包
 	}
 }

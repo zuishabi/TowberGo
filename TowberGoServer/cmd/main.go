@@ -71,6 +71,12 @@ func main() {
 	// 创建itemManager并进行初始化
 	objects.ItemManager = &objects.ItemManagerStruct{ItemMap: list.ItemList}
 
+	// 创建petManager并进行初始化
+	objects.PetManager = objects.NewPetManager(hub.Db, list.PetList)
+
+	// 创建SkillManager并进行初始化
+	objects.SkillManager = &objects.SkillManagerStruct{SkillList: list.SkillsList}
+
 	// 定义websocket处理
 	http.HandleFunc("/ws", func(w http.ResponseWriter, r *http.Request) {
 		hub.Serve(clients.NewWebSocketClient, w, r)
