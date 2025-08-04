@@ -21,6 +21,10 @@ func _ready():
 	enter_request.set_area_name("InitialVillage")
 	enter_request.set_entrance_id(0)
 	WS.send(packet)
+	#请求获得背包物品
+	var get_bag := packets.Packet.new()
+	get_bag.new_bag_request()
+	WS.send(get_bag)
 
 func _on_connection_closed():
 	_window.show_confirm("connection closed")
@@ -48,6 +52,17 @@ func _on_ws_packted_received(msg:packets.Packet):
 		_handle_use_bag_response(msg.get_use_bag_item_response().get_success(),msg.get_use_bag_item_response().get_reason())
 	elif msg.has_ui_packet():
 		_handle_ui_message(msg.get_ui_packet())
+	elif msg.has_add_bag_item():
+		PlayerManager.add_item(msg.get_add_bag_item().get_id(),msg.get_add_bag_item().get_count())
+		_bag_window.update()
+		print("get bag item ",msg.get_add_bag_item().get_id())
+	elif msg.has_delete_bag_item():
+		PlayerManager.delete_item(msg.get_delete_bag_item().get_id(),msg.get_delete_bag_item().get_count())
+		_bag_window.update()
+	elif msg.has_get_pet():
+		print("get pet ",msg.get_get_pet().get_id())
+	elif msg.has_pet_bag_response():
+		print("get pet bag ",msg.get_pet_bag_response())
 
 func _handle_player_enter(sender_id:int,msg:packets.PlayerEnterAreaMessage):
 	var new_actor:Actor = ACTOR.instantiate()
@@ -91,7 +106,7 @@ func _handle_deny_response(reason:String):
 
 func _handle_bag_message(msg:packets.BagMessage):
 	for i:int in msg.get_id().size():
-		PlayerManager.item_bag[i] = ItemManager.generate_items(msg.get_id()[i],msg.get_count()[i])
+		PlayerManager.item_bag[msg.get_id()[i]] = ItemManager.generate_items(msg.get_id()[i],msg.get_count()[i])
 	_bag_window.update()
 
 func _handle_use_bag_response(success:bool,reason:String):

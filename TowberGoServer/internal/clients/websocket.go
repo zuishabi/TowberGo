@@ -164,8 +164,10 @@ func (c *WebSocketClient) Close(reason string) {
 	c.state.ClearResources()
 	if c.state.Name() == "Connected" {
 		// 如果是未登录而断开连接
+		fmt.Println("从连接池中移除玩家")
 		c.hub.ConnectedClients.Remove(c.id)
 	} else {
+		fmt.Println("从登录池中移除玩家")
 		c.hub.LoginClients.Remove(c.id)
 	}
 	c.SetState(nil)

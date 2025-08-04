@@ -26,7 +26,7 @@ func (g *InGame) SetClient(client internal.ClientInterface) {
 
 // OnEnter 每次状态改变时调用
 func (g *InGame) OnEnter() {
-
+	g.Player.EquippedPets = objects.PetManager.GetPetBag(g.Player)
 }
 
 func (g *InGame) OnExit() {
@@ -79,6 +79,10 @@ func (g *InGame) HandleMessage(senderID uint32, message packets.Msg) {
 		g.handleUseBagItemMessage(message.UseBagItemRequest)
 	case *packets.Packet_UiPacket:
 		g.handleUiPacket(senderID, message.UiPacket.Msg)
+	case *packets.Packet_SavePet:
+		g.handleSavePet()
+	case *packets.Packet_PetBagRequest:
+		g.handlePetBagRequest()
 	default:
 		if g.Player.Area == nil {
 			return
@@ -143,6 +147,49 @@ func (g *InGame) handleUseBagItemMessage(msg *packets.UseBagItemRequestMessage) 
 	g.client.SocketSend(&rsp)
 }
 
+// 当收到来自hub的保存宠物信息的广播时调用
+func (g *InGame) handleSavePet() {
+	for i := range g.Player.EquippedPets {
+		objects.PetManager.SavePet(g.Player, g.Player.EquippedPets[i])
+	}
+}
+
+func (g *InGame) handlePetBagRequest() {
+	g.Player.PetBagLock.RLock()
+	defer g.Player.PetBagLock.RUnlock()
+	pets := make([]*packets.PetMessage, 5)
+	for i, v := range g.Player.EquippedPets {
+		if v == nil {
+			continue
+		}
+		equippedSkills := make([]uint32, 4)
+		for a, b := range v.EquippedSkills() {
+			if b == nil {
+				continue
+			}
+			equippedSkills[a] = uint32(b.ID())
+		}
+		stats := packets.PetStatsMessage{
+			MaxHp:        int64(v.Stats().MaxHP),
+			Hp:           int64(v.Stats().HP),
+			Strength:     int64(v.Stats().Strength),
+			Intelligence: int64(v.Stats().Intelligence),
+			Speed:        int64(v.Stats().Speed),
+			Defense:      int64(v.Stats().Defense),
+		}
+		pets[i] = &packets.PetMessage{
+			PetId:          v.PetID(),
+			Id:             v.ID(),
+			Exp:            int64(v.Exp()),
+			Level:          int64(v.Level()),
+			EquippedSkills: equippedSkills,
+			PetStats:       &stats,
+		}
+	}
+	response := packets.Packet_PetBagResponse{PetBagResponse: &packets.PetBagResponseMessage{Pet: pets}}
+	g.client.SocketSend(&response)
+}
+
 //---------------------------------------------------------处理ui信息----------------------------------------------------
 
 func (g *InGame) handleUiPacket(senderID uint32, msg packets.UIMsg) {
@@ -153,7 +200,9 @@ func (g *InGame) handleUiPacket(senderID uint32, msg packets.UIMsg) {
 }
 
 func (g *InGame) handleInitialPetRequest(msg *packets.InitialPetRequestMessage) {
-	if err := objects.ItemManager.DeleteItem(g.Player, msg.RequestId, 1); err != nil {
-		// TODO 使用初始礼包
+	if err := objects.ItemManager.DeleteItem(g.Player, 1, 1); err != nil {
+		g.client.SocketSend(&packets.Packet_DenyResponse{DenyResponse: &packets.DenyResponseMessage{Reason: err.Error()}})
+		return
 	}
+	objects.PetManager.CreatePet(g.Player, msg.RequestId)
 }

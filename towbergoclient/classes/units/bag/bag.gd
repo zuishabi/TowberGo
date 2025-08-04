@@ -56,6 +56,7 @@ func confirm_func():
 	use_bag.set_id(current_item.item_id)
 	use_bag.set_count(_spin_box.value)
 	WS.send(packet)
+	_detail.hide()
 
 func _input(event):
 	if self.visible && event.is_action_pressed("esc") && self.has_focus():

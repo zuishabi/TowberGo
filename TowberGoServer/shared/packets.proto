@@ -113,6 +113,37 @@ message UseBagItemResponseMessage{
   string reason = 2;
 }
 
+message GetPetMessage{
+  uint32 id = 1;
+  bool equipped = 2; // 是否被装备
+}
+
+message PetBagRequestMessage{}
+
+message PetBagResponseMessage{
+  repeated PetMessage pet = 1;
+}
+
+message PetMessage{
+  uint32 pet_id = 1;
+  uint64 id = 2;
+  int64 exp = 3;
+  int64 level =4;
+  repeated uint32 equipped_skills = 5;
+  PetStatsMessage pet_stats = 6;
+}
+
+message PetStatsMessage{
+  int64 max_hp = 1;
+  int64 hp = 2;
+  int64 strength = 3;
+  int64 intelligence = 4;
+  int64 speed = 5;
+  int64 defense = 6;
+}
+
+message SavePetMessage{}
+
 message Packet{
   uint32 uid = 1;
   oneof msg{
@@ -139,6 +170,10 @@ message Packet{
     UseBagItemRequestMessage use_bag_item_request = 22;
     UseBagItemResponseMessage use_bag_item_response = 23;
     UiPacket ui_packet = 24;
+    GetPetMessage get_pet = 25;
+    PetBagRequestMessage pet_bag_request = 26;
+    PetBagResponseMessage pet_bag_response = 27;
+    SavePetMessage save_pet = 28;
   }
 }
 

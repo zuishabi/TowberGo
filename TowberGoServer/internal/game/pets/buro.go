@@ -86,12 +86,13 @@ func (b *Buro) EquippedSkills() []objects.Skill {
 func (b *Buro) Initialize(exp int, equippedSkills []uint32, stats *objects.Stats, owner *objects.Player) objects.Pet {
 	if exp == 0 {
 		// 相当于生成一个宠物
-		*stats = b.BaseStats()
+		s := b.BaseStats()
+		stats = &s
 		// TODO 在这里初始化技能
 	}
 	res := Buro{
 		exp:            exp,
-		stats:          objects.Stats{},
+		stats:          *stats,
 		level:          objects.ConvertExpToLevel(exp),
 		equippedSkills: make([]objects.Skill, 4),
 		owner:          owner,

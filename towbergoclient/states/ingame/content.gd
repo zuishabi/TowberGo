@@ -43,3 +43,4 @@ func _on_collect_pressed():
 	var collect := packet.new_mail_collect()
 	collect.set_id(current_mail.mail_id)
 	WS.send(packet)
+	self.hide()

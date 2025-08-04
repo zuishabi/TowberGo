@@ -44,7 +44,6 @@ type Pets struct {
 	CreatedAt time.Time
 	Owner     uint32 `gorm:"Index"`
 	Exp       int
-	Equipped  bool
 }
 
 type PetSkills struct {
@@ -66,7 +65,7 @@ type PetStats struct {
 }
 
 type EquippedPets struct {
-	ID    uint32 `gorm:"primaryKey"`
+	UID   uint32 `gorm:"primaryKey"`
 	Slot1 uint64
 	Slot2 uint64
 	Slot3 uint64

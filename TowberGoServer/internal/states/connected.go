@@ -55,8 +55,9 @@ func (c *Connected) handleLoginRequest(senderID uint32, message *packets.Packet_
 	c.client.Login(userInfo.ID)
 	// 转换状态
 	c.client.SetState(&InGame{Player: &objects.Player{
-		UserName: userInfo.UserName,
-		UID:      userInfo.ID,
+		UserName:     userInfo.UserName,
+		UID:          userInfo.ID,
+		EquippedPets: make([]objects.Pet, 5),
 	}})
 }
 
@@ -72,9 +73,9 @@ func (c *Connected) handleRegisterRequest(senderID uint32, message *packets.Pack
 	c.client.Db().Create(&userInfo)
 
 	// 创建玩家的宠物背包
-	petBag := db.EquippedPets{ID: userInfo.ID}
+	petBag := db.EquippedPets{UID: userInfo.ID}
 	c.client.Db().Create(&petBag)
-	
+
 	c.client.SocketSend(&packets.Packet_OkResponse{OkResponse: &packets.OKResponseMessage{}})
 	objects.MailManager.SendMail(userInfo.ID, &objects.Mail{
 		Title:   "new player's reward",

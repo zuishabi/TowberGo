@@ -2,6 +2,7 @@ package objects
 
 import (
 	"TowberGoServer/internal/db"
+	"TowberGoServer/pkg/packets"
 	"context"
 	"fmt"
 	"strconv"
@@ -80,6 +81,13 @@ func (i *ItemManagerStruct) AddItem(player *Player, id uint32, count int) error 
 	if err != nil {
 		return err
 	}
+
+	// 向客户端发送添加物品消息
+	addMsg := packets.Packet_AddBagItem{AddBagItem: &packets.AddBagItemMessage{
+		Id:    id,
+		Count: int64(count),
+	}}
+	player.Client.SocketSend(&addMsg)
 	return nil
 }
 
@@ -89,6 +97,11 @@ func (i *ItemManagerStruct) DeleteItem(player *Player, id uint32, count int) err
 	if err != nil {
 		return err
 	}
+	deleteMsg := &packets.Packet_DeleteBagItem{DeleteBagItem: &packets.DeleteBagItemMessage{
+		Id:    id,
+		Count: int64(count),
+	}}
+	player.Client.SocketSend(deleteMsg)
 	return nil
 }
 

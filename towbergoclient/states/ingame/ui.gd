@@ -11,12 +11,9 @@ func _on_mail_pressed():
 func _on_bag_pressed():
 	if _bag_window.visible:
 		return
-	if !PlayerManager.loaded:
-		PlayerManager.loaded = true
-		var packet := packets.Packet.new()
-		packet.new_bag_request()
-		WS.send(packet)
 	_bag_window.show_bag()
 
-func show_pop_up(scene:PackedScene):
-	pass
+func _on_pets_pressed():
+	var packet := packets.Packet.new()
+	packet.new_pet_bag_request()
+	WS.send(packet)

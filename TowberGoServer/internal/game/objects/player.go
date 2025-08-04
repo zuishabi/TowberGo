@@ -7,10 +7,11 @@ import (
 )
 
 type Player struct {
-	UserName   string
-	UID        uint32
-	Client     internal.ClientInterface
-	Position   containers.Vector2
-	Area       Area
-	PetBagLock sync.RWMutex
+	UserName     string
+	UID          uint32
+	Client       internal.ClientInterface
+	Position     containers.Vector2
+	EquippedPets []Pet
+	Area         Area
+	PetBagLock   sync.RWMutex
 }

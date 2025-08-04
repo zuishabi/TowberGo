@@ -73,6 +73,7 @@ func main() {
 
 	// 创建petManager并进行初始化
 	objects.PetManager = objects.NewPetManager(hub.Db, list.PetList)
+	go objects.PetManager.SavePetGoroutine(hub)
 
 	// 创建SkillManager并进行初始化
 	objects.SkillManager = &objects.SkillManagerStruct{SkillList: list.SkillsList}
