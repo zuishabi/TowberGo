@@ -2,6 +2,7 @@ extends CanvasLayer
 
 @onready var _mail_window = $Mail
 @onready var _bag_window = $Bag
+@onready var _pet_bag = $PetBag
 const packets := preload("res://packets.gd")
 
 func _on_mail_pressed():
@@ -17,3 +18,4 @@ func _on_pets_pressed():
 	var packet := packets.Packet.new()
 	packet.new_pet_bag_request()
 	WS.send(packet)
+	_pet_bag.show()

@@ -12,6 +12,7 @@ var _states_scenes:Dictionary[State,String] = {
 
 signal show_confirm(text:String,callable:Callable)
 signal show_choose(text:String,confirm:Callable,cancel:Callable)
+signal show_pet_bag_detail(pet:BasePet)
 
 var id:int
 var username:String

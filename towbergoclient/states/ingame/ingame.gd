@@ -2,6 +2,7 @@ extends Node2D
 
 const packets := preload("res://packets.gd")
 const ACTOR = preload("res://classes/actor/actor.tscn")
+const GET_WINDOW = preload("res://classes/units/get_window/get_window.tscn")
 
 @onready var _window = $Window
 @onready var _player_manager = $PlayerManager
@@ -10,6 +11,7 @@ const ACTOR = preload("res://classes/actor/actor.tscn")
 @onready var _mail_window = $UI/Mail
 @onready var _bag_window = $UI/Bag
 @onready var _ui = $UI
+@onready var _pet_bag = $UI/PetBag
 
 func _ready():
 	GameManager.show_choose.connect(_window.show_choose)
@@ -55,7 +57,9 @@ func _on_ws_packted_received(msg:packets.Packet):
 	elif msg.has_add_bag_item():
 		PlayerManager.add_item(msg.get_add_bag_item().get_id(),msg.get_add_bag_item().get_count())
 		_bag_window.update()
-		print("get bag item ",msg.get_add_bag_item().get_id())
+		var new_get_window := GET_WINDOW.instantiate()
+		_ui.add_child(new_get_window)
+		new_get_window.add_item(msg.get_add_bag_item().get_id(),msg.get_add_bag_item().get_count())
 	elif msg.has_delete_bag_item():
 		PlayerManager.delete_item(msg.get_delete_bag_item().get_id(),msg.get_delete_bag_item().get_count())
 		_bag_window.update()
@@ -63,6 +67,7 @@ func _on_ws_packted_received(msg:packets.Packet):
 		print("get pet ",msg.get_get_pet().get_id())
 	elif msg.has_pet_bag_response():
 		print("get pet bag ",msg.get_pet_bag_response())
+		_handle_get_pet_bag_response(msg.get_pet_bag_response())
 
 func _handle_player_enter(sender_id:int,msg:packets.PlayerEnterAreaMessage):
 	var new_actor:Actor = ACTOR.instantiate()
@@ -121,3 +126,13 @@ func _handle_open_ui(path:String):
 	var ui:PackedScene = load("res://classes/units/ui/"+path+"/"+path+".tscn")
 	var object := ui.instantiate()
 	_ui.add_child(object)
+
+func _handle_get_pet_bag_response(msg:packets.PetBagResponseMessage):
+	var pets:Array[BasePet]
+	pets.resize(5)
+	for i in msg.get_pet().size():
+		if msg.get_pet()[i].get_pet_id() == 0:
+			pets[i] = null
+		else:
+			pets[i] = PetManager.msg_to_pet(msg.get_pet()[i])
+	_pet_bag.update(pets)

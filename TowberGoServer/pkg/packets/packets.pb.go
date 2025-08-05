@@ -1421,10 +1421,12 @@ type PetStatsMessage struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	MaxHp         int64                  `protobuf:"varint,1,opt,name=max_hp,json=maxHp,proto3" json:"max_hp,omitempty"`
 	Hp            int64                  `protobuf:"varint,2,opt,name=hp,proto3" json:"hp,omitempty"`
-	Strength      int64                  `protobuf:"varint,3,opt,name=strength,proto3" json:"strength,omitempty"`
-	Intelligence  int64                  `protobuf:"varint,4,opt,name=intelligence,proto3" json:"intelligence,omitempty"`
-	Speed         int64                  `protobuf:"varint,5,opt,name=speed,proto3" json:"speed,omitempty"`
-	Defense       int64                  `protobuf:"varint,6,opt,name=defense,proto3" json:"defense,omitempty"`
+	MaxMana       int64                  `protobuf:"varint,3,opt,name=max_mana,json=maxMana,proto3" json:"max_mana,omitempty"`
+	Mana          int64                  `protobuf:"varint,4,opt,name=mana,proto3" json:"mana,omitempty"`
+	Strength      int64                  `protobuf:"varint,5,opt,name=strength,proto3" json:"strength,omitempty"`
+	Intelligence  int64                  `protobuf:"varint,6,opt,name=intelligence,proto3" json:"intelligence,omitempty"`
+	Speed         int64                  `protobuf:"varint,7,opt,name=speed,proto3" json:"speed,omitempty"`
+	Defense       int64                  `protobuf:"varint,8,opt,name=defense,proto3" json:"defense,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -1469,6 +1471,20 @@ func (x *PetStatsMessage) GetMaxHp() int64 {
 func (x *PetStatsMessage) GetHp() int64 {
 	if x != nil {
 		return x.Hp
+	}
+	return 0
+}
+
+func (x *PetStatsMessage) GetMaxMana() int64 {
+	if x != nil {
+		return x.MaxMana
+	}
+	return 0
+}
+
+func (x *PetStatsMessage) GetMana() int64 {
+	if x != nil {
+		return x.Mana
 	}
 	return 0
 }
@@ -2284,14 +2300,16 @@ const file_shared_packets_proto_rawDesc = "" +
 	"\x03exp\x18\x03 \x01(\x03R\x03exp\x12\x14\n" +
 	"\x05level\x18\x04 \x01(\x03R\x05level\x12'\n" +
 	"\x0fequipped_skills\x18\x05 \x03(\rR\x0eequippedSkills\x125\n" +
-	"\tpet_stats\x18\x06 \x01(\v2\x18.packets.PetStatsMessageR\bpetStats\"\xa8\x01\n" +
+	"\tpet_stats\x18\x06 \x01(\v2\x18.packets.PetStatsMessageR\bpetStats\"\xd7\x01\n" +
 	"\x0fPetStatsMessage\x12\x15\n" +
 	"\x06max_hp\x18\x01 \x01(\x03R\x05maxHp\x12\x0e\n" +
-	"\x02hp\x18\x02 \x01(\x03R\x02hp\x12\x1a\n" +
-	"\bstrength\x18\x03 \x01(\x03R\bstrength\x12\"\n" +
-	"\fintelligence\x18\x04 \x01(\x03R\fintelligence\x12\x14\n" +
-	"\x05speed\x18\x05 \x01(\x03R\x05speed\x12\x18\n" +
-	"\adefense\x18\x06 \x01(\x03R\adefense\"\x10\n" +
+	"\x02hp\x18\x02 \x01(\x03R\x02hp\x12\x19\n" +
+	"\bmax_mana\x18\x03 \x01(\x03R\amaxMana\x12\x12\n" +
+	"\x04mana\x18\x04 \x01(\x03R\x04mana\x12\x1a\n" +
+	"\bstrength\x18\x05 \x01(\x03R\bstrength\x12\"\n" +
+	"\fintelligence\x18\x06 \x01(\x03R\fintelligence\x12\x14\n" +
+	"\x05speed\x18\a \x01(\x03R\x05speed\x12\x18\n" +
+	"\adefense\x18\b \x01(\x03R\adefense\"\x10\n" +
 	"\x0eSavePetMessage\"\xda\x0e\n" +
 	"\x06Packet\x12\x10\n" +
 	"\x03uid\x18\x01 \x01(\rR\x03uid\x12C\n" +

@@ -21,6 +21,8 @@ WS="*res://websocket.gd"
 GameManager="*res://game_manager.gd"
 ItemManager="*res://item_manager.gd"
 PlayerManager="*res://player_manager.gd"
+SkillManager="*res://skill_manager.gd"
+PetManager="*res://pet_manager.gd"
 
 [display]
 
@@ -35,7 +37,6 @@ enabled=PackedStringArray("res://addons/protobuf/plugin.cfg")
 [gui]
 
 theme/custom="uid://bdbjie1ddqlm5"
-theme/custom_font="uid://dqrc3mtq4ep80"
 
 [input]
 

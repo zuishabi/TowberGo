@@ -63,6 +63,9 @@ func (b *Buro) Level() int {
 func (b *Buro) LevelUp() {
 	b.level += 1
 	b.stats.MaxHP += 5
+	b.stats.HP = b.stats.MaxHP
+	b.stats.MaxMana += 3
+	b.stats.Mana = b.stats.MaxMana
 	b.stats.Defense += 2
 	b.stats.Intelligence += 1
 	b.stats.Strength += 5
@@ -84,12 +87,6 @@ func (b *Buro) EquippedSkills() []objects.Skill {
 }
 
 func (b *Buro) Initialize(exp int, equippedSkills []uint32, stats *objects.Stats, owner *objects.Player) objects.Pet {
-	if exp == 0 {
-		// 相当于生成一个宠物
-		s := b.BaseStats()
-		stats = &s
-		// TODO 在这里初始化技能
-	}
 	res := Buro{
 		exp:            exp,
 		stats:          *stats,
@@ -115,6 +112,9 @@ func (b *Buro) Stats() *objects.Stats {
 func (b *Buro) BaseStats() objects.Stats {
 	return objects.Stats{
 		MaxHP:        50,
+		HP:           50,
+		MaxMana:      60,
+		Mana:         60,
 		Strength:     60,
 		Intelligence: 20,
 		Speed:        60,

@@ -1,0 +1,386 @@
+[gd_scene load_steps=21 format=3 uid="uid://blee2cbkjei1w"]
+
+[ext_resource type="Script" uid="uid://drkpm7cur572c" path="res://classes/units/pet_bag/pet_bag.gd" id="1_b1t0f"]
+[ext_resource type="Texture2D" uid="uid://jwrp3m3e3k4p" path="res://assets/ui/UI assets (1x).png" id="2_yugfw"]
+[ext_resource type="PackedScene" uid="uid://g8eapbf146mm" path="res://classes/units/pet_bag/pet_bag_slot.tscn" id="3_rddfb"]
+[ext_resource type="Texture2D" uid="uid://0uells4eymux" path="res://assets/ui/progress_bar/under.tres" id="3_tg4sn"]
+[ext_resource type="Script" uid="uid://cgcy1o5jmoyyb" path="res://classes/units/pet_bag/info.gd" id="4_6g4o5"]
+[ext_resource type="Texture2D" uid="uid://cbft5w2sanv77" path="res://assets/ui/buttons/close.tres" id="4_ljkfy"]
+[ext_resource type="PackedScene" uid="uid://cvj6a5ysy1q3u" path="res://classes/units/skill_slot/skill_slot.tscn" id="5_dfwjy"]
+[ext_resource type="Texture2D" uid="uid://ccxxem3ww8nct" path="res://assets/ui/buttons/close_hover.tres" id="5_tg4sn"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rddfb"]
+atlas = ExtResource("2_yugfw")
+region = Rect2(150, 6, 36, 36)
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ljkfy"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ljkfy"]
+content_margin_left = 2.0
+content_margin_top = 5.0
+content_margin_right = 2.0
+content_margin_bottom = 5.0
+bg_color = Color(0.411765, 0.305882, 0.027451, 0)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 1
+border_width_bottom = 2
+corner_radius_top_left = 10
+corner_radius_bottom_left = 10
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_b2uas"]
+atlas = ExtResource("2_yugfw")
+region = Rect2(0, 243, 48, 10)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6dw7t"]
+atlas = ExtResource("2_yugfw")
+region = Rect2(189, 211, 54, 10)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6g4o5"]
+atlas = ExtResource("2_yugfw")
+region = Rect2(97, 212, 46, 8)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dfwjy"]
+atlas = ExtResource("2_yugfw")
+region = Rect2(49, 212, 46, 8)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_tg4sn"]
+bg_color = Color(0.816092, 0.526092, 0.200066, 0.631373)
+border_width_left = 1
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fg0sr"]
+atlas = ExtResource("2_yugfw")
+region = Rect2(131, 708, 10, 10)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_muo3y"]
+atlas = ExtResource("2_yugfw")
+region = Rect2(195, 708, 10, 10)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_o2hjq"]
+atlas = ExtResource("2_yugfw")
+region = Rect2(147, 708, 10, 10)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_pkhgc"]
+atlas = ExtResource("2_yugfw")
+region = Rect2(163, 708, 10, 10)
+
+[node name="PetBag" type="Window"]
+transparent_bg = true
+canvas_item_default_texture_filter = 0
+initial_position = 1
+size = Vector2i(600, 400)
+unresizable = true
+borderless = true
+transparent = true
+script = ExtResource("1_b1t0f")
+
+[node name="NinePatchRect" type="NinePatchRect" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource("AtlasTexture_rddfb")
+patch_margin_left = 7
+patch_margin_top = 7
+patch_margin_right = 7
+patch_margin_bottom = 7
+
+[node name="MarginContainer" type="MarginContainer" parent="NinePatchRect"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 8
+theme_override_constants/margin_right = 8
+theme_override_constants/margin_bottom = 8
+
+[node name="VBoxContainer" type="VBoxContainer" parent="NinePatchRect/MarginContainer"]
+layout_mode = 2
+
+[node name="Title" type="Label" parent="NinePatchRect/MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "Pet Bag"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Detail" type="PanelContainer" parent="NinePatchRect/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_styles/panel = SubResource("StyleBoxEmpty_ljkfy")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="NinePatchRect/MarginContainer/VBoxContainer/Detail"]
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="LeftPanel" type="PanelContainer" parent="NinePatchRect/MarginContainer/VBoxContainer/Detail/HBoxContainer"]
+custom_minimum_size = Vector2(233, 0)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_ljkfy")
+
+[node name="Left" type="VBoxContainer" parent="NinePatchRect/MarginContainer/VBoxContainer/Detail/HBoxContainer/LeftPanel"]
+custom_minimum_size = Vector2(227, 0)
+layout_mode = 2
+theme_override_constants/separation = 5
+
+[node name="PetName" type="Label" parent="NinePatchRect/MarginContainer/VBoxContainer/Detail/HBoxContainer/LeftPanel/Left"]
+layout_mode = 2
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="TextureRect" type="TextureRect" parent="NinePatchRect/MarginContainer/VBoxContainer/Detail/HBoxContainer/LeftPanel/Left"]
+custom_minimum_size = Vector2(128, 128)
+layout_mode = 2
+size_flags_horizontal = 4
+
+[node name="Level" type="HBoxContainer" parent="NinePatchRect/MarginContainer/VBoxContainer/Detail/HBoxContainer/LeftPanel/Left"]
+layout_mode = 2
+alignment = 1
+
+[node name="Lv" type="Label" parent="NinePatchRect/MarginContainer/VBoxContainer/Detail/HBoxContainer/LeftPanel/Left/Level"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 12
+text = "lv"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ExpProgress" type="TextureProgressBar" parent="NinePatchRect/MarginContainer/VBoxContainer/Detail/HBoxContainer/LeftPanel/Left/Level"]
+custom_minimum_size = Vector2(150, 15)
+layout_mode = 2
+size_flags_vertical = 8
+value = 100.0
+nine_patch_stretch = true
+stretch_margin_left = 11
+stretch_margin_top = 5
+stretch_margin_right = 11
+stretch_margin_bottom = 5
+texture_under = SubResource("AtlasTexture_b2uas")
+texture_progress = SubResource("AtlasTexture_6dw7t")
+
+[node name="ExpText" type="Label" parent="NinePatchRect/MarginContainer/VBoxContainer/Detail/HBoxContainer/LeftPanel/Left/Level/ExpProgress"]
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -18.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_font_sizes/font_size = 13
+text = "2515"
+horizontal_alignment = 1
+
+[node name="Hp" type="TextureProgressBar" parent="NinePatchRect/MarginContainer/VBoxContainer/Detail/HBoxContainer/LeftPanel/Left"]
+custom_minimum_size = Vector2(200, 10)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 3
+value = 79.0
+nine_patch_stretch = true
+stretch_margin_left = 4
+stretch_margin_top = 4
+stretch_margin_right = 4
+stretch_margin_bottom = 3
+texture_under = ExtResource("3_tg4sn")
+texture_progress = SubResource("AtlasTexture_6g4o5")
+
+[node name="HpText" type="Label" parent="NinePatchRect/MarginContainer/VBoxContainer/Detail/HBoxContainer/LeftPanel/Left/Hp"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 13
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Mana" type="TextureProgressBar" parent="NinePatchRect/MarginContainer/VBoxContainer/Detail/HBoxContainer/LeftPanel/Left"]
+custom_minimum_size = Vector2(200, 10)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 3
+value = 90.0
+nine_patch_stretch = true
+stretch_margin_left = 4
+stretch_margin_top = 4
+stretch_margin_right = 4
+stretch_margin_bottom = 4
+texture_under = ExtResource("3_tg4sn")
+texture_progress = SubResource("AtlasTexture_dfwjy")
+
+[node name="ManaText" type="Label" parent="NinePatchRect/MarginContainer/VBoxContainer/Detail/HBoxContainer/LeftPanel/Left/Mana"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 13
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="RightPanel" type="PanelContainer" parent="NinePatchRect/MarginContainer/VBoxContainer/Detail/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_styles/panel = SubResource("StyleBoxFlat_tg4sn")
+
+[node name="TabContainer" type="VBoxContainer" parent="NinePatchRect/MarginContainer/VBoxContainer/Detail/HBoxContainer/RightPanel"]
+layout_mode = 2
+
+[node name="TabBar" type="TabBar" parent="NinePatchRect/MarginContainer/VBoxContainer/Detail/HBoxContainer/RightPanel/TabContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 13
+current_tab = 0
+tab_count = 2
+tab_0/title = "Info"
+tab_1/title = "Pet Item"
+
+[node name="Info" type="ScrollContainer" parent="NinePatchRect/MarginContainer/VBoxContainer/Detail/HBoxContainer/RightPanel/TabContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+script = ExtResource("4_6g4o5")
+
+[node name="Info" type="VBoxContainer" parent="NinePatchRect/MarginContainer/VBoxContainer/Detail/HBoxContainer/RightPanel/TabContainer/Info"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Label" type="Label" parent="NinePatchRect/MarginContainer/VBoxContainer/Detail/HBoxContainer/RightPanel/TabContainer/Info/Info"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 12
+text = "Skills"
+horizontal_alignment = 1
+
+[node name="Skill1" type="HBoxContainer" parent="NinePatchRect/MarginContainer/VBoxContainer/Detail/HBoxContainer/RightPanel/TabContainer/Info/Info"]
+layout_mode = 2
+alignment = 1
+
+[node name="SkillSlot" parent="NinePatchRect/MarginContainer/VBoxContainer/Detail/HBoxContainer/RightPanel/TabContainer/Info/Info/Skill1" instance=ExtResource("5_dfwjy")]
+layout_mode = 2
+
+[node name="SkillSlot2" parent="NinePatchRect/MarginContainer/VBoxContainer/Detail/HBoxContainer/RightPanel/TabContainer/Info/Info/Skill1" instance=ExtResource("5_dfwjy")]
+layout_mode = 2
+
+[node name="Skill2" type="HBoxContainer" parent="NinePatchRect/MarginContainer/VBoxContainer/Detail/HBoxContainer/RightPanel/TabContainer/Info/Info"]
+layout_mode = 2
+alignment = 1
+
+[node name="SkillSlot" parent="NinePatchRect/MarginContainer/VBoxContainer/Detail/HBoxContainer/RightPanel/TabContainer/Info/Info/Skill2" instance=ExtResource("5_dfwjy")]
+layout_mode = 2
+
+[node name="SkillSlot2" parent="NinePatchRect/MarginContainer/VBoxContainer/Detail/HBoxContainer/RightPanel/TabContainer/Info/Info/Skill2" instance=ExtResource("5_dfwjy")]
+layout_mode = 2
+
+[node name="Label2" type="Label" parent="NinePatchRect/MarginContainer/VBoxContainer/Detail/HBoxContainer/RightPanel/TabContainer/Info/Info"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 12
+text = "Stats"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Stats1" type="HBoxContainer" parent="NinePatchRect/MarginContainer/VBoxContainer/Detail/HBoxContainer/RightPanel/TabContainer/Info/Info"]
+layout_mode = 2
+theme_override_constants/separation = 20
+alignment = 1
+
+[node name="Strength" type="HBoxContainer" parent="NinePatchRect/MarginContainer/VBoxContainer/Detail/HBoxContainer/RightPanel/TabContainer/Info/Info/Stats1"]
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="NinePatchRect/MarginContainer/VBoxContainer/Detail/HBoxContainer/RightPanel/TabContainer/Info/Info/Stats1/Strength"]
+custom_minimum_size = Vector2(20, 20)
+layout_mode = 2
+texture = SubResource("AtlasTexture_fg0sr")
+expand_mode = 1
+
+[node name="Label" type="Label" parent="NinePatchRect/MarginContainer/VBoxContainer/Detail/HBoxContainer/RightPanel/TabContainer/Info/Info/Stats1/Strength"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 12
+
+[node name="Intelligence" type="HBoxContainer" parent="NinePatchRect/MarginContainer/VBoxContainer/Detail/HBoxContainer/RightPanel/TabContainer/Info/Info/Stats1"]
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="NinePatchRect/MarginContainer/VBoxContainer/Detail/HBoxContainer/RightPanel/TabContainer/Info/Info/Stats1/Intelligence"]
+custom_minimum_size = Vector2(20, 20)
+layout_mode = 2
+texture = SubResource("AtlasTexture_muo3y")
+expand_mode = 1
+
+[node name="Label" type="Label" parent="NinePatchRect/MarginContainer/VBoxContainer/Detail/HBoxContainer/RightPanel/TabContainer/Info/Info/Stats1/Intelligence"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 12
+
+[node name="Speed" type="HBoxContainer" parent="NinePatchRect/MarginContainer/VBoxContainer/Detail/HBoxContainer/RightPanel/TabContainer/Info/Info/Stats1"]
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="NinePatchRect/MarginContainer/VBoxContainer/Detail/HBoxContainer/RightPanel/TabContainer/Info/Info/Stats1/Speed"]
+custom_minimum_size = Vector2(20, 20)
+layout_mode = 2
+texture = SubResource("AtlasTexture_o2hjq")
+expand_mode = 1
+
+[node name="Label" type="Label" parent="NinePatchRect/MarginContainer/VBoxContainer/Detail/HBoxContainer/RightPanel/TabContainer/Info/Info/Stats1/Speed"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 12
+
+[node name="Defense" type="HBoxContainer" parent="NinePatchRect/MarginContainer/VBoxContainer/Detail/HBoxContainer/RightPanel/TabContainer/Info/Info/Stats1"]
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="NinePatchRect/MarginContainer/VBoxContainer/Detail/HBoxContainer/RightPanel/TabContainer/Info/Info/Stats1/Defense"]
+custom_minimum_size = Vector2(20, 20)
+layout_mode = 2
+texture = SubResource("AtlasTexture_pkhgc")
+expand_mode = 1
+
+[node name="Label" type="Label" parent="NinePatchRect/MarginContainer/VBoxContainer/Detail/HBoxContainer/RightPanel/TabContainer/Info/Info/Stats1/Defense"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 12
+
+[node name="PetItem" type="GridContainer" parent="NinePatchRect/MarginContainer/VBoxContainer/Detail/HBoxContainer/RightPanel/TabContainer"]
+layout_mode = 2
+
+[node name="PetList" type="MarginContainer" parent="NinePatchRect/MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 100)
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="NinePatchRect/MarginContainer/VBoxContainer/PetList"]
+layout_mode = 2
+
+[node name="Slot" parent="NinePatchRect/MarginContainer/VBoxContainer/PetList/HBoxContainer" instance=ExtResource("3_rddfb")]
+layout_mode = 2
+
+[node name="Slot2" parent="NinePatchRect/MarginContainer/VBoxContainer/PetList/HBoxContainer" instance=ExtResource("3_rddfb")]
+layout_mode = 2
+
+[node name="Slot3" parent="NinePatchRect/MarginContainer/VBoxContainer/PetList/HBoxContainer" instance=ExtResource("3_rddfb")]
+layout_mode = 2
+
+[node name="Slot4" parent="NinePatchRect/MarginContainer/VBoxContainer/PetList/HBoxContainer" instance=ExtResource("3_rddfb")]
+layout_mode = 2
+
+[node name="Slot5" parent="NinePatchRect/MarginContainer/VBoxContainer/PetList/HBoxContainer" instance=ExtResource("3_rddfb")]
+layout_mode = 2
+
+[node name="TextureButton" type="TextureButton" parent="."]
+custom_minimum_size = Vector2(20, 20)
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -28.0
+offset_top = 10.0
+offset_right = -8.0
+offset_bottom = 30.0
+grow_horizontal = 0
+texture_normal = ExtResource("4_ljkfy")
+texture_hover = ExtResource("5_tg4sn")
+stretch_mode = 0
+
+[connection signal="tab_changed" from="NinePatchRect/MarginContainer/VBoxContainer/Detail/HBoxContainer/RightPanel/TabContainer/TabBar" to="." method="_on_tab_bar_tab_changed"]
+[connection signal="pressed" from="TextureButton" to="." method="_on_texture_button_pressed"]

@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=3 uid="uid://cc083armwg684"]
+[gd_scene load_steps=23 format=3 uid="uid://cc083armwg684"]
 
 [ext_resource type="Script" uid="uid://dd0d3amb3xsju" path="res://states/ingame/ingame.gd" id="1_b7vyf"]
 [ext_resource type="PackedScene" uid="uid://7e1771outtfj" path="res://classes/windows/window.tscn" id="2_0uskn"]
@@ -16,6 +16,7 @@
 [ext_resource type="PackedScene" uid="uid://b0w10b3j7y3cs" path="res://classes/units/bag/bag.tscn" id="9_sqgb6"]
 [ext_resource type="Texture2D" uid="uid://cbft5w2sanv77" path="res://assets/ui/buttons/close.tres" id="10_2apfk"]
 [ext_resource type="Texture2D" uid="uid://ccxxem3ww8nct" path="res://assets/ui/buttons/close_hover.tres" id="11_4a0li"]
+[ext_resource type="PackedScene" uid="uid://blee2cbkjei1w" path="res://classes/units/pet_bag/pet_bag.tscn" id="14_4a0li"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ube6o"]
 
@@ -134,6 +135,7 @@ transparent_bg = true
 canvas_item_default_texture_filter = 0
 initial_position = 1
 size = Vector2i(600, 400)
+visible = false
 unresizable = true
 borderless = true
 transparent = true
@@ -226,6 +228,9 @@ texture_hover = ExtResource("11_4a0li")
 stretch_mode = 0
 
 [node name="Bag" parent="UI" instance=ExtResource("9_sqgb6")]
+visible = false
+
+[node name="PetBag" parent="UI" instance=ExtResource("14_4a0li")]
 visible = false
 
 [node name="Window" parent="." instance=ExtResource("2_0uskn")]

@@ -58,6 +58,8 @@ type PetStats struct {
 	ID           uint64 `gorm:"primaryKey"`
 	MaxHP        int
 	HP           int
+	MaxMana      int
+	Mana         int
 	Strength     int
 	Intelligence int
 	Speed        int

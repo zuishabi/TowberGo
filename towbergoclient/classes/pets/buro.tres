@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="BasePet" load_steps=4 format=3 uid="uid://d1hx6hrtegt"]
+
+[ext_resource type="Texture2D" uid="uid://dy7cw1f6cbeko" path="res://assets/pets/buro/Owlbear_idle.png" id="1_68w0e"]
+[ext_resource type="Script" uid="uid://dk3kmpyjqbff8" path="res://classes/pets/base_pet.gd" id="1_pmc84"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_f6gab"]
+atlas = ExtResource("1_68w0e")
+region = Rect2(32, 68, 32, 32)
+
+[resource]
+script = ExtResource("1_pmc84")
+pet_id = 1
+pet_name = "buro"
+pet_texture = SubResource("AtlasTexture_f6gab")
+metadata/_custom_type_script = "uid://dk3kmpyjqbff8"

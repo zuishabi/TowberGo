@@ -172,11 +172,14 @@ func (g *InGame) handlePetBagRequest() {
 		stats := packets.PetStatsMessage{
 			MaxHp:        int64(v.Stats().MaxHP),
 			Hp:           int64(v.Stats().HP),
+			MaxMana:      int64(v.Stats().MaxMana),
+			Mana:         int64(v.Stats().Mana),
 			Strength:     int64(v.Stats().Strength),
 			Intelligence: int64(v.Stats().Intelligence),
 			Speed:        int64(v.Stats().Speed),
 			Defense:      int64(v.Stats().Defense),
 		}
+		fmt.Println(v.Stats())
 		pets[i] = &packets.PetMessage{
 			PetId:          v.PetID(),
 			Id:             v.ID(),

@@ -136,10 +136,12 @@ message PetMessage{
 message PetStatsMessage{
   int64 max_hp = 1;
   int64 hp = 2;
-  int64 strength = 3;
-  int64 intelligence = 4;
-  int64 speed = 5;
-  int64 defense = 6;
+  int64 max_mana = 3;
+  int64 mana = 4;
+  int64 strength = 5;
+  int64 intelligence = 6;
+  int64 speed = 7;
+  int64 defense = 8;
 }
 
 message SavePetMessage{}

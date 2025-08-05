@@ -1,0 +1,64 @@
+[gd_scene load_steps=7 format=3 uid="uid://g8eapbf146mm"]
+
+[ext_resource type="Script" uid="uid://pj16oabpkfjd" path="res://classes/units/pet_bag/pet_bag_slot.gd" id="1_8f1pb"]
+[ext_resource type="Texture2D" uid="uid://dmh0l53w1gxpp" path="res://icon.svg" id="2_w7t3w"]
+[ext_resource type="Texture2D" uid="uid://jwrp3m3e3k4p" path="res://assets/ui/UI assets (1x).png" id="3_ecv27"]
+[ext_resource type="Texture2D" uid="uid://0uells4eymux" path="res://assets/ui/progress_bar/under.tres" id="3_xppm1"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xppm1"]
+atlas = ExtResource("3_ecv27")
+region = Rect2(97, 212, 46, 8)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_63dax"]
+atlas = ExtResource("3_ecv27")
+region = Rect2(49, 212, 46, 8)
+
+[node name="Slot" type="PanelContainer"]
+custom_minimum_size = Vector2(113, 100)
+size_flags_horizontal = 3
+mouse_default_cursor_shape = 2
+script = ExtResource("1_8f1pb")
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 2
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 5
+theme_override_constants/margin_bottom = 5
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 1
+
+[node name="TextureRect" type="TextureRect" parent="MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+size_flags_horizontal = 4
+texture = ExtResource("2_w7t3w")
+expand_mode = 1
+
+[node name="Hp" type="TextureProgressBar" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+value = 79.0
+nine_patch_stretch = true
+stretch_margin_left = 4
+stretch_margin_top = 4
+stretch_margin_right = 4
+stretch_margin_bottom = 3
+texture_under = ExtResource("3_xppm1")
+texture_progress = SubResource("AtlasTexture_xppm1")
+
+[node name="Mana" type="TextureProgressBar" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+value = 90.0
+nine_patch_stretch = true
+stretch_margin_left = 4
+stretch_margin_top = 4
+stretch_margin_right = 4
+stretch_margin_bottom = 4
+texture_under = ExtResource("3_xppm1")
+texture_progress = SubResource("AtlasTexture_63dax")
+
+[connection signal="gui_input" from="." to="." method="_on_gui_input"]

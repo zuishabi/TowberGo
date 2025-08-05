@@ -2376,22 +2376,32 @@ class PetStatsMessage:
 		service.field = __hp
 		data[__hp.tag] = service
 		
-		__strength = PBField.new("strength", PB_DATA_TYPE.INT64, PB_RULE.OPTIONAL, 3, true, DEFAULT_VALUES_3[PB_DATA_TYPE.INT64])
+		__max_mana = PBField.new("max_mana", PB_DATA_TYPE.INT64, PB_RULE.OPTIONAL, 3, true, DEFAULT_VALUES_3[PB_DATA_TYPE.INT64])
+		service = PBServiceField.new()
+		service.field = __max_mana
+		data[__max_mana.tag] = service
+		
+		__mana = PBField.new("mana", PB_DATA_TYPE.INT64, PB_RULE.OPTIONAL, 4, true, DEFAULT_VALUES_3[PB_DATA_TYPE.INT64])
+		service = PBServiceField.new()
+		service.field = __mana
+		data[__mana.tag] = service
+		
+		__strength = PBField.new("strength", PB_DATA_TYPE.INT64, PB_RULE.OPTIONAL, 5, true, DEFAULT_VALUES_3[PB_DATA_TYPE.INT64])
 		service = PBServiceField.new()
 		service.field = __strength
 		data[__strength.tag] = service
 		
-		__intelligence = PBField.new("intelligence", PB_DATA_TYPE.INT64, PB_RULE.OPTIONAL, 4, true, DEFAULT_VALUES_3[PB_DATA_TYPE.INT64])
+		__intelligence = PBField.new("intelligence", PB_DATA_TYPE.INT64, PB_RULE.OPTIONAL, 6, true, DEFAULT_VALUES_3[PB_DATA_TYPE.INT64])
 		service = PBServiceField.new()
 		service.field = __intelligence
 		data[__intelligence.tag] = service
 		
-		__speed = PBField.new("speed", PB_DATA_TYPE.INT64, PB_RULE.OPTIONAL, 5, true, DEFAULT_VALUES_3[PB_DATA_TYPE.INT64])
+		__speed = PBField.new("speed", PB_DATA_TYPE.INT64, PB_RULE.OPTIONAL, 7, true, DEFAULT_VALUES_3[PB_DATA_TYPE.INT64])
 		service = PBServiceField.new()
 		service.field = __speed
 		data[__speed.tag] = service
 		
-		__defense = PBField.new("defense", PB_DATA_TYPE.INT64, PB_RULE.OPTIONAL, 6, true, DEFAULT_VALUES_3[PB_DATA_TYPE.INT64])
+		__defense = PBField.new("defense", PB_DATA_TYPE.INT64, PB_RULE.OPTIONAL, 8, true, DEFAULT_VALUES_3[PB_DATA_TYPE.INT64])
 		service = PBServiceField.new()
 		service.field = __defense
 		data[__defense.tag] = service
@@ -2424,6 +2434,32 @@ class PetStatsMessage:
 	func set_hp(value : int) -> void:
 		__hp.value = value
 	
+	var __max_mana: PBField
+	func has_max_mana() -> bool:
+		if __max_mana.value != null:
+			return true
+		return false
+	func get_max_mana() -> int:
+		return __max_mana.value
+	func clear_max_mana() -> void:
+		data[3].state = PB_SERVICE_STATE.UNFILLED
+		__max_mana.value = DEFAULT_VALUES_3[PB_DATA_TYPE.INT64]
+	func set_max_mana(value : int) -> void:
+		__max_mana.value = value
+	
+	var __mana: PBField
+	func has_mana() -> bool:
+		if __mana.value != null:
+			return true
+		return false
+	func get_mana() -> int:
+		return __mana.value
+	func clear_mana() -> void:
+		data[4].state = PB_SERVICE_STATE.UNFILLED
+		__mana.value = DEFAULT_VALUES_3[PB_DATA_TYPE.INT64]
+	func set_mana(value : int) -> void:
+		__mana.value = value
+	
 	var __strength: PBField
 	func has_strength() -> bool:
 		if __strength.value != null:
@@ -2432,7 +2468,7 @@ class PetStatsMessage:
 	func get_strength() -> int:
 		return __strength.value
 	func clear_strength() -> void:
-		data[3].state = PB_SERVICE_STATE.UNFILLED
+		data[5].state = PB_SERVICE_STATE.UNFILLED
 		__strength.value = DEFAULT_VALUES_3[PB_DATA_TYPE.INT64]
 	func set_strength(value : int) -> void:
 		__strength.value = value
@@ -2445,7 +2481,7 @@ class PetStatsMessage:
 	func get_intelligence() -> int:
 		return __intelligence.value
 	func clear_intelligence() -> void:
-		data[4].state = PB_SERVICE_STATE.UNFILLED
+		data[6].state = PB_SERVICE_STATE.UNFILLED
 		__intelligence.value = DEFAULT_VALUES_3[PB_DATA_TYPE.INT64]
 	func set_intelligence(value : int) -> void:
 		__intelligence.value = value
@@ -2458,7 +2494,7 @@ class PetStatsMessage:
 	func get_speed() -> int:
 		return __speed.value
 	func clear_speed() -> void:
-		data[5].state = PB_SERVICE_STATE.UNFILLED
+		data[7].state = PB_SERVICE_STATE.UNFILLED
 		__speed.value = DEFAULT_VALUES_3[PB_DATA_TYPE.INT64]
 	func set_speed(value : int) -> void:
 		__speed.value = value
@@ -2471,7 +2507,7 @@ class PetStatsMessage:
 	func get_defense() -> int:
 		return __defense.value
 	func clear_defense() -> void:
-		data[6].state = PB_SERVICE_STATE.UNFILLED
+		data[8].state = PB_SERVICE_STATE.UNFILLED
 		__defense.value = DEFAULT_VALUES_3[PB_DATA_TYPE.INT64]
 	func set_defense(value : int) -> void:
 		__defense.value = value

@@ -34,6 +34,8 @@ type Pet interface {
 type Stats struct {
 	MaxHP        int
 	HP           int
+	MaxMana      int
+	Mana         int
 	Strength     int
 	Intelligence int
 	Speed        int
@@ -108,7 +110,9 @@ func (p *PetManagerStruct) SavePet(player *Player, pet Pet) {
 
 // CreatePet 向玩家添加一个新宠物，并返回是否放入到背包中
 func (p *PetManagerStruct) CreatePet(player *Player, petID uint32) (Pet, bool) {
-	pet := p.petList[petID].Initialize(0, nil, nil, player)
+	base := p.petList[petID].BaseStats()
+	fmt.Println("create pet stats ", base)
+	pet := p.petList[petID].Initialize(0, nil, &base, player)
 	data := &db.Pets{
 		PetID: petID,
 		Owner: player.UID,
@@ -124,6 +128,8 @@ func (p *PetManagerStruct) CreatePet(player *Player, petID uint32) (Pet, bool) {
 		ID:           pet.ID(),
 		MaxHP:        s.MaxHP,
 		HP:           s.HP,
+		MaxMana:      s.MaxMana,
+		Mana:         s.Mana,
 		Strength:     s.Strength,
 		Intelligence: s.Intelligence,
 		Speed:        s.Speed,
@@ -205,9 +211,11 @@ func (p *PetManagerStruct) GetPetBag(player *Player) []Pet {
 func (p *PetManagerStruct) GetPet(player *Player, id uint64) Pet {
 	skills := p.GetPetSkill(id)
 	stats := p.GetPetStats(id)
+	fmt.Println("get player pet stats:", stats)
 	pet := db.Pets{}
 	p.db.Where("id = ?", id).First(&pet)
 	res := p.petList[pet.PetID].Initialize(pet.Exp, skills, stats, player)
+	res.SetID(id)
 	return res
 }
 
@@ -231,15 +239,17 @@ func (p *PetManagerStruct) GetPetSkill(id uint64) []uint32 {
 }
 
 func (p *PetManagerStruct) GetPetStats(id uint64) *Stats {
-	stat := db.PetStats{}
-	p.db.Where("id = ?", id).First(&stat)
+	stats := db.PetStats{}
+	p.db.Where("id = ?", id).First(&stats)
 	return &Stats{
-		MaxHP:        stat.MaxHP,
-		HP:           stat.HP,
-		Strength:     stat.Strength,
-		Intelligence: stat.Intelligence,
-		Speed:        stat.Speed,
-		Defense:      stat.Defense,
+		MaxHP:        stats.MaxHP,
+		HP:           stats.HP,
+		MaxMana:      stats.MaxMana,
+		Mana:         stats.Mana,
+		Strength:     stats.Strength,
+		Intelligence: stats.Intelligence,
+		Speed:        stats.Speed,
+		Defense:      stats.Defense,
 	}
 }
 

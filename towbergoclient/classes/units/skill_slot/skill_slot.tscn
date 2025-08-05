@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=3 uid="uid://cvj6a5ysy1q3u"]
+
+[ext_resource type="Script" uid="uid://rngh2umgfo6j" path="res://classes/units/skill_slot/skill_slot.gd" id="1_bpvse"]
+
+[node name="SkillSlot" type="PanelContainer"]
+custom_minimum_size = Vector2(120, 50)
+offset_right = 22.0
+offset_bottom = 23.0
+script = ExtResource("1_bpvse")
