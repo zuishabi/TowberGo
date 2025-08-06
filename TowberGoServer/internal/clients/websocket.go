@@ -10,6 +10,7 @@ import (
 	"gorm.io/gorm"
 	"log"
 	"net/http"
+	"sync"
 	"sync/atomic"
 )
 
@@ -21,6 +22,7 @@ type WebSocketClient struct {
 	logger   *log.Logger
 	sendChan chan *packets.Packet
 	closed   atomic.Bool
+	lock     sync.Mutex
 }
 
 func NewWebSocketClient(hub *internal.Hub, writer http.ResponseWriter, request *http.Request) (internal.ClientInterface, error) {
@@ -187,4 +189,12 @@ func (c *WebSocketClient) Login(newID uint32) {
 
 func (c *WebSocketClient) Hub() *internal.Hub {
 	return c.hub
+}
+
+func (c *WebSocketClient) Lock() {
+	c.lock.Lock()
+}
+
+func (c *WebSocketClient) UnLock() {
+	c.lock.Unlock()
 }

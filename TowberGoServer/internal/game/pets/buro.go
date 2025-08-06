@@ -2,9 +2,12 @@ package pets
 
 import (
 	"TowberGoServer/internal/game/objects"
+	"TowberGoServer/internal/game/skills"
 )
 
-var BuroSkillList map[int]objects.Skill = map[int]objects.Skill{}
+var BuroSkillList map[int]objects.Skill = map[int]objects.Skill{
+	1: &skills.Bite{},
+}
 
 type Buro struct {
 	exp            int
@@ -39,23 +42,6 @@ func (b *Buro) Exp() int {
 	return b.exp
 }
 
-func (b *Buro) AddExp(exp int) bool {
-	flag := false
-	if b.Exp() == objects.MaxExp {
-		return false
-	}
-	if b.Exp()+exp >= objects.MaxExp {
-		b.exp = objects.MaxExp
-	} else {
-		b.exp += exp
-	}
-	for b.exp >= objects.LevelList[b.level-1] {
-		flag = true
-		b.LevelUp()
-	}
-	return flag
-}
-
 func (b *Buro) Level() int {
 	return b.level
 }
@@ -73,13 +59,13 @@ func (b *Buro) LevelUp() {
 }
 
 func (b *Buro) UnlockedSkillList() []objects.Skill {
-	skills := make([]objects.Skill, 0)
+	s := make([]objects.Skill, 0)
 	for i := range BuroSkillList {
 		if b.level >= i {
-			skills = append(skills, BuroSkillList[i])
+			s = append(s, BuroSkillList[i])
 		}
 	}
-	return skills
+	return s
 }
 
 func (b *Buro) EquippedSkills() []objects.Skill {
@@ -124,4 +110,8 @@ func (b *Buro) BaseStats() objects.Stats {
 
 func (b *Buro) Owner() *objects.Player {
 	return b.owner
+}
+
+func (b *Buro) SetExp(exp int) {
+	b.exp = exp
 }

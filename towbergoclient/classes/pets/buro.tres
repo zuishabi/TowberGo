@@ -1,7 +1,9 @@
-[gd_resource type="Resource" script_class="BasePet" load_steps=4 format=3 uid="uid://d1hx6hrtegt"]
+[gd_resource type="Resource" script_class="BasePet" load_steps=6 format=3 uid="uid://d1hx6hrtegt"]
 
 [ext_resource type="Texture2D" uid="uid://dy7cw1f6cbeko" path="res://assets/pets/buro/Owlbear_idle.png" id="1_68w0e"]
 [ext_resource type="Script" uid="uid://dk3kmpyjqbff8" path="res://classes/pets/base_pet.gd" id="1_pmc84"]
+[ext_resource type="Script" uid="uid://dwjntohumbn67" path="res://classes/skills/base_skill.gd" id="3_nrw7v"]
+[ext_resource type="Resource" uid="uid://ccqpc7ihutimh" path="res://classes/skills/Bite.tres" id="4_hr0ur"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_f6gab"]
 atlas = ExtResource("1_68w0e")
@@ -12,4 +14,7 @@ script = ExtResource("1_pmc84")
 pet_id = 1
 pet_name = "buro"
 pet_texture = SubResource("AtlasTexture_f6gab")
+skill_list = Dictionary[int, ExtResource("3_nrw7v")]({
+1: ExtResource("4_hr0ur")
+})
 metadata/_custom_type_script = "uid://dk3kmpyjqbff8"

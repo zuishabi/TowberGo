@@ -4,6 +4,7 @@ extends Resource
 @export var pet_id:int
 @export var pet_name:String
 @export var pet_texture:Texture2D
+@export var skill_list:Dictionary[int,BaseSkill]
 var id:int
 var level:int
 var exp:int

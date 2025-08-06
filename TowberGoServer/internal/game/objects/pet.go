@@ -4,6 +4,7 @@ import (
 	"TowberGoServer/internal"
 	"TowberGoServer/internal/db"
 	"TowberGoServer/pkg/packets"
+	"errors"
 	"fmt"
 	"gorm.io/gorm"
 	"time"
@@ -19,7 +20,7 @@ type Pet interface {
 	Name() string
 	SkillList() map[int]Skill
 	Exp() int
-	AddExp(exp int) bool
+	SetExp(exp int)
 	Level() int
 	UnlockedSkillList() []Skill
 	EquippedSkills() []Skill
@@ -99,19 +100,31 @@ func (p *PetManagerStruct) SavePet(player *Player, pet Pet) {
 	player.Client.Db().Model(&db.PetStats{}).Where("id = ?", pet.ID()).Updates(stats)
 
 	// 保存技能配置信息
-	equippedSkills := db.PetSkills{}
+	equippedSkills := map[string]interface{}{
+		"slot1": 0,
+		"slot2": 0,
+		"slot3": 0,
+		"slot4": 0,
+	}
 	list := pet.EquippedSkills()
-	equippedSkills.Slot1 = uint32(list[0].ID())
-	equippedSkills.Slot2 = uint32(list[1].ID())
-	equippedSkills.Slot3 = uint32(list[2].ID())
-	equippedSkills.Slot4 = uint32(list[3].ID())
-	p.db.Model(&db.PetSkills{}).Where("id = ?", pet.ID()).Updates(&equippedSkills)
+	if list[0] != nil {
+		equippedSkills["slot1"] = uint32(list[0].ID())
+	}
+	if list[1] != nil {
+		equippedSkills["slot2"] = uint32(list[1].ID())
+	}
+	if list[2] != nil {
+		equippedSkills["slot3"] = uint32(list[2].ID())
+	}
+	if list[3] != nil {
+		equippedSkills["slot4"] = uint32(list[3].ID())
+	}
+	p.db.Model(&db.PetSkills{}).Where("id = ?", pet.ID()).Updates(equippedSkills)
 }
 
 // CreatePet 向玩家添加一个新宠物，并返回是否放入到背包中
 func (p *PetManagerStruct) CreatePet(player *Player, petID uint32) (Pet, bool) {
 	base := p.petList[petID].BaseStats()
-	fmt.Println("create pet stats ", base)
 	pet := p.petList[petID].Initialize(0, nil, &base, player)
 	data := &db.Pets{
 		PetID: petID,
@@ -254,20 +267,20 @@ func (p *PetManagerStruct) GetPetStats(id uint64) *Stats {
 }
 
 func (p *PetManagerStruct) SavePetGoroutine(hub *internal.Hub) {
-	ticker := time.NewTicker(5 * time.Minute)
-	defer ticker.Stop()
 	for {
-		select {
-		case <-ticker.C:
-			fmt.Println("saving player's pet...")
-			hub.BroadCast(&packets.Packet{Msg: &packets.Packet_SavePet{SavePet: &packets.SavePetMessage{}}})
-		}
+		hub.BroadCast(&packets.Packet{Msg: &packets.Packet_SavePet{SavePet: &packets.SavePetMessage{}}})
+		time.Sleep(time.Minute)
 	}
 }
 
 func (p *PetManagerStruct) EquipPet(player *Player, pet Pet, position int) {
 	player.PetBagLock.Lock()
 	defer player.PetBagLock.Unlock()
+	for _, v := range player.EquippedPets {
+		if v != nil && v.ID() == pet.ID() {
+			return
+		}
+	}
 	if player.EquippedPets[position] != nil {
 		p.SavePet(player, player.EquippedPets[position])
 	}
@@ -295,4 +308,44 @@ func (p *PetManagerStruct) UnequipPet(player *Player, position int) {
 		"slot5": 0,
 	}
 	p.db.Model(&db.EquippedPets{}).Where("uid = ?", player.UID).Updates(equipped)
+}
+
+// -------------------------------------------宠物修改-------------------------------------------------------------------
+
+// AddExp 为宠物增加经验值，并返回是否增加成功
+func (p *PetManagerStruct) AddExp(pet Pet, exp int) bool {
+	flag := false
+	if pet.Exp() == MaxExp {
+		return false
+	}
+	if pet.Exp()+exp >= MaxExp {
+		pet.SetExp(MaxExp)
+	} else {
+		pet.SetExp(pet.Exp() + exp)
+	}
+	for pet.Exp() >= LevelList[pet.Level()-1] {
+		flag = true
+		pet.LevelUp()
+	}
+	return flag
+}
+
+func (p *PetManagerStruct) LearnSkill(pet Pet, skill uint32, position int) error {
+	s := SkillManager.SkillList[skill]
+	if s == nil {
+		return errors.New("no such skill")
+	}
+	equippedSkills := pet.EquippedSkills()
+	// 检查是否已装备该技能
+	for _, v := range equippedSkills {
+		if v == s {
+			return errors.New("the skill has equipped")
+		}
+	}
+	// 设置新技能到指定位置
+	if position < 0 || position >= len(equippedSkills) {
+		return errors.New("error position")
+	}
+	equippedSkills[position] = s
+	return nil
 }

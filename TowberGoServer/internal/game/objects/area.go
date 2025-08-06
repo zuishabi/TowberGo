@@ -77,6 +77,9 @@ func (b *BaseArea) AddPlayer(player *Player, id uint32) {
 	msg := &packets.PlayerEnterAreaMessage{}
 	otherInfo := &packets.Packet_PlayerEnter{PlayerEnter: msg}
 	b.players.ForEach(func(uid uint32, p *Player) {
+		if player == nil {
+			return
+		}
 		msg.X = p.Position.X
 		msg.Y = p.Position.Y
 		msg.Username = p.UserName

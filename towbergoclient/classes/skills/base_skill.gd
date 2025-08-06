@@ -6,3 +6,6 @@ extends Resource
 @export var cool_down:int
 @export var cost:int
 @export var speed:int
+@export var description:String
+@export var type:SkillType
+enum SkillType {MAGIC,PHYSICAL}

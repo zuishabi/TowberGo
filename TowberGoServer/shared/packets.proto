@@ -146,6 +146,51 @@ message PetStatsMessage{
 
 message SavePetMessage{}
 
+message LearnSkillRequestMessage{
+  int64 position = 1;
+  uint32 skill_id = 2;
+  uint64 pet_id = 3;
+}
+
+message LearnSkillResponseMessage{
+  bool success = 1;
+  string reason = 2;
+}
+
+//-------------------------------------宠物背包-------------------------
+message AddPetItemMessage{
+  uint32 id = 1;
+  int64 count = 2;
+}
+
+message DeletePetItemMessage{
+  uint32 id = 1;
+  int64 count = 2;
+}
+
+message PetItemMessage{
+  uint32 id = 1;
+  int64 count = 2;
+}
+
+message PetItemBagRequestMessage{}
+
+message PetItemBagResponseMessage{
+  repeated uint32 id = 1;
+  repeated int64 count = 2;
+}
+
+message UsePetItemRequestMessage{
+  uint32 id = 1;
+  int64 count = 2;
+}
+
+message UsePetItemResponseMessage{
+  bool success = 1;
+  string reason = 2;
+}
+
+//---------------------------------------------------------------------
 message Packet{
   uint32 uid = 1;
   oneof msg{
@@ -176,6 +221,13 @@ message Packet{
     PetBagRequestMessage pet_bag_request = 26;
     PetBagResponseMessage pet_bag_response = 27;
     SavePetMessage save_pet = 28;
+    LearnSkillRequestMessage learn_skill_request = 29;
+    LearnSkillResponseMessage learn_skill_response = 30;
+    AddPetItemMessage add_pet_item = 31;
+    DeletePetItemMessage delete_pet_item = 32;
+    PetItemBagRequestMessage pet_item_bag_request = 33;
+    UsePetItemRequestMessage use_pet_item_request = 34;
+    UsePetItemResponseMessage use_pet_item_response = 35;
   }
 }
 

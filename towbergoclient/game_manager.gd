@@ -18,6 +18,7 @@ var id:int
 var username:String
 var _current_scene_root:Node
 var can_move:bool = true
+const packets := preload("res://packets.gd")
 
 func set_state(state:State):
 	if _current_scene_root != null:

@@ -1,6 +1,8 @@
 extends Node
 
-var skill_list:Dictionary[int,BaseSkill]
+var skill_list:Dictionary[int,BaseSkill] = {
+	1:preload("res://classes/skills/Bite.tres")
+}
 
 func get_skill(id:int)->BaseSkill:
 	if skill_list.has(id):

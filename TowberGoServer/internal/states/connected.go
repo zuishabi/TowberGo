@@ -80,7 +80,7 @@ func (c *Connected) handleRegisterRequest(senderID uint32, message *packets.Pack
 	objects.MailManager.SendMail(userInfo.ID, &objects.Mail{
 		Title:   "new player's reward",
 		Content: "welcome to the xxx land,these are the towbers you can choose one as your assistant",
-		Items:   []objects.MailItem{{ID: 1, Count: 1}},
+		Items:   []objects.MailItem{{ID: 1, Count: 1, Type: 2}},
 		Sender:  "admin",
 	})
 	objects.MailManager.SendMail(userInfo.ID, &objects.Mail{

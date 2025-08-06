@@ -15,6 +15,7 @@ type MailManagerStruct struct{}
 type MailItem struct {
 	ID    uint32
 	Count uint32
+	Type  uint32 // 记录物品类型，1是宠物物品，2是普通物品
 }
 
 type Mail struct {
@@ -76,22 +77,31 @@ func (m *MailManagerStruct) CollectMail(player *Player, mailID uint32) error {
 	mail := &Mail{}
 	_ = json.Unmarshal([]byte(result), mail)
 	for i := range mail.Items {
-		if err := ItemManager.AddItem(player, mail.Items[i].ID, int(mail.Items[i].Count)); err != nil {
-			mail.Items = mail.Items[i:]
-			// 更新 Redis 中的邮件内容
-			mailJson, _ := json.Marshal(mail)
-			db.Rdb.HSet(ctx, fmt.Sprintf("player:%d:mail", player.UID), fmt.Sprint(mailID), mailJson)
-			return err
+		if mail.Items[i].Type == 1 {
+			if err := PetItemManager.AddItem(player, mail.Items[i].ID, int(mail.Items[i].Count)); err != nil {
+				mail.Items = mail.Items[i:]
+				// 更新 Redis 中的邮件内容
+				mailJson, _ := json.Marshal(mail)
+				db.Rdb.HSet(ctx, fmt.Sprintf("player:%d:mail", player.UID), fmt.Sprint(mailID), mailJson)
+				return err
+			}
+		} else {
+			if err := ItemManager.AddItem(player, mail.Items[i].ID, int(mail.Items[i].Count)); err != nil {
+				mail.Items = mail.Items[i:]
+				// 更新 Redis 中的邮件内容
+				mailJson, _ := json.Marshal(mail)
+				db.Rdb.HSet(ctx, fmt.Sprintf("player:%d:mail", player.UID), fmt.Sprint(mailID), mailJson)
+				return err
+			}
 		}
+
 	}
 	m.DeleteMail(player.UID, mailID)
 	return nil
 }
 
 func (m *MailManagerStruct) GetMails(uid uint32) []Mail {
-	fmt.Println("get mails")
 	ctx := context.Background()
-	fmt.Println(uid)
 
 	result, err := db.Rdb.HGetAll(ctx, fmt.Sprintf("player:%d:mail", uid)).Result()
 	if err != nil {

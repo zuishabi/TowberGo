@@ -46,6 +46,8 @@ type ClientInterface interface {
 	Close(reason string)
 	Login(newID uint32)
 	Hub() *Hub
+	Lock()
+	UnLock()
 }
 
 type Hub struct {
@@ -70,6 +72,7 @@ func NewHub() *Hub {
 		Db:               database,
 		LoginClients:     containers.NewSharedIDMap[ClientInterface](),
 		ConnectedClients: containers.NewSharedIDMap[ClientInterface](),
+		broadcastChan:    make(chan *packets.Packet),
 	}
 }
 
@@ -82,9 +85,11 @@ func (h *Hub) Run() {
 		select {
 		case packet := <-h.broadcastChan:
 			h.LoginClients.ForEach(func(id uint32, client ClientInterface) {
-				if id != packet.Uid {
+				client.Lock()
+				if client != nil && id != packet.Uid {
 					client.ProcessMessage(packet.Uid, packet.Msg)
 				}
+				client.UnLock()
 			})
 		}
 	}

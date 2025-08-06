@@ -1,9 +1,113 @@
-[gd_scene load_steps=2 format=3 uid="uid://cvj6a5ysy1q3u"]
+[gd_scene load_steps=9 format=3 uid="uid://cvj6a5ysy1q3u"]
 
 [ext_resource type="Script" uid="uid://rngh2umgfo6j" path="res://classes/units/skill_slot/skill_slot.gd" id="1_bpvse"]
+[ext_resource type="Texture2D" uid="uid://jwrp3m3e3k4p" path="res://assets/ui/UI assets (1x).png" id="1_xut5j"]
+[ext_resource type="Texture2D" uid="uid://82k7w1mmedpt" path="res://assets/items/wand.tres" id="3_7lkyj"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7lkyj"]
+atlas = ExtResource("1_xut5j")
+region = Rect2(385, 70, 46, 17)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_v7yte"]
+texture = SubResource("AtlasTexture_7lkyj")
+texture_margin_left = 5.0
+texture_margin_top = 5.0
+texture_margin_right = 5.0
+texture_margin_bottom = 5.0
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_v7yte"]
+atlas = ExtResource("1_xut5j")
+region = Rect2(163, 772, 10, 10)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rhl70"]
+atlas = ExtResource("1_xut5j")
+region = Rect2(179, 724, 10, 10)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_afort"]
+atlas = ExtResource("1_xut5j")
+region = Rect2(163, 724, 10, 10)
 
 [node name="SkillSlot" type="PanelContainer"]
 custom_minimum_size = Vector2(120, 50)
 offset_right = 22.0
 offset_bottom = 23.0
+mouse_default_cursor_shape = 2
+theme_override_styles/panel = SubResource("StyleBoxTexture_v7yte")
 script = ExtResource("1_bpvse")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="Type" type="TextureRect" parent="VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(20, 20)
+layout_mode = 2
+size_flags_vertical = 4
+texture = ExtResource("3_7lkyj")
+expand_mode = 1
+
+[node name="Label" type="Label" parent="VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 12
+text = "dwadwa"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+alignment = 1
+
+[node name="TextureRect" type="TextureRect" parent="VBoxContainer/HBoxContainer2"]
+custom_minimum_size = Vector2(10, 10)
+layout_mode = 2
+size_flags_vertical = 4
+texture = SubResource("AtlasTexture_v7yte")
+expand_mode = 1
+
+[node name="SpeedText" type="Label" parent="VBoxContainer/HBoxContainer2"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 10
+horizontal_alignment = 1
+vertical_alignment = 1
+text_overrun_behavior = 1
+
+[node name="TextureRect2" type="TextureRect" parent="VBoxContainer/HBoxContainer2"]
+custom_minimum_size = Vector2(10, 10)
+layout_mode = 2
+size_flags_vertical = 4
+texture = SubResource("AtlasTexture_rhl70")
+expand_mode = 1
+
+[node name="CostText" type="Label" parent="VBoxContainer/HBoxContainer2"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 10
+horizontal_alignment = 1
+vertical_alignment = 1
+text_overrun_behavior = 1
+
+[node name="TextureRect3" type="TextureRect" parent="VBoxContainer/HBoxContainer2"]
+custom_minimum_size = Vector2(10, 10)
+layout_mode = 2
+size_flags_vertical = 4
+texture = SubResource("AtlasTexture_afort")
+expand_mode = 1
+
+[node name="CoolDown" type="Label" parent="VBoxContainer/HBoxContainer2"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 10
+horizontal_alignment = 1
+vertical_alignment = 1
+text_overrun_behavior = 1
+
+[connection signal="gui_input" from="." to="." method="_on_gui_input"]
+[connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="." to="." method="_on_mouse_exited"]

@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="BaseSkill" load_steps=2 format=3 uid="uid://ccqpc7ihutimh"]
+
+[ext_resource type="Script" uid="uid://dwjntohumbn67" path="res://classes/skills/base_skill.gd" id="1_os3kp"]
+
+[resource]
+script = ExtResource("1_os3kp")
+skill_id = 1
+skill_name = "Bite"
+cool_down = 0
+cost = 0
+speed = 8
+description = "Bite~Bite~"
+type = 1
+metadata/_custom_type_script = "uid://dwjntohumbn67"

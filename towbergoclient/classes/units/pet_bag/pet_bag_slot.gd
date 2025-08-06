@@ -23,4 +23,5 @@ func update(pet:BasePet):
 
 func _on_gui_input(event:InputEvent):
 	if event.is_action_pressed("left_mouse"):
-		GameManager.show_pet_bag_detail.emit(current_pet)
+		if current_pet != null:
+			GameManager.show_pet_bag_detail.emit(current_pet)

@@ -13,9 +13,13 @@ extends Window
 @onready var _mana_text = $NinePatchRect/MarginContainer/VBoxContainer/Detail/HBoxContainer/LeftPanel/Left/Mana/ManaText
 @onready var _info_container = $NinePatchRect/MarginContainer/VBoxContainer/Detail/HBoxContainer/RightPanel/TabContainer/Info
 @onready var _pet_item_container = $NinePatchRect/MarginContainer/VBoxContainer/Detail/HBoxContainer/RightPanel/TabContainer/PetItem
+@onready var _learn_skill_broker = $LearnSkillBroker
+var choosed_pet:BasePet
+signal learn_skill_response()
 
 func _ready():
 	self.hide()
+	_learn_skill_broker.hide()
 	_info_container.show()
 	_pet_item_container.hide()
 	GameManager.show_pet_bag_detail.connect(_show_pet_detail)
@@ -23,9 +27,11 @@ func _ready():
 func _on_texture_button_pressed():
 	self.hide()
 	_detail.hide()
+	choosed_pet = null
 
 func update(pets:Array[BasePet]):
 	_detail.hide()
+	choosed_pet = null
 	for i in pets.size():
 		var slot:PetBagSlot = _h_box_container.get_child(i)
 		slot.update(pets[i])
@@ -33,6 +39,7 @@ func update(pets:Array[BasePet]):
 func _show_pet_detail(pet:BasePet):
 	if pet == null:
 		return
+	choosed_pet = pet
 	_detail.show()
 	_pet_name.text = pet.pet_name
 	_texture_rect.texture = pet.pet_texture
@@ -45,7 +52,7 @@ func _show_pet_detail(pet:BasePet):
 	_hp_text.text = str(pet.hp) + "/" + str(pet.max_hp)
 	_mana.max_value = pet.max_mana
 	_mana.value = pet.mana
-	_mana_text.text = str(pet.mana) + "/" + str(pet.max_mana)
+	_mana_text.text = str(pet.mana) + "/" + str(pet.max_mana)	
 
 func _on_tab_bar_tab_changed(tab:int):
 	if tab == 0:
@@ -54,3 +61,7 @@ func _on_tab_bar_tab_changed(tab:int):
 	else:
 		_info_container.hide()
 		_pet_item_container.show()
+
+func _on_learn_skill_pressed():
+	_learn_skill_broker.show()
+	_learn_skill_broker.update(choosed_pet)

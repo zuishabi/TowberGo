@@ -3,10 +3,8 @@ package objects
 type Skill interface {
 	Name() string
 	ID() int
-	Use(self *Pet, enemy *Pet) *SkillSummary
+	Use(self *BattlePet, enemy *BattlePet) *AttackInfo
 }
-
-type SkillSummary struct{}
 
 var SkillManager *SkillManagerStruct
 

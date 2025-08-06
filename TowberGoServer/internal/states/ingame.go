@@ -83,6 +83,8 @@ func (g *InGame) HandleMessage(senderID uint32, message packets.Msg) {
 		g.handleSavePet()
 	case *packets.Packet_PetBagRequest:
 		g.handlePetBagRequest()
+	case *packets.Packet_LearnSkillRequest:
+		g.handleLearnSkill(message.LearnSkillRequest)
 	default:
 		if g.Player.Area == nil {
 			return
@@ -94,6 +96,9 @@ func (g *InGame) HandleMessage(senderID uint32, message packets.Msg) {
 // 处理全局消息
 func (g *InGame) handleChatMessage(senderID uint32, message *packets.Packet_Chat) {
 	g.client.Hub().LoginClients.ForEach(func(id uint32, client internal.ClientInterface) {
+		if client == nil {
+			return
+		}
 		client.SocketSendAs(message, senderID)
 	})
 }
@@ -150,7 +155,9 @@ func (g *InGame) handleUseBagItemMessage(msg *packets.UseBagItemRequestMessage) 
 // 当收到来自hub的保存宠物信息的广播时调用
 func (g *InGame) handleSavePet() {
 	for i := range g.Player.EquippedPets {
-		objects.PetManager.SavePet(g.Player, g.Player.EquippedPets[i])
+		if g.Player.EquippedPets[i] != nil {
+			objects.PetManager.SavePet(g.Player, g.Player.EquippedPets[i])
+		}
 	}
 }
 
@@ -191,6 +198,26 @@ func (g *InGame) handlePetBagRequest() {
 	}
 	response := packets.Packet_PetBagResponse{PetBagResponse: &packets.PetBagResponseMessage{Pet: pets}}
 	g.client.SocketSend(&response)
+}
+
+func (g *InGame) handleLearnSkill(msg *packets.LearnSkillRequestMessage) {
+	g.Player.PetBagLock.RLock()
+	defer g.Player.PetBagLock.RUnlock()
+	rsp := &packets.LearnSkillResponseMessage{Success: true}
+	for i, v := range g.Player.EquippedPets {
+		if v.ID() == msg.PetId {
+			if err := objects.PetManager.LearnSkill(v, msg.GetSkillId(), int(msg.GetPosition())); err != nil {
+				rsp.Success = false
+				rsp.Reason = err.Error()
+			}
+			break
+		}
+		if i == 4 {
+			rsp.Success = false
+			rsp.Reason = "no such pet"
+		}
+	}
+	g.client.SocketSend(&packets.Packet_LearnSkillResponse{LearnSkillResponse: rsp})
 }
 
 //---------------------------------------------------------处理ui信息----------------------------------------------------

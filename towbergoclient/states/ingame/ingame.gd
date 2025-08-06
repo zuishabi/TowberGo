@@ -68,6 +68,8 @@ func _on_ws_packted_received(msg:packets.Packet):
 	elif msg.has_pet_bag_response():
 		print("get pet bag ",msg.get_pet_bag_response())
 		_handle_get_pet_bag_response(msg.get_pet_bag_response())
+	elif msg.has_learn_skill_response():
+		_handle_learn_skill_response(msg.get_learn_skill_response())
 
 func _handle_player_enter(sender_id:int,msg:packets.PlayerEnterAreaMessage):
 	var new_actor:Actor = ACTOR.instantiate()
@@ -136,3 +138,12 @@ func _handle_get_pet_bag_response(msg:packets.PetBagResponseMessage):
 		else:
 			pets[i] = PetManager.msg_to_pet(msg.get_pet()[i])
 	_pet_bag.update(pets)
+
+func _handle_learn_skill_response(msg:packets.LearnSkillResponseMessage):
+	if msg.get_success():
+		_window.show_confirm("learn skill success")
+	else:
+		_window.show_confirm("learn skill error: " + msg.get_reason())
+	var packet := packets.Packet.new()
+	packet.new_pet_bag_request()
+	WS.send(packet)

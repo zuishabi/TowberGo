@@ -8,3 +8,5 @@ import (
 var ItemList = map[uint32]objects.Item{
 	1: &items.InitialPet{},
 }
+
+var PetItemList = map[uint32]objects.PetItem{}

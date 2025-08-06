@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=3 uid="uid://blee2cbkjei1w"]
+[gd_scene load_steps=29 format=3 uid="uid://blee2cbkjei1w"]
 
 [ext_resource type="Script" uid="uid://drkpm7cur572c" path="res://classes/units/pet_bag/pet_bag.gd" id="1_b1t0f"]
 [ext_resource type="Texture2D" uid="uid://jwrp3m3e3k4p" path="res://assets/ui/UI assets (1x).png" id="2_yugfw"]
@@ -8,6 +8,8 @@
 [ext_resource type="Texture2D" uid="uid://cbft5w2sanv77" path="res://assets/ui/buttons/close.tres" id="4_ljkfy"]
 [ext_resource type="PackedScene" uid="uid://cvj6a5ysy1q3u" path="res://classes/units/skill_slot/skill_slot.tscn" id="5_dfwjy"]
 [ext_resource type="Texture2D" uid="uid://ccxxem3ww8nct" path="res://assets/ui/buttons/close_hover.tres" id="5_tg4sn"]
+[ext_resource type="Script" uid="uid://cb82ra8c74vrq" path="res://classes/units/pet_bag/learn_skill_broker.gd" id="7_b2uas"]
+[ext_resource type="Script" uid="uid://dsphavjqal70e" path="res://classes/units/pet_bag/skill_detail.gd" id="10_6dw7t"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_rddfb"]
 atlas = ExtResource("2_yugfw")
@@ -68,6 +70,33 @@ region = Rect2(147, 708, 10, 10)
 [sub_resource type="AtlasTexture" id="AtlasTexture_pkhgc"]
 atlas = ExtResource("2_yugfw")
 region = Rect2(163, 708, 10, 10)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hii7v"]
+atlas = ExtResource("2_yugfw")
+region = Rect2(291, 3, 42, 41)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_f2mru"]
+atlas = ExtResource("2_yugfw")
+region = Rect2(102, 6, 36, 36)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_02hjq"]
+atlas = ExtResource("2_yugfw")
+region = Rect2(54, 6, 36, 36)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_fuvrp"]
+texture = SubResource("AtlasTexture_02hjq")
+texture_margin_left = 9.0
+texture_margin_top = 9.0
+texture_margin_right = 9.0
+texture_margin_bottom = 9.0
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fuvrp"]
+atlas = ExtResource("2_yugfw")
+region = Rect2(179, 724, 10, 10)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_x85lc"]
+atlas = ExtResource("2_yugfw")
+region = Rect2(163, 724, 10, 10)
 
 [node name="PetBag" type="Window"]
 transparent_bg = true
@@ -279,6 +308,12 @@ layout_mode = 2
 [node name="SkillSlot2" parent="NinePatchRect/MarginContainer/VBoxContainer/Detail/HBoxContainer/RightPanel/TabContainer/Info/Info/Skill2" instance=ExtResource("5_dfwjy")]
 layout_mode = 2
 
+[node name="LearnSkill" type="Button" parent="NinePatchRect/MarginContainer/VBoxContainer/Detail/HBoxContainer/RightPanel/TabContainer/Info/Info"]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_font_sizes/font_size = 12
+text = "Learn Skill"
+
 [node name="Label2" type="Label" parent="NinePatchRect/MarginContainer/VBoxContainer/Detail/HBoxContainer/RightPanel/TabContainer/Info/Info"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 12
@@ -317,29 +352,29 @@ expand_mode = 1
 layout_mode = 2
 theme_override_font_sizes/font_size = 12
 
-[node name="Speed" type="HBoxContainer" parent="NinePatchRect/MarginContainer/VBoxContainer/Detail/HBoxContainer/RightPanel/TabContainer/Info/Info/Stats1"]
-layout_mode = 2
-
-[node name="TextureRect" type="TextureRect" parent="NinePatchRect/MarginContainer/VBoxContainer/Detail/HBoxContainer/RightPanel/TabContainer/Info/Info/Stats1/Speed"]
-custom_minimum_size = Vector2(20, 20)
-layout_mode = 2
-texture = SubResource("AtlasTexture_o2hjq")
-expand_mode = 1
-
-[node name="Label" type="Label" parent="NinePatchRect/MarginContainer/VBoxContainer/Detail/HBoxContainer/RightPanel/TabContainer/Info/Info/Stats1/Speed"]
-layout_mode = 2
-theme_override_font_sizes/font_size = 12
-
 [node name="Defense" type="HBoxContainer" parent="NinePatchRect/MarginContainer/VBoxContainer/Detail/HBoxContainer/RightPanel/TabContainer/Info/Info/Stats1"]
 layout_mode = 2
 
 [node name="TextureRect" type="TextureRect" parent="NinePatchRect/MarginContainer/VBoxContainer/Detail/HBoxContainer/RightPanel/TabContainer/Info/Info/Stats1/Defense"]
 custom_minimum_size = Vector2(20, 20)
 layout_mode = 2
-texture = SubResource("AtlasTexture_pkhgc")
+texture = SubResource("AtlasTexture_o2hjq")
 expand_mode = 1
 
 [node name="Label" type="Label" parent="NinePatchRect/MarginContainer/VBoxContainer/Detail/HBoxContainer/RightPanel/TabContainer/Info/Info/Stats1/Defense"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 12
+
+[node name="Speed" type="HBoxContainer" parent="NinePatchRect/MarginContainer/VBoxContainer/Detail/HBoxContainer/RightPanel/TabContainer/Info/Info/Stats1"]
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="NinePatchRect/MarginContainer/VBoxContainer/Detail/HBoxContainer/RightPanel/TabContainer/Info/Info/Stats1/Speed"]
+custom_minimum_size = Vector2(20, 20)
+layout_mode = 2
+texture = SubResource("AtlasTexture_pkhgc")
+expand_mode = 1
+
+[node name="Label" type="Label" parent="NinePatchRect/MarginContainer/VBoxContainer/Detail/HBoxContainer/RightPanel/TabContainer/Info/Info/Stats1/Speed"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 12
 
@@ -368,6 +403,159 @@ layout_mode = 2
 [node name="Slot5" parent="NinePatchRect/MarginContainer/VBoxContainer/PetList/HBoxContainer" instance=ExtResource("3_rddfb")]
 layout_mode = 2
 
+[node name="LearnSkillBroker" type="Control" parent="."]
+visible = false
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("7_b2uas")
+
+[node name="LearnSkill" type="NinePatchRect" parent="LearnSkillBroker"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -143.0
+offset_top = -163.0
+offset_right = 143.0
+offset_bottom = 163.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource("AtlasTexture_hii7v")
+patch_margin_left = 14
+patch_margin_top = 14
+patch_margin_right = 14
+patch_margin_bottom = 14
+
+[node name="MarginContainer" type="MarginContainer" parent="LearnSkillBroker/LearnSkill"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="VBoxContainer" type="VBoxContainer" parent="LearnSkillBroker/LearnSkill/MarginContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="LearnSkillBroker/LearnSkill/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 16
+text = "Skill Learning"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ScrollContainer" type="ScrollContainer" parent="LearnSkillBroker/LearnSkill/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="SkillList" type="VBoxContainer" parent="LearnSkillBroker/LearnSkill/MarginContainer/VBoxContainer/ScrollContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Exit" type="Button" parent="LearnSkillBroker/LearnSkill/MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(80, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_font_sizes/font_size = 12
+text = "Exit"
+
+[node name="SkillChoose" type="NinePatchRect" parent="LearnSkillBroker"]
+custom_minimum_size = Vector2(200, 100)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource("AtlasTexture_f2mru")
+patch_margin_left = 9
+patch_margin_top = 9
+patch_margin_right = 9
+patch_margin_bottom = 9
+
+[node name="MarginContainer" type="MarginContainer" parent="LearnSkillBroker/SkillChoose"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 5
+theme_override_constants/margin_bottom = 5
+
+[node name="VBoxContainer" type="VBoxContainer" parent="LearnSkillBroker/SkillChoose/MarginContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="LearnSkillBroker/SkillChoose/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 12
+text = "Please  choose a skill"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="LearnSkillBroker/SkillChoose/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+alignment = 1
+
+[node name="Slot1" type="Button" parent="LearnSkillBroker/SkillChoose/MarginContainer/VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_font_sizes/font_size = 16
+text = "1"
+
+[node name="Slot2" type="Button" parent="LearnSkillBroker/SkillChoose/MarginContainer/VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_font_sizes/font_size = 16
+text = "2"
+
+[node name="Slot3" type="Button" parent="LearnSkillBroker/SkillChoose/MarginContainer/VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_font_sizes/font_size = 16
+text = "3"
+
+[node name="Slot4" type="Button" parent="LearnSkillBroker/SkillChoose/MarginContainer/VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_font_sizes/font_size = 16
+text = "4
+"
+
+[node name="Cancel" type="Button" parent="LearnSkillBroker/SkillChoose/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_font_sizes/font_size = 12
+text = "Cancel"
+
 [node name="TextureButton" type="TextureButton" parent="."]
 custom_minimum_size = Vector2(20, 20)
 anchors_preset = 1
@@ -382,5 +570,107 @@ texture_normal = ExtResource("4_ljkfy")
 texture_hover = ExtResource("5_tg4sn")
 stretch_mode = 0
 
+[node name="SkillDetail" type="PanelContainer" parent="."]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(120, 150)
+offset_right = 100.0
+offset_bottom = 120.0
+mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBoxTexture_fuvrp")
+script = ExtResource("10_6dw7t")
+
+[node name="Timer" type="Timer" parent="SkillDetail"]
+wait_time = 0.05
+one_shot = true
+
+[node name="VBoxContainer" type="VBoxContainer" parent="SkillDetail"]
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="SkillDetail/VBoxContainer"]
+layout_mode = 2
+
+[node name="Type" type="TextureRect" parent="SkillDetail/VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(20, 20)
+layout_mode = 2
+expand_mode = 1
+
+[node name="Name" type="Label" parent="SkillDetail/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 12
+text = "156"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="description" type="RichTextLabel" parent="SkillDetail/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/normal_font_size = 12
+bbcode_enabled = true
+fit_content = true
+
+[node name="Stats1" type="HBoxContainer" parent="SkillDetail/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 10
+theme_override_constants/separation = 5
+alignment = 1
+
+[node name="Speed" type="HBoxContainer" parent="SkillDetail/VBoxContainer/Stats1"]
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="SkillDetail/VBoxContainer/Stats1/Speed"]
+custom_minimum_size = Vector2(10, 10)
+layout_mode = 2
+size_flags_vertical = 4
+texture = SubResource("AtlasTexture_pkhgc")
+expand_mode = 1
+
+[node name="Label" type="Label" parent="SkillDetail/VBoxContainer/Stats1/Speed"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 12
+
+[node name="Cost" type="HBoxContainer" parent="SkillDetail/VBoxContainer/Stats1"]
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="SkillDetail/VBoxContainer/Stats1/Cost"]
+custom_minimum_size = Vector2(10, 10)
+layout_mode = 2
+size_flags_vertical = 4
+texture = SubResource("AtlasTexture_fuvrp")
+expand_mode = 1
+
+[node name="Label" type="Label" parent="SkillDetail/VBoxContainer/Stats1/Cost"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 12
+
+[node name="CoolDown" type="HBoxContainer" parent="SkillDetail/VBoxContainer/Stats1"]
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="SkillDetail/VBoxContainer/Stats1/CoolDown"]
+custom_minimum_size = Vector2(10, 10)
+layout_mode = 2
+size_flags_vertical = 4
+texture = SubResource("AtlasTexture_x85lc")
+expand_mode = 1
+
+[node name="Label" type="Label" parent="SkillDetail/VBoxContainer/Stats1/CoolDown"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 12
+
 [connection signal="tab_changed" from="NinePatchRect/MarginContainer/VBoxContainer/Detail/HBoxContainer/RightPanel/TabContainer/TabBar" to="." method="_on_tab_bar_tab_changed"]
+[connection signal="pressed" from="NinePatchRect/MarginContainer/VBoxContainer/Detail/HBoxContainer/RightPanel/TabContainer/Info/Info/LearnSkill" to="." method="_on_learn_skill_pressed"]
+[connection signal="pressed" from="LearnSkillBroker/LearnSkill/MarginContainer/VBoxContainer/Exit" to="LearnSkillBroker" method="_on_exit_pressed"]
+[connection signal="mouse_entered" from="LearnSkillBroker/SkillChoose/MarginContainer/VBoxContainer/HBoxContainer/Slot1" to="LearnSkillBroker" method="_on_slot_1_mouse_entered"]
+[connection signal="mouse_exited" from="LearnSkillBroker/SkillChoose/MarginContainer/VBoxContainer/HBoxContainer/Slot1" to="LearnSkillBroker" method="_mouse_exit"]
+[connection signal="pressed" from="LearnSkillBroker/SkillChoose/MarginContainer/VBoxContainer/HBoxContainer/Slot1" to="LearnSkillBroker" method="_on_slot_1_pressed"]
+[connection signal="mouse_entered" from="LearnSkillBroker/SkillChoose/MarginContainer/VBoxContainer/HBoxContainer/Slot2" to="LearnSkillBroker" method="_on_slot_2_mouse_entered"]
+[connection signal="mouse_exited" from="LearnSkillBroker/SkillChoose/MarginContainer/VBoxContainer/HBoxContainer/Slot2" to="LearnSkillBroker" method="_mouse_exit"]
+[connection signal="pressed" from="LearnSkillBroker/SkillChoose/MarginContainer/VBoxContainer/HBoxContainer/Slot2" to="LearnSkillBroker" method="_on_slot_2_pressed"]
+[connection signal="mouse_entered" from="LearnSkillBroker/SkillChoose/MarginContainer/VBoxContainer/HBoxContainer/Slot3" to="LearnSkillBroker" method="_on_slot_3_mouse_entered"]
+[connection signal="mouse_exited" from="LearnSkillBroker/SkillChoose/MarginContainer/VBoxContainer/HBoxContainer/Slot3" to="LearnSkillBroker" method="_mouse_exit"]
+[connection signal="pressed" from="LearnSkillBroker/SkillChoose/MarginContainer/VBoxContainer/HBoxContainer/Slot3" to="LearnSkillBroker" method="_on_slot_3_pressed"]
+[connection signal="mouse_entered" from="LearnSkillBroker/SkillChoose/MarginContainer/VBoxContainer/HBoxContainer/Slot4" to="LearnSkillBroker" method="_on_slot_4_mouse_entered"]
+[connection signal="mouse_exited" from="LearnSkillBroker/SkillChoose/MarginContainer/VBoxContainer/HBoxContainer/Slot4" to="LearnSkillBroker" method="_mouse_exit"]
+[connection signal="pressed" from="LearnSkillBroker/SkillChoose/MarginContainer/VBoxContainer/HBoxContainer/Slot4" to="LearnSkillBroker" method="_on_slot_4_pressed"]
+[connection signal="pressed" from="LearnSkillBroker/SkillChoose/MarginContainer/VBoxContainer/Cancel" to="LearnSkillBroker" method="_on_cancel_pressed"]
 [connection signal="pressed" from="TextureButton" to="." method="_on_texture_button_pressed"]
+[connection signal="timeout" from="SkillDetail/Timer" to="SkillDetail" method="_on_timer_timeout"]
