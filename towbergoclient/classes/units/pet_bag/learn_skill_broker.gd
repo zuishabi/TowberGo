@@ -51,6 +51,9 @@ func _on_slot_1_pressed():
 	req.set_position(0)
 	req.set_skill_id(chosen_skill.skill_id)
 	WS.send(packet)
+	var update := GameManager.packets.Packet.new()
+	update.new_equipped_pet_info_request().set_id(current_pet.id)
+	WS.send(update)
 	self.hide()
 
 func _on_slot_1_mouse_entered():
@@ -63,6 +66,9 @@ func _on_slot_2_pressed():
 	req.set_position(1)
 	req.set_skill_id(chosen_skill.skill_id)
 	WS.send(packet)
+	var update := GameManager.packets.Packet.new()
+	update.new_equipped_pet_info_request().set_id(current_pet.id)
+	WS.send(update)
 	self.hide()
 
 func _on_slot_2_mouse_entered():
@@ -75,6 +81,9 @@ func _on_slot_3_pressed():
 	req.set_position(2)
 	req.set_skill_id(chosen_skill.skill_id)
 	WS.send(packet)
+	var update := GameManager.packets.Packet.new()
+	update.new_equipped_pet_info_request().set_id(current_pet.id)
+	WS.send(update)
 	self.hide()
 
 func _on_slot_3_mouse_entered():
@@ -87,6 +96,9 @@ func _on_slot_4_pressed():
 	req.set_position(3)
 	req.set_skill_id(chosen_skill.skill_id)
 	WS.send(packet)
+	var update := GameManager.packets.Packet.new()
+	update.new_equipped_pet_info_request().set_id(current_pet.id)
+	WS.send(update)
 	self.hide()
 
 func _on_slot_4_mouse_entered():

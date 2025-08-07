@@ -21,10 +21,10 @@ func show_window():
 	packet.new_mail_request()
 	WS.send(packet)
 
-func add_mail(title:String,content:String,sender:String,items:Array[BaseItem],id:int):
+func add_mail(title:String,content:String,sender:String,items:Array[BaseItem],pet_items:Array[BasePetItem],id:int):
 	var new_mail:MailUnit = MAIL_UNIT.instantiate()
 	_list.add_child(new_mail)
-	new_mail.update(title,content,sender,items,id)
+	new_mail.update(title,content,sender,items,pet_items,id)
 	new_mail.show_mail.connect(show_mail)
 
 func delete_mail(mail_id:int):

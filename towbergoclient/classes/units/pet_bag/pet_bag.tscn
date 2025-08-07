@@ -1,4 +1,4 @@
-[gd_scene load_steps=29 format=3 uid="uid://blee2cbkjei1w"]
+[gd_scene load_steps=30 format=3 uid="uid://blee2cbkjei1w"]
 
 [ext_resource type="Script" uid="uid://drkpm7cur572c" path="res://classes/units/pet_bag/pet_bag.gd" id="1_b1t0f"]
 [ext_resource type="Texture2D" uid="uid://jwrp3m3e3k4p" path="res://assets/ui/UI assets (1x).png" id="2_yugfw"]
@@ -8,6 +8,7 @@
 [ext_resource type="Texture2D" uid="uid://cbft5w2sanv77" path="res://assets/ui/buttons/close.tres" id="4_ljkfy"]
 [ext_resource type="PackedScene" uid="uid://cvj6a5ysy1q3u" path="res://classes/units/skill_slot/skill_slot.tscn" id="5_dfwjy"]
 [ext_resource type="Texture2D" uid="uid://ccxxem3ww8nct" path="res://assets/ui/buttons/close_hover.tres" id="5_tg4sn"]
+[ext_resource type="Script" uid="uid://doymeu1rgo113" path="res://classes/units/pet_bag/pet_item.gd" id="6_fg0sr"]
 [ext_resource type="Script" uid="uid://cb82ra8c74vrq" path="res://classes/units/pet_bag/learn_skill_broker.gd" id="7_b2uas"]
 [ext_resource type="Script" uid="uid://dsphavjqal70e" path="res://classes/units/pet_bag/skill_detail.gd" id="10_6dw7t"]
 
@@ -273,6 +274,7 @@ tab_0/title = "Info"
 tab_1/title = "Pet Item"
 
 [node name="Info" type="ScrollContainer" parent="NinePatchRect/MarginContainer/VBoxContainer/Detail/HBoxContainer/RightPanel/TabContainer"]
+visible = false
 layout_mode = 2
 size_flags_vertical = 3
 script = ExtResource("4_6g4o5")
@@ -378,8 +380,24 @@ expand_mode = 1
 layout_mode = 2
 theme_override_font_sizes/font_size = 12
 
-[node name="PetItem" type="GridContainer" parent="NinePatchRect/MarginContainer/VBoxContainer/Detail/HBoxContainer/RightPanel/TabContainer"]
+[node name="PetItem" type="ScrollContainer" parent="NinePatchRect/MarginContainer/VBoxContainer/Detail/HBoxContainer/RightPanel/TabContainer"]
 layout_mode = 2
+size_flags_vertical = 3
+script = ExtResource("6_fg0sr")
+
+[node name="MarginContainer" type="MarginContainer" parent="NinePatchRect/MarginContainer/VBoxContainer/Detail/HBoxContainer/RightPanel/TabContainer/PetItem"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="PetItem" type="GridContainer" parent="NinePatchRect/MarginContainer/VBoxContainer/Detail/HBoxContainer/RightPanel/TabContainer/PetItem/MarginContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/h_separation = 2
+columns = 5
 
 [node name="PetList" type="MarginContainer" parent="NinePatchRect/MarginContainer/VBoxContainer"]
 custom_minimum_size = Vector2(0, 100)

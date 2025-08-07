@@ -1,0 +1,23 @@
+[gd_scene load_steps=2 format=3 uid="uid://3pkvwk0qktki"]
+
+[ext_resource type="Script" uid="uid://de0ao2tisn6pw" path="res://classes/units/pet_item_slot/pet_item_slot.gd" id="1_ik5b8"]
+
+[node name="PetItemSlot" type="PanelContainer"]
+custom_minimum_size = Vector2(64, 64)
+offset_right = 40.0
+offset_bottom = 40.0
+mouse_default_cursor_shape = 2
+script = ExtResource("1_ik5b8")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 8
+theme_override_font_sizes/font_size = 12
+
+[connection signal="gui_input" from="." to="." method="_on_gui_input"]
+[connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="." to="." method="_on_mouse_exited"]

@@ -24,6 +24,8 @@ func update(mail:MailUnit):
 		_delete.hide()
 		for i:BaseItem in mail._items:
 			_item_list.add_item(i.item_name + str(i.item_count),i.item_texture,false)
+		for i:BasePetItem in mail._pet_items:
+			_item_list.add_item(i.pet_item_name + str(i.pet_item_count),i.pet_item_texture,false)
 	else:
 		_collect.hide()
 		_delete.show()

@@ -80,6 +80,9 @@ func (p *PetManagerStruct) GetPetTemplate(id uint32) Pet {
 
 // SavePet 给玩家的宠物进行信息更新
 func (p *PetManagerStruct) SavePet(player *Player, pet Pet) {
+	if pet == nil {
+		return
+	}
 	// 首先保存基本信息
 	data := &db.Pets{
 		Exp: pet.Exp(),
@@ -314,20 +317,19 @@ func (p *PetManagerStruct) UnequipPet(player *Player, position int) {
 
 // AddExp 为宠物增加经验值，并返回是否增加成功
 func (p *PetManagerStruct) AddExp(pet Pet, exp int) bool {
-	flag := false
 	if pet.Exp() == MaxExp {
 		return false
 	}
 	if pet.Exp()+exp >= MaxExp {
 		pet.SetExp(MaxExp)
+		return true
 	} else {
 		pet.SetExp(pet.Exp() + exp)
 	}
 	for pet.Exp() >= LevelList[pet.Level()-1] {
-		flag = true
 		pet.LevelUp()
 	}
-	return flag
+	return true
 }
 
 func (p *PetManagerStruct) LearnSkill(pet Pet, skill uint32, position int) error {

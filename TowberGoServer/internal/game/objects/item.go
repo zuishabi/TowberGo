@@ -84,8 +84,9 @@ func (i *ItemManagerStruct) AddItem(player *Player, id uint32, count int) error 
 
 	// 向客户端发送添加物品消息
 	addMsg := packets.Packet_AddBagItem{AddBagItem: &packets.AddBagItemMessage{
-		Id:    id,
-		Count: int64(count),
+		Id:         id,
+		Count:      int64(count),
+		Compensate: false,
 	}}
 	player.Client.SocketSend(&addMsg)
 	return nil
@@ -123,4 +124,19 @@ func (i *ItemManagerStruct) GetBags(player *Player) []BaseItem {
 		res = append(res, newItem)
 	}
 	return res
+}
+
+func (i *ItemManagerStruct) CompensateItem(player *Player, id uint32, count int) {
+	ctx := context.Background()
+	_, err := db.Rdb.Eval(ctx, AddLua, []string{fmt.Sprint(player.UID)}, fmt.Sprint(id), fmt.Sprint(count)).Result()
+	if err != nil {
+		return
+	}
+	addMsg := packets.Packet_AddBagItem{AddBagItem: &packets.AddBagItemMessage{
+		Id:         id,
+		Count:      int64(count),
+		Compensate: true,
+	}}
+	player.Client.SocketSend(&addMsg)
+	return
 }

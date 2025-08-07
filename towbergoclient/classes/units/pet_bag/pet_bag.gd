@@ -23,6 +23,7 @@ func _ready():
 	_info_container.show()
 	_pet_item_container.hide()
 	GameManager.show_pet_bag_detail.connect(_show_pet_detail)
+	GameManager.update_equipped_pet_info.connect(_update_equipped_pet_info)
 
 func _on_texture_button_pressed():
 	self.hide()
@@ -44,8 +45,12 @@ func _show_pet_detail(pet:BasePet):
 	_pet_name.text = pet.pet_name
 	_texture_rect.texture = pet.pet_texture
 	_lv.text = "lv." + str(pet.level)
-	_exp_progress.max_value = PetManager.ExpList[pet.level-1]
-	_exp_progress.value = pet.exp - (PetManager.ExpList[pet.level-2] if (pet.level > 1)  else 0)
+	if pet.level - 1 == PetManager.ExpList.size():
+		_exp_progress.max_value = 0
+		_exp_progress.value = 0
+	else:
+		_exp_progress.max_value = PetManager.ExpList[pet.level-1]
+		_exp_progress.value = pet.exp
 	_exp_text.text = str(_exp_progress.value) + "/" + str(_exp_progress.max_value)
 	_hp.max_value = pet.max_hp
 	_hp.value = pet.hp
@@ -61,7 +66,18 @@ func _on_tab_bar_tab_changed(tab:int):
 	else:
 		_info_container.hide()
 		_pet_item_container.show()
+		_pet_item_container.update()
 
 func _on_learn_skill_pressed():
 	_learn_skill_broker.show()
 	_learn_skill_broker.update(choosed_pet)
+
+func _update_equipped_pet_info(pet:BasePet,id:int):
+	for i:PetBagSlot in _h_box_container.get_children():
+		if i.current_pet.id == id:
+			i.update(pet)
+			break
+	if pet.id == choosed_pet.id:
+		choosed_pet = pet
+		_info_container.update(pet)
+		_show_pet_detail(pet)

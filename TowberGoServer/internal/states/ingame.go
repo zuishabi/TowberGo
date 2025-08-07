@@ -37,6 +37,9 @@ func (g *InGame) ClearResources() {
 	if g.Player.Area != nil {
 		g.Player.Area.RemovePlayer(g.Player.UID)
 	}
+	for _, v := range g.Player.EquippedPets {
+		objects.PetManager.SavePet(g.Player, v)
+	}
 }
 
 func (g *InGame) HandleMessage(senderID uint32, message packets.Msg) {
@@ -85,6 +88,12 @@ func (g *InGame) HandleMessage(senderID uint32, message packets.Msg) {
 		g.handlePetBagRequest()
 	case *packets.Packet_LearnSkillRequest:
 		g.handleLearnSkill(message.LearnSkillRequest)
+	case *packets.Packet_PetItemBagRequest:
+		g.handlePetItemBagRequest()
+	case *packets.Packet_UsePetItemRequest:
+		g.handleUsePetItemRequest(message.UsePetItemRequest)
+	case *packets.Packet_EquippedPetInfoRequest:
+		g.handleEquippedPetInfoRequest(message.EquippedPetInfoRequest.Id)
 	default:
 		if g.Player.Area == nil {
 			return
@@ -218,6 +227,63 @@ func (g *InGame) handleLearnSkill(msg *packets.LearnSkillRequestMessage) {
 		}
 	}
 	g.client.SocketSend(&packets.Packet_LearnSkillResponse{LearnSkillResponse: rsp})
+}
+
+// 发送宠物背包中的物品
+func (g *InGame) handlePetItemBagRequest() {
+	bags := objects.PetItemManager.GetBags(g.Player)
+	g.client.SocketSend(utils.NewPetItemBagMessage(bags))
+}
+
+func (g *InGame) handleUsePetItemRequest(msg *packets.UsePetItemRequestMessage) {
+	i := objects.BasePetItem{
+		Count: int(msg.Count),
+		ID:    msg.GetId(),
+	}
+	item := i.Convert()
+	g.Player.PetBagLock.RLock()
+	defer g.Player.PetBagLock.RUnlock()
+	var pet objects.Pet
+	for _, v := range g.Player.EquippedPets {
+		if v != nil && v.ID() == msg.PetId {
+			pet = v
+			break
+		}
+	}
+	rsp := &packets.UsePetItemResponseMessage{Success: true}
+	if err := objects.PetItemManager.DeleteItem(g.Player, item.ID(), item.Count()); err != nil {
+		rsp.Success = false
+		rsp.Reason = err.Error()
+		g.client.SocketSend(&packets.Packet_UsePetItemResponse{UsePetItemResponse: rsp})
+		return
+	}
+	if err := item.Use(pet, item.Count()); err != nil {
+		rsp.Success = false
+		rsp.Reason = err.Error()
+		objects.PetItemManager.CompensateItem(g.Player, item.ID(), item.Count())
+		g.client.SocketSend(&packets.Packet_UsePetItemResponse{UsePetItemResponse: rsp})
+	} else {
+		g.client.SocketSend(&packets.Packet_UsePetItemResponse{UsePetItemResponse: rsp})
+	}
+}
+
+func (g *InGame) handleEquippedPetInfoRequest(id uint64) {
+	g.Player.PetBagLock.RLock()
+	defer g.Player.PetBagLock.RUnlock()
+	for _, v := range g.Player.EquippedPets {
+		if v != nil && v.ID() == id {
+			pet := v
+			petMsg := utils.NewPetMessage(pet)
+			g.client.SocketSend(&packets.Packet_EquippedPetInfoResponse{EquippedPetInfoResponse: &packets.EquippedPetInfoResponseMessage{
+				Id:  id,
+				Pet: petMsg,
+			}})
+			return
+		}
+	}
+
+	// 如果需要更新的宠物不在背包中，则刷新玩家背包
+	g.HandleMessage(0, &packets.Packet_PetBagRequest{PetBagRequest: &packets.PetBagRequestMessage{}})
 }
 
 //---------------------------------------------------------处理ui信息----------------------------------------------------

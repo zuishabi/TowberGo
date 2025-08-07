@@ -636,6 +636,7 @@ type MailMessage struct {
 	Contents      string                 `protobuf:"bytes,3,opt,name=contents,proto3" json:"contents,omitempty"`
 	Sender        string                 `protobuf:"bytes,4,opt,name=sender,proto3" json:"sender,omitempty"`
 	Items         []*ItemMessage         `protobuf:"bytes,5,rep,name=items,proto3" json:"items,omitempty"`
+	PetItems      []*PetItemMessage      `protobuf:"bytes,6,rep,name=pet_items,json=petItems,proto3" json:"pet_items,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -701,6 +702,13 @@ func (x *MailMessage) GetSender() string {
 func (x *MailMessage) GetItems() []*ItemMessage {
 	if x != nil {
 		return x.Items
+	}
+	return nil
+}
+
+func (x *MailMessage) GetPetItems() []*PetItemMessage {
+	if x != nil {
+		return x.PetItems
 	}
 	return nil
 }
@@ -997,6 +1005,7 @@ type AddBagItemMessage struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Id            uint32                 `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
 	Count         int64                  `protobuf:"varint,2,opt,name=count,proto3" json:"count,omitempty"`
+	Compensate    bool                   `protobuf:"varint,3,opt,name=compensate,proto3" json:"compensate,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -1043,6 +1052,13 @@ func (x *AddBagItemMessage) GetCount() int64 {
 		return x.Count
 	}
 	return 0
+}
+
+func (x *AddBagItemMessage) GetCompensate() bool {
+	if x != nil {
+		return x.Compensate
+	}
+	return false
 }
 
 type DeleteBagItemMessage struct {
@@ -1665,18 +1681,115 @@ func (x *LearnSkillResponseMessage) GetReason() string {
 	return ""
 }
 
-// -------------------------------------宠物背包-------------------------
+type EquippedPetInfoRequestMessage struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Id            uint64                 `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *EquippedPetInfoRequestMessage) Reset() {
+	*x = EquippedPetInfoRequestMessage{}
+	mi := &file_shared_packets_proto_msgTypes[31]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *EquippedPetInfoRequestMessage) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*EquippedPetInfoRequestMessage) ProtoMessage() {}
+
+func (x *EquippedPetInfoRequestMessage) ProtoReflect() protoreflect.Message {
+	mi := &file_shared_packets_proto_msgTypes[31]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use EquippedPetInfoRequestMessage.ProtoReflect.Descriptor instead.
+func (*EquippedPetInfoRequestMessage) Descriptor() ([]byte, []int) {
+	return file_shared_packets_proto_rawDescGZIP(), []int{31}
+}
+
+func (x *EquippedPetInfoRequestMessage) GetId() uint64 {
+	if x != nil {
+		return x.Id
+	}
+	return 0
+}
+
+type EquippedPetInfoResponseMessage struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Id            uint64                 `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
+	Pet           *PetMessage            `protobuf:"bytes,2,opt,name=pet,proto3" json:"pet,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *EquippedPetInfoResponseMessage) Reset() {
+	*x = EquippedPetInfoResponseMessage{}
+	mi := &file_shared_packets_proto_msgTypes[32]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *EquippedPetInfoResponseMessage) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*EquippedPetInfoResponseMessage) ProtoMessage() {}
+
+func (x *EquippedPetInfoResponseMessage) ProtoReflect() protoreflect.Message {
+	mi := &file_shared_packets_proto_msgTypes[32]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use EquippedPetInfoResponseMessage.ProtoReflect.Descriptor instead.
+func (*EquippedPetInfoResponseMessage) Descriptor() ([]byte, []int) {
+	return file_shared_packets_proto_rawDescGZIP(), []int{32}
+}
+
+func (x *EquippedPetInfoResponseMessage) GetId() uint64 {
+	if x != nil {
+		return x.Id
+	}
+	return 0
+}
+
+func (x *EquippedPetInfoResponseMessage) GetPet() *PetMessage {
+	if x != nil {
+		return x.Pet
+	}
+	return nil
+}
+
+// ----------------------------------宠物道具背包-------------------------
 type AddPetItemMessage struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Id            uint32                 `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
 	Count         int64                  `protobuf:"varint,2,opt,name=count,proto3" json:"count,omitempty"`
+	Compensate    bool                   `protobuf:"varint,3,opt,name=compensate,proto3" json:"compensate,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
 func (x *AddPetItemMessage) Reset() {
 	*x = AddPetItemMessage{}
-	mi := &file_shared_packets_proto_msgTypes[31]
+	mi := &file_shared_packets_proto_msgTypes[33]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1688,7 +1801,7 @@ func (x *AddPetItemMessage) String() string {
 func (*AddPetItemMessage) ProtoMessage() {}
 
 func (x *AddPetItemMessage) ProtoReflect() protoreflect.Message {
-	mi := &file_shared_packets_proto_msgTypes[31]
+	mi := &file_shared_packets_proto_msgTypes[33]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1701,7 +1814,7 @@ func (x *AddPetItemMessage) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use AddPetItemMessage.ProtoReflect.Descriptor instead.
 func (*AddPetItemMessage) Descriptor() ([]byte, []int) {
-	return file_shared_packets_proto_rawDescGZIP(), []int{31}
+	return file_shared_packets_proto_rawDescGZIP(), []int{33}
 }
 
 func (x *AddPetItemMessage) GetId() uint32 {
@@ -1718,6 +1831,13 @@ func (x *AddPetItemMessage) GetCount() int64 {
 	return 0
 }
 
+func (x *AddPetItemMessage) GetCompensate() bool {
+	if x != nil {
+		return x.Compensate
+	}
+	return false
+}
+
 type DeletePetItemMessage struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Id            uint32                 `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
@@ -1728,7 +1848,7 @@ type DeletePetItemMessage struct {
 
 func (x *DeletePetItemMessage) Reset() {
 	*x = DeletePetItemMessage{}
-	mi := &file_shared_packets_proto_msgTypes[32]
+	mi := &file_shared_packets_proto_msgTypes[34]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1740,7 +1860,7 @@ func (x *DeletePetItemMessage) String() string {
 func (*DeletePetItemMessage) ProtoMessage() {}
 
 func (x *DeletePetItemMessage) ProtoReflect() protoreflect.Message {
-	mi := &file_shared_packets_proto_msgTypes[32]
+	mi := &file_shared_packets_proto_msgTypes[34]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1753,7 +1873,7 @@ func (x *DeletePetItemMessage) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use DeletePetItemMessage.ProtoReflect.Descriptor instead.
 func (*DeletePetItemMessage) Descriptor() ([]byte, []int) {
-	return file_shared_packets_proto_rawDescGZIP(), []int{32}
+	return file_shared_packets_proto_rawDescGZIP(), []int{34}
 }
 
 func (x *DeletePetItemMessage) GetId() uint32 {
@@ -1780,7 +1900,7 @@ type PetItemMessage struct {
 
 func (x *PetItemMessage) Reset() {
 	*x = PetItemMessage{}
-	mi := &file_shared_packets_proto_msgTypes[33]
+	mi := &file_shared_packets_proto_msgTypes[35]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1792,7 +1912,7 @@ func (x *PetItemMessage) String() string {
 func (*PetItemMessage) ProtoMessage() {}
 
 func (x *PetItemMessage) ProtoReflect() protoreflect.Message {
-	mi := &file_shared_packets_proto_msgTypes[33]
+	mi := &file_shared_packets_proto_msgTypes[35]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1805,7 +1925,7 @@ func (x *PetItemMessage) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use PetItemMessage.ProtoReflect.Descriptor instead.
 func (*PetItemMessage) Descriptor() ([]byte, []int) {
-	return file_shared_packets_proto_rawDescGZIP(), []int{33}
+	return file_shared_packets_proto_rawDescGZIP(), []int{35}
 }
 
 func (x *PetItemMessage) GetId() uint32 {
@@ -1830,7 +1950,7 @@ type PetItemBagRequestMessage struct {
 
 func (x *PetItemBagRequestMessage) Reset() {
 	*x = PetItemBagRequestMessage{}
-	mi := &file_shared_packets_proto_msgTypes[34]
+	mi := &file_shared_packets_proto_msgTypes[36]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1842,7 +1962,7 @@ func (x *PetItemBagRequestMessage) String() string {
 func (*PetItemBagRequestMessage) ProtoMessage() {}
 
 func (x *PetItemBagRequestMessage) ProtoReflect() protoreflect.Message {
-	mi := &file_shared_packets_proto_msgTypes[34]
+	mi := &file_shared_packets_proto_msgTypes[36]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1855,7 +1975,7 @@ func (x *PetItemBagRequestMessage) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use PetItemBagRequestMessage.ProtoReflect.Descriptor instead.
 func (*PetItemBagRequestMessage) Descriptor() ([]byte, []int) {
-	return file_shared_packets_proto_rawDescGZIP(), []int{34}
+	return file_shared_packets_proto_rawDescGZIP(), []int{36}
 }
 
 type PetItemBagResponseMessage struct {
@@ -1868,7 +1988,7 @@ type PetItemBagResponseMessage struct {
 
 func (x *PetItemBagResponseMessage) Reset() {
 	*x = PetItemBagResponseMessage{}
-	mi := &file_shared_packets_proto_msgTypes[35]
+	mi := &file_shared_packets_proto_msgTypes[37]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1880,7 +2000,7 @@ func (x *PetItemBagResponseMessage) String() string {
 func (*PetItemBagResponseMessage) ProtoMessage() {}
 
 func (x *PetItemBagResponseMessage) ProtoReflect() protoreflect.Message {
-	mi := &file_shared_packets_proto_msgTypes[35]
+	mi := &file_shared_packets_proto_msgTypes[37]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1893,7 +2013,7 @@ func (x *PetItemBagResponseMessage) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use PetItemBagResponseMessage.ProtoReflect.Descriptor instead.
 func (*PetItemBagResponseMessage) Descriptor() ([]byte, []int) {
-	return file_shared_packets_proto_rawDescGZIP(), []int{35}
+	return file_shared_packets_proto_rawDescGZIP(), []int{37}
 }
 
 func (x *PetItemBagResponseMessage) GetId() []uint32 {
@@ -1913,14 +2033,15 @@ func (x *PetItemBagResponseMessage) GetCount() []int64 {
 type UsePetItemRequestMessage struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Id            uint32                 `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
-	Count         int64                  `protobuf:"varint,2,opt,name=count,proto3" json:"count,omitempty"`
+	PetId         uint64                 `protobuf:"varint,2,opt,name=pet_id,json=petId,proto3" json:"pet_id,omitempty"`
+	Count         int64                  `protobuf:"varint,3,opt,name=count,proto3" json:"count,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
 func (x *UsePetItemRequestMessage) Reset() {
 	*x = UsePetItemRequestMessage{}
-	mi := &file_shared_packets_proto_msgTypes[36]
+	mi := &file_shared_packets_proto_msgTypes[38]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1932,7 +2053,7 @@ func (x *UsePetItemRequestMessage) String() string {
 func (*UsePetItemRequestMessage) ProtoMessage() {}
 
 func (x *UsePetItemRequestMessage) ProtoReflect() protoreflect.Message {
-	mi := &file_shared_packets_proto_msgTypes[36]
+	mi := &file_shared_packets_proto_msgTypes[38]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1945,12 +2066,19 @@ func (x *UsePetItemRequestMessage) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use UsePetItemRequestMessage.ProtoReflect.Descriptor instead.
 func (*UsePetItemRequestMessage) Descriptor() ([]byte, []int) {
-	return file_shared_packets_proto_rawDescGZIP(), []int{36}
+	return file_shared_packets_proto_rawDescGZIP(), []int{38}
 }
 
 func (x *UsePetItemRequestMessage) GetId() uint32 {
 	if x != nil {
 		return x.Id
+	}
+	return 0
+}
+
+func (x *UsePetItemRequestMessage) GetPetId() uint64 {
+	if x != nil {
+		return x.PetId
 	}
 	return 0
 }
@@ -1972,7 +2100,7 @@ type UsePetItemResponseMessage struct {
 
 func (x *UsePetItemResponseMessage) Reset() {
 	*x = UsePetItemResponseMessage{}
-	mi := &file_shared_packets_proto_msgTypes[37]
+	mi := &file_shared_packets_proto_msgTypes[39]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1984,7 +2112,7 @@ func (x *UsePetItemResponseMessage) String() string {
 func (*UsePetItemResponseMessage) ProtoMessage() {}
 
 func (x *UsePetItemResponseMessage) ProtoReflect() protoreflect.Message {
-	mi := &file_shared_packets_proto_msgTypes[37]
+	mi := &file_shared_packets_proto_msgTypes[39]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1997,7 +2125,7 @@ func (x *UsePetItemResponseMessage) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use UsePetItemResponseMessage.ProtoReflect.Descriptor instead.
 func (*UsePetItemResponseMessage) Descriptor() ([]byte, []int) {
-	return file_shared_packets_proto_rawDescGZIP(), []int{37}
+	return file_shared_packets_proto_rawDescGZIP(), []int{39}
 }
 
 func (x *UsePetItemResponseMessage) GetSuccess() bool {
@@ -2054,6 +2182,9 @@ type Packet struct {
 	//	*Packet_PetItemBagRequest
 	//	*Packet_UsePetItemRequest
 	//	*Packet_UsePetItemResponse
+	//	*Packet_PetItemBagResponse
+	//	*Packet_EquippedPetInfoRequest
+	//	*Packet_EquippedPetInfoResponse
 	Msg           isPacket_Msg `protobuf_oneof:"msg"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -2061,7 +2192,7 @@ type Packet struct {
 
 func (x *Packet) Reset() {
 	*x = Packet{}
-	mi := &file_shared_packets_proto_msgTypes[38]
+	mi := &file_shared_packets_proto_msgTypes[40]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2073,7 +2204,7 @@ func (x *Packet) String() string {
 func (*Packet) ProtoMessage() {}
 
 func (x *Packet) ProtoReflect() protoreflect.Message {
-	mi := &file_shared_packets_proto_msgTypes[38]
+	mi := &file_shared_packets_proto_msgTypes[40]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2086,7 +2217,7 @@ func (x *Packet) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use Packet.ProtoReflect.Descriptor instead.
 func (*Packet) Descriptor() ([]byte, []int) {
-	return file_shared_packets_proto_rawDescGZIP(), []int{38}
+	return file_shared_packets_proto_rawDescGZIP(), []int{40}
 }
 
 func (x *Packet) GetUid() uint32 {
@@ -2409,6 +2540,33 @@ func (x *Packet) GetUsePetItemResponse() *UsePetItemResponseMessage {
 	return nil
 }
 
+func (x *Packet) GetPetItemBagResponse() *PetItemBagResponseMessage {
+	if x != nil {
+		if x, ok := x.Msg.(*Packet_PetItemBagResponse); ok {
+			return x.PetItemBagResponse
+		}
+	}
+	return nil
+}
+
+func (x *Packet) GetEquippedPetInfoRequest() *EquippedPetInfoRequestMessage {
+	if x != nil {
+		if x, ok := x.Msg.(*Packet_EquippedPetInfoRequest); ok {
+			return x.EquippedPetInfoRequest
+		}
+	}
+	return nil
+}
+
+func (x *Packet) GetEquippedPetInfoResponse() *EquippedPetInfoResponseMessage {
+	if x != nil {
+		if x, ok := x.Msg.(*Packet_EquippedPetInfoResponse); ok {
+			return x.EquippedPetInfoResponse
+		}
+	}
+	return nil
+}
+
 type isPacket_Msg interface {
 	isPacket_Msg()
 }
@@ -2549,6 +2707,18 @@ type Packet_UsePetItemResponse struct {
 	UsePetItemResponse *UsePetItemResponseMessage `protobuf:"bytes,35,opt,name=use_pet_item_response,json=usePetItemResponse,proto3,oneof"`
 }
 
+type Packet_PetItemBagResponse struct {
+	PetItemBagResponse *PetItemBagResponseMessage `protobuf:"bytes,36,opt,name=pet_item_bag_response,json=petItemBagResponse,proto3,oneof"`
+}
+
+type Packet_EquippedPetInfoRequest struct {
+	EquippedPetInfoRequest *EquippedPetInfoRequestMessage `protobuf:"bytes,37,opt,name=equipped_pet_info_request,json=equippedPetInfoRequest,proto3,oneof"`
+}
+
+type Packet_EquippedPetInfoResponse struct {
+	EquippedPetInfoResponse *EquippedPetInfoResponseMessage `protobuf:"bytes,38,opt,name=equipped_pet_info_response,json=equippedPetInfoResponse,proto3,oneof"`
+}
+
 func (*Packet_LoginRequest) isPacket_Msg() {}
 
 func (*Packet_RegisterRequest) isPacket_Msg() {}
@@ -2617,6 +2787,12 @@ func (*Packet_UsePetItemRequest) isPacket_Msg() {}
 
 func (*Packet_UsePetItemResponse) isPacket_Msg() {}
 
+func (*Packet_PetItemBagResponse) isPacket_Msg() {}
+
+func (*Packet_EquippedPetInfoRequest) isPacket_Msg() {}
+
+func (*Packet_EquippedPetInfoResponse) isPacket_Msg() {}
+
 type UiPacket struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// Types that are valid to be assigned to Msg:
@@ -2630,7 +2806,7 @@ type UiPacket struct {
 
 func (x *UiPacket) Reset() {
 	*x = UiPacket{}
-	mi := &file_shared_packets_proto_msgTypes[39]
+	mi := &file_shared_packets_proto_msgTypes[41]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2642,7 +2818,7 @@ func (x *UiPacket) String() string {
 func (*UiPacket) ProtoMessage() {}
 
 func (x *UiPacket) ProtoReflect() protoreflect.Message {
-	mi := &file_shared_packets_proto_msgTypes[39]
+	mi := &file_shared_packets_proto_msgTypes[41]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2655,7 +2831,7 @@ func (x *UiPacket) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use UiPacket.ProtoReflect.Descriptor instead.
 func (*UiPacket) Descriptor() ([]byte, []int) {
-	return file_shared_packets_proto_rawDescGZIP(), []int{39}
+	return file_shared_packets_proto_rawDescGZIP(), []int{41}
 }
 
 func (x *UiPacket) GetMsg() isUiPacket_Msg {
@@ -2708,7 +2884,7 @@ type OpenUIMessage struct {
 
 func (x *OpenUIMessage) Reset() {
 	*x = OpenUIMessage{}
-	mi := &file_shared_packets_proto_msgTypes[40]
+	mi := &file_shared_packets_proto_msgTypes[42]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2720,7 +2896,7 @@ func (x *OpenUIMessage) String() string {
 func (*OpenUIMessage) ProtoMessage() {}
 
 func (x *OpenUIMessage) ProtoReflect() protoreflect.Message {
-	mi := &file_shared_packets_proto_msgTypes[40]
+	mi := &file_shared_packets_proto_msgTypes[42]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2733,7 +2909,7 @@ func (x *OpenUIMessage) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use OpenUIMessage.ProtoReflect.Descriptor instead.
 func (*OpenUIMessage) Descriptor() ([]byte, []int) {
-	return file_shared_packets_proto_rawDescGZIP(), []int{40}
+	return file_shared_packets_proto_rawDescGZIP(), []int{42}
 }
 
 func (x *OpenUIMessage) GetPath() string {
@@ -2752,7 +2928,7 @@ type InitialPetRequestMessage struct {
 
 func (x *InitialPetRequestMessage) Reset() {
 	*x = InitialPetRequestMessage{}
-	mi := &file_shared_packets_proto_msgTypes[41]
+	mi := &file_shared_packets_proto_msgTypes[43]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2764,7 +2940,7 @@ func (x *InitialPetRequestMessage) String() string {
 func (*InitialPetRequestMessage) ProtoMessage() {}
 
 func (x *InitialPetRequestMessage) ProtoReflect() protoreflect.Message {
-	mi := &file_shared_packets_proto_msgTypes[41]
+	mi := &file_shared_packets_proto_msgTypes[43]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2777,7 +2953,7 @@ func (x *InitialPetRequestMessage) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use InitialPetRequestMessage.ProtoReflect.Descriptor instead.
 func (*InitialPetRequestMessage) Descriptor() ([]byte, []int) {
-	return file_shared_packets_proto_rawDescGZIP(), []int{41}
+	return file_shared_packets_proto_rawDescGZIP(), []int{43}
 }
 
 func (x *InitialPetRequestMessage) GetRequestId() uint32 {
@@ -2826,13 +3002,14 @@ const file_shared_packets_proto_rawDesc = "" +
 	"\acontent\x18\x01 \x01(\tR\acontent\x12\x1a\n" +
 	"\busername\x18\x02 \x01(\tR\busername\x12\x12\n" +
 	"\x04type\x18\x03 \x01(\rR\x04type\"\x14\n" +
-	"\x12MailRequestMessage\"\x95\x01\n" +
+	"\x12MailRequestMessage\"\xcb\x01\n" +
 	"\vMailMessage\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\rR\x02id\x12\x16\n" +
 	"\x06titles\x18\x02 \x01(\tR\x06titles\x12\x1a\n" +
 	"\bcontents\x18\x03 \x01(\tR\bcontents\x12\x16\n" +
 	"\x06sender\x18\x04 \x01(\tR\x06sender\x12*\n" +
-	"\x05items\x18\x05 \x03(\v2\x14.packets.ItemMessageR\x05items\"$\n" +
+	"\x05items\x18\x05 \x03(\v2\x14.packets.ItemMessageR\x05items\x124\n" +
+	"\tpet_items\x18\x06 \x03(\v2\x17.packets.PetItemMessageR\bpetItems\"$\n" +
 	"\x12MailCollectMessage\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\rR\x02id\"^\n" +
 	"\x1aMailCollectResponseMessage\x12\x18\n" +
@@ -2848,10 +3025,13 @@ const file_shared_packets_proto_rawDesc = "" +
 	"\n" +
 	"BagMessage\x12\x0e\n" +
 	"\x02id\x18\x01 \x03(\rR\x02id\x12\x14\n" +
-	"\x05count\x18\x02 \x03(\x03R\x05count\"9\n" +
+	"\x05count\x18\x02 \x03(\x03R\x05count\"Y\n" +
 	"\x11AddBagItemMessage\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\rR\x02id\x12\x14\n" +
-	"\x05count\x18\x02 \x01(\x03R\x05count\"<\n" +
+	"\x05count\x18\x02 \x01(\x03R\x05count\x12\x1e\n" +
+	"\n" +
+	"compensate\x18\x03 \x01(\bR\n" +
+	"compensate\"<\n" +
 	"\x14DeleteBagItemMessage\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\rR\x02id\x12\x14\n" +
 	"\x05count\x18\x02 \x01(\x03R\x05count\"@\n" +
@@ -2891,10 +3071,18 @@ const file_shared_packets_proto_rawDesc = "" +
 	"\x06pet_id\x18\x03 \x01(\x04R\x05petId\"M\n" +
 	"\x19LearnSkillResponseMessage\x12\x18\n" +
 	"\asuccess\x18\x01 \x01(\bR\asuccess\x12\x16\n" +
-	"\x06reason\x18\x02 \x01(\tR\x06reason\"9\n" +
+	"\x06reason\x18\x02 \x01(\tR\x06reason\"/\n" +
+	"\x1dEquippedPetInfoRequestMessage\x12\x0e\n" +
+	"\x02id\x18\x01 \x01(\x04R\x02id\"W\n" +
+	"\x1eEquippedPetInfoResponseMessage\x12\x0e\n" +
+	"\x02id\x18\x01 \x01(\x04R\x02id\x12%\n" +
+	"\x03pet\x18\x02 \x01(\v2\x13.packets.PetMessageR\x03pet\"Y\n" +
 	"\x11AddPetItemMessage\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\rR\x02id\x12\x14\n" +
-	"\x05count\x18\x02 \x01(\x03R\x05count\"<\n" +
+	"\x05count\x18\x02 \x01(\x03R\x05count\x12\x1e\n" +
+	"\n" +
+	"compensate\x18\x03 \x01(\bR\n" +
+	"compensate\"<\n" +
 	"\x14DeletePetItemMessage\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\rR\x02id\x12\x14\n" +
 	"\x05count\x18\x02 \x01(\x03R\x05count\"6\n" +
@@ -2904,13 +3092,14 @@ const file_shared_packets_proto_rawDesc = "" +
 	"\x18PetItemBagRequestMessage\"A\n" +
 	"\x19PetItemBagResponseMessage\x12\x0e\n" +
 	"\x02id\x18\x01 \x03(\rR\x02id\x12\x14\n" +
-	"\x05count\x18\x02 \x03(\x03R\x05count\"@\n" +
+	"\x05count\x18\x02 \x03(\x03R\x05count\"W\n" +
 	"\x18UsePetItemRequestMessage\x12\x0e\n" +
-	"\x02id\x18\x01 \x01(\rR\x02id\x12\x14\n" +
-	"\x05count\x18\x02 \x01(\x03R\x05count\"M\n" +
+	"\x02id\x18\x01 \x01(\rR\x02id\x12\x15\n" +
+	"\x06pet_id\x18\x02 \x01(\x04R\x05petId\x12\x14\n" +
+	"\x05count\x18\x03 \x01(\x03R\x05count\"M\n" +
 	"\x19UsePetItemResponseMessage\x12\x18\n" +
 	"\asuccess\x18\x01 \x01(\bR\asuccess\x12\x16\n" +
-	"\x06reason\x18\x02 \x01(\tR\x06reason\"\x95\x13\n" +
+	"\x06reason\x18\x02 \x01(\tR\x06reason\"\xbb\x15\n" +
 	"\x06Packet\x12\x10\n" +
 	"\x03uid\x18\x01 \x01(\rR\x03uid\x12C\n" +
 	"\rlogin_request\x18\x02 \x01(\v2\x1c.packets.LoginRequestMessageH\x00R\floginRequest\x12L\n" +
@@ -2952,7 +3141,10 @@ const file_shared_packets_proto_rawDesc = "" +
 	"\x0fdelete_pet_item\x18  \x01(\v2\x1d.packets.DeletePetItemMessageH\x00R\rdeletePetItem\x12T\n" +
 	"\x14pet_item_bag_request\x18! \x01(\v2!.packets.PetItemBagRequestMessageH\x00R\x11petItemBagRequest\x12T\n" +
 	"\x14use_pet_item_request\x18\" \x01(\v2!.packets.UsePetItemRequestMessageH\x00R\x11usePetItemRequest\x12W\n" +
-	"\x15use_pet_item_response\x18# \x01(\v2\".packets.UsePetItemResponseMessageH\x00R\x12usePetItemResponseB\x05\n" +
+	"\x15use_pet_item_response\x18# \x01(\v2\".packets.UsePetItemResponseMessageH\x00R\x12usePetItemResponse\x12W\n" +
+	"\x15pet_item_bag_response\x18$ \x01(\v2\".packets.PetItemBagResponseMessageH\x00R\x12petItemBagResponse\x12c\n" +
+	"\x19equipped_pet_info_request\x18% \x01(\v2&.packets.EquippedPetInfoRequestMessageH\x00R\x16equippedPetInfoRequest\x12f\n" +
+	"\x1aequipped_pet_info_response\x18& \x01(\v2'.packets.EquippedPetInfoResponseMessageH\x00R\x17equippedPetInfoResponseB\x05\n" +
 	"\x03msg\"\x99\x01\n" +
 	"\bUiPacket\x121\n" +
 	"\aopen_ui\x18\x01 \x01(\v2\x16.packets.OpenUIMessageH\x00R\x06openUi\x12S\n" +
@@ -2976,7 +3168,7 @@ func file_shared_packets_proto_rawDescGZIP() []byte {
 	return file_shared_packets_proto_rawDescData
 }
 
-var file_shared_packets_proto_msgTypes = make([]protoimpl.MessageInfo, 42)
+var file_shared_packets_proto_msgTypes = make([]protoimpl.MessageInfo, 44)
 var file_shared_packets_proto_goTypes = []any{
 	(*LoginRequestMessage)(nil),            // 0: packets.LoginRequestMessage
 	(*RegisterRequestMessage)(nil),         // 1: packets.RegisterRequestMessage
@@ -3009,63 +3201,70 @@ var file_shared_packets_proto_goTypes = []any{
 	(*SavePetMessage)(nil),                 // 28: packets.SavePetMessage
 	(*LearnSkillRequestMessage)(nil),       // 29: packets.LearnSkillRequestMessage
 	(*LearnSkillResponseMessage)(nil),      // 30: packets.LearnSkillResponseMessage
-	(*AddPetItemMessage)(nil),              // 31: packets.AddPetItemMessage
-	(*DeletePetItemMessage)(nil),           // 32: packets.DeletePetItemMessage
-	(*PetItemMessage)(nil),                 // 33: packets.PetItemMessage
-	(*PetItemBagRequestMessage)(nil),       // 34: packets.PetItemBagRequestMessage
-	(*PetItemBagResponseMessage)(nil),      // 35: packets.PetItemBagResponseMessage
-	(*UsePetItemRequestMessage)(nil),       // 36: packets.UsePetItemRequestMessage
-	(*UsePetItemResponseMessage)(nil),      // 37: packets.UsePetItemResponseMessage
-	(*Packet)(nil),                         // 38: packets.Packet
-	(*UiPacket)(nil),                       // 39: packets.UiPacket
-	(*OpenUIMessage)(nil),                  // 40: packets.OpenUIMessage
-	(*InitialPetRequestMessage)(nil),       // 41: packets.InitialPetRequestMessage
+	(*EquippedPetInfoRequestMessage)(nil),  // 31: packets.EquippedPetInfoRequestMessage
+	(*EquippedPetInfoResponseMessage)(nil), // 32: packets.EquippedPetInfoResponseMessage
+	(*AddPetItemMessage)(nil),              // 33: packets.AddPetItemMessage
+	(*DeletePetItemMessage)(nil),           // 34: packets.DeletePetItemMessage
+	(*PetItemMessage)(nil),                 // 35: packets.PetItemMessage
+	(*PetItemBagRequestMessage)(nil),       // 36: packets.PetItemBagRequestMessage
+	(*PetItemBagResponseMessage)(nil),      // 37: packets.PetItemBagResponseMessage
+	(*UsePetItemRequestMessage)(nil),       // 38: packets.UsePetItemRequestMessage
+	(*UsePetItemResponseMessage)(nil),      // 39: packets.UsePetItemResponseMessage
+	(*Packet)(nil),                         // 40: packets.Packet
+	(*UiPacket)(nil),                       // 41: packets.UiPacket
+	(*OpenUIMessage)(nil),                  // 42: packets.OpenUIMessage
+	(*InitialPetRequestMessage)(nil),       // 43: packets.InitialPetRequestMessage
 }
 var file_shared_packets_proto_depIdxs = []int32{
 	16, // 0: packets.MailMessage.items:type_name -> packets.ItemMessage
-	26, // 1: packets.PetBagResponseMessage.pet:type_name -> packets.PetMessage
-	27, // 2: packets.PetMessage.pet_stats:type_name -> packets.PetStatsMessage
-	0,  // 3: packets.Packet.login_request:type_name -> packets.LoginRequestMessage
-	1,  // 4: packets.Packet.register_request:type_name -> packets.RegisterRequestMessage
-	2,  // 5: packets.Packet.ok_response:type_name -> packets.OKResponseMessage
-	3,  // 6: packets.Packet.deny_response:type_name -> packets.DenyResponseMessage
-	4,  // 7: packets.Packet.login_success:type_name -> packets.LoginSuccessMessage
-	7,  // 8: packets.Packet.player_enter:type_name -> packets.PlayerEnterAreaMessage
-	8,  // 9: packets.Packet.player_leave:type_name -> packets.PlayerLeaveAreaMessage
-	9,  // 10: packets.Packet.player_movement:type_name -> packets.PlayerMoveMessage
-	5,  // 11: packets.Packet.player_enter_request:type_name -> packets.PlayerEnterAreaRequestMessage
-	10, // 12: packets.Packet.chat:type_name -> packets.ChatMessage
-	6,  // 13: packets.Packet.player_enter_area_response:type_name -> packets.PlayerEnterAreaResponseMessage
-	12, // 14: packets.Packet.mail:type_name -> packets.MailMessage
-	11, // 15: packets.Packet.mail_request:type_name -> packets.MailRequestMessage
-	13, // 16: packets.Packet.mail_collect:type_name -> packets.MailCollectMessage
-	15, // 17: packets.Packet.mail_delete:type_name -> packets.MailDeleteMessage
-	14, // 18: packets.Packet.mail_collect_response:type_name -> packets.MailCollectResponseMessage
-	17, // 19: packets.Packet.bag_request:type_name -> packets.BagRequestMessage
-	18, // 20: packets.Packet.bag:type_name -> packets.BagMessage
-	19, // 21: packets.Packet.add_bag_item:type_name -> packets.AddBagItemMessage
-	20, // 22: packets.Packet.delete_bag_item:type_name -> packets.DeleteBagItemMessage
-	21, // 23: packets.Packet.use_bag_item_request:type_name -> packets.UseBagItemRequestMessage
-	22, // 24: packets.Packet.use_bag_item_response:type_name -> packets.UseBagItemResponseMessage
-	39, // 25: packets.Packet.ui_packet:type_name -> packets.UiPacket
-	23, // 26: packets.Packet.get_pet:type_name -> packets.GetPetMessage
-	24, // 27: packets.Packet.pet_bag_request:type_name -> packets.PetBagRequestMessage
-	25, // 28: packets.Packet.pet_bag_response:type_name -> packets.PetBagResponseMessage
-	28, // 29: packets.Packet.save_pet:type_name -> packets.SavePetMessage
-	29, // 30: packets.Packet.learn_skill_request:type_name -> packets.LearnSkillRequestMessage
-	30, // 31: packets.Packet.learn_skill_response:type_name -> packets.LearnSkillResponseMessage
-	31, // 32: packets.Packet.add_pet_item:type_name -> packets.AddPetItemMessage
-	32, // 33: packets.Packet.delete_pet_item:type_name -> packets.DeletePetItemMessage
-	34, // 34: packets.Packet.pet_item_bag_request:type_name -> packets.PetItemBagRequestMessage
-	36, // 35: packets.Packet.use_pet_item_request:type_name -> packets.UsePetItemRequestMessage
-	37, // 36: packets.Packet.use_pet_item_response:type_name -> packets.UsePetItemResponseMessage
-	40, // 37: packets.UiPacket.open_ui:type_name -> packets.OpenUIMessage
-	41, // 38: packets.UiPacket.initial_pet_request:type_name -> packets.InitialPetRequestMessage
-	39, // [39:39] is the sub-list for method output_type
-	39, // [39:39] is the sub-list for method input_type
-	39, // [39:39] is the sub-list for extension type_name
-	39, // [39:39] is the sub-list for extension extendee
-	0,  // [0:39] is the sub-list for field type_name
+	35, // 1: packets.MailMessage.pet_items:type_name -> packets.PetItemMessage
+	26, // 2: packets.PetBagResponseMessage.pet:type_name -> packets.PetMessage
+	27, // 3: packets.PetMessage.pet_stats:type_name -> packets.PetStatsMessage
+	26, // 4: packets.EquippedPetInfoResponseMessage.pet:type_name -> packets.PetMessage
+	0,  // 5: packets.Packet.login_request:type_name -> packets.LoginRequestMessage
+	1,  // 6: packets.Packet.register_request:type_name -> packets.RegisterRequestMessage
+	2,  // 7: packets.Packet.ok_response:type_name -> packets.OKResponseMessage
+	3,  // 8: packets.Packet.deny_response:type_name -> packets.DenyResponseMessage
+	4,  // 9: packets.Packet.login_success:type_name -> packets.LoginSuccessMessage
+	7,  // 10: packets.Packet.player_enter:type_name -> packets.PlayerEnterAreaMessage
+	8,  // 11: packets.Packet.player_leave:type_name -> packets.PlayerLeaveAreaMessage
+	9,  // 12: packets.Packet.player_movement:type_name -> packets.PlayerMoveMessage
+	5,  // 13: packets.Packet.player_enter_request:type_name -> packets.PlayerEnterAreaRequestMessage
+	10, // 14: packets.Packet.chat:type_name -> packets.ChatMessage
+	6,  // 15: packets.Packet.player_enter_area_response:type_name -> packets.PlayerEnterAreaResponseMessage
+	12, // 16: packets.Packet.mail:type_name -> packets.MailMessage
+	11, // 17: packets.Packet.mail_request:type_name -> packets.MailRequestMessage
+	13, // 18: packets.Packet.mail_collect:type_name -> packets.MailCollectMessage
+	15, // 19: packets.Packet.mail_delete:type_name -> packets.MailDeleteMessage
+	14, // 20: packets.Packet.mail_collect_response:type_name -> packets.MailCollectResponseMessage
+	17, // 21: packets.Packet.bag_request:type_name -> packets.BagRequestMessage
+	18, // 22: packets.Packet.bag:type_name -> packets.BagMessage
+	19, // 23: packets.Packet.add_bag_item:type_name -> packets.AddBagItemMessage
+	20, // 24: packets.Packet.delete_bag_item:type_name -> packets.DeleteBagItemMessage
+	21, // 25: packets.Packet.use_bag_item_request:type_name -> packets.UseBagItemRequestMessage
+	22, // 26: packets.Packet.use_bag_item_response:type_name -> packets.UseBagItemResponseMessage
+	41, // 27: packets.Packet.ui_packet:type_name -> packets.UiPacket
+	23, // 28: packets.Packet.get_pet:type_name -> packets.GetPetMessage
+	24, // 29: packets.Packet.pet_bag_request:type_name -> packets.PetBagRequestMessage
+	25, // 30: packets.Packet.pet_bag_response:type_name -> packets.PetBagResponseMessage
+	28, // 31: packets.Packet.save_pet:type_name -> packets.SavePetMessage
+	29, // 32: packets.Packet.learn_skill_request:type_name -> packets.LearnSkillRequestMessage
+	30, // 33: packets.Packet.learn_skill_response:type_name -> packets.LearnSkillResponseMessage
+	33, // 34: packets.Packet.add_pet_item:type_name -> packets.AddPetItemMessage
+	34, // 35: packets.Packet.delete_pet_item:type_name -> packets.DeletePetItemMessage
+	36, // 36: packets.Packet.pet_item_bag_request:type_name -> packets.PetItemBagRequestMessage
+	38, // 37: packets.Packet.use_pet_item_request:type_name -> packets.UsePetItemRequestMessage
+	39, // 38: packets.Packet.use_pet_item_response:type_name -> packets.UsePetItemResponseMessage
+	37, // 39: packets.Packet.pet_item_bag_response:type_name -> packets.PetItemBagResponseMessage
+	31, // 40: packets.Packet.equipped_pet_info_request:type_name -> packets.EquippedPetInfoRequestMessage
+	32, // 41: packets.Packet.equipped_pet_info_response:type_name -> packets.EquippedPetInfoResponseMessage
+	42, // 42: packets.UiPacket.open_ui:type_name -> packets.OpenUIMessage
+	43, // 43: packets.UiPacket.initial_pet_request:type_name -> packets.InitialPetRequestMessage
+	44, // [44:44] is the sub-list for method output_type
+	44, // [44:44] is the sub-list for method input_type
+	44, // [44:44] is the sub-list for extension type_name
+	44, // [44:44] is the sub-list for extension extendee
+	0,  // [0:44] is the sub-list for field type_name
 }
 
 func init() { file_shared_packets_proto_init() }
@@ -3073,7 +3272,7 @@ func file_shared_packets_proto_init() {
 	if File_shared_packets_proto != nil {
 		return
 	}
-	file_shared_packets_proto_msgTypes[38].OneofWrappers = []any{
+	file_shared_packets_proto_msgTypes[40].OneofWrappers = []any{
 		(*Packet_LoginRequest)(nil),
 		(*Packet_RegisterRequest)(nil),
 		(*Packet_OkResponse)(nil),
@@ -3108,8 +3307,11 @@ func file_shared_packets_proto_init() {
 		(*Packet_PetItemBagRequest)(nil),
 		(*Packet_UsePetItemRequest)(nil),
 		(*Packet_UsePetItemResponse)(nil),
+		(*Packet_PetItemBagResponse)(nil),
+		(*Packet_EquippedPetInfoRequest)(nil),
+		(*Packet_EquippedPetInfoResponse)(nil),
 	}
-	file_shared_packets_proto_msgTypes[39].OneofWrappers = []any{
+	file_shared_packets_proto_msgTypes[41].OneofWrappers = []any{
 		(*UiPacket_OpenUi)(nil),
 		(*UiPacket_InitialPetRequest)(nil),
 	}
@@ -3119,7 +3321,7 @@ func file_shared_packets_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_shared_packets_proto_rawDesc), len(file_shared_packets_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   42,
+			NumMessages:   44,
 			NumExtensions: 0,
 			NumServices:   0,
 		},

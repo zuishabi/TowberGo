@@ -5,6 +5,7 @@ var _content:String
 var _sender:String
 var _title:String
 var _items:Array[BaseItem]
+var _pet_items:Array[BasePetItem]
 var mail_id:int
 
 @onready var _sender_text = $VBoxContainer/Sender
@@ -12,8 +13,9 @@ var mail_id:int
 
 signal show_mail(mail:MailUnit)
 
-func update(title:String,content:String,sender:String,items:Array[BaseItem],id:int):
+func update(title:String,content:String,sender:String,items:Array[BaseItem],pet_items:Array[BasePetItem],id:int):
 	self._items = items
+	self._pet_items = pet_items
 	self._content = content
 	self._sender = sender
 	self._title = title

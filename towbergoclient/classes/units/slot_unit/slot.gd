@@ -14,3 +14,9 @@ func update(item:BaseItem):
 func _on_gui_input(event:InputEvent):
 	if event.is_action_pressed("left_mouse"):
 		ItemManager.show_item_detail.emit(current_item)
+
+func _on_mouse_entered():
+	GameManager.show_item_detail.emit(current_item)
+
+func _on_mouse_exited():
+	GameManager.hide_item_detail.emit()

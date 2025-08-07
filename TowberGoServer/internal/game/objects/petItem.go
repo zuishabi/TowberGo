@@ -76,8 +76,9 @@ func (p *PetItemManagerStruct) AddItem(player *Player, id uint32, count int) err
 
 	// 向客户端发送添加宠物物品消息
 	addMsg := packets.Packet_AddPetItem{AddPetItem: &packets.AddPetItemMessage{
-		Id:    id,
-		Count: int64(count),
+		Id:         id,
+		Count:      int64(count),
+		Compensate: false,
 	}}
 	player.Client.SocketSend(&addMsg)
 	return nil
@@ -115,4 +116,20 @@ func (p *PetItemManagerStruct) GetBags(player *Player) []BasePetItem {
 		res = append(res, newItem)
 	}
 	return res
+}
+
+func (p *PetItemManagerStruct) CompensateItem(player *Player, id uint32, count int) {
+	ctx := context.Background()
+	_, err := db.Rdb.Eval(ctx, addPetItemLua, []string{fmt.Sprint(player.UID)}, fmt.Sprint(id), fmt.Sprint(count)).Result()
+	if err != nil {
+		return
+	}
+
+	addMsg := packets.Packet_AddPetItem{AddPetItem: &packets.AddPetItemMessage{
+		Id:         id,
+		Count:      int64(count),
+		Compensate: true,
+	}}
+	player.Client.SocketSend(&addMsg)
+	return
 }

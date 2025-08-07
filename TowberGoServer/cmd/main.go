@@ -71,6 +71,9 @@ func main() {
 	// 创建itemManager并进行初始化
 	objects.ItemManager = &objects.ItemManagerStruct{ItemMap: list.ItemList}
 
+	// 创建petItemManager 并进行初始化
+	objects.PetItemManager = &objects.PetItemManagerStruct{PetItemList: list.PetItemList}
+
 	// 创建petManager并进行初始化
 	objects.PetManager = objects.NewPetManager(hub.Db, list.PetList)
 	go objects.PetManager.SavePetGoroutine(hub)

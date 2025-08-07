@@ -30,6 +30,8 @@ func update(skill:BaseSkill):
 		h_box_container_2.hide()
 		_label.text = "null"
 		return
+	_type.show()
+	h_box_container_2.show()
 	if skill.type == skill.SkillType.PHYSICAL:
 		_type.texture = SWORD
 	else:
