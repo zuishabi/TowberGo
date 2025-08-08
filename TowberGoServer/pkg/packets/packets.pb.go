@@ -2963,6 +2963,455 @@ func (x *InitialPetRequestMessage) GetRequestId() uint32 {
 	return 0
 }
 
+// --------------------------------------战斗系统------------------------
+type BattlePacket struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *BattlePacket) Reset() {
+	*x = BattlePacket{}
+	mi := &file_shared_packets_proto_msgTypes[44]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *BattlePacket) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*BattlePacket) ProtoMessage() {}
+
+func (x *BattlePacket) ProtoReflect() protoreflect.Message {
+	mi := &file_shared_packets_proto_msgTypes[44]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use BattlePacket.ProtoReflect.Descriptor instead.
+func (*BattlePacket) Descriptor() ([]byte, []int) {
+	return file_shared_packets_proto_rawDescGZIP(), []int{44}
+}
+
+type RoundCommandMessage struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// Types that are valid to be assigned to Command:
+	//
+	//	*RoundCommandMessage_ChangePet
+	//	*RoundCommandMessage_Runaway
+	//	*RoundCommandMessage_Attack
+	Command       isRoundCommandMessage_Command `protobuf_oneof:"command"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *RoundCommandMessage) Reset() {
+	*x = RoundCommandMessage{}
+	mi := &file_shared_packets_proto_msgTypes[45]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *RoundCommandMessage) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*RoundCommandMessage) ProtoMessage() {}
+
+func (x *RoundCommandMessage) ProtoReflect() protoreflect.Message {
+	mi := &file_shared_packets_proto_msgTypes[45]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use RoundCommandMessage.ProtoReflect.Descriptor instead.
+func (*RoundCommandMessage) Descriptor() ([]byte, []int) {
+	return file_shared_packets_proto_rawDescGZIP(), []int{45}
+}
+
+func (x *RoundCommandMessage) GetCommand() isRoundCommandMessage_Command {
+	if x != nil {
+		return x.Command
+	}
+	return nil
+}
+
+func (x *RoundCommandMessage) GetChangePet() *ChangePet {
+	if x != nil {
+		if x, ok := x.Command.(*RoundCommandMessage_ChangePet); ok {
+			return x.ChangePet
+		}
+	}
+	return nil
+}
+
+func (x *RoundCommandMessage) GetRunaway() *RunAway {
+	if x != nil {
+		if x, ok := x.Command.(*RoundCommandMessage_Runaway); ok {
+			return x.Runaway
+		}
+	}
+	return nil
+}
+
+func (x *RoundCommandMessage) GetAttack() *Attack {
+	if x != nil {
+		if x, ok := x.Command.(*RoundCommandMessage_Attack); ok {
+			return x.Attack
+		}
+	}
+	return nil
+}
+
+type isRoundCommandMessage_Command interface {
+	isRoundCommandMessage_Command()
+}
+
+type RoundCommandMessage_ChangePet struct {
+	ChangePet *ChangePet `protobuf:"bytes,1,opt,name=change_pet,json=changePet,proto3,oneof"`
+}
+
+type RoundCommandMessage_Runaway struct {
+	Runaway *RunAway `protobuf:"bytes,2,opt,name=runaway,proto3,oneof"`
+}
+
+type RoundCommandMessage_Attack struct {
+	Attack *Attack `protobuf:"bytes,3,opt,name=attack,proto3,oneof"`
+}
+
+func (*RoundCommandMessage_ChangePet) isRoundCommandMessage_Command() {}
+
+func (*RoundCommandMessage_Runaway) isRoundCommandMessage_Command() {}
+
+func (*RoundCommandMessage_Attack) isRoundCommandMessage_Command() {}
+
+type ChangePet struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	PetPosition   uint64                 `protobuf:"varint,1,opt,name=pet_position,json=petPosition,proto3" json:"pet_position,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *ChangePet) Reset() {
+	*x = ChangePet{}
+	mi := &file_shared_packets_proto_msgTypes[46]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ChangePet) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ChangePet) ProtoMessage() {}
+
+func (x *ChangePet) ProtoReflect() protoreflect.Message {
+	mi := &file_shared_packets_proto_msgTypes[46]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ChangePet.ProtoReflect.Descriptor instead.
+func (*ChangePet) Descriptor() ([]byte, []int) {
+	return file_shared_packets_proto_rawDescGZIP(), []int{46}
+}
+
+func (x *ChangePet) GetPetPosition() uint64 {
+	if x != nil {
+		return x.PetPosition
+	}
+	return 0
+}
+
+type RunAway struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *RunAway) Reset() {
+	*x = RunAway{}
+	mi := &file_shared_packets_proto_msgTypes[47]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *RunAway) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*RunAway) ProtoMessage() {}
+
+func (x *RunAway) ProtoReflect() protoreflect.Message {
+	mi := &file_shared_packets_proto_msgTypes[47]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use RunAway.ProtoReflect.Descriptor instead.
+func (*RunAway) Descriptor() ([]byte, []int) {
+	return file_shared_packets_proto_rawDescGZIP(), []int{47}
+}
+
+type Attack struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	SkillPos      int64                  `protobuf:"varint,1,opt,name=skill_pos,json=skillPos,proto3" json:"skill_pos,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *Attack) Reset() {
+	*x = Attack{}
+	mi := &file_shared_packets_proto_msgTypes[48]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *Attack) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*Attack) ProtoMessage() {}
+
+func (x *Attack) ProtoReflect() protoreflect.Message {
+	mi := &file_shared_packets_proto_msgTypes[48]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use Attack.ProtoReflect.Descriptor instead.
+func (*Attack) Descriptor() ([]byte, []int) {
+	return file_shared_packets_proto_rawDescGZIP(), []int{48}
+}
+
+func (x *Attack) GetSkillPos() int64 {
+	if x != nil {
+		return x.SkillPos
+	}
+	return 0
+}
+
+type RoundSummaryMessage struct {
+	state  protoimpl.MessageState `protogen:"open.v1"`
+	Number int64                  `protobuf:"varint,1,opt,name=number,proto3" json:"number,omitempty"`
+	// Types that are valid to be assigned to Msg:
+	//
+	//	*RoundSummaryMessage_AttackStats
+	Msg           isRoundSummaryMessage_Msg `protobuf_oneof:"msg"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *RoundSummaryMessage) Reset() {
+	*x = RoundSummaryMessage{}
+	mi := &file_shared_packets_proto_msgTypes[49]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *RoundSummaryMessage) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*RoundSummaryMessage) ProtoMessage() {}
+
+func (x *RoundSummaryMessage) ProtoReflect() protoreflect.Message {
+	mi := &file_shared_packets_proto_msgTypes[49]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use RoundSummaryMessage.ProtoReflect.Descriptor instead.
+func (*RoundSummaryMessage) Descriptor() ([]byte, []int) {
+	return file_shared_packets_proto_rawDescGZIP(), []int{49}
+}
+
+func (x *RoundSummaryMessage) GetNumber() int64 {
+	if x != nil {
+		return x.Number
+	}
+	return 0
+}
+
+func (x *RoundSummaryMessage) GetMsg() isRoundSummaryMessage_Msg {
+	if x != nil {
+		return x.Msg
+	}
+	return nil
+}
+
+func (x *RoundSummaryMessage) GetAttackStats() *AttackStats {
+	if x != nil {
+		if x, ok := x.Msg.(*RoundSummaryMessage_AttackStats); ok {
+			return x.AttackStats
+		}
+	}
+	return nil
+}
+
+type isRoundSummaryMessage_Msg interface {
+	isRoundSummaryMessage_Msg()
+}
+
+type RoundSummaryMessage_AttackStats struct {
+	AttackStats *AttackStats `protobuf:"bytes,2,opt,name=attack_stats,json=attackStats,proto3,oneof"`
+}
+
+func (*RoundSummaryMessage_AttackStats) isRoundSummaryMessage_Msg() {}
+
+type AttackStats struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	SkillId       uint32                 `protobuf:"varint,1,opt,name=skill_id,json=skillId,proto3" json:"skill_id,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *AttackStats) Reset() {
+	*x = AttackStats{}
+	mi := &file_shared_packets_proto_msgTypes[50]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *AttackStats) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*AttackStats) ProtoMessage() {}
+
+func (x *AttackStats) ProtoReflect() protoreflect.Message {
+	mi := &file_shared_packets_proto_msgTypes[50]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use AttackStats.ProtoReflect.Descriptor instead.
+func (*AttackStats) Descriptor() ([]byte, []int) {
+	return file_shared_packets_proto_rawDescGZIP(), []int{50}
+}
+
+func (x *AttackStats) GetSkillId() uint32 {
+	if x != nil {
+		return x.SkillId
+	}
+	return 0
+}
+
+type PetStats struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *PetStats) Reset() {
+	*x = PetStats{}
+	mi := &file_shared_packets_proto_msgTypes[51]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *PetStats) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*PetStats) ProtoMessage() {}
+
+func (x *PetStats) ProtoReflect() protoreflect.Message {
+	mi := &file_shared_packets_proto_msgTypes[51]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use PetStats.ProtoReflect.Descriptor instead.
+func (*PetStats) Descriptor() ([]byte, []int) {
+	return file_shared_packets_proto_rawDescGZIP(), []int{51}
+}
+
+type BattleEndStats struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *BattleEndStats) Reset() {
+	*x = BattleEndStats{}
+	mi := &file_shared_packets_proto_msgTypes[52]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *BattleEndStats) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*BattleEndStats) ProtoMessage() {}
+
+func (x *BattleEndStats) ProtoReflect() protoreflect.Message {
+	mi := &file_shared_packets_proto_msgTypes[52]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use BattleEndStats.ProtoReflect.Descriptor instead.
+func (*BattleEndStats) Descriptor() ([]byte, []int) {
+	return file_shared_packets_proto_rawDescGZIP(), []int{52}
+}
+
 var File_shared_packets_proto protoreflect.FileDescriptor
 
 const file_shared_packets_proto_rawDesc = "" +
@@ -3154,7 +3603,28 @@ const file_shared_packets_proto_rawDesc = "" +
 	"\x04path\x18\x01 \x01(\tR\x04path\"9\n" +
 	"\x18InitialPetRequestMessage\x12\x1d\n" +
 	"\n" +
-	"request_id\x18\x01 \x01(\rR\trequestIdB\rZ\vpkg/packetsb\x06proto3"
+	"request_id\x18\x01 \x01(\rR\trequestId\"\x0e\n" +
+	"\fBattlePacket\"\xae\x01\n" +
+	"\x13RoundCommandMessage\x123\n" +
+	"\n" +
+	"change_pet\x18\x01 \x01(\v2\x12.packets.ChangePetH\x00R\tchangePet\x12,\n" +
+	"\arunaway\x18\x02 \x01(\v2\x10.packets.RunAwayH\x00R\arunaway\x12)\n" +
+	"\x06attack\x18\x03 \x01(\v2\x0f.packets.AttackH\x00R\x06attackB\t\n" +
+	"\acommand\".\n" +
+	"\tChangePet\x12!\n" +
+	"\fpet_position\x18\x01 \x01(\x04R\vpetPosition\"\t\n" +
+	"\aRunAway\"%\n" +
+	"\x06Attack\x12\x1b\n" +
+	"\tskill_pos\x18\x01 \x01(\x03R\bskillPos\"o\n" +
+	"\x13RoundSummaryMessage\x12\x16\n" +
+	"\x06number\x18\x01 \x01(\x03R\x06number\x129\n" +
+	"\fattack_stats\x18\x02 \x01(\v2\x14.packets.AttackStatsH\x00R\vattackStatsB\x05\n" +
+	"\x03msg\"(\n" +
+	"\vAttackStats\x12\x19\n" +
+	"\bskill_id\x18\x01 \x01(\rR\askillId\"\n" +
+	"\n" +
+	"\bPetStats\"\x10\n" +
+	"\x0eBattleEndStatsB\rZ\vpkg/packetsb\x06proto3"
 
 var (
 	file_shared_packets_proto_rawDescOnce sync.Once
@@ -3168,7 +3638,7 @@ func file_shared_packets_proto_rawDescGZIP() []byte {
 	return file_shared_packets_proto_rawDescData
 }
 
-var file_shared_packets_proto_msgTypes = make([]protoimpl.MessageInfo, 44)
+var file_shared_packets_proto_msgTypes = make([]protoimpl.MessageInfo, 53)
 var file_shared_packets_proto_goTypes = []any{
 	(*LoginRequestMessage)(nil),            // 0: packets.LoginRequestMessage
 	(*RegisterRequestMessage)(nil),         // 1: packets.RegisterRequestMessage
@@ -3214,6 +3684,15 @@ var file_shared_packets_proto_goTypes = []any{
 	(*UiPacket)(nil),                       // 41: packets.UiPacket
 	(*OpenUIMessage)(nil),                  // 42: packets.OpenUIMessage
 	(*InitialPetRequestMessage)(nil),       // 43: packets.InitialPetRequestMessage
+	(*BattlePacket)(nil),                   // 44: packets.BattlePacket
+	(*RoundCommandMessage)(nil),            // 45: packets.RoundCommandMessage
+	(*ChangePet)(nil),                      // 46: packets.ChangePet
+	(*RunAway)(nil),                        // 47: packets.RunAway
+	(*Attack)(nil),                         // 48: packets.Attack
+	(*RoundSummaryMessage)(nil),            // 49: packets.RoundSummaryMessage
+	(*AttackStats)(nil),                    // 50: packets.AttackStats
+	(*PetStats)(nil),                       // 51: packets.PetStats
+	(*BattleEndStats)(nil),                 // 52: packets.BattleEndStats
 }
 var file_shared_packets_proto_depIdxs = []int32{
 	16, // 0: packets.MailMessage.items:type_name -> packets.ItemMessage
@@ -3260,11 +3739,15 @@ var file_shared_packets_proto_depIdxs = []int32{
 	32, // 41: packets.Packet.equipped_pet_info_response:type_name -> packets.EquippedPetInfoResponseMessage
 	42, // 42: packets.UiPacket.open_ui:type_name -> packets.OpenUIMessage
 	43, // 43: packets.UiPacket.initial_pet_request:type_name -> packets.InitialPetRequestMessage
-	44, // [44:44] is the sub-list for method output_type
-	44, // [44:44] is the sub-list for method input_type
-	44, // [44:44] is the sub-list for extension type_name
-	44, // [44:44] is the sub-list for extension extendee
-	0,  // [0:44] is the sub-list for field type_name
+	46, // 44: packets.RoundCommandMessage.change_pet:type_name -> packets.ChangePet
+	47, // 45: packets.RoundCommandMessage.runaway:type_name -> packets.RunAway
+	48, // 46: packets.RoundCommandMessage.attack:type_name -> packets.Attack
+	50, // 47: packets.RoundSummaryMessage.attack_stats:type_name -> packets.AttackStats
+	48, // [48:48] is the sub-list for method output_type
+	48, // [48:48] is the sub-list for method input_type
+	48, // [48:48] is the sub-list for extension type_name
+	48, // [48:48] is the sub-list for extension extendee
+	0,  // [0:48] is the sub-list for field type_name
 }
 
 func init() { file_shared_packets_proto_init() }
@@ -3315,13 +3798,21 @@ func file_shared_packets_proto_init() {
 		(*UiPacket_OpenUi)(nil),
 		(*UiPacket_InitialPetRequest)(nil),
 	}
+	file_shared_packets_proto_msgTypes[45].OneofWrappers = []any{
+		(*RoundCommandMessage_ChangePet)(nil),
+		(*RoundCommandMessage_Runaway)(nil),
+		(*RoundCommandMessage_Attack)(nil),
+	}
+	file_shared_packets_proto_msgTypes[49].OneofWrappers = []any{
+		(*RoundSummaryMessage_AttackStats)(nil),
+	}
 	type x struct{}
 	out := protoimpl.TypeBuilder{
 		File: protoimpl.DescBuilder{
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_shared_packets_proto_rawDesc), len(file_shared_packets_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   44,
+			NumMessages:   53,
 			NumExtensions: 0,
 			NumServices:   0,
 		},

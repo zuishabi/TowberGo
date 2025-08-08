@@ -57,7 +57,7 @@ func (c *Connected) handleLoginRequest(senderID uint32, message *packets.Packet_
 	c.client.SetState(&InGame{Player: &objects.Player{
 		UserName:     userInfo.UserName,
 		UID:          userInfo.ID,
-		EquippedPets: make([]objects.Pet, 5),
+		EquippedPets: [5]objects.Pet{},
 	}})
 }
 

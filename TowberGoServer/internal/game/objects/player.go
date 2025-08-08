@@ -11,7 +11,7 @@ type Player struct {
 	UID          uint32
 	Client       internal.ClientInterface
 	Position     containers.Vector2
-	EquippedPets []Pet
+	EquippedPets [5]Pet
 	Area         Area
 	PetBagLock   sync.RWMutex
 }

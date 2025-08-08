@@ -13,7 +13,7 @@ type Buro struct {
 	exp            int
 	stats          objects.Stats
 	level          int
-	equippedSkills []objects.Skill
+	equippedSkills [4]objects.Skill
 	owner          *objects.Player
 	id             uint64
 }
@@ -68,7 +68,7 @@ func (b *Buro) UnlockedSkillList() []objects.Skill {
 	return s
 }
 
-func (b *Buro) EquippedSkills() []objects.Skill {
+func (b *Buro) EquippedSkills() [4]objects.Skill {
 	return b.equippedSkills
 }
 
@@ -77,7 +77,7 @@ func (b *Buro) Initialize(exp int, equippedSkills []uint32, stats *objects.Stats
 		exp:            exp,
 		stats:          *stats,
 		level:          objects.ConvertExpToLevel(exp),
-		equippedSkills: make([]objects.Skill, 4),
+		equippedSkills: [4]objects.Skill{},
 		owner:          owner,
 	}
 	if len(equippedSkills) > 4 {

@@ -23,13 +23,16 @@ type Pet interface {
 	SetExp(exp int)
 	Level() int
 	UnlockedSkillList() []Skill
-	EquippedSkills() []Skill
+	EquippedSkills() [4]Skill
 	Initialize(exp int, equippedSkills []uint32, stats *Stats, owner *Player) Pet
 	Stats() *Stats
 	BaseStats() Stats
 	// LevelUp 宠物提升一级时调用
 	LevelUp()
 	Owner() *Player
+	// GetEvent 战斗时获得事件触发
+	// 1、进入战斗 2、新回合开始 3、回合结束 4、自身受伤 5、获得负面buff 6、获得正面buff 7、敌人死亡
+	GetEvent(event int, owner int, battleRoom *BattleRoom)
 }
 
 type Stats struct {
@@ -191,10 +194,10 @@ func (p *PetManagerStruct) CreatePet(player *Player, petID uint32) (Pet, bool) {
 }
 
 // GetPetBag 获得宠物背包中的所有宠物
-func (p *PetManagerStruct) GetPetBag(player *Player) []Pet {
+func (p *PetManagerStruct) GetPetBag(player *Player) [5]Pet {
 	equippedPet := db.EquippedPets{}
 	p.db.Where("uid = ?", player.UID).First(&equippedPet)
-	res := make([]Pet, 5)
+	res := [5]Pet{}
 	dbPet := db.Pets{}
 	if equippedPet.Slot1 != 0 {
 		p.db.Where("id = ?", equippedPet.Slot1).First(&dbPet)

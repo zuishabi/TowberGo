@@ -81,6 +81,9 @@ func (c *WebSocketClient) SocketSend(message packets.Msg) {
 }
 
 func (c *WebSocketClient) SocketSendAs(message packets.Msg, senderId uint32) {
+	if c.closed.Load() {
+		return
+	}
 	select {
 	case c.sendChan <- &packets.Packet{
 		Uid: senderId,
