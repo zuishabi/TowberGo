@@ -25,6 +25,9 @@ func (v *InitialVillage) ProcessMessage(senderID uint32, message packets.Msg) {
 	if v.BaseArea.ProcessMessage(senderID, message) {
 		return
 	}
+	switch message := message.(type) {
+	
+	}
 }
 
 func (v *InitialVillage) Initialize() {

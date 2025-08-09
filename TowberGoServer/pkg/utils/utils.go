@@ -99,3 +99,7 @@ func NewPetMessage(pet objects.Pet) *packets.PetMessage {
 	res.PetStats = &stats
 	return &res
 }
+
+func NewAttackStatsPacket(msg *packets.AttackStatsMessage) packets.BattleMsg {
+	return &packets.BattlePacket_AttackStats{AttackStats: msg}
+}

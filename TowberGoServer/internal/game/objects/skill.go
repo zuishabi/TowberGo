@@ -2,13 +2,10 @@ package objects
 
 type Skill interface {
 	Name() string
-	ID() int
+	ID() uint32
 	Use(self *BattlePet, enemy *BattlePet) []*AttackInfo
 	Speed() int
-	CoolDown() int
 	Cost() int
-	SetCoolDown(num int)
-	GetCoolDown() int
 }
 
 var SkillManager *SkillManagerStruct

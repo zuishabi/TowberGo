@@ -115,3 +115,7 @@ func (b *Buro) Owner() *objects.Player {
 func (b *Buro) SetExp(exp int) {
 	b.exp = exp
 }
+
+func (b *Buro) GetEvent(event int, self bool, battleRoom *objects.BattleRoom) {
+
+}

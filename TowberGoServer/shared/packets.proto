@@ -206,6 +206,21 @@ message UsePetItemResponseMessage{
 }
 
 //---------------------------------------------------------------------
+message BattleRequestMessage{
+  uint32 roomID = 1;
+}
+
+message BattleResponseMessage{
+  uint32 roomID = 1;
+  bool accepted = 2;
+}
+
+message StartBattleMessage{
+  int64 number = 1;
+}
+
+
+//---------------------------------------------------------------------
 message Packet{
   uint32 uid = 1;
   oneof msg{
@@ -246,6 +261,10 @@ message Packet{
     PetItemBagResponseMessage pet_item_bag_response = 36;
     EquippedPetInfoRequestMessage equipped_pet_info_request = 37;
     EquippedPetInfoResponseMessage equipped_pet_info_response = 38;
+    BattlePacket battle_packet = 39;
+    BattleRequestMessage battle_request = 40;
+    BattleResponseMessage battle_response = 41;
+    StartBattleMessage start_battle = 42;
   }
 }
 
@@ -266,7 +285,17 @@ message InitialPetRequestMessage{
 
 //--------------------------------------战斗系统------------------------
 message BattlePacket{
-
+  oneof msg{
+    RoundCommandMessage command = 1;
+    AttackStatsMessage attack_stats = 2;
+    DenyCommandMessage deny_command = 3;
+    StartNextRoundMessage start_next_round = 4;
+    BattleEndMessage battle_end = 5;
+    RoundConfirmMessage round_confirm = 6;
+    ChangePetResponseMessage change_pet = 7;
+    ChangePetRequestMessage change_pet_request = 8;
+    SyncBattleInformationMessage sync_battle_information = 9;
+  }
 }
 
 message RoundCommandMessage{
@@ -278,7 +307,7 @@ message RoundCommandMessage{
 }
 
 message ChangePet{
-  uint64 pet_position = 1;
+  int64 pet_position = 1;
 }
 
 message RunAway{}
@@ -287,24 +316,46 @@ message Attack{
   int64 skill_pos = 1;
 }
 
-message RoundSummaryMessage{
+message AttackStatsMessage{
   int64 number = 1;
-  oneof msg{
-    AttackStats attack_stats = 2;
-  }
+  uint32 skill_id = 2;
+  int64 physical_damage = 3;
+  int64 magic_damage = 4;
+  repeated Buff buffs = 5;
+  repeated PetStatsMessage pet_stats = 6;
 }
 
-message AttackStats{
-  uint32 skill_id = 1;
+message Buff{
+  uint32 id = 1;
+  int64 level = 2;
 }
-
-message PetStats{
-
-}
-
-message PetChangeStats{
-
-}
-
 
 message BattleEndStats{}
+
+message DenyCommandMessage{
+  string reason = 1;
+}
+
+message StartNextRoundMessage{}
+
+message BattleEndMessage{
+  int64 winner = 1;
+}
+
+// 当客户端回合播放完毕后发送此消息
+message RoundConfirmMessage{}
+
+// 更换宠物请求
+message ChangePetRequestMessage{}
+
+// 更换宠物
+message ChangePetResponseMessage{
+  int64 pet_position = 2;
+}
+
+// 同步双方的信息
+message SyncBattleInformationMessage{
+  int64 number = 1;
+  string player_name = 2;
+  repeated PetMessage pet_messages = 3;
+}

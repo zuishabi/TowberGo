@@ -31,8 +31,7 @@ type Pet interface {
 	LevelUp()
 	Owner() *Player
 	// GetEvent 战斗时获得事件触发
-	// 1、进入战斗 2、新回合开始 3、回合结束 4、自身受伤 5、获得负面buff 6、获得正面buff 7、敌人死亡
-	GetEvent(event int, owner int, battleRoom *BattleRoom)
+	GetEvent(event int, self bool, battleRoom *BattleRoom)
 }
 
 type Stats struct {
