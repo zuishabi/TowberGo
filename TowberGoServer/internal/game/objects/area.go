@@ -13,7 +13,7 @@ type Area interface {
 	RemovePlayer(uid uint32)
 	BroadcastArea(packet *packets.Packet, except bool)
 	// ProcessMessage 将消息传递给area处理
-	ProcessMessage(uid uint32, packet packets.Msg)
+	ProcessMessage(sender *Player, packet packets.Msg)
 	Initialize()
 	CheckCanEnter(player *Player) (bool, string)
 }
@@ -47,17 +47,17 @@ func (m *AreaManager) Initialize() {
 }
 
 type BaseArea struct {
-	players   *containers.SharedIDMap[*Player]
-	expansion Area
+	Players   *containers.SharedIDMap[*Player]
+	Expansion Area
 }
 
 func (b *BaseArea) Initialize(e Area) {
-	b.players = containers.NewSharedIDMap[*Player]()
-	b.expansion = e
+	b.Players = containers.NewSharedIDMap[*Player]()
+	b.Expansion = e
 }
 
 func (b *BaseArea) BroadcastArea(packet *packets.Packet, except bool) {
-	b.players.ForEach(func(uid uint32, player *Player) {
+	b.Players.ForEach(func(uid uint32, player *Player) {
 		if uid == packet.Uid && except || player == nil {
 			return
 		}
@@ -66,8 +66,8 @@ func (b *BaseArea) BroadcastArea(packet *packets.Packet, except bool) {
 }
 
 func (b *BaseArea) RemovePlayer(uid uint32) {
-	p, _ := b.players.Get(uid)
-	b.players.Remove(uid)
+	p, _ := b.Players.Get(uid)
+	b.Players.Remove(uid)
 	p.Area = nil
 	packet := packets.Packet{Uid: uid, Msg: &packets.Packet_PlayerLeave{PlayerLeave: &packets.PlayerLeaveAreaMessage{}}}
 	b.BroadcastArea(&packet, true)
@@ -76,7 +76,7 @@ func (b *BaseArea) RemovePlayer(uid uint32) {
 func (b *BaseArea) AddPlayer(player *Player, id uint32) {
 	msg := &packets.PlayerEnterAreaMessage{}
 	otherInfo := &packets.Packet_PlayerEnter{PlayerEnter: msg}
-	b.players.ForEach(func(uid uint32, p *Player) {
+	b.Players.ForEach(func(uid uint32, p *Player) {
 		if player == nil {
 			return
 		}
@@ -85,9 +85,9 @@ func (b *BaseArea) AddPlayer(player *Player, id uint32) {
 		msg.Username = p.UserName
 		player.Client.SocketSendAs(otherInfo, uid)
 	})
-	b.players.Set(player.UID, player)
-	player.Area = b.expansion
-	pos := b.expansion.GetEntrance(id)
+	b.Players.Set(player.UID, player)
+	player.Area = b.Expansion
+	pos := b.Expansion.GetEntrance(id)
 	player.Position = pos
 	packet := packets.Packet{Uid: player.UID, Msg: &packets.Packet_PlayerEnter{PlayerEnter: &packets.PlayerEnterAreaMessage{
 		Username: player.UserName,
@@ -98,13 +98,13 @@ func (b *BaseArea) AddPlayer(player *Player, id uint32) {
 	player.Client.SocketSend(packet.Msg)
 }
 
-func (b *BaseArea) ProcessMessage(senderID uint32, message packets.Msg) bool {
+func (b *BaseArea) ProcessMessage(sender *Player, message packets.Msg) bool {
 	processed := true
 	switch message := message.(type) {
 	case *packets.Packet_PlayerMovement:
-		b.BroadcastArea(&packets.Packet{Uid: senderID, Msg: message}, true)
+		b.BroadcastArea(&packets.Packet{Uid: sender.UID, Msg: message}, true)
 	case *packets.Packet_Chat:
-		b.BroadcastArea(&packets.Packet{Uid: senderID, Msg: message}, false)
+		b.BroadcastArea(&packets.Packet{Uid: sender.UID, Msg: message}, false)
 	default:
 		processed = false
 	}

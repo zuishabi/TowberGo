@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://hxdvic72hrmf"]
+
+[ext_resource type="Script" uid="uid://dbng260x4rf68" path="res://states/inbattle/in_battle.gd" id="1_uolke"]
+
+[node name="InBattle" type="Node2D"]
+script = ExtResource("1_uolke")

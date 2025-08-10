@@ -62,7 +62,6 @@ func (m *MailManagerStruct) SendMailToAll() {
 // DeleteMail 删除指定邮件
 func (m *MailManagerStruct) DeleteMail(uid uint32, mailID uint32) {
 	ctx := context.Background()
-	fmt.Println(mailID)
 	if err := db.Rdb.HDel(ctx, fmt.Sprintf("player:%d:mail", uid), fmt.Sprintf("%d", mailID)).Err(); err != nil {
 		fmt.Println("delete mail error", err)
 	}

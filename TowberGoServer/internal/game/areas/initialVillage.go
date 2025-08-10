@@ -21,12 +21,15 @@ func (v *InitialVillage) Name() string {
 	return "InitialVillage"
 }
 
-func (v *InitialVillage) ProcessMessage(senderID uint32, message packets.Msg) {
-	if v.BaseArea.ProcessMessage(senderID, message) {
+func (v *InitialVillage) ProcessMessage(sender *objects.Player, message packets.Msg) {
+	if v.BaseArea.ProcessMessage(sender, message) {
 		return
 	}
 	switch message := message.(type) {
-	
+	case *packets.Packet_BattleRequest:
+		message.BattleRequest.GetTarget()
+		packet := packets.Packet_DenyResponse{DenyResponse: &packets.DenyResponseMessage{Reason: "this area cannot battle"}}
+		sender.Client.SocketSend(&packet)
 	}
 }
 

@@ -64,6 +64,9 @@ func (r *BattleRoom) SendEvent(event int, target int) {
 	for i, v := range r.Players {
 		self := target == i
 		for _, k := range v.EquippedPets() {
+			if k.Pet == nil {
+				continue
+			}
 			k.GetEvent(event, self, r)
 		}
 	}
@@ -233,6 +236,9 @@ func (r *BattleRoom) isValid(command *Command) bool {
 func (r *BattleRoom) ProcessCommand(commands [2]*Command) {
 	skills := [2]Skill{}
 	for i := range commands {
+		if commands[i] == nil {
+			continue
+		}
 		switch command := commands[i].Msg.Command.(type) {
 		case *packets.RoundCommandMessage_Attack:
 			skill := r.Players[i].CurrentPet().EquippedSkills()[command.Attack.SkillPos]

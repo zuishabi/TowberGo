@@ -207,10 +207,16 @@ message UsePetItemResponseMessage{
 
 //---------------------------------------------------------------------
 message BattleRequestMessage{
-  uint32 roomID = 1;
+  uint32 target = 1;
 }
 
-message BattleResponseMessage{
+message BattleInvitingMessage{
+  uint32 roomID = 1;
+  string user_name = 2;
+}
+
+
+message BattleInvitingResponseMessage{
   uint32 roomID = 1;
   bool accepted = 2;
 }
@@ -263,8 +269,9 @@ message Packet{
     EquippedPetInfoResponseMessage equipped_pet_info_response = 38;
     BattlePacket battle_packet = 39;
     BattleRequestMessage battle_request = 40;
-    BattleResponseMessage battle_response = 41;
-    StartBattleMessage start_battle = 42;
+    BattleInvitingResponseMessage battle_inviting_response = 41;
+    BattleInvitingMessage battle_inviting = 42;
+    StartBattleMessage start_battle = 43;
   }
 }
 

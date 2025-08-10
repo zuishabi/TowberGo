@@ -3,11 +3,13 @@ extends Node
 enum State{
 	ENTERED,
 	INGAME,
+	INBATTLE,
 }
 
 var _states_scenes:Dictionary[State,String] = {
 	State.ENTERED: "res://states/entered/entered.tscn",
 	State.INGAME: "res://states/ingame/ingame.tscn",
+	State.INBATTLE: "res://states/inbattle/in_battle.tscn",
 }
 
 signal show_confirm(text:String,callable:Callable)

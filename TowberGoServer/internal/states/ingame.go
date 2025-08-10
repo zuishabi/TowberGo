@@ -62,14 +62,14 @@ func (g *InGame) HandleMessage(senderID uint32, message packets.Msg) {
 		if message.Chat.Type == 1 {
 			g.handleChatMessage(senderID, message)
 		} else {
-			g.Player.Area.ProcessMessage(senderID, message)
+			g.Player.Area.ProcessMessage(g.Player, message)
 		}
 	case *packets.Packet_PlayerMovement:
 		g.Player.Position = containers.Vector2{
 			X: message.PlayerMovement.ToX,
 			Y: message.PlayerMovement.ToY,
 		}
-		g.Player.Area.ProcessMessage(senderID, message)
+		g.Player.Area.ProcessMessage(g.Player, message)
 	case *packets.Packet_MailRequest:
 		g.handleMailRequest()
 	case *packets.Packet_MailDelete:
@@ -98,7 +98,7 @@ func (g *InGame) HandleMessage(senderID uint32, message packets.Msg) {
 		if g.Player.Area == nil {
 			return
 		}
-		g.Player.Area.ProcessMessage(senderID, message)
+		g.Player.Area.ProcessMessage(g.Player, message)
 	}
 }
 

@@ -50,3 +50,9 @@ func _unhandled_input(event:InputEvent):
 func set_camera_limit(limit:Vector2i):
 	_camera_2d.limit_bottom = limit.y
 	_camera_2d.limit_right = limit.x
+
+func _on_input_panel_gui_input(event:InputEvent):
+	if event.is_action_pressed("left_mouse") && !is_self:
+		var packet := packets.Packet.new()
+		packet.new_battle_request().set_target(uid)
+		WS.send(packet)

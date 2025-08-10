@@ -4,6 +4,7 @@ import (
 	"TowberGoServer/internal"
 	"TowberGoServer/internal/game/objects"
 	"TowberGoServer/pkg/packets"
+	"fmt"
 )
 
 type InBattle struct {
@@ -26,6 +27,7 @@ func (i *InBattle) SetClient(client internal.ClientInterface) {
 func (i *InBattle) OnEnter() {
 	i.Player.PetBagLock.RLock()
 	defer i.Player.PetBagLock.RUnlock()
+	fmt.Println("注册玩家装备宠物...")
 	for k, v := range i.Player.EquippedPets {
 		i.equippedPet[k] = &objects.BattlePet{
 			Pet:   v,

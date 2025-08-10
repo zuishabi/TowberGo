@@ -3285,6 +3285,222 @@ class UsePetItemResponseMessage:
 			return PB_ERR.PARSE_INCOMPLETE
 		return result
 	
+class BattleRequestMessage:
+	func _init():
+		var service
+		
+		__target = PBField.new("target", PB_DATA_TYPE.UINT32, PB_RULE.OPTIONAL, 1, true, DEFAULT_VALUES_3[PB_DATA_TYPE.UINT32])
+		service = PBServiceField.new()
+		service.field = __target
+		data[__target.tag] = service
+		
+	var data = {}
+	
+	var __target: PBField
+	func has_target() -> bool:
+		if __target.value != null:
+			return true
+		return false
+	func get_target() -> int:
+		return __target.value
+	func clear_target() -> void:
+		data[1].state = PB_SERVICE_STATE.UNFILLED
+		__target.value = DEFAULT_VALUES_3[PB_DATA_TYPE.UINT32]
+	func set_target(value : int) -> void:
+		__target.value = value
+	
+	func _to_string() -> String:
+		return PBPacker.message_to_string(data)
+		
+	func to_bytes() -> PackedByteArray:
+		return PBPacker.pack_message(data)
+		
+	func from_bytes(bytes : PackedByteArray, offset : int = 0, limit : int = -1) -> int:
+		var cur_limit = bytes.size()
+		if limit != -1:
+			cur_limit = limit
+		var result = PBPacker.unpack_message(data, bytes, offset, cur_limit)
+		if result == cur_limit:
+			if PBPacker.check_required(data):
+				if limit == -1:
+					return PB_ERR.NO_ERRORS
+			else:
+				return PB_ERR.REQUIRED_FIELDS
+		elif limit == -1 && result > 0:
+			return PB_ERR.PARSE_INCOMPLETE
+		return result
+	
+class BattleInvitingMessage:
+	func _init():
+		var service
+		
+		__roomID = PBField.new("roomID", PB_DATA_TYPE.UINT32, PB_RULE.OPTIONAL, 1, true, DEFAULT_VALUES_3[PB_DATA_TYPE.UINT32])
+		service = PBServiceField.new()
+		service.field = __roomID
+		data[__roomID.tag] = service
+		
+		__user_name = PBField.new("user_name", PB_DATA_TYPE.STRING, PB_RULE.OPTIONAL, 2, true, DEFAULT_VALUES_3[PB_DATA_TYPE.STRING])
+		service = PBServiceField.new()
+		service.field = __user_name
+		data[__user_name.tag] = service
+		
+	var data = {}
+	
+	var __roomID: PBField
+	func has_roomID() -> bool:
+		if __roomID.value != null:
+			return true
+		return false
+	func get_roomID() -> int:
+		return __roomID.value
+	func clear_roomID() -> void:
+		data[1].state = PB_SERVICE_STATE.UNFILLED
+		__roomID.value = DEFAULT_VALUES_3[PB_DATA_TYPE.UINT32]
+	func set_roomID(value : int) -> void:
+		__roomID.value = value
+	
+	var __user_name: PBField
+	func has_user_name() -> bool:
+		if __user_name.value != null:
+			return true
+		return false
+	func get_user_name() -> String:
+		return __user_name.value
+	func clear_user_name() -> void:
+		data[2].state = PB_SERVICE_STATE.UNFILLED
+		__user_name.value = DEFAULT_VALUES_3[PB_DATA_TYPE.STRING]
+	func set_user_name(value : String) -> void:
+		__user_name.value = value
+	
+	func _to_string() -> String:
+		return PBPacker.message_to_string(data)
+		
+	func to_bytes() -> PackedByteArray:
+		return PBPacker.pack_message(data)
+		
+	func from_bytes(bytes : PackedByteArray, offset : int = 0, limit : int = -1) -> int:
+		var cur_limit = bytes.size()
+		if limit != -1:
+			cur_limit = limit
+		var result = PBPacker.unpack_message(data, bytes, offset, cur_limit)
+		if result == cur_limit:
+			if PBPacker.check_required(data):
+				if limit == -1:
+					return PB_ERR.NO_ERRORS
+			else:
+				return PB_ERR.REQUIRED_FIELDS
+		elif limit == -1 && result > 0:
+			return PB_ERR.PARSE_INCOMPLETE
+		return result
+	
+class BattleInvitingResponseMessage:
+	func _init():
+		var service
+		
+		__roomID = PBField.new("roomID", PB_DATA_TYPE.UINT32, PB_RULE.OPTIONAL, 1, true, DEFAULT_VALUES_3[PB_DATA_TYPE.UINT32])
+		service = PBServiceField.new()
+		service.field = __roomID
+		data[__roomID.tag] = service
+		
+		__accepted = PBField.new("accepted", PB_DATA_TYPE.BOOL, PB_RULE.OPTIONAL, 2, true, DEFAULT_VALUES_3[PB_DATA_TYPE.BOOL])
+		service = PBServiceField.new()
+		service.field = __accepted
+		data[__accepted.tag] = service
+		
+	var data = {}
+	
+	var __roomID: PBField
+	func has_roomID() -> bool:
+		if __roomID.value != null:
+			return true
+		return false
+	func get_roomID() -> int:
+		return __roomID.value
+	func clear_roomID() -> void:
+		data[1].state = PB_SERVICE_STATE.UNFILLED
+		__roomID.value = DEFAULT_VALUES_3[PB_DATA_TYPE.UINT32]
+	func set_roomID(value : int) -> void:
+		__roomID.value = value
+	
+	var __accepted: PBField
+	func has_accepted() -> bool:
+		if __accepted.value != null:
+			return true
+		return false
+	func get_accepted() -> bool:
+		return __accepted.value
+	func clear_accepted() -> void:
+		data[2].state = PB_SERVICE_STATE.UNFILLED
+		__accepted.value = DEFAULT_VALUES_3[PB_DATA_TYPE.BOOL]
+	func set_accepted(value : bool) -> void:
+		__accepted.value = value
+	
+	func _to_string() -> String:
+		return PBPacker.message_to_string(data)
+		
+	func to_bytes() -> PackedByteArray:
+		return PBPacker.pack_message(data)
+		
+	func from_bytes(bytes : PackedByteArray, offset : int = 0, limit : int = -1) -> int:
+		var cur_limit = bytes.size()
+		if limit != -1:
+			cur_limit = limit
+		var result = PBPacker.unpack_message(data, bytes, offset, cur_limit)
+		if result == cur_limit:
+			if PBPacker.check_required(data):
+				if limit == -1:
+					return PB_ERR.NO_ERRORS
+			else:
+				return PB_ERR.REQUIRED_FIELDS
+		elif limit == -1 && result > 0:
+			return PB_ERR.PARSE_INCOMPLETE
+		return result
+	
+class StartBattleMessage:
+	func _init():
+		var service
+		
+		__number = PBField.new("number", PB_DATA_TYPE.INT64, PB_RULE.OPTIONAL, 1, true, DEFAULT_VALUES_3[PB_DATA_TYPE.INT64])
+		service = PBServiceField.new()
+		service.field = __number
+		data[__number.tag] = service
+		
+	var data = {}
+	
+	var __number: PBField
+	func has_number() -> bool:
+		if __number.value != null:
+			return true
+		return false
+	func get_number() -> int:
+		return __number.value
+	func clear_number() -> void:
+		data[1].state = PB_SERVICE_STATE.UNFILLED
+		__number.value = DEFAULT_VALUES_3[PB_DATA_TYPE.INT64]
+	func set_number(value : int) -> void:
+		__number.value = value
+	
+	func _to_string() -> String:
+		return PBPacker.message_to_string(data)
+		
+	func to_bytes() -> PackedByteArray:
+		return PBPacker.pack_message(data)
+		
+	func from_bytes(bytes : PackedByteArray, offset : int = 0, limit : int = -1) -> int:
+		var cur_limit = bytes.size()
+		if limit != -1:
+			cur_limit = limit
+		var result = PBPacker.unpack_message(data, bytes, offset, cur_limit)
+		if result == cur_limit:
+			if PBPacker.check_required(data):
+				if limit == -1:
+					return PB_ERR.NO_ERRORS
+			else:
+				return PB_ERR.REQUIRED_FIELDS
+		elif limit == -1 && result > 0:
+			return PB_ERR.PARSE_INCOMPLETE
+		return result
+	
 class Packet:
 	func _init():
 		var service
@@ -3516,6 +3732,36 @@ class Packet:
 		service.func_ref = Callable(self, "new_equipped_pet_info_response")
 		data[__equipped_pet_info_response.tag] = service
 		
+		__battle_packet = PBField.new("battle_packet", PB_DATA_TYPE.MESSAGE, PB_RULE.OPTIONAL, 39, true, DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE])
+		service = PBServiceField.new()
+		service.field = __battle_packet
+		service.func_ref = Callable(self, "new_battle_packet")
+		data[__battle_packet.tag] = service
+		
+		__battle_request = PBField.new("battle_request", PB_DATA_TYPE.MESSAGE, PB_RULE.OPTIONAL, 40, true, DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE])
+		service = PBServiceField.new()
+		service.field = __battle_request
+		service.func_ref = Callable(self, "new_battle_request")
+		data[__battle_request.tag] = service
+		
+		__battle_inviting_response = PBField.new("battle_inviting_response", PB_DATA_TYPE.MESSAGE, PB_RULE.OPTIONAL, 41, true, DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE])
+		service = PBServiceField.new()
+		service.field = __battle_inviting_response
+		service.func_ref = Callable(self, "new_battle_inviting_response")
+		data[__battle_inviting_response.tag] = service
+		
+		__battle_inviting = PBField.new("battle_inviting", PB_DATA_TYPE.MESSAGE, PB_RULE.OPTIONAL, 42, true, DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE])
+		service = PBServiceField.new()
+		service.field = __battle_inviting
+		service.func_ref = Callable(self, "new_battle_inviting")
+		data[__battle_inviting.tag] = service
+		
+		__start_battle = PBField.new("start_battle", PB_DATA_TYPE.MESSAGE, PB_RULE.OPTIONAL, 43, true, DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE])
+		service = PBServiceField.new()
+		service.field = __start_battle
+		service.func_ref = Callable(self, "new_start_battle")
+		data[__start_battle.tag] = service
+		
 	var data = {}
 	
 	var __uid: PBField
@@ -3615,6 +3861,16 @@ class Packet:
 		data[37].state = PB_SERVICE_STATE.UNFILLED
 		__equipped_pet_info_response.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
 		data[38].state = PB_SERVICE_STATE.UNFILLED
+		__battle_packet.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
+		data[39].state = PB_SERVICE_STATE.UNFILLED
+		__battle_request.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
+		data[40].state = PB_SERVICE_STATE.UNFILLED
+		__battle_inviting_response.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
+		data[41].state = PB_SERVICE_STATE.UNFILLED
+		__battle_inviting.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
+		data[42].state = PB_SERVICE_STATE.UNFILLED
+		__start_battle.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
+		data[43].state = PB_SERVICE_STATE.UNFILLED
 		__login_request.value = LoginRequestMessage.new()
 		return __login_request.value
 	
@@ -3702,6 +3958,16 @@ class Packet:
 		data[37].state = PB_SERVICE_STATE.UNFILLED
 		__equipped_pet_info_response.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
 		data[38].state = PB_SERVICE_STATE.UNFILLED
+		__battle_packet.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
+		data[39].state = PB_SERVICE_STATE.UNFILLED
+		__battle_request.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
+		data[40].state = PB_SERVICE_STATE.UNFILLED
+		__battle_inviting_response.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
+		data[41].state = PB_SERVICE_STATE.UNFILLED
+		__battle_inviting.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
+		data[42].state = PB_SERVICE_STATE.UNFILLED
+		__start_battle.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
+		data[43].state = PB_SERVICE_STATE.UNFILLED
 		__register_request.value = RegisterRequestMessage.new()
 		return __register_request.value
 	
@@ -3789,6 +4055,16 @@ class Packet:
 		data[37].state = PB_SERVICE_STATE.UNFILLED
 		__equipped_pet_info_response.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
 		data[38].state = PB_SERVICE_STATE.UNFILLED
+		__battle_packet.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
+		data[39].state = PB_SERVICE_STATE.UNFILLED
+		__battle_request.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
+		data[40].state = PB_SERVICE_STATE.UNFILLED
+		__battle_inviting_response.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
+		data[41].state = PB_SERVICE_STATE.UNFILLED
+		__battle_inviting.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
+		data[42].state = PB_SERVICE_STATE.UNFILLED
+		__start_battle.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
+		data[43].state = PB_SERVICE_STATE.UNFILLED
 		__ok_response.value = OKResponseMessage.new()
 		return __ok_response.value
 	
@@ -3876,6 +4152,16 @@ class Packet:
 		data[37].state = PB_SERVICE_STATE.UNFILLED
 		__equipped_pet_info_response.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
 		data[38].state = PB_SERVICE_STATE.UNFILLED
+		__battle_packet.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
+		data[39].state = PB_SERVICE_STATE.UNFILLED
+		__battle_request.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
+		data[40].state = PB_SERVICE_STATE.UNFILLED
+		__battle_inviting_response.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
+		data[41].state = PB_SERVICE_STATE.UNFILLED
+		__battle_inviting.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
+		data[42].state = PB_SERVICE_STATE.UNFILLED
+		__start_battle.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
+		data[43].state = PB_SERVICE_STATE.UNFILLED
 		__deny_response.value = DenyResponseMessage.new()
 		return __deny_response.value
 	
@@ -3963,6 +4249,16 @@ class Packet:
 		data[37].state = PB_SERVICE_STATE.UNFILLED
 		__equipped_pet_info_response.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
 		data[38].state = PB_SERVICE_STATE.UNFILLED
+		__battle_packet.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
+		data[39].state = PB_SERVICE_STATE.UNFILLED
+		__battle_request.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
+		data[40].state = PB_SERVICE_STATE.UNFILLED
+		__battle_inviting_response.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
+		data[41].state = PB_SERVICE_STATE.UNFILLED
+		__battle_inviting.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
+		data[42].state = PB_SERVICE_STATE.UNFILLED
+		__start_battle.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
+		data[43].state = PB_SERVICE_STATE.UNFILLED
 		__login_success.value = LoginSuccessMessage.new()
 		return __login_success.value
 	
@@ -4050,6 +4346,16 @@ class Packet:
 		data[37].state = PB_SERVICE_STATE.UNFILLED
 		__equipped_pet_info_response.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
 		data[38].state = PB_SERVICE_STATE.UNFILLED
+		__battle_packet.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
+		data[39].state = PB_SERVICE_STATE.UNFILLED
+		__battle_request.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
+		data[40].state = PB_SERVICE_STATE.UNFILLED
+		__battle_inviting_response.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
+		data[41].state = PB_SERVICE_STATE.UNFILLED
+		__battle_inviting.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
+		data[42].state = PB_SERVICE_STATE.UNFILLED
+		__start_battle.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
+		data[43].state = PB_SERVICE_STATE.UNFILLED
 		__player_enter.value = PlayerEnterAreaMessage.new()
 		return __player_enter.value
 	
@@ -4137,6 +4443,16 @@ class Packet:
 		data[37].state = PB_SERVICE_STATE.UNFILLED
 		__equipped_pet_info_response.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
 		data[38].state = PB_SERVICE_STATE.UNFILLED
+		__battle_packet.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
+		data[39].state = PB_SERVICE_STATE.UNFILLED
+		__battle_request.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
+		data[40].state = PB_SERVICE_STATE.UNFILLED
+		__battle_inviting_response.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
+		data[41].state = PB_SERVICE_STATE.UNFILLED
+		__battle_inviting.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
+		data[42].state = PB_SERVICE_STATE.UNFILLED
+		__start_battle.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
+		data[43].state = PB_SERVICE_STATE.UNFILLED
 		__player_leave.value = PlayerLeaveAreaMessage.new()
 		return __player_leave.value
 	
@@ -4224,6 +4540,16 @@ class Packet:
 		data[37].state = PB_SERVICE_STATE.UNFILLED
 		__equipped_pet_info_response.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
 		data[38].state = PB_SERVICE_STATE.UNFILLED
+		__battle_packet.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
+		data[39].state = PB_SERVICE_STATE.UNFILLED
+		__battle_request.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
+		data[40].state = PB_SERVICE_STATE.UNFILLED
+		__battle_inviting_response.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
+		data[41].state = PB_SERVICE_STATE.UNFILLED
+		__battle_inviting.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
+		data[42].state = PB_SERVICE_STATE.UNFILLED
+		__start_battle.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
+		data[43].state = PB_SERVICE_STATE.UNFILLED
 		__player_movement.value = PlayerMoveMessage.new()
 		return __player_movement.value
 	
@@ -4311,6 +4637,16 @@ class Packet:
 		data[37].state = PB_SERVICE_STATE.UNFILLED
 		__equipped_pet_info_response.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
 		data[38].state = PB_SERVICE_STATE.UNFILLED
+		__battle_packet.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
+		data[39].state = PB_SERVICE_STATE.UNFILLED
+		__battle_request.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
+		data[40].state = PB_SERVICE_STATE.UNFILLED
+		__battle_inviting_response.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
+		data[41].state = PB_SERVICE_STATE.UNFILLED
+		__battle_inviting.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
+		data[42].state = PB_SERVICE_STATE.UNFILLED
+		__start_battle.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
+		data[43].state = PB_SERVICE_STATE.UNFILLED
 		__player_enter_request.value = PlayerEnterAreaRequestMessage.new()
 		return __player_enter_request.value
 	
@@ -4398,6 +4734,16 @@ class Packet:
 		data[37].state = PB_SERVICE_STATE.UNFILLED
 		__equipped_pet_info_response.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
 		data[38].state = PB_SERVICE_STATE.UNFILLED
+		__battle_packet.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
+		data[39].state = PB_SERVICE_STATE.UNFILLED
+		__battle_request.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
+		data[40].state = PB_SERVICE_STATE.UNFILLED
+		__battle_inviting_response.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
+		data[41].state = PB_SERVICE_STATE.UNFILLED
+		__battle_inviting.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
+		data[42].state = PB_SERVICE_STATE.UNFILLED
+		__start_battle.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
+		data[43].state = PB_SERVICE_STATE.UNFILLED
 		__chat.value = ChatMessage.new()
 		return __chat.value
 	
@@ -4485,6 +4831,16 @@ class Packet:
 		data[37].state = PB_SERVICE_STATE.UNFILLED
 		__equipped_pet_info_response.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
 		data[38].state = PB_SERVICE_STATE.UNFILLED
+		__battle_packet.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
+		data[39].state = PB_SERVICE_STATE.UNFILLED
+		__battle_request.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
+		data[40].state = PB_SERVICE_STATE.UNFILLED
+		__battle_inviting_response.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
+		data[41].state = PB_SERVICE_STATE.UNFILLED
+		__battle_inviting.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
+		data[42].state = PB_SERVICE_STATE.UNFILLED
+		__start_battle.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
+		data[43].state = PB_SERVICE_STATE.UNFILLED
 		__player_enter_area_response.value = PlayerEnterAreaResponseMessage.new()
 		return __player_enter_area_response.value
 	
@@ -4572,6 +4928,16 @@ class Packet:
 		data[37].state = PB_SERVICE_STATE.UNFILLED
 		__equipped_pet_info_response.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
 		data[38].state = PB_SERVICE_STATE.UNFILLED
+		__battle_packet.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
+		data[39].state = PB_SERVICE_STATE.UNFILLED
+		__battle_request.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
+		data[40].state = PB_SERVICE_STATE.UNFILLED
+		__battle_inviting_response.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
+		data[41].state = PB_SERVICE_STATE.UNFILLED
+		__battle_inviting.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
+		data[42].state = PB_SERVICE_STATE.UNFILLED
+		__start_battle.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
+		data[43].state = PB_SERVICE_STATE.UNFILLED
 		__mail.value = MailMessage.new()
 		return __mail.value
 	
@@ -4659,6 +5025,16 @@ class Packet:
 		data[37].state = PB_SERVICE_STATE.UNFILLED
 		__equipped_pet_info_response.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
 		data[38].state = PB_SERVICE_STATE.UNFILLED
+		__battle_packet.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
+		data[39].state = PB_SERVICE_STATE.UNFILLED
+		__battle_request.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
+		data[40].state = PB_SERVICE_STATE.UNFILLED
+		__battle_inviting_response.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
+		data[41].state = PB_SERVICE_STATE.UNFILLED
+		__battle_inviting.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
+		data[42].state = PB_SERVICE_STATE.UNFILLED
+		__start_battle.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
+		data[43].state = PB_SERVICE_STATE.UNFILLED
 		__mail_request.value = MailRequestMessage.new()
 		return __mail_request.value
 	
@@ -4746,6 +5122,16 @@ class Packet:
 		data[37].state = PB_SERVICE_STATE.UNFILLED
 		__equipped_pet_info_response.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
 		data[38].state = PB_SERVICE_STATE.UNFILLED
+		__battle_packet.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
+		data[39].state = PB_SERVICE_STATE.UNFILLED
+		__battle_request.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
+		data[40].state = PB_SERVICE_STATE.UNFILLED
+		__battle_inviting_response.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
+		data[41].state = PB_SERVICE_STATE.UNFILLED
+		__battle_inviting.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
+		data[42].state = PB_SERVICE_STATE.UNFILLED
+		__start_battle.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
+		data[43].state = PB_SERVICE_STATE.UNFILLED
 		__mail_collect.value = MailCollectMessage.new()
 		return __mail_collect.value
 	
@@ -4833,6 +5219,16 @@ class Packet:
 		data[37].state = PB_SERVICE_STATE.UNFILLED
 		__equipped_pet_info_response.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
 		data[38].state = PB_SERVICE_STATE.UNFILLED
+		__battle_packet.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
+		data[39].state = PB_SERVICE_STATE.UNFILLED
+		__battle_request.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
+		data[40].state = PB_SERVICE_STATE.UNFILLED
+		__battle_inviting_response.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
+		data[41].state = PB_SERVICE_STATE.UNFILLED
+		__battle_inviting.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
+		data[42].state = PB_SERVICE_STATE.UNFILLED
+		__start_battle.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
+		data[43].state = PB_SERVICE_STATE.UNFILLED
 		__mail_delete.value = MailDeleteMessage.new()
 		return __mail_delete.value
 	
@@ -4920,6 +5316,16 @@ class Packet:
 		data[37].state = PB_SERVICE_STATE.UNFILLED
 		__equipped_pet_info_response.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
 		data[38].state = PB_SERVICE_STATE.UNFILLED
+		__battle_packet.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
+		data[39].state = PB_SERVICE_STATE.UNFILLED
+		__battle_request.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
+		data[40].state = PB_SERVICE_STATE.UNFILLED
+		__battle_inviting_response.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
+		data[41].state = PB_SERVICE_STATE.UNFILLED
+		__battle_inviting.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
+		data[42].state = PB_SERVICE_STATE.UNFILLED
+		__start_battle.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
+		data[43].state = PB_SERVICE_STATE.UNFILLED
 		__mail_collect_response.value = MailCollectResponseMessage.new()
 		return __mail_collect_response.value
 	
@@ -5007,6 +5413,16 @@ class Packet:
 		data[37].state = PB_SERVICE_STATE.UNFILLED
 		__equipped_pet_info_response.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
 		data[38].state = PB_SERVICE_STATE.UNFILLED
+		__battle_packet.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
+		data[39].state = PB_SERVICE_STATE.UNFILLED
+		__battle_request.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
+		data[40].state = PB_SERVICE_STATE.UNFILLED
+		__battle_inviting_response.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
+		data[41].state = PB_SERVICE_STATE.UNFILLED
+		__battle_inviting.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
+		data[42].state = PB_SERVICE_STATE.UNFILLED
+		__start_battle.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
+		data[43].state = PB_SERVICE_STATE.UNFILLED
 		__bag_request.value = BagRequestMessage.new()
 		return __bag_request.value
 	
@@ -5094,6 +5510,16 @@ class Packet:
 		data[37].state = PB_SERVICE_STATE.UNFILLED
 		__equipped_pet_info_response.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
 		data[38].state = PB_SERVICE_STATE.UNFILLED
+		__battle_packet.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
+		data[39].state = PB_SERVICE_STATE.UNFILLED
+		__battle_request.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
+		data[40].state = PB_SERVICE_STATE.UNFILLED
+		__battle_inviting_response.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
+		data[41].state = PB_SERVICE_STATE.UNFILLED
+		__battle_inviting.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
+		data[42].state = PB_SERVICE_STATE.UNFILLED
+		__start_battle.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
+		data[43].state = PB_SERVICE_STATE.UNFILLED
 		__bag.value = BagMessage.new()
 		return __bag.value
 	
@@ -5181,6 +5607,16 @@ class Packet:
 		data[37].state = PB_SERVICE_STATE.UNFILLED
 		__equipped_pet_info_response.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
 		data[38].state = PB_SERVICE_STATE.UNFILLED
+		__battle_packet.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
+		data[39].state = PB_SERVICE_STATE.UNFILLED
+		__battle_request.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
+		data[40].state = PB_SERVICE_STATE.UNFILLED
+		__battle_inviting_response.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
+		data[41].state = PB_SERVICE_STATE.UNFILLED
+		__battle_inviting.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
+		data[42].state = PB_SERVICE_STATE.UNFILLED
+		__start_battle.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
+		data[43].state = PB_SERVICE_STATE.UNFILLED
 		__add_bag_item.value = AddBagItemMessage.new()
 		return __add_bag_item.value
 	
@@ -5268,6 +5704,16 @@ class Packet:
 		data[37].state = PB_SERVICE_STATE.UNFILLED
 		__equipped_pet_info_response.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
 		data[38].state = PB_SERVICE_STATE.UNFILLED
+		__battle_packet.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
+		data[39].state = PB_SERVICE_STATE.UNFILLED
+		__battle_request.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
+		data[40].state = PB_SERVICE_STATE.UNFILLED
+		__battle_inviting_response.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
+		data[41].state = PB_SERVICE_STATE.UNFILLED
+		__battle_inviting.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
+		data[42].state = PB_SERVICE_STATE.UNFILLED
+		__start_battle.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
+		data[43].state = PB_SERVICE_STATE.UNFILLED
 		__delete_bag_item.value = DeleteBagItemMessage.new()
 		return __delete_bag_item.value
 	
@@ -5355,6 +5801,16 @@ class Packet:
 		data[37].state = PB_SERVICE_STATE.UNFILLED
 		__equipped_pet_info_response.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
 		data[38].state = PB_SERVICE_STATE.UNFILLED
+		__battle_packet.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
+		data[39].state = PB_SERVICE_STATE.UNFILLED
+		__battle_request.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
+		data[40].state = PB_SERVICE_STATE.UNFILLED
+		__battle_inviting_response.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
+		data[41].state = PB_SERVICE_STATE.UNFILLED
+		__battle_inviting.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
+		data[42].state = PB_SERVICE_STATE.UNFILLED
+		__start_battle.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
+		data[43].state = PB_SERVICE_STATE.UNFILLED
 		__use_bag_item_request.value = UseBagItemRequestMessage.new()
 		return __use_bag_item_request.value
 	
@@ -5442,6 +5898,16 @@ class Packet:
 		data[37].state = PB_SERVICE_STATE.UNFILLED
 		__equipped_pet_info_response.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
 		data[38].state = PB_SERVICE_STATE.UNFILLED
+		__battle_packet.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
+		data[39].state = PB_SERVICE_STATE.UNFILLED
+		__battle_request.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
+		data[40].state = PB_SERVICE_STATE.UNFILLED
+		__battle_inviting_response.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
+		data[41].state = PB_SERVICE_STATE.UNFILLED
+		__battle_inviting.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
+		data[42].state = PB_SERVICE_STATE.UNFILLED
+		__start_battle.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
+		data[43].state = PB_SERVICE_STATE.UNFILLED
 		__use_bag_item_response.value = UseBagItemResponseMessage.new()
 		return __use_bag_item_response.value
 	
@@ -5529,6 +5995,16 @@ class Packet:
 		data[37].state = PB_SERVICE_STATE.UNFILLED
 		__equipped_pet_info_response.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
 		data[38].state = PB_SERVICE_STATE.UNFILLED
+		__battle_packet.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
+		data[39].state = PB_SERVICE_STATE.UNFILLED
+		__battle_request.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
+		data[40].state = PB_SERVICE_STATE.UNFILLED
+		__battle_inviting_response.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
+		data[41].state = PB_SERVICE_STATE.UNFILLED
+		__battle_inviting.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
+		data[42].state = PB_SERVICE_STATE.UNFILLED
+		__start_battle.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
+		data[43].state = PB_SERVICE_STATE.UNFILLED
 		__ui_packet.value = UiPacket.new()
 		return __ui_packet.value
 	
@@ -5616,6 +6092,16 @@ class Packet:
 		data[37].state = PB_SERVICE_STATE.UNFILLED
 		__equipped_pet_info_response.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
 		data[38].state = PB_SERVICE_STATE.UNFILLED
+		__battle_packet.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
+		data[39].state = PB_SERVICE_STATE.UNFILLED
+		__battle_request.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
+		data[40].state = PB_SERVICE_STATE.UNFILLED
+		__battle_inviting_response.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
+		data[41].state = PB_SERVICE_STATE.UNFILLED
+		__battle_inviting.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
+		data[42].state = PB_SERVICE_STATE.UNFILLED
+		__start_battle.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
+		data[43].state = PB_SERVICE_STATE.UNFILLED
 		__get_pet.value = GetPetMessage.new()
 		return __get_pet.value
 	
@@ -5703,6 +6189,16 @@ class Packet:
 		data[37].state = PB_SERVICE_STATE.UNFILLED
 		__equipped_pet_info_response.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
 		data[38].state = PB_SERVICE_STATE.UNFILLED
+		__battle_packet.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
+		data[39].state = PB_SERVICE_STATE.UNFILLED
+		__battle_request.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
+		data[40].state = PB_SERVICE_STATE.UNFILLED
+		__battle_inviting_response.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
+		data[41].state = PB_SERVICE_STATE.UNFILLED
+		__battle_inviting.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
+		data[42].state = PB_SERVICE_STATE.UNFILLED
+		__start_battle.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
+		data[43].state = PB_SERVICE_STATE.UNFILLED
 		__pet_bag_request.value = PetBagRequestMessage.new()
 		return __pet_bag_request.value
 	
@@ -5790,6 +6286,16 @@ class Packet:
 		data[37].state = PB_SERVICE_STATE.UNFILLED
 		__equipped_pet_info_response.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
 		data[38].state = PB_SERVICE_STATE.UNFILLED
+		__battle_packet.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
+		data[39].state = PB_SERVICE_STATE.UNFILLED
+		__battle_request.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
+		data[40].state = PB_SERVICE_STATE.UNFILLED
+		__battle_inviting_response.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
+		data[41].state = PB_SERVICE_STATE.UNFILLED
+		__battle_inviting.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
+		data[42].state = PB_SERVICE_STATE.UNFILLED
+		__start_battle.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
+		data[43].state = PB_SERVICE_STATE.UNFILLED
 		__pet_bag_response.value = PetBagResponseMessage.new()
 		return __pet_bag_response.value
 	
@@ -5877,6 +6383,16 @@ class Packet:
 		data[37].state = PB_SERVICE_STATE.UNFILLED
 		__equipped_pet_info_response.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
 		data[38].state = PB_SERVICE_STATE.UNFILLED
+		__battle_packet.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
+		data[39].state = PB_SERVICE_STATE.UNFILLED
+		__battle_request.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
+		data[40].state = PB_SERVICE_STATE.UNFILLED
+		__battle_inviting_response.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
+		data[41].state = PB_SERVICE_STATE.UNFILLED
+		__battle_inviting.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
+		data[42].state = PB_SERVICE_STATE.UNFILLED
+		__start_battle.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
+		data[43].state = PB_SERVICE_STATE.UNFILLED
 		__save_pet.value = SavePetMessage.new()
 		return __save_pet.value
 	
@@ -5964,6 +6480,16 @@ class Packet:
 		data[37].state = PB_SERVICE_STATE.UNFILLED
 		__equipped_pet_info_response.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
 		data[38].state = PB_SERVICE_STATE.UNFILLED
+		__battle_packet.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
+		data[39].state = PB_SERVICE_STATE.UNFILLED
+		__battle_request.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
+		data[40].state = PB_SERVICE_STATE.UNFILLED
+		__battle_inviting_response.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
+		data[41].state = PB_SERVICE_STATE.UNFILLED
+		__battle_inviting.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
+		data[42].state = PB_SERVICE_STATE.UNFILLED
+		__start_battle.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
+		data[43].state = PB_SERVICE_STATE.UNFILLED
 		__learn_skill_request.value = LearnSkillRequestMessage.new()
 		return __learn_skill_request.value
 	
@@ -6051,6 +6577,16 @@ class Packet:
 		data[37].state = PB_SERVICE_STATE.UNFILLED
 		__equipped_pet_info_response.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
 		data[38].state = PB_SERVICE_STATE.UNFILLED
+		__battle_packet.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
+		data[39].state = PB_SERVICE_STATE.UNFILLED
+		__battle_request.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
+		data[40].state = PB_SERVICE_STATE.UNFILLED
+		__battle_inviting_response.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
+		data[41].state = PB_SERVICE_STATE.UNFILLED
+		__battle_inviting.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
+		data[42].state = PB_SERVICE_STATE.UNFILLED
+		__start_battle.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
+		data[43].state = PB_SERVICE_STATE.UNFILLED
 		__learn_skill_response.value = LearnSkillResponseMessage.new()
 		return __learn_skill_response.value
 	
@@ -6138,6 +6674,16 @@ class Packet:
 		data[37].state = PB_SERVICE_STATE.UNFILLED
 		__equipped_pet_info_response.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
 		data[38].state = PB_SERVICE_STATE.UNFILLED
+		__battle_packet.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
+		data[39].state = PB_SERVICE_STATE.UNFILLED
+		__battle_request.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
+		data[40].state = PB_SERVICE_STATE.UNFILLED
+		__battle_inviting_response.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
+		data[41].state = PB_SERVICE_STATE.UNFILLED
+		__battle_inviting.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
+		data[42].state = PB_SERVICE_STATE.UNFILLED
+		__start_battle.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
+		data[43].state = PB_SERVICE_STATE.UNFILLED
 		__add_pet_item.value = AddPetItemMessage.new()
 		return __add_pet_item.value
 	
@@ -6225,6 +6771,16 @@ class Packet:
 		data[37].state = PB_SERVICE_STATE.UNFILLED
 		__equipped_pet_info_response.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
 		data[38].state = PB_SERVICE_STATE.UNFILLED
+		__battle_packet.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
+		data[39].state = PB_SERVICE_STATE.UNFILLED
+		__battle_request.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
+		data[40].state = PB_SERVICE_STATE.UNFILLED
+		__battle_inviting_response.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
+		data[41].state = PB_SERVICE_STATE.UNFILLED
+		__battle_inviting.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
+		data[42].state = PB_SERVICE_STATE.UNFILLED
+		__start_battle.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
+		data[43].state = PB_SERVICE_STATE.UNFILLED
 		__delete_pet_item.value = DeletePetItemMessage.new()
 		return __delete_pet_item.value
 	
@@ -6312,6 +6868,16 @@ class Packet:
 		data[37].state = PB_SERVICE_STATE.UNFILLED
 		__equipped_pet_info_response.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
 		data[38].state = PB_SERVICE_STATE.UNFILLED
+		__battle_packet.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
+		data[39].state = PB_SERVICE_STATE.UNFILLED
+		__battle_request.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
+		data[40].state = PB_SERVICE_STATE.UNFILLED
+		__battle_inviting_response.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
+		data[41].state = PB_SERVICE_STATE.UNFILLED
+		__battle_inviting.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
+		data[42].state = PB_SERVICE_STATE.UNFILLED
+		__start_battle.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
+		data[43].state = PB_SERVICE_STATE.UNFILLED
 		__pet_item_bag_request.value = PetItemBagRequestMessage.new()
 		return __pet_item_bag_request.value
 	
@@ -6399,6 +6965,16 @@ class Packet:
 		data[37].state = PB_SERVICE_STATE.UNFILLED
 		__equipped_pet_info_response.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
 		data[38].state = PB_SERVICE_STATE.UNFILLED
+		__battle_packet.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
+		data[39].state = PB_SERVICE_STATE.UNFILLED
+		__battle_request.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
+		data[40].state = PB_SERVICE_STATE.UNFILLED
+		__battle_inviting_response.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
+		data[41].state = PB_SERVICE_STATE.UNFILLED
+		__battle_inviting.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
+		data[42].state = PB_SERVICE_STATE.UNFILLED
+		__start_battle.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
+		data[43].state = PB_SERVICE_STATE.UNFILLED
 		__use_pet_item_request.value = UsePetItemRequestMessage.new()
 		return __use_pet_item_request.value
 	
@@ -6486,6 +7062,16 @@ class Packet:
 		data[37].state = PB_SERVICE_STATE.UNFILLED
 		__equipped_pet_info_response.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
 		data[38].state = PB_SERVICE_STATE.UNFILLED
+		__battle_packet.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
+		data[39].state = PB_SERVICE_STATE.UNFILLED
+		__battle_request.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
+		data[40].state = PB_SERVICE_STATE.UNFILLED
+		__battle_inviting_response.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
+		data[41].state = PB_SERVICE_STATE.UNFILLED
+		__battle_inviting.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
+		data[42].state = PB_SERVICE_STATE.UNFILLED
+		__start_battle.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
+		data[43].state = PB_SERVICE_STATE.UNFILLED
 		__use_pet_item_response.value = UsePetItemResponseMessage.new()
 		return __use_pet_item_response.value
 	
@@ -6573,6 +7159,16 @@ class Packet:
 		data[37].state = PB_SERVICE_STATE.UNFILLED
 		__equipped_pet_info_response.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
 		data[38].state = PB_SERVICE_STATE.UNFILLED
+		__battle_packet.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
+		data[39].state = PB_SERVICE_STATE.UNFILLED
+		__battle_request.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
+		data[40].state = PB_SERVICE_STATE.UNFILLED
+		__battle_inviting_response.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
+		data[41].state = PB_SERVICE_STATE.UNFILLED
+		__battle_inviting.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
+		data[42].state = PB_SERVICE_STATE.UNFILLED
+		__start_battle.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
+		data[43].state = PB_SERVICE_STATE.UNFILLED
 		__pet_item_bag_response.value = PetItemBagResponseMessage.new()
 		return __pet_item_bag_response.value
 	
@@ -6660,6 +7256,16 @@ class Packet:
 		data[37].state = PB_SERVICE_STATE.FILLED
 		__equipped_pet_info_response.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
 		data[38].state = PB_SERVICE_STATE.UNFILLED
+		__battle_packet.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
+		data[39].state = PB_SERVICE_STATE.UNFILLED
+		__battle_request.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
+		data[40].state = PB_SERVICE_STATE.UNFILLED
+		__battle_inviting_response.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
+		data[41].state = PB_SERVICE_STATE.UNFILLED
+		__battle_inviting.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
+		data[42].state = PB_SERVICE_STATE.UNFILLED
+		__start_battle.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
+		data[43].state = PB_SERVICE_STATE.UNFILLED
 		__equipped_pet_info_request.value = EquippedPetInfoRequestMessage.new()
 		return __equipped_pet_info_request.value
 	
@@ -6747,8 +7353,503 @@ class Packet:
 		__equipped_pet_info_request.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
 		data[37].state = PB_SERVICE_STATE.UNFILLED
 		data[38].state = PB_SERVICE_STATE.FILLED
+		__battle_packet.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
+		data[39].state = PB_SERVICE_STATE.UNFILLED
+		__battle_request.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
+		data[40].state = PB_SERVICE_STATE.UNFILLED
+		__battle_inviting_response.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
+		data[41].state = PB_SERVICE_STATE.UNFILLED
+		__battle_inviting.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
+		data[42].state = PB_SERVICE_STATE.UNFILLED
+		__start_battle.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
+		data[43].state = PB_SERVICE_STATE.UNFILLED
 		__equipped_pet_info_response.value = EquippedPetInfoResponseMessage.new()
 		return __equipped_pet_info_response.value
+	
+	var __battle_packet: PBField
+	func has_battle_packet() -> bool:
+		if __battle_packet.value != null:
+			return true
+		return false
+	func get_battle_packet() -> BattlePacket:
+		return __battle_packet.value
+	func clear_battle_packet() -> void:
+		data[39].state = PB_SERVICE_STATE.UNFILLED
+		__battle_packet.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
+	func new_battle_packet() -> BattlePacket:
+		__login_request.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
+		data[2].state = PB_SERVICE_STATE.UNFILLED
+		__register_request.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
+		data[3].state = PB_SERVICE_STATE.UNFILLED
+		__ok_response.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
+		data[4].state = PB_SERVICE_STATE.UNFILLED
+		__deny_response.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
+		data[5].state = PB_SERVICE_STATE.UNFILLED
+		__login_success.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
+		data[6].state = PB_SERVICE_STATE.UNFILLED
+		__player_enter.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
+		data[7].state = PB_SERVICE_STATE.UNFILLED
+		__player_leave.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
+		data[8].state = PB_SERVICE_STATE.UNFILLED
+		__player_movement.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
+		data[9].state = PB_SERVICE_STATE.UNFILLED
+		__player_enter_request.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
+		data[10].state = PB_SERVICE_STATE.UNFILLED
+		__chat.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
+		data[11].state = PB_SERVICE_STATE.UNFILLED
+		__player_enter_area_response.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
+		data[12].state = PB_SERVICE_STATE.UNFILLED
+		__mail.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
+		data[13].state = PB_SERVICE_STATE.UNFILLED
+		__mail_request.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
+		data[14].state = PB_SERVICE_STATE.UNFILLED
+		__mail_collect.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
+		data[15].state = PB_SERVICE_STATE.UNFILLED
+		__mail_delete.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
+		data[16].state = PB_SERVICE_STATE.UNFILLED
+		__mail_collect_response.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
+		data[17].state = PB_SERVICE_STATE.UNFILLED
+		__bag_request.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
+		data[18].state = PB_SERVICE_STATE.UNFILLED
+		__bag.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
+		data[19].state = PB_SERVICE_STATE.UNFILLED
+		__add_bag_item.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
+		data[20].state = PB_SERVICE_STATE.UNFILLED
+		__delete_bag_item.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
+		data[21].state = PB_SERVICE_STATE.UNFILLED
+		__use_bag_item_request.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
+		data[22].state = PB_SERVICE_STATE.UNFILLED
+		__use_bag_item_response.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
+		data[23].state = PB_SERVICE_STATE.UNFILLED
+		__ui_packet.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
+		data[24].state = PB_SERVICE_STATE.UNFILLED
+		__get_pet.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
+		data[25].state = PB_SERVICE_STATE.UNFILLED
+		__pet_bag_request.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
+		data[26].state = PB_SERVICE_STATE.UNFILLED
+		__pet_bag_response.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
+		data[27].state = PB_SERVICE_STATE.UNFILLED
+		__save_pet.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
+		data[28].state = PB_SERVICE_STATE.UNFILLED
+		__learn_skill_request.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
+		data[29].state = PB_SERVICE_STATE.UNFILLED
+		__learn_skill_response.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
+		data[30].state = PB_SERVICE_STATE.UNFILLED
+		__add_pet_item.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
+		data[31].state = PB_SERVICE_STATE.UNFILLED
+		__delete_pet_item.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
+		data[32].state = PB_SERVICE_STATE.UNFILLED
+		__pet_item_bag_request.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
+		data[33].state = PB_SERVICE_STATE.UNFILLED
+		__use_pet_item_request.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
+		data[34].state = PB_SERVICE_STATE.UNFILLED
+		__use_pet_item_response.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
+		data[35].state = PB_SERVICE_STATE.UNFILLED
+		__pet_item_bag_response.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
+		data[36].state = PB_SERVICE_STATE.UNFILLED
+		__equipped_pet_info_request.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
+		data[37].state = PB_SERVICE_STATE.UNFILLED
+		__equipped_pet_info_response.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
+		data[38].state = PB_SERVICE_STATE.UNFILLED
+		data[39].state = PB_SERVICE_STATE.FILLED
+		__battle_request.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
+		data[40].state = PB_SERVICE_STATE.UNFILLED
+		__battle_inviting_response.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
+		data[41].state = PB_SERVICE_STATE.UNFILLED
+		__battle_inviting.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
+		data[42].state = PB_SERVICE_STATE.UNFILLED
+		__start_battle.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
+		data[43].state = PB_SERVICE_STATE.UNFILLED
+		__battle_packet.value = BattlePacket.new()
+		return __battle_packet.value
+	
+	var __battle_request: PBField
+	func has_battle_request() -> bool:
+		if __battle_request.value != null:
+			return true
+		return false
+	func get_battle_request() -> BattleRequestMessage:
+		return __battle_request.value
+	func clear_battle_request() -> void:
+		data[40].state = PB_SERVICE_STATE.UNFILLED
+		__battle_request.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
+	func new_battle_request() -> BattleRequestMessage:
+		__login_request.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
+		data[2].state = PB_SERVICE_STATE.UNFILLED
+		__register_request.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
+		data[3].state = PB_SERVICE_STATE.UNFILLED
+		__ok_response.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
+		data[4].state = PB_SERVICE_STATE.UNFILLED
+		__deny_response.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
+		data[5].state = PB_SERVICE_STATE.UNFILLED
+		__login_success.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
+		data[6].state = PB_SERVICE_STATE.UNFILLED
+		__player_enter.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
+		data[7].state = PB_SERVICE_STATE.UNFILLED
+		__player_leave.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
+		data[8].state = PB_SERVICE_STATE.UNFILLED
+		__player_movement.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
+		data[9].state = PB_SERVICE_STATE.UNFILLED
+		__player_enter_request.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
+		data[10].state = PB_SERVICE_STATE.UNFILLED
+		__chat.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
+		data[11].state = PB_SERVICE_STATE.UNFILLED
+		__player_enter_area_response.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
+		data[12].state = PB_SERVICE_STATE.UNFILLED
+		__mail.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
+		data[13].state = PB_SERVICE_STATE.UNFILLED
+		__mail_request.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
+		data[14].state = PB_SERVICE_STATE.UNFILLED
+		__mail_collect.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
+		data[15].state = PB_SERVICE_STATE.UNFILLED
+		__mail_delete.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
+		data[16].state = PB_SERVICE_STATE.UNFILLED
+		__mail_collect_response.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
+		data[17].state = PB_SERVICE_STATE.UNFILLED
+		__bag_request.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
+		data[18].state = PB_SERVICE_STATE.UNFILLED
+		__bag.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
+		data[19].state = PB_SERVICE_STATE.UNFILLED
+		__add_bag_item.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
+		data[20].state = PB_SERVICE_STATE.UNFILLED
+		__delete_bag_item.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
+		data[21].state = PB_SERVICE_STATE.UNFILLED
+		__use_bag_item_request.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
+		data[22].state = PB_SERVICE_STATE.UNFILLED
+		__use_bag_item_response.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
+		data[23].state = PB_SERVICE_STATE.UNFILLED
+		__ui_packet.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
+		data[24].state = PB_SERVICE_STATE.UNFILLED
+		__get_pet.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
+		data[25].state = PB_SERVICE_STATE.UNFILLED
+		__pet_bag_request.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
+		data[26].state = PB_SERVICE_STATE.UNFILLED
+		__pet_bag_response.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
+		data[27].state = PB_SERVICE_STATE.UNFILLED
+		__save_pet.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
+		data[28].state = PB_SERVICE_STATE.UNFILLED
+		__learn_skill_request.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
+		data[29].state = PB_SERVICE_STATE.UNFILLED
+		__learn_skill_response.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
+		data[30].state = PB_SERVICE_STATE.UNFILLED
+		__add_pet_item.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
+		data[31].state = PB_SERVICE_STATE.UNFILLED
+		__delete_pet_item.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
+		data[32].state = PB_SERVICE_STATE.UNFILLED
+		__pet_item_bag_request.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
+		data[33].state = PB_SERVICE_STATE.UNFILLED
+		__use_pet_item_request.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
+		data[34].state = PB_SERVICE_STATE.UNFILLED
+		__use_pet_item_response.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
+		data[35].state = PB_SERVICE_STATE.UNFILLED
+		__pet_item_bag_response.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
+		data[36].state = PB_SERVICE_STATE.UNFILLED
+		__equipped_pet_info_request.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
+		data[37].state = PB_SERVICE_STATE.UNFILLED
+		__equipped_pet_info_response.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
+		data[38].state = PB_SERVICE_STATE.UNFILLED
+		__battle_packet.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
+		data[39].state = PB_SERVICE_STATE.UNFILLED
+		data[40].state = PB_SERVICE_STATE.FILLED
+		__battle_inviting_response.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
+		data[41].state = PB_SERVICE_STATE.UNFILLED
+		__battle_inviting.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
+		data[42].state = PB_SERVICE_STATE.UNFILLED
+		__start_battle.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
+		data[43].state = PB_SERVICE_STATE.UNFILLED
+		__battle_request.value = BattleRequestMessage.new()
+		return __battle_request.value
+	
+	var __battle_inviting_response: PBField
+	func has_battle_inviting_response() -> bool:
+		if __battle_inviting_response.value != null:
+			return true
+		return false
+	func get_battle_inviting_response() -> BattleInvitingResponseMessage:
+		return __battle_inviting_response.value
+	func clear_battle_inviting_response() -> void:
+		data[41].state = PB_SERVICE_STATE.UNFILLED
+		__battle_inviting_response.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
+	func new_battle_inviting_response() -> BattleInvitingResponseMessage:
+		__login_request.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
+		data[2].state = PB_SERVICE_STATE.UNFILLED
+		__register_request.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
+		data[3].state = PB_SERVICE_STATE.UNFILLED
+		__ok_response.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
+		data[4].state = PB_SERVICE_STATE.UNFILLED
+		__deny_response.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
+		data[5].state = PB_SERVICE_STATE.UNFILLED
+		__login_success.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
+		data[6].state = PB_SERVICE_STATE.UNFILLED
+		__player_enter.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
+		data[7].state = PB_SERVICE_STATE.UNFILLED
+		__player_leave.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
+		data[8].state = PB_SERVICE_STATE.UNFILLED
+		__player_movement.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
+		data[9].state = PB_SERVICE_STATE.UNFILLED
+		__player_enter_request.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
+		data[10].state = PB_SERVICE_STATE.UNFILLED
+		__chat.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
+		data[11].state = PB_SERVICE_STATE.UNFILLED
+		__player_enter_area_response.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
+		data[12].state = PB_SERVICE_STATE.UNFILLED
+		__mail.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
+		data[13].state = PB_SERVICE_STATE.UNFILLED
+		__mail_request.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
+		data[14].state = PB_SERVICE_STATE.UNFILLED
+		__mail_collect.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
+		data[15].state = PB_SERVICE_STATE.UNFILLED
+		__mail_delete.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
+		data[16].state = PB_SERVICE_STATE.UNFILLED
+		__mail_collect_response.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
+		data[17].state = PB_SERVICE_STATE.UNFILLED
+		__bag_request.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
+		data[18].state = PB_SERVICE_STATE.UNFILLED
+		__bag.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
+		data[19].state = PB_SERVICE_STATE.UNFILLED
+		__add_bag_item.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
+		data[20].state = PB_SERVICE_STATE.UNFILLED
+		__delete_bag_item.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
+		data[21].state = PB_SERVICE_STATE.UNFILLED
+		__use_bag_item_request.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
+		data[22].state = PB_SERVICE_STATE.UNFILLED
+		__use_bag_item_response.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
+		data[23].state = PB_SERVICE_STATE.UNFILLED
+		__ui_packet.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
+		data[24].state = PB_SERVICE_STATE.UNFILLED
+		__get_pet.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
+		data[25].state = PB_SERVICE_STATE.UNFILLED
+		__pet_bag_request.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
+		data[26].state = PB_SERVICE_STATE.UNFILLED
+		__pet_bag_response.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
+		data[27].state = PB_SERVICE_STATE.UNFILLED
+		__save_pet.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
+		data[28].state = PB_SERVICE_STATE.UNFILLED
+		__learn_skill_request.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
+		data[29].state = PB_SERVICE_STATE.UNFILLED
+		__learn_skill_response.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
+		data[30].state = PB_SERVICE_STATE.UNFILLED
+		__add_pet_item.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
+		data[31].state = PB_SERVICE_STATE.UNFILLED
+		__delete_pet_item.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
+		data[32].state = PB_SERVICE_STATE.UNFILLED
+		__pet_item_bag_request.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
+		data[33].state = PB_SERVICE_STATE.UNFILLED
+		__use_pet_item_request.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
+		data[34].state = PB_SERVICE_STATE.UNFILLED
+		__use_pet_item_response.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
+		data[35].state = PB_SERVICE_STATE.UNFILLED
+		__pet_item_bag_response.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
+		data[36].state = PB_SERVICE_STATE.UNFILLED
+		__equipped_pet_info_request.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
+		data[37].state = PB_SERVICE_STATE.UNFILLED
+		__equipped_pet_info_response.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
+		data[38].state = PB_SERVICE_STATE.UNFILLED
+		__battle_packet.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
+		data[39].state = PB_SERVICE_STATE.UNFILLED
+		__battle_request.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
+		data[40].state = PB_SERVICE_STATE.UNFILLED
+		data[41].state = PB_SERVICE_STATE.FILLED
+		__battle_inviting.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
+		data[42].state = PB_SERVICE_STATE.UNFILLED
+		__start_battle.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
+		data[43].state = PB_SERVICE_STATE.UNFILLED
+		__battle_inviting_response.value = BattleInvitingResponseMessage.new()
+		return __battle_inviting_response.value
+	
+	var __battle_inviting: PBField
+	func has_battle_inviting() -> bool:
+		if __battle_inviting.value != null:
+			return true
+		return false
+	func get_battle_inviting() -> BattleInvitingMessage:
+		return __battle_inviting.value
+	func clear_battle_inviting() -> void:
+		data[42].state = PB_SERVICE_STATE.UNFILLED
+		__battle_inviting.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
+	func new_battle_inviting() -> BattleInvitingMessage:
+		__login_request.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
+		data[2].state = PB_SERVICE_STATE.UNFILLED
+		__register_request.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
+		data[3].state = PB_SERVICE_STATE.UNFILLED
+		__ok_response.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
+		data[4].state = PB_SERVICE_STATE.UNFILLED
+		__deny_response.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
+		data[5].state = PB_SERVICE_STATE.UNFILLED
+		__login_success.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
+		data[6].state = PB_SERVICE_STATE.UNFILLED
+		__player_enter.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
+		data[7].state = PB_SERVICE_STATE.UNFILLED
+		__player_leave.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
+		data[8].state = PB_SERVICE_STATE.UNFILLED
+		__player_movement.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
+		data[9].state = PB_SERVICE_STATE.UNFILLED
+		__player_enter_request.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
+		data[10].state = PB_SERVICE_STATE.UNFILLED
+		__chat.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
+		data[11].state = PB_SERVICE_STATE.UNFILLED
+		__player_enter_area_response.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
+		data[12].state = PB_SERVICE_STATE.UNFILLED
+		__mail.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
+		data[13].state = PB_SERVICE_STATE.UNFILLED
+		__mail_request.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
+		data[14].state = PB_SERVICE_STATE.UNFILLED
+		__mail_collect.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
+		data[15].state = PB_SERVICE_STATE.UNFILLED
+		__mail_delete.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
+		data[16].state = PB_SERVICE_STATE.UNFILLED
+		__mail_collect_response.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
+		data[17].state = PB_SERVICE_STATE.UNFILLED
+		__bag_request.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
+		data[18].state = PB_SERVICE_STATE.UNFILLED
+		__bag.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
+		data[19].state = PB_SERVICE_STATE.UNFILLED
+		__add_bag_item.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
+		data[20].state = PB_SERVICE_STATE.UNFILLED
+		__delete_bag_item.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
+		data[21].state = PB_SERVICE_STATE.UNFILLED
+		__use_bag_item_request.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
+		data[22].state = PB_SERVICE_STATE.UNFILLED
+		__use_bag_item_response.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
+		data[23].state = PB_SERVICE_STATE.UNFILLED
+		__ui_packet.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
+		data[24].state = PB_SERVICE_STATE.UNFILLED
+		__get_pet.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
+		data[25].state = PB_SERVICE_STATE.UNFILLED
+		__pet_bag_request.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
+		data[26].state = PB_SERVICE_STATE.UNFILLED
+		__pet_bag_response.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
+		data[27].state = PB_SERVICE_STATE.UNFILLED
+		__save_pet.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
+		data[28].state = PB_SERVICE_STATE.UNFILLED
+		__learn_skill_request.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
+		data[29].state = PB_SERVICE_STATE.UNFILLED
+		__learn_skill_response.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
+		data[30].state = PB_SERVICE_STATE.UNFILLED
+		__add_pet_item.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
+		data[31].state = PB_SERVICE_STATE.UNFILLED
+		__delete_pet_item.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
+		data[32].state = PB_SERVICE_STATE.UNFILLED
+		__pet_item_bag_request.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
+		data[33].state = PB_SERVICE_STATE.UNFILLED
+		__use_pet_item_request.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
+		data[34].state = PB_SERVICE_STATE.UNFILLED
+		__use_pet_item_response.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
+		data[35].state = PB_SERVICE_STATE.UNFILLED
+		__pet_item_bag_response.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
+		data[36].state = PB_SERVICE_STATE.UNFILLED
+		__equipped_pet_info_request.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
+		data[37].state = PB_SERVICE_STATE.UNFILLED
+		__equipped_pet_info_response.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
+		data[38].state = PB_SERVICE_STATE.UNFILLED
+		__battle_packet.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
+		data[39].state = PB_SERVICE_STATE.UNFILLED
+		__battle_request.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
+		data[40].state = PB_SERVICE_STATE.UNFILLED
+		__battle_inviting_response.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
+		data[41].state = PB_SERVICE_STATE.UNFILLED
+		data[42].state = PB_SERVICE_STATE.FILLED
+		__start_battle.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
+		data[43].state = PB_SERVICE_STATE.UNFILLED
+		__battle_inviting.value = BattleInvitingMessage.new()
+		return __battle_inviting.value
+	
+	var __start_battle: PBField
+	func has_start_battle() -> bool:
+		if __start_battle.value != null:
+			return true
+		return false
+	func get_start_battle() -> StartBattleMessage:
+		return __start_battle.value
+	func clear_start_battle() -> void:
+		data[43].state = PB_SERVICE_STATE.UNFILLED
+		__start_battle.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
+	func new_start_battle() -> StartBattleMessage:
+		__login_request.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
+		data[2].state = PB_SERVICE_STATE.UNFILLED
+		__register_request.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
+		data[3].state = PB_SERVICE_STATE.UNFILLED
+		__ok_response.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
+		data[4].state = PB_SERVICE_STATE.UNFILLED
+		__deny_response.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
+		data[5].state = PB_SERVICE_STATE.UNFILLED
+		__login_success.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
+		data[6].state = PB_SERVICE_STATE.UNFILLED
+		__player_enter.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
+		data[7].state = PB_SERVICE_STATE.UNFILLED
+		__player_leave.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
+		data[8].state = PB_SERVICE_STATE.UNFILLED
+		__player_movement.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
+		data[9].state = PB_SERVICE_STATE.UNFILLED
+		__player_enter_request.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
+		data[10].state = PB_SERVICE_STATE.UNFILLED
+		__chat.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
+		data[11].state = PB_SERVICE_STATE.UNFILLED
+		__player_enter_area_response.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
+		data[12].state = PB_SERVICE_STATE.UNFILLED
+		__mail.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
+		data[13].state = PB_SERVICE_STATE.UNFILLED
+		__mail_request.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
+		data[14].state = PB_SERVICE_STATE.UNFILLED
+		__mail_collect.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
+		data[15].state = PB_SERVICE_STATE.UNFILLED
+		__mail_delete.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
+		data[16].state = PB_SERVICE_STATE.UNFILLED
+		__mail_collect_response.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
+		data[17].state = PB_SERVICE_STATE.UNFILLED
+		__bag_request.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
+		data[18].state = PB_SERVICE_STATE.UNFILLED
+		__bag.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
+		data[19].state = PB_SERVICE_STATE.UNFILLED
+		__add_bag_item.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
+		data[20].state = PB_SERVICE_STATE.UNFILLED
+		__delete_bag_item.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
+		data[21].state = PB_SERVICE_STATE.UNFILLED
+		__use_bag_item_request.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
+		data[22].state = PB_SERVICE_STATE.UNFILLED
+		__use_bag_item_response.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
+		data[23].state = PB_SERVICE_STATE.UNFILLED
+		__ui_packet.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
+		data[24].state = PB_SERVICE_STATE.UNFILLED
+		__get_pet.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
+		data[25].state = PB_SERVICE_STATE.UNFILLED
+		__pet_bag_request.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
+		data[26].state = PB_SERVICE_STATE.UNFILLED
+		__pet_bag_response.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
+		data[27].state = PB_SERVICE_STATE.UNFILLED
+		__save_pet.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
+		data[28].state = PB_SERVICE_STATE.UNFILLED
+		__learn_skill_request.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
+		data[29].state = PB_SERVICE_STATE.UNFILLED
+		__learn_skill_response.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
+		data[30].state = PB_SERVICE_STATE.UNFILLED
+		__add_pet_item.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
+		data[31].state = PB_SERVICE_STATE.UNFILLED
+		__delete_pet_item.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
+		data[32].state = PB_SERVICE_STATE.UNFILLED
+		__pet_item_bag_request.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
+		data[33].state = PB_SERVICE_STATE.UNFILLED
+		__use_pet_item_request.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
+		data[34].state = PB_SERVICE_STATE.UNFILLED
+		__use_pet_item_response.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
+		data[35].state = PB_SERVICE_STATE.UNFILLED
+		__pet_item_bag_response.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
+		data[36].state = PB_SERVICE_STATE.UNFILLED
+		__equipped_pet_info_request.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
+		data[37].state = PB_SERVICE_STATE.UNFILLED
+		__equipped_pet_info_response.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
+		data[38].state = PB_SERVICE_STATE.UNFILLED
+		__battle_packet.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
+		data[39].state = PB_SERVICE_STATE.UNFILLED
+		__battle_request.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
+		data[40].state = PB_SERVICE_STATE.UNFILLED
+		__battle_inviting_response.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
+		data[41].state = PB_SERVICE_STATE.UNFILLED
+		__battle_inviting.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
+		data[42].state = PB_SERVICE_STATE.UNFILLED
+		data[43].state = PB_SERVICE_STATE.FILLED
+		__start_battle.value = StartBattleMessage.new()
+		return __start_battle.value
 	
 	func _to_string() -> String:
 		return PBPacker.message_to_string(data)
@@ -6912,6 +8013,1107 @@ class InitialPetRequestMessage:
 		__request_id.value = DEFAULT_VALUES_3[PB_DATA_TYPE.UINT32]
 	func set_request_id(value : int) -> void:
 		__request_id.value = value
+	
+	func _to_string() -> String:
+		return PBPacker.message_to_string(data)
+		
+	func to_bytes() -> PackedByteArray:
+		return PBPacker.pack_message(data)
+		
+	func from_bytes(bytes : PackedByteArray, offset : int = 0, limit : int = -1) -> int:
+		var cur_limit = bytes.size()
+		if limit != -1:
+			cur_limit = limit
+		var result = PBPacker.unpack_message(data, bytes, offset, cur_limit)
+		if result == cur_limit:
+			if PBPacker.check_required(data):
+				if limit == -1:
+					return PB_ERR.NO_ERRORS
+			else:
+				return PB_ERR.REQUIRED_FIELDS
+		elif limit == -1 && result > 0:
+			return PB_ERR.PARSE_INCOMPLETE
+		return result
+	
+class BattlePacket:
+	func _init():
+		var service
+		
+		__command = PBField.new("command", PB_DATA_TYPE.MESSAGE, PB_RULE.OPTIONAL, 1, true, DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE])
+		service = PBServiceField.new()
+		service.field = __command
+		service.func_ref = Callable(self, "new_command")
+		data[__command.tag] = service
+		
+		__attack_stats = PBField.new("attack_stats", PB_DATA_TYPE.MESSAGE, PB_RULE.OPTIONAL, 2, true, DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE])
+		service = PBServiceField.new()
+		service.field = __attack_stats
+		service.func_ref = Callable(self, "new_attack_stats")
+		data[__attack_stats.tag] = service
+		
+		__deny_command = PBField.new("deny_command", PB_DATA_TYPE.MESSAGE, PB_RULE.OPTIONAL, 3, true, DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE])
+		service = PBServiceField.new()
+		service.field = __deny_command
+		service.func_ref = Callable(self, "new_deny_command")
+		data[__deny_command.tag] = service
+		
+		__start_next_round = PBField.new("start_next_round", PB_DATA_TYPE.MESSAGE, PB_RULE.OPTIONAL, 4, true, DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE])
+		service = PBServiceField.new()
+		service.field = __start_next_round
+		service.func_ref = Callable(self, "new_start_next_round")
+		data[__start_next_round.tag] = service
+		
+		__battle_end = PBField.new("battle_end", PB_DATA_TYPE.MESSAGE, PB_RULE.OPTIONAL, 5, true, DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE])
+		service = PBServiceField.new()
+		service.field = __battle_end
+		service.func_ref = Callable(self, "new_battle_end")
+		data[__battle_end.tag] = service
+		
+		__round_confirm = PBField.new("round_confirm", PB_DATA_TYPE.MESSAGE, PB_RULE.OPTIONAL, 6, true, DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE])
+		service = PBServiceField.new()
+		service.field = __round_confirm
+		service.func_ref = Callable(self, "new_round_confirm")
+		data[__round_confirm.tag] = service
+		
+		__change_pet = PBField.new("change_pet", PB_DATA_TYPE.MESSAGE, PB_RULE.OPTIONAL, 7, true, DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE])
+		service = PBServiceField.new()
+		service.field = __change_pet
+		service.func_ref = Callable(self, "new_change_pet")
+		data[__change_pet.tag] = service
+		
+		__change_pet_request = PBField.new("change_pet_request", PB_DATA_TYPE.MESSAGE, PB_RULE.OPTIONAL, 8, true, DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE])
+		service = PBServiceField.new()
+		service.field = __change_pet_request
+		service.func_ref = Callable(self, "new_change_pet_request")
+		data[__change_pet_request.tag] = service
+		
+		__sync_battle_information = PBField.new("sync_battle_information", PB_DATA_TYPE.MESSAGE, PB_RULE.OPTIONAL, 9, true, DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE])
+		service = PBServiceField.new()
+		service.field = __sync_battle_information
+		service.func_ref = Callable(self, "new_sync_battle_information")
+		data[__sync_battle_information.tag] = service
+		
+	var data = {}
+	
+	var __command: PBField
+	func has_command() -> bool:
+		if __command.value != null:
+			return true
+		return false
+	func get_command() -> RoundCommandMessage:
+		return __command.value
+	func clear_command() -> void:
+		data[1].state = PB_SERVICE_STATE.UNFILLED
+		__command.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
+	func new_command() -> RoundCommandMessage:
+		data[1].state = PB_SERVICE_STATE.FILLED
+		__attack_stats.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
+		data[2].state = PB_SERVICE_STATE.UNFILLED
+		__deny_command.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
+		data[3].state = PB_SERVICE_STATE.UNFILLED
+		__start_next_round.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
+		data[4].state = PB_SERVICE_STATE.UNFILLED
+		__battle_end.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
+		data[5].state = PB_SERVICE_STATE.UNFILLED
+		__round_confirm.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
+		data[6].state = PB_SERVICE_STATE.UNFILLED
+		__change_pet.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
+		data[7].state = PB_SERVICE_STATE.UNFILLED
+		__change_pet_request.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
+		data[8].state = PB_SERVICE_STATE.UNFILLED
+		__sync_battle_information.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
+		data[9].state = PB_SERVICE_STATE.UNFILLED
+		__command.value = RoundCommandMessage.new()
+		return __command.value
+	
+	var __attack_stats: PBField
+	func has_attack_stats() -> bool:
+		if __attack_stats.value != null:
+			return true
+		return false
+	func get_attack_stats() -> AttackStatsMessage:
+		return __attack_stats.value
+	func clear_attack_stats() -> void:
+		data[2].state = PB_SERVICE_STATE.UNFILLED
+		__attack_stats.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
+	func new_attack_stats() -> AttackStatsMessage:
+		__command.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
+		data[1].state = PB_SERVICE_STATE.UNFILLED
+		data[2].state = PB_SERVICE_STATE.FILLED
+		__deny_command.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
+		data[3].state = PB_SERVICE_STATE.UNFILLED
+		__start_next_round.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
+		data[4].state = PB_SERVICE_STATE.UNFILLED
+		__battle_end.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
+		data[5].state = PB_SERVICE_STATE.UNFILLED
+		__round_confirm.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
+		data[6].state = PB_SERVICE_STATE.UNFILLED
+		__change_pet.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
+		data[7].state = PB_SERVICE_STATE.UNFILLED
+		__change_pet_request.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
+		data[8].state = PB_SERVICE_STATE.UNFILLED
+		__sync_battle_information.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
+		data[9].state = PB_SERVICE_STATE.UNFILLED
+		__attack_stats.value = AttackStatsMessage.new()
+		return __attack_stats.value
+	
+	var __deny_command: PBField
+	func has_deny_command() -> bool:
+		if __deny_command.value != null:
+			return true
+		return false
+	func get_deny_command() -> DenyCommandMessage:
+		return __deny_command.value
+	func clear_deny_command() -> void:
+		data[3].state = PB_SERVICE_STATE.UNFILLED
+		__deny_command.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
+	func new_deny_command() -> DenyCommandMessage:
+		__command.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
+		data[1].state = PB_SERVICE_STATE.UNFILLED
+		__attack_stats.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
+		data[2].state = PB_SERVICE_STATE.UNFILLED
+		data[3].state = PB_SERVICE_STATE.FILLED
+		__start_next_round.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
+		data[4].state = PB_SERVICE_STATE.UNFILLED
+		__battle_end.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
+		data[5].state = PB_SERVICE_STATE.UNFILLED
+		__round_confirm.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
+		data[6].state = PB_SERVICE_STATE.UNFILLED
+		__change_pet.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
+		data[7].state = PB_SERVICE_STATE.UNFILLED
+		__change_pet_request.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
+		data[8].state = PB_SERVICE_STATE.UNFILLED
+		__sync_battle_information.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
+		data[9].state = PB_SERVICE_STATE.UNFILLED
+		__deny_command.value = DenyCommandMessage.new()
+		return __deny_command.value
+	
+	var __start_next_round: PBField
+	func has_start_next_round() -> bool:
+		if __start_next_round.value != null:
+			return true
+		return false
+	func get_start_next_round() -> StartNextRoundMessage:
+		return __start_next_round.value
+	func clear_start_next_round() -> void:
+		data[4].state = PB_SERVICE_STATE.UNFILLED
+		__start_next_round.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
+	func new_start_next_round() -> StartNextRoundMessage:
+		__command.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
+		data[1].state = PB_SERVICE_STATE.UNFILLED
+		__attack_stats.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
+		data[2].state = PB_SERVICE_STATE.UNFILLED
+		__deny_command.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
+		data[3].state = PB_SERVICE_STATE.UNFILLED
+		data[4].state = PB_SERVICE_STATE.FILLED
+		__battle_end.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
+		data[5].state = PB_SERVICE_STATE.UNFILLED
+		__round_confirm.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
+		data[6].state = PB_SERVICE_STATE.UNFILLED
+		__change_pet.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
+		data[7].state = PB_SERVICE_STATE.UNFILLED
+		__change_pet_request.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
+		data[8].state = PB_SERVICE_STATE.UNFILLED
+		__sync_battle_information.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
+		data[9].state = PB_SERVICE_STATE.UNFILLED
+		__start_next_round.value = StartNextRoundMessage.new()
+		return __start_next_round.value
+	
+	var __battle_end: PBField
+	func has_battle_end() -> bool:
+		if __battle_end.value != null:
+			return true
+		return false
+	func get_battle_end() -> BattleEndMessage:
+		return __battle_end.value
+	func clear_battle_end() -> void:
+		data[5].state = PB_SERVICE_STATE.UNFILLED
+		__battle_end.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
+	func new_battle_end() -> BattleEndMessage:
+		__command.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
+		data[1].state = PB_SERVICE_STATE.UNFILLED
+		__attack_stats.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
+		data[2].state = PB_SERVICE_STATE.UNFILLED
+		__deny_command.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
+		data[3].state = PB_SERVICE_STATE.UNFILLED
+		__start_next_round.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
+		data[4].state = PB_SERVICE_STATE.UNFILLED
+		data[5].state = PB_SERVICE_STATE.FILLED
+		__round_confirm.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
+		data[6].state = PB_SERVICE_STATE.UNFILLED
+		__change_pet.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
+		data[7].state = PB_SERVICE_STATE.UNFILLED
+		__change_pet_request.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
+		data[8].state = PB_SERVICE_STATE.UNFILLED
+		__sync_battle_information.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
+		data[9].state = PB_SERVICE_STATE.UNFILLED
+		__battle_end.value = BattleEndMessage.new()
+		return __battle_end.value
+	
+	var __round_confirm: PBField
+	func has_round_confirm() -> bool:
+		if __round_confirm.value != null:
+			return true
+		return false
+	func get_round_confirm() -> RoundConfirmMessage:
+		return __round_confirm.value
+	func clear_round_confirm() -> void:
+		data[6].state = PB_SERVICE_STATE.UNFILLED
+		__round_confirm.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
+	func new_round_confirm() -> RoundConfirmMessage:
+		__command.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
+		data[1].state = PB_SERVICE_STATE.UNFILLED
+		__attack_stats.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
+		data[2].state = PB_SERVICE_STATE.UNFILLED
+		__deny_command.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
+		data[3].state = PB_SERVICE_STATE.UNFILLED
+		__start_next_round.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
+		data[4].state = PB_SERVICE_STATE.UNFILLED
+		__battle_end.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
+		data[5].state = PB_SERVICE_STATE.UNFILLED
+		data[6].state = PB_SERVICE_STATE.FILLED
+		__change_pet.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
+		data[7].state = PB_SERVICE_STATE.UNFILLED
+		__change_pet_request.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
+		data[8].state = PB_SERVICE_STATE.UNFILLED
+		__sync_battle_information.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
+		data[9].state = PB_SERVICE_STATE.UNFILLED
+		__round_confirm.value = RoundConfirmMessage.new()
+		return __round_confirm.value
+	
+	var __change_pet: PBField
+	func has_change_pet() -> bool:
+		if __change_pet.value != null:
+			return true
+		return false
+	func get_change_pet() -> ChangePetResponseMessage:
+		return __change_pet.value
+	func clear_change_pet() -> void:
+		data[7].state = PB_SERVICE_STATE.UNFILLED
+		__change_pet.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
+	func new_change_pet() -> ChangePetResponseMessage:
+		__command.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
+		data[1].state = PB_SERVICE_STATE.UNFILLED
+		__attack_stats.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
+		data[2].state = PB_SERVICE_STATE.UNFILLED
+		__deny_command.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
+		data[3].state = PB_SERVICE_STATE.UNFILLED
+		__start_next_round.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
+		data[4].state = PB_SERVICE_STATE.UNFILLED
+		__battle_end.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
+		data[5].state = PB_SERVICE_STATE.UNFILLED
+		__round_confirm.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
+		data[6].state = PB_SERVICE_STATE.UNFILLED
+		data[7].state = PB_SERVICE_STATE.FILLED
+		__change_pet_request.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
+		data[8].state = PB_SERVICE_STATE.UNFILLED
+		__sync_battle_information.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
+		data[9].state = PB_SERVICE_STATE.UNFILLED
+		__change_pet.value = ChangePetResponseMessage.new()
+		return __change_pet.value
+	
+	var __change_pet_request: PBField
+	func has_change_pet_request() -> bool:
+		if __change_pet_request.value != null:
+			return true
+		return false
+	func get_change_pet_request() -> ChangePetRequestMessage:
+		return __change_pet_request.value
+	func clear_change_pet_request() -> void:
+		data[8].state = PB_SERVICE_STATE.UNFILLED
+		__change_pet_request.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
+	func new_change_pet_request() -> ChangePetRequestMessage:
+		__command.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
+		data[1].state = PB_SERVICE_STATE.UNFILLED
+		__attack_stats.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
+		data[2].state = PB_SERVICE_STATE.UNFILLED
+		__deny_command.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
+		data[3].state = PB_SERVICE_STATE.UNFILLED
+		__start_next_round.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
+		data[4].state = PB_SERVICE_STATE.UNFILLED
+		__battle_end.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
+		data[5].state = PB_SERVICE_STATE.UNFILLED
+		__round_confirm.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
+		data[6].state = PB_SERVICE_STATE.UNFILLED
+		__change_pet.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
+		data[7].state = PB_SERVICE_STATE.UNFILLED
+		data[8].state = PB_SERVICE_STATE.FILLED
+		__sync_battle_information.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
+		data[9].state = PB_SERVICE_STATE.UNFILLED
+		__change_pet_request.value = ChangePetRequestMessage.new()
+		return __change_pet_request.value
+	
+	var __sync_battle_information: PBField
+	func has_sync_battle_information() -> bool:
+		if __sync_battle_information.value != null:
+			return true
+		return false
+	func get_sync_battle_information() -> SyncBattleInformationMessage:
+		return __sync_battle_information.value
+	func clear_sync_battle_information() -> void:
+		data[9].state = PB_SERVICE_STATE.UNFILLED
+		__sync_battle_information.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
+	func new_sync_battle_information() -> SyncBattleInformationMessage:
+		__command.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
+		data[1].state = PB_SERVICE_STATE.UNFILLED
+		__attack_stats.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
+		data[2].state = PB_SERVICE_STATE.UNFILLED
+		__deny_command.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
+		data[3].state = PB_SERVICE_STATE.UNFILLED
+		__start_next_round.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
+		data[4].state = PB_SERVICE_STATE.UNFILLED
+		__battle_end.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
+		data[5].state = PB_SERVICE_STATE.UNFILLED
+		__round_confirm.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
+		data[6].state = PB_SERVICE_STATE.UNFILLED
+		__change_pet.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
+		data[7].state = PB_SERVICE_STATE.UNFILLED
+		__change_pet_request.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
+		data[8].state = PB_SERVICE_STATE.UNFILLED
+		data[9].state = PB_SERVICE_STATE.FILLED
+		__sync_battle_information.value = SyncBattleInformationMessage.new()
+		return __sync_battle_information.value
+	
+	func _to_string() -> String:
+		return PBPacker.message_to_string(data)
+		
+	func to_bytes() -> PackedByteArray:
+		return PBPacker.pack_message(data)
+		
+	func from_bytes(bytes : PackedByteArray, offset : int = 0, limit : int = -1) -> int:
+		var cur_limit = bytes.size()
+		if limit != -1:
+			cur_limit = limit
+		var result = PBPacker.unpack_message(data, bytes, offset, cur_limit)
+		if result == cur_limit:
+			if PBPacker.check_required(data):
+				if limit == -1:
+					return PB_ERR.NO_ERRORS
+			else:
+				return PB_ERR.REQUIRED_FIELDS
+		elif limit == -1 && result > 0:
+			return PB_ERR.PARSE_INCOMPLETE
+		return result
+	
+class RoundCommandMessage:
+	func _init():
+		var service
+		
+		__change_pet = PBField.new("change_pet", PB_DATA_TYPE.MESSAGE, PB_RULE.OPTIONAL, 1, true, DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE])
+		service = PBServiceField.new()
+		service.field = __change_pet
+		service.func_ref = Callable(self, "new_change_pet")
+		data[__change_pet.tag] = service
+		
+		__runaway = PBField.new("runaway", PB_DATA_TYPE.MESSAGE, PB_RULE.OPTIONAL, 2, true, DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE])
+		service = PBServiceField.new()
+		service.field = __runaway
+		service.func_ref = Callable(self, "new_runaway")
+		data[__runaway.tag] = service
+		
+		__attack = PBField.new("attack", PB_DATA_TYPE.MESSAGE, PB_RULE.OPTIONAL, 3, true, DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE])
+		service = PBServiceField.new()
+		service.field = __attack
+		service.func_ref = Callable(self, "new_attack")
+		data[__attack.tag] = service
+		
+	var data = {}
+	
+	var __change_pet: PBField
+	func has_change_pet() -> bool:
+		if __change_pet.value != null:
+			return true
+		return false
+	func get_change_pet() -> ChangePet:
+		return __change_pet.value
+	func clear_change_pet() -> void:
+		data[1].state = PB_SERVICE_STATE.UNFILLED
+		__change_pet.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
+	func new_change_pet() -> ChangePet:
+		data[1].state = PB_SERVICE_STATE.FILLED
+		__runaway.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
+		data[2].state = PB_SERVICE_STATE.UNFILLED
+		__attack.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
+		data[3].state = PB_SERVICE_STATE.UNFILLED
+		__change_pet.value = ChangePet.new()
+		return __change_pet.value
+	
+	var __runaway: PBField
+	func has_runaway() -> bool:
+		if __runaway.value != null:
+			return true
+		return false
+	func get_runaway() -> RunAway:
+		return __runaway.value
+	func clear_runaway() -> void:
+		data[2].state = PB_SERVICE_STATE.UNFILLED
+		__runaway.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
+	func new_runaway() -> RunAway:
+		__change_pet.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
+		data[1].state = PB_SERVICE_STATE.UNFILLED
+		data[2].state = PB_SERVICE_STATE.FILLED
+		__attack.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
+		data[3].state = PB_SERVICE_STATE.UNFILLED
+		__runaway.value = RunAway.new()
+		return __runaway.value
+	
+	var __attack: PBField
+	func has_attack() -> bool:
+		if __attack.value != null:
+			return true
+		return false
+	func get_attack() -> Attack:
+		return __attack.value
+	func clear_attack() -> void:
+		data[3].state = PB_SERVICE_STATE.UNFILLED
+		__attack.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
+	func new_attack() -> Attack:
+		__change_pet.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
+		data[1].state = PB_SERVICE_STATE.UNFILLED
+		__runaway.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
+		data[2].state = PB_SERVICE_STATE.UNFILLED
+		data[3].state = PB_SERVICE_STATE.FILLED
+		__attack.value = Attack.new()
+		return __attack.value
+	
+	func _to_string() -> String:
+		return PBPacker.message_to_string(data)
+		
+	func to_bytes() -> PackedByteArray:
+		return PBPacker.pack_message(data)
+		
+	func from_bytes(bytes : PackedByteArray, offset : int = 0, limit : int = -1) -> int:
+		var cur_limit = bytes.size()
+		if limit != -1:
+			cur_limit = limit
+		var result = PBPacker.unpack_message(data, bytes, offset, cur_limit)
+		if result == cur_limit:
+			if PBPacker.check_required(data):
+				if limit == -1:
+					return PB_ERR.NO_ERRORS
+			else:
+				return PB_ERR.REQUIRED_FIELDS
+		elif limit == -1 && result > 0:
+			return PB_ERR.PARSE_INCOMPLETE
+		return result
+	
+class ChangePet:
+	func _init():
+		var service
+		
+		__pet_position = PBField.new("pet_position", PB_DATA_TYPE.INT64, PB_RULE.OPTIONAL, 1, true, DEFAULT_VALUES_3[PB_DATA_TYPE.INT64])
+		service = PBServiceField.new()
+		service.field = __pet_position
+		data[__pet_position.tag] = service
+		
+	var data = {}
+	
+	var __pet_position: PBField
+	func has_pet_position() -> bool:
+		if __pet_position.value != null:
+			return true
+		return false
+	func get_pet_position() -> int:
+		return __pet_position.value
+	func clear_pet_position() -> void:
+		data[1].state = PB_SERVICE_STATE.UNFILLED
+		__pet_position.value = DEFAULT_VALUES_3[PB_DATA_TYPE.INT64]
+	func set_pet_position(value : int) -> void:
+		__pet_position.value = value
+	
+	func _to_string() -> String:
+		return PBPacker.message_to_string(data)
+		
+	func to_bytes() -> PackedByteArray:
+		return PBPacker.pack_message(data)
+		
+	func from_bytes(bytes : PackedByteArray, offset : int = 0, limit : int = -1) -> int:
+		var cur_limit = bytes.size()
+		if limit != -1:
+			cur_limit = limit
+		var result = PBPacker.unpack_message(data, bytes, offset, cur_limit)
+		if result == cur_limit:
+			if PBPacker.check_required(data):
+				if limit == -1:
+					return PB_ERR.NO_ERRORS
+			else:
+				return PB_ERR.REQUIRED_FIELDS
+		elif limit == -1 && result > 0:
+			return PB_ERR.PARSE_INCOMPLETE
+		return result
+	
+class RunAway:
+	func _init():
+		var service
+		
+	var data = {}
+	
+	func _to_string() -> String:
+		return PBPacker.message_to_string(data)
+		
+	func to_bytes() -> PackedByteArray:
+		return PBPacker.pack_message(data)
+		
+	func from_bytes(bytes : PackedByteArray, offset : int = 0, limit : int = -1) -> int:
+		var cur_limit = bytes.size()
+		if limit != -1:
+			cur_limit = limit
+		var result = PBPacker.unpack_message(data, bytes, offset, cur_limit)
+		if result == cur_limit:
+			if PBPacker.check_required(data):
+				if limit == -1:
+					return PB_ERR.NO_ERRORS
+			else:
+				return PB_ERR.REQUIRED_FIELDS
+		elif limit == -1 && result > 0:
+			return PB_ERR.PARSE_INCOMPLETE
+		return result
+	
+class Attack:
+	func _init():
+		var service
+		
+		__skill_pos = PBField.new("skill_pos", PB_DATA_TYPE.INT64, PB_RULE.OPTIONAL, 1, true, DEFAULT_VALUES_3[PB_DATA_TYPE.INT64])
+		service = PBServiceField.new()
+		service.field = __skill_pos
+		data[__skill_pos.tag] = service
+		
+	var data = {}
+	
+	var __skill_pos: PBField
+	func has_skill_pos() -> bool:
+		if __skill_pos.value != null:
+			return true
+		return false
+	func get_skill_pos() -> int:
+		return __skill_pos.value
+	func clear_skill_pos() -> void:
+		data[1].state = PB_SERVICE_STATE.UNFILLED
+		__skill_pos.value = DEFAULT_VALUES_3[PB_DATA_TYPE.INT64]
+	func set_skill_pos(value : int) -> void:
+		__skill_pos.value = value
+	
+	func _to_string() -> String:
+		return PBPacker.message_to_string(data)
+		
+	func to_bytes() -> PackedByteArray:
+		return PBPacker.pack_message(data)
+		
+	func from_bytes(bytes : PackedByteArray, offset : int = 0, limit : int = -1) -> int:
+		var cur_limit = bytes.size()
+		if limit != -1:
+			cur_limit = limit
+		var result = PBPacker.unpack_message(data, bytes, offset, cur_limit)
+		if result == cur_limit:
+			if PBPacker.check_required(data):
+				if limit == -1:
+					return PB_ERR.NO_ERRORS
+			else:
+				return PB_ERR.REQUIRED_FIELDS
+		elif limit == -1 && result > 0:
+			return PB_ERR.PARSE_INCOMPLETE
+		return result
+	
+class AttackStatsMessage:
+	func _init():
+		var service
+		
+		__number = PBField.new("number", PB_DATA_TYPE.INT64, PB_RULE.OPTIONAL, 1, true, DEFAULT_VALUES_3[PB_DATA_TYPE.INT64])
+		service = PBServiceField.new()
+		service.field = __number
+		data[__number.tag] = service
+		
+		__skill_id = PBField.new("skill_id", PB_DATA_TYPE.UINT32, PB_RULE.OPTIONAL, 2, true, DEFAULT_VALUES_3[PB_DATA_TYPE.UINT32])
+		service = PBServiceField.new()
+		service.field = __skill_id
+		data[__skill_id.tag] = service
+		
+		__physical_damage = PBField.new("physical_damage", PB_DATA_TYPE.INT64, PB_RULE.OPTIONAL, 3, true, DEFAULT_VALUES_3[PB_DATA_TYPE.INT64])
+		service = PBServiceField.new()
+		service.field = __physical_damage
+		data[__physical_damage.tag] = service
+		
+		__magic_damage = PBField.new("magic_damage", PB_DATA_TYPE.INT64, PB_RULE.OPTIONAL, 4, true, DEFAULT_VALUES_3[PB_DATA_TYPE.INT64])
+		service = PBServiceField.new()
+		service.field = __magic_damage
+		data[__magic_damage.tag] = service
+		
+		var __buffs_default: Array[Buff] = []
+		__buffs = PBField.new("buffs", PB_DATA_TYPE.MESSAGE, PB_RULE.REPEATED, 5, true, __buffs_default)
+		service = PBServiceField.new()
+		service.field = __buffs
+		service.func_ref = Callable(self, "add_buffs")
+		data[__buffs.tag] = service
+		
+		var __pet_stats_default: Array[PetStatsMessage] = []
+		__pet_stats = PBField.new("pet_stats", PB_DATA_TYPE.MESSAGE, PB_RULE.REPEATED, 6, true, __pet_stats_default)
+		service = PBServiceField.new()
+		service.field = __pet_stats
+		service.func_ref = Callable(self, "add_pet_stats")
+		data[__pet_stats.tag] = service
+		
+	var data = {}
+	
+	var __number: PBField
+	func has_number() -> bool:
+		if __number.value != null:
+			return true
+		return false
+	func get_number() -> int:
+		return __number.value
+	func clear_number() -> void:
+		data[1].state = PB_SERVICE_STATE.UNFILLED
+		__number.value = DEFAULT_VALUES_3[PB_DATA_TYPE.INT64]
+	func set_number(value : int) -> void:
+		__number.value = value
+	
+	var __skill_id: PBField
+	func has_skill_id() -> bool:
+		if __skill_id.value != null:
+			return true
+		return false
+	func get_skill_id() -> int:
+		return __skill_id.value
+	func clear_skill_id() -> void:
+		data[2].state = PB_SERVICE_STATE.UNFILLED
+		__skill_id.value = DEFAULT_VALUES_3[PB_DATA_TYPE.UINT32]
+	func set_skill_id(value : int) -> void:
+		__skill_id.value = value
+	
+	var __physical_damage: PBField
+	func has_physical_damage() -> bool:
+		if __physical_damage.value != null:
+			return true
+		return false
+	func get_physical_damage() -> int:
+		return __physical_damage.value
+	func clear_physical_damage() -> void:
+		data[3].state = PB_SERVICE_STATE.UNFILLED
+		__physical_damage.value = DEFAULT_VALUES_3[PB_DATA_TYPE.INT64]
+	func set_physical_damage(value : int) -> void:
+		__physical_damage.value = value
+	
+	var __magic_damage: PBField
+	func has_magic_damage() -> bool:
+		if __magic_damage.value != null:
+			return true
+		return false
+	func get_magic_damage() -> int:
+		return __magic_damage.value
+	func clear_magic_damage() -> void:
+		data[4].state = PB_SERVICE_STATE.UNFILLED
+		__magic_damage.value = DEFAULT_VALUES_3[PB_DATA_TYPE.INT64]
+	func set_magic_damage(value : int) -> void:
+		__magic_damage.value = value
+	
+	var __buffs: PBField
+	func get_buffs() -> Array[Buff]:
+		return __buffs.value
+	func clear_buffs() -> void:
+		data[5].state = PB_SERVICE_STATE.UNFILLED
+		__buffs.value.clear()
+	func add_buffs() -> Buff:
+		var element = Buff.new()
+		__buffs.value.append(element)
+		return element
+	
+	var __pet_stats: PBField
+	func get_pet_stats() -> Array[PetStatsMessage]:
+		return __pet_stats.value
+	func clear_pet_stats() -> void:
+		data[6].state = PB_SERVICE_STATE.UNFILLED
+		__pet_stats.value.clear()
+	func add_pet_stats() -> PetStatsMessage:
+		var element = PetStatsMessage.new()
+		__pet_stats.value.append(element)
+		return element
+	
+	func _to_string() -> String:
+		return PBPacker.message_to_string(data)
+		
+	func to_bytes() -> PackedByteArray:
+		return PBPacker.pack_message(data)
+		
+	func from_bytes(bytes : PackedByteArray, offset : int = 0, limit : int = -1) -> int:
+		var cur_limit = bytes.size()
+		if limit != -1:
+			cur_limit = limit
+		var result = PBPacker.unpack_message(data, bytes, offset, cur_limit)
+		if result == cur_limit:
+			if PBPacker.check_required(data):
+				if limit == -1:
+					return PB_ERR.NO_ERRORS
+			else:
+				return PB_ERR.REQUIRED_FIELDS
+		elif limit == -1 && result > 0:
+			return PB_ERR.PARSE_INCOMPLETE
+		return result
+	
+class Buff:
+	func _init():
+		var service
+		
+		__id = PBField.new("id", PB_DATA_TYPE.UINT32, PB_RULE.OPTIONAL, 1, true, DEFAULT_VALUES_3[PB_DATA_TYPE.UINT32])
+		service = PBServiceField.new()
+		service.field = __id
+		data[__id.tag] = service
+		
+		__level = PBField.new("level", PB_DATA_TYPE.INT64, PB_RULE.OPTIONAL, 2, true, DEFAULT_VALUES_3[PB_DATA_TYPE.INT64])
+		service = PBServiceField.new()
+		service.field = __level
+		data[__level.tag] = service
+		
+	var data = {}
+	
+	var __id: PBField
+	func has_id() -> bool:
+		if __id.value != null:
+			return true
+		return false
+	func get_id() -> int:
+		return __id.value
+	func clear_id() -> void:
+		data[1].state = PB_SERVICE_STATE.UNFILLED
+		__id.value = DEFAULT_VALUES_3[PB_DATA_TYPE.UINT32]
+	func set_id(value : int) -> void:
+		__id.value = value
+	
+	var __level: PBField
+	func has_level() -> bool:
+		if __level.value != null:
+			return true
+		return false
+	func get_level() -> int:
+		return __level.value
+	func clear_level() -> void:
+		data[2].state = PB_SERVICE_STATE.UNFILLED
+		__level.value = DEFAULT_VALUES_3[PB_DATA_TYPE.INT64]
+	func set_level(value : int) -> void:
+		__level.value = value
+	
+	func _to_string() -> String:
+		return PBPacker.message_to_string(data)
+		
+	func to_bytes() -> PackedByteArray:
+		return PBPacker.pack_message(data)
+		
+	func from_bytes(bytes : PackedByteArray, offset : int = 0, limit : int = -1) -> int:
+		var cur_limit = bytes.size()
+		if limit != -1:
+			cur_limit = limit
+		var result = PBPacker.unpack_message(data, bytes, offset, cur_limit)
+		if result == cur_limit:
+			if PBPacker.check_required(data):
+				if limit == -1:
+					return PB_ERR.NO_ERRORS
+			else:
+				return PB_ERR.REQUIRED_FIELDS
+		elif limit == -1 && result > 0:
+			return PB_ERR.PARSE_INCOMPLETE
+		return result
+	
+class BattleEndStats:
+	func _init():
+		var service
+		
+	var data = {}
+	
+	func _to_string() -> String:
+		return PBPacker.message_to_string(data)
+		
+	func to_bytes() -> PackedByteArray:
+		return PBPacker.pack_message(data)
+		
+	func from_bytes(bytes : PackedByteArray, offset : int = 0, limit : int = -1) -> int:
+		var cur_limit = bytes.size()
+		if limit != -1:
+			cur_limit = limit
+		var result = PBPacker.unpack_message(data, bytes, offset, cur_limit)
+		if result == cur_limit:
+			if PBPacker.check_required(data):
+				if limit == -1:
+					return PB_ERR.NO_ERRORS
+			else:
+				return PB_ERR.REQUIRED_FIELDS
+		elif limit == -1 && result > 0:
+			return PB_ERR.PARSE_INCOMPLETE
+		return result
+	
+class DenyCommandMessage:
+	func _init():
+		var service
+		
+		__reason = PBField.new("reason", PB_DATA_TYPE.STRING, PB_RULE.OPTIONAL, 1, true, DEFAULT_VALUES_3[PB_DATA_TYPE.STRING])
+		service = PBServiceField.new()
+		service.field = __reason
+		data[__reason.tag] = service
+		
+	var data = {}
+	
+	var __reason: PBField
+	func has_reason() -> bool:
+		if __reason.value != null:
+			return true
+		return false
+	func get_reason() -> String:
+		return __reason.value
+	func clear_reason() -> void:
+		data[1].state = PB_SERVICE_STATE.UNFILLED
+		__reason.value = DEFAULT_VALUES_3[PB_DATA_TYPE.STRING]
+	func set_reason(value : String) -> void:
+		__reason.value = value
+	
+	func _to_string() -> String:
+		return PBPacker.message_to_string(data)
+		
+	func to_bytes() -> PackedByteArray:
+		return PBPacker.pack_message(data)
+		
+	func from_bytes(bytes : PackedByteArray, offset : int = 0, limit : int = -1) -> int:
+		var cur_limit = bytes.size()
+		if limit != -1:
+			cur_limit = limit
+		var result = PBPacker.unpack_message(data, bytes, offset, cur_limit)
+		if result == cur_limit:
+			if PBPacker.check_required(data):
+				if limit == -1:
+					return PB_ERR.NO_ERRORS
+			else:
+				return PB_ERR.REQUIRED_FIELDS
+		elif limit == -1 && result > 0:
+			return PB_ERR.PARSE_INCOMPLETE
+		return result
+	
+class StartNextRoundMessage:
+	func _init():
+		var service
+		
+	var data = {}
+	
+	func _to_string() -> String:
+		return PBPacker.message_to_string(data)
+		
+	func to_bytes() -> PackedByteArray:
+		return PBPacker.pack_message(data)
+		
+	func from_bytes(bytes : PackedByteArray, offset : int = 0, limit : int = -1) -> int:
+		var cur_limit = bytes.size()
+		if limit != -1:
+			cur_limit = limit
+		var result = PBPacker.unpack_message(data, bytes, offset, cur_limit)
+		if result == cur_limit:
+			if PBPacker.check_required(data):
+				if limit == -1:
+					return PB_ERR.NO_ERRORS
+			else:
+				return PB_ERR.REQUIRED_FIELDS
+		elif limit == -1 && result > 0:
+			return PB_ERR.PARSE_INCOMPLETE
+		return result
+	
+class BattleEndMessage:
+	func _init():
+		var service
+		
+		__winner = PBField.new("winner", PB_DATA_TYPE.INT64, PB_RULE.OPTIONAL, 1, true, DEFAULT_VALUES_3[PB_DATA_TYPE.INT64])
+		service = PBServiceField.new()
+		service.field = __winner
+		data[__winner.tag] = service
+		
+	var data = {}
+	
+	var __winner: PBField
+	func has_winner() -> bool:
+		if __winner.value != null:
+			return true
+		return false
+	func get_winner() -> int:
+		return __winner.value
+	func clear_winner() -> void:
+		data[1].state = PB_SERVICE_STATE.UNFILLED
+		__winner.value = DEFAULT_VALUES_3[PB_DATA_TYPE.INT64]
+	func set_winner(value : int) -> void:
+		__winner.value = value
+	
+	func _to_string() -> String:
+		return PBPacker.message_to_string(data)
+		
+	func to_bytes() -> PackedByteArray:
+		return PBPacker.pack_message(data)
+		
+	func from_bytes(bytes : PackedByteArray, offset : int = 0, limit : int = -1) -> int:
+		var cur_limit = bytes.size()
+		if limit != -1:
+			cur_limit = limit
+		var result = PBPacker.unpack_message(data, bytes, offset, cur_limit)
+		if result == cur_limit:
+			if PBPacker.check_required(data):
+				if limit == -1:
+					return PB_ERR.NO_ERRORS
+			else:
+				return PB_ERR.REQUIRED_FIELDS
+		elif limit == -1 && result > 0:
+			return PB_ERR.PARSE_INCOMPLETE
+		return result
+	
+class RoundConfirmMessage:
+	func _init():
+		var service
+		
+	var data = {}
+	
+	func _to_string() -> String:
+		return PBPacker.message_to_string(data)
+		
+	func to_bytes() -> PackedByteArray:
+		return PBPacker.pack_message(data)
+		
+	func from_bytes(bytes : PackedByteArray, offset : int = 0, limit : int = -1) -> int:
+		var cur_limit = bytes.size()
+		if limit != -1:
+			cur_limit = limit
+		var result = PBPacker.unpack_message(data, bytes, offset, cur_limit)
+		if result == cur_limit:
+			if PBPacker.check_required(data):
+				if limit == -1:
+					return PB_ERR.NO_ERRORS
+			else:
+				return PB_ERR.REQUIRED_FIELDS
+		elif limit == -1 && result > 0:
+			return PB_ERR.PARSE_INCOMPLETE
+		return result
+	
+class ChangePetRequestMessage:
+	func _init():
+		var service
+		
+	var data = {}
+	
+	func _to_string() -> String:
+		return PBPacker.message_to_string(data)
+		
+	func to_bytes() -> PackedByteArray:
+		return PBPacker.pack_message(data)
+		
+	func from_bytes(bytes : PackedByteArray, offset : int = 0, limit : int = -1) -> int:
+		var cur_limit = bytes.size()
+		if limit != -1:
+			cur_limit = limit
+		var result = PBPacker.unpack_message(data, bytes, offset, cur_limit)
+		if result == cur_limit:
+			if PBPacker.check_required(data):
+				if limit == -1:
+					return PB_ERR.NO_ERRORS
+			else:
+				return PB_ERR.REQUIRED_FIELDS
+		elif limit == -1 && result > 0:
+			return PB_ERR.PARSE_INCOMPLETE
+		return result
+	
+class ChangePetResponseMessage:
+	func _init():
+		var service
+		
+		__pet_position = PBField.new("pet_position", PB_DATA_TYPE.INT64, PB_RULE.OPTIONAL, 2, true, DEFAULT_VALUES_3[PB_DATA_TYPE.INT64])
+		service = PBServiceField.new()
+		service.field = __pet_position
+		data[__pet_position.tag] = service
+		
+	var data = {}
+	
+	var __pet_position: PBField
+	func has_pet_position() -> bool:
+		if __pet_position.value != null:
+			return true
+		return false
+	func get_pet_position() -> int:
+		return __pet_position.value
+	func clear_pet_position() -> void:
+		data[2].state = PB_SERVICE_STATE.UNFILLED
+		__pet_position.value = DEFAULT_VALUES_3[PB_DATA_TYPE.INT64]
+	func set_pet_position(value : int) -> void:
+		__pet_position.value = value
+	
+	func _to_string() -> String:
+		return PBPacker.message_to_string(data)
+		
+	func to_bytes() -> PackedByteArray:
+		return PBPacker.pack_message(data)
+		
+	func from_bytes(bytes : PackedByteArray, offset : int = 0, limit : int = -1) -> int:
+		var cur_limit = bytes.size()
+		if limit != -1:
+			cur_limit = limit
+		var result = PBPacker.unpack_message(data, bytes, offset, cur_limit)
+		if result == cur_limit:
+			if PBPacker.check_required(data):
+				if limit == -1:
+					return PB_ERR.NO_ERRORS
+			else:
+				return PB_ERR.REQUIRED_FIELDS
+		elif limit == -1 && result > 0:
+			return PB_ERR.PARSE_INCOMPLETE
+		return result
+	
+class SyncBattleInformationMessage:
+	func _init():
+		var service
+		
+		__number = PBField.new("number", PB_DATA_TYPE.INT64, PB_RULE.OPTIONAL, 1, true, DEFAULT_VALUES_3[PB_DATA_TYPE.INT64])
+		service = PBServiceField.new()
+		service.field = __number
+		data[__number.tag] = service
+		
+		__player_name = PBField.new("player_name", PB_DATA_TYPE.STRING, PB_RULE.OPTIONAL, 2, true, DEFAULT_VALUES_3[PB_DATA_TYPE.STRING])
+		service = PBServiceField.new()
+		service.field = __player_name
+		data[__player_name.tag] = service
+		
+		var __pet_messages_default: Array[PetMessage] = []
+		__pet_messages = PBField.new("pet_messages", PB_DATA_TYPE.MESSAGE, PB_RULE.REPEATED, 3, true, __pet_messages_default)
+		service = PBServiceField.new()
+		service.field = __pet_messages
+		service.func_ref = Callable(self, "add_pet_messages")
+		data[__pet_messages.tag] = service
+		
+	var data = {}
+	
+	var __number: PBField
+	func has_number() -> bool:
+		if __number.value != null:
+			return true
+		return false
+	func get_number() -> int:
+		return __number.value
+	func clear_number() -> void:
+		data[1].state = PB_SERVICE_STATE.UNFILLED
+		__number.value = DEFAULT_VALUES_3[PB_DATA_TYPE.INT64]
+	func set_number(value : int) -> void:
+		__number.value = value
+	
+	var __player_name: PBField
+	func has_player_name() -> bool:
+		if __player_name.value != null:
+			return true
+		return false
+	func get_player_name() -> String:
+		return __player_name.value
+	func clear_player_name() -> void:
+		data[2].state = PB_SERVICE_STATE.UNFILLED
+		__player_name.value = DEFAULT_VALUES_3[PB_DATA_TYPE.STRING]
+	func set_player_name(value : String) -> void:
+		__player_name.value = value
+	
+	var __pet_messages: PBField
+	func get_pet_messages() -> Array[PetMessage]:
+		return __pet_messages.value
+	func clear_pet_messages() -> void:
+		data[3].state = PB_SERVICE_STATE.UNFILLED
+		__pet_messages.value.clear()
+	func add_pet_messages() -> PetMessage:
+		var element = PetMessage.new()
+		__pet_messages.value.append(element)
+		return element
 	
 	func _to_string() -> String:
 		return PBPacker.message_to_string(data)

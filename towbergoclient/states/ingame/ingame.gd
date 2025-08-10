@@ -99,6 +99,16 @@ func _on_ws_packted_received(msg:packets.Packet):
 		var m := msg.get_equipped_pet_info_response()
 		var pet := PetManager.msg_to_pet(m.get_pet())
 		GameManager.update_equipped_pet_info.emit(pet,m.get_id())
+	elif msg.has_battle_inviting():
+		print("收到战斗请求...")
+		var packet := packets.Packet.new()
+		var rsp := packet.new_battle_inviting_response()
+		rsp.set_accepted(true)
+		rsp.set_roomID(msg.get_battle_inviting().get_roomID())
+		WS.send(packet)
+	elif msg.has_start_battle():
+		print("切换至战斗状态")
+		GameManager.set_state(GameManager.State.INBATTLE)
 
 
 func _handle_player_enter(sender_id:int,msg:packets.PlayerEnterAreaMessage):

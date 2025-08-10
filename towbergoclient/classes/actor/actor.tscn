@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://ctq3u0s6gs18m"]
+[gd_scene load_steps=15 format=3 uid="uid://ctq3u0s6gs18m"]
 
 [ext_resource type="Script" uid="uid://crx47nkf5sksn" path="res://classes/actor/actor.gd" id="1_py182"]
 [ext_resource type="Texture2D" uid="uid://bmchy8kfwbvgj" path="res://assets/character/Elf_idle (16x24).png" id="2_bds3w"]
@@ -76,6 +76,8 @@ animations = [{
 [sub_resource type="CircleShape2D" id="CircleShape2D_e4b7d"]
 radius = 2.0
 
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_bds3w"]
+
 [node name="Actor" type="CharacterBody2D"]
 collision_mask = 2
 script = ExtResource("1_py182")
@@ -100,3 +102,13 @@ enabled = false
 zoom = Vector2(4, 4)
 limit_left = 0
 limit_top = 0
+
+[node name="InputPanel" type="PanelContainer" parent="."]
+offset_left = -5.0
+offset_top = -15.0
+offset_right = 5.0
+offset_bottom = 2.0
+mouse_default_cursor_shape = 2
+theme_override_styles/panel = SubResource("StyleBoxEmpty_bds3w")
+
+[connection signal="gui_input" from="InputPanel" to="." method="_on_input_panel_gui_input"]

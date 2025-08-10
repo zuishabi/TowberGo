@@ -229,7 +229,7 @@ func (p *PetManagerStruct) GetPetBag(player *Player) [5]Pet {
 func (p *PetManagerStruct) GetPet(player *Player, id uint64) Pet {
 	skills := p.GetPetSkill(id)
 	stats := p.GetPetStats(id)
-	fmt.Println("get player pet stats:", stats)
+	//fmt.Println("get player pet stats:", stats)
 	pet := db.Pets{}
 	p.db.Where("id = ?", id).First(&pet)
 	res := p.petList[pet.PetID].Initialize(pet.Exp, skills, stats, player)
