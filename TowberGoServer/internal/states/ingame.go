@@ -10,8 +10,9 @@ import (
 )
 
 type InGame struct {
-	Player *objects.Player
-	client internal.ClientInterface
+	Player     *objects.Player
+	client     internal.ClientInterface
+	hasEntered bool
 }
 
 func (g *InGame) Name() string {
@@ -26,7 +27,14 @@ func (g *InGame) SetClient(client internal.ClientInterface) {
 
 // OnEnter 每次状态改变时调用
 func (g *InGame) OnEnter() {
-	g.Player.EquippedPets = objects.PetManager.GetPetBag(g.Player)
+	if !g.hasEntered {
+		g.Player.EquippedPets = objects.PetManager.GetPetBag(g.Player)
+		g.hasEntered = true
+		g.HandleMessage(0, &packets.Packet_PlayerEnterRequest{PlayerEnterRequest: &packets.PlayerEnterAreaRequestMessage{
+			AreaName:   "InitialVillage",
+			EntranceId: 0,
+		}})
+	}
 }
 
 func (g *InGame) OnExit() {

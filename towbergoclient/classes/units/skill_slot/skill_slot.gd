@@ -11,7 +11,6 @@ const WAND = preload("res://assets/items/wand.tres")
 @onready var _speed_text = $VBoxContainer/HBoxContainer2/SpeedText
 @onready var _cost_text = $VBoxContainer/HBoxContainer2/CostText
 @onready var h_box_container_2 = $VBoxContainer/HBoxContainer2
-@onready var _cool_down = $VBoxContainer/HBoxContainer2/CoolDown
 
 func _on_gui_input(event:InputEvent):
 	if event.is_action_pressed("left_mouse"):
@@ -39,4 +38,3 @@ func update(skill:BaseSkill):
 	_label.text = skill.skill_name
 	_speed_text.text = str(skill.speed)
 	_cost_text.text = str(skill.cost)
-	_cool_down.text = str(skill.cool_down)

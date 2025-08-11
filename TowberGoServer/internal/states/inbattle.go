@@ -47,7 +47,18 @@ func (i *InBattle) HandleMessage(senderID uint32, message packets.Msg) {
 
 func (i *InBattle) OnExit() {}
 
-func (i *InBattle) ClearResources() {}
+func (i *InBattle) ClearResources() {
+	if i.Player.Area != nil {
+		i.Player.Area.RemovePlayer(i.Player.UID)
+	}
+	if i.BattleRoom != nil {
+		i.BattleRoom.Players[i.Num] = &objects.AutoBattlePlayer{
+			Number:        i.Num,
+			CommandChan:   i.BattleRoom.CommandChan,
+			NextRoundChan: i.BattleRoom.NextRoundChan,
+		}
+	}
+}
 
 func (i *InBattle) ProcessMessage(message packets.BattleMsg) {
 	switch battleMsg := message.(type) {
@@ -69,7 +80,7 @@ func (i *InBattle) ProcessMessage(message packets.BattleMsg) {
 		i.client.SocketSend(&packets.Packet_BattlePacket{BattlePacket: &packets.BattlePacket{Msg: battleMsg}})
 		i.client.SetState(&InGame{Player: i.Player})
 	case *packets.BattlePacket_StartNextRound, *packets.BattlePacket_DenyCommand, *packets.BattlePacket_AttackStats,
-		*packets.BattlePacket_ChangePetRequest, *packets.BattlePacket_SyncBattleInformation:
+		*packets.BattlePacket_ChangePetRequest, *packets.BattlePacket_SyncBattleInformation, *packets.BattlePacket_RoundEnd:
 		i.client.SocketSend(&packets.Packet_BattlePacket{BattlePacket: &packets.BattlePacket{Msg: battleMsg}})
 	}
 }

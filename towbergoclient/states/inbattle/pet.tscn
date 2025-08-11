@@ -1,0 +1,3 @@
+[gd_scene format=3 uid="uid://b72j425k4n4xn"]
+
+[node name="Pet" type="Sprite2D"]

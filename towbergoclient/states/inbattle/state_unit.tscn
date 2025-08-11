@@ -1,0 +1,96 @@
+[gd_scene load_steps=8 format=3 uid="uid://b6ibs4hx2mqx"]
+
+[ext_resource type="Texture2D" uid="uid://jwrp3m3e3k4p" path="res://assets/ui/UI assets (1x).png" id="1_1772a"]
+[ext_resource type="Texture2D" uid="uid://0uells4eymux" path="res://assets/ui/progress_bar/under.tres" id="2_ankfu"]
+[ext_resource type="Script" uid="uid://dsw1s6g8toiwo" path="res://states/inbattle/state_unit.gd" id="2_us5uw"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ankfu"]
+atlas = ExtResource("1_1772a")
+region = Rect2(243, 3, 42, 42)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_us5uw"]
+texture = SubResource("AtlasTexture_ankfu")
+texture_margin_left = 11.0
+texture_margin_top = 11.0
+texture_margin_right = 11.0
+texture_margin_bottom = 11.0
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_us5uw"]
+atlas = ExtResource("1_1772a")
+region = Rect2(97, 212, 46, 8)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_itru1"]
+atlas = ExtResource("1_1772a")
+region = Rect2(49, 212, 46, 8)
+
+[node name="StateUnit" type="PanelContainer"]
+custom_minimum_size = Vector2(350, 100)
+size_flags_horizontal = 3
+theme_override_styles/panel = SubResource("StyleBoxTexture_us5uw")
+script = ExtResource("2_us5uw")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="HBoxContainer"]
+custom_minimum_size = Vector2(80, 80)
+layout_mode = 2
+size_flags_vertical = 4
+expand_mode = 1
+
+[node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 0
+
+[node name="Name" type="Label" parent="HBoxContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 12
+text = "154154"
+vertical_alignment = 1
+
+[node name="Hp" type="TextureProgressBar" parent="HBoxContainer/VBoxContainer"]
+custom_minimum_size = Vector2(200, 10)
+layout_mode = 2
+size_flags_vertical = 6
+value = 79.0
+nine_patch_stretch = true
+stretch_margin_left = 4
+stretch_margin_top = 4
+stretch_margin_right = 4
+stretch_margin_bottom = 3
+texture_under = ExtResource("2_ankfu")
+texture_progress = SubResource("AtlasTexture_us5uw")
+
+[node name="HpText" type="Label" parent="HBoxContainer/VBoxContainer/Hp"]
+layout_mode = 2
+offset_top = -19.0
+offset_right = 244.0
+offset_bottom = -1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 13
+vertical_alignment = 1
+
+[node name="Mana" type="TextureProgressBar" parent="HBoxContainer/VBoxContainer"]
+custom_minimum_size = Vector2(200, 10)
+layout_mode = 2
+size_flags_vertical = 6
+value = 90.0
+nine_patch_stretch = true
+stretch_margin_left = 4
+stretch_margin_top = 4
+stretch_margin_right = 4
+stretch_margin_bottom = 4
+texture_under = ExtResource("2_ankfu")
+texture_progress = SubResource("AtlasTexture_itru1")
+
+[node name="ManaText" type="Label" parent="HBoxContainer/VBoxContainer/Mana"]
+layout_mode = 2
+offset_top = -24.0
+offset_right = 244.0
+offset_bottom = -6.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 13
+vertical_alignment = 1

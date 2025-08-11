@@ -1,0 +1,99 @@
+[gd_scene load_steps=7 format=3 uid="uid://mhpmh4uraudo"]
+
+[ext_resource type="Script" uid="uid://w4a6eva5uj50" path="res://states/inbattle/round_tip.gd" id="1_58ago"]
+[ext_resource type="Script" uid="uid://dcrtubupgfmt2" path="res://states/inbattle/battle_panel.gd" id="1_gs4d0"]
+[ext_resource type="PackedScene" uid="uid://b6ibs4hx2mqx" path="res://states/inbattle/state_unit.tscn" id="2_bdykp"]
+[ext_resource type="PackedScene" uid="uid://b72j425k4n4xn" path="res://states/inbattle/pet.tscn" id="4_5v0gl"]
+[ext_resource type="PackedScene" uid="uid://bal1wnoxgrhh4" path="res://states/inbattle/skill_unit.tscn" id="4_t0kmw"]
+[ext_resource type="Texture2D" uid="uid://82k7w1mmedpt" path="res://assets/items/wand.tres" id="6_ucnan"]
+
+[node name="BattlePanel" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -1.0
+offset_bottom = -1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_gs4d0")
+
+[node name="RoundTip" type="PanelContainer" parent="."]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -81.0
+offset_right = 81.0
+offset_bottom = 81.0
+grow_horizontal = 2
+script = ExtResource("1_58ago")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="RoundTip"]
+layout_mode = 2
+
+[node name="RoundLabel" type="Label" parent="RoundTip/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 32
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="State" type="HBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 123.0
+grow_horizontal = 2
+
+[node name="StateUnit" parent="State" instance=ExtResource("2_bdykp")]
+layout_mode = 2
+size_flags_horizontal = 2
+size_flags_vertical = 4
+
+[node name="StateUnit2" parent="State" instance=ExtResource("2_bdykp")]
+layout_mode = 2
+size_flags_horizontal = 10
+size_flags_vertical = 4
+mirror = true
+
+[node name="SkillList" type="PanelContainer" parent="."]
+custom_minimum_size = Vector2(0, 150)
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 0
+
+[node name="HBoxContainer" type="HBoxContainer" parent="SkillList"]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="SkillUnit" parent="SkillList/HBoxContainer" instance=ExtResource("4_t0kmw")]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="SkillUnit2" parent="SkillList/HBoxContainer" instance=ExtResource("4_t0kmw")]
+layout_mode = 2
+size_flags_horizontal = 3
+pos = 1
+
+[node name="SkillUnit3" parent="SkillList/HBoxContainer" instance=ExtResource("4_t0kmw")]
+layout_mode = 2
+size_flags_horizontal = 3
+pos = 2
+
+[node name="SkillUnit4" parent="SkillList/HBoxContainer" instance=ExtResource("4_t0kmw")]
+layout_mode = 2
+size_flags_horizontal = 3
+pos = 3
+
+[node name="Pet" parent="." instance=ExtResource("4_5v0gl")]
+position = Vector2(197, 283)
+scale = Vector2(10, 10)
+
+[node name="Pet2" parent="." instance=ExtResource("4_5v0gl")]
+position = Vector2(990, 284.87)
+scale = Vector2(-10, 10)
+texture = ExtResource("6_ucnan")

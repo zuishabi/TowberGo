@@ -19,11 +19,6 @@ func _ready():
 	GameManager.show_confirm.connect(_window.show_confirm)
 	WS.packet_received.connect(_on_ws_packted_received)
 	WS.connection_closed.connect(_on_connection_closed)
-	var packet := packets.Packet.new()
-	var enter_request := packet.new_player_enter_request()
-	enter_request.set_area_name("InitialVillage")
-	enter_request.set_entrance_id(0)
-	WS.send(packet)
 	# 请求获得背包物品
 	var get_bag := packets.Packet.new()
 	get_bag.new_bag_request()
@@ -108,6 +103,7 @@ func _on_ws_packted_received(msg:packets.Packet):
 		WS.send(packet)
 	elif msg.has_start_battle():
 		print("切换至战斗状态")
+		BattleManager.refresh(msg.get_start_battle().get_number())
 		GameManager.set_state(GameManager.State.INBATTLE)
 
 

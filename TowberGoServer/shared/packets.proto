@@ -302,6 +302,7 @@ message BattlePacket{
     ChangePetResponseMessage change_pet = 7;
     ChangePetRequestMessage change_pet_request = 8;
     SyncBattleInformationMessage sync_battle_information = 9;
+    RoundEndMessage round_end = 10;
   }
 }
 
@@ -366,3 +367,5 @@ message SyncBattleInformationMessage{
   string player_name = 2;
   repeated PetMessage pet_messages = 3;
 }
+
+message RoundEndMessage{}

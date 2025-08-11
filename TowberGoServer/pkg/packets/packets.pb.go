@@ -3250,6 +3250,7 @@ type BattlePacket struct {
 	//	*BattlePacket_ChangePet
 	//	*BattlePacket_ChangePetRequest
 	//	*BattlePacket_SyncBattleInformation
+	//	*BattlePacket_RoundEnd
 	Msg           isBattlePacket_Msg `protobuf_oneof:"msg"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -3373,6 +3374,15 @@ func (x *BattlePacket) GetSyncBattleInformation() *SyncBattleInformationMessage 
 	return nil
 }
 
+func (x *BattlePacket) GetRoundEnd() *RoundEndMessage {
+	if x != nil {
+		if x, ok := x.Msg.(*BattlePacket_RoundEnd); ok {
+			return x.RoundEnd
+		}
+	}
+	return nil
+}
+
 type isBattlePacket_Msg interface {
 	isBattlePacket_Msg()
 }
@@ -3413,6 +3423,10 @@ type BattlePacket_SyncBattleInformation struct {
 	SyncBattleInformation *SyncBattleInformationMessage `protobuf:"bytes,9,opt,name=sync_battle_information,json=syncBattleInformation,proto3,oneof"`
 }
 
+type BattlePacket_RoundEnd struct {
+	RoundEnd *RoundEndMessage `protobuf:"bytes,10,opt,name=round_end,json=roundEnd,proto3,oneof"`
+}
+
 func (*BattlePacket_Command) isBattlePacket_Msg() {}
 
 func (*BattlePacket_AttackStats) isBattlePacket_Msg() {}
@@ -3430,6 +3444,8 @@ func (*BattlePacket_ChangePet) isBattlePacket_Msg() {}
 func (*BattlePacket_ChangePetRequest) isBattlePacket_Msg() {}
 
 func (*BattlePacket_SyncBattleInformation) isBattlePacket_Msg() {}
+
+func (*BattlePacket_RoundEnd) isBattlePacket_Msg() {}
 
 type RoundCommandMessage struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
@@ -4129,6 +4145,42 @@ func (x *SyncBattleInformationMessage) GetPetMessages() []*PetMessage {
 	return nil
 }
 
+type RoundEndMessage struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *RoundEndMessage) Reset() {
+	*x = RoundEndMessage{}
+	mi := &file_shared_packets_proto_msgTypes[63]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *RoundEndMessage) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*RoundEndMessage) ProtoMessage() {}
+
+func (x *RoundEndMessage) ProtoReflect() protoreflect.Message {
+	mi := &file_shared_packets_proto_msgTypes[63]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use RoundEndMessage.ProtoReflect.Descriptor instead.
+func (*RoundEndMessage) Descriptor() ([]byte, []int) {
+	return file_shared_packets_proto_rawDescGZIP(), []int{63}
+}
+
 var File_shared_packets_proto protoreflect.FileDescriptor
 
 const file_shared_packets_proto_rawDesc = "" +
@@ -4335,7 +4387,7 @@ const file_shared_packets_proto_rawDesc = "" +
 	"\x04path\x18\x01 \x01(\tR\x04path\"9\n" +
 	"\x18InitialPetRequestMessage\x12\x1d\n" +
 	"\n" +
-	"request_id\x18\x01 \x01(\rR\trequestId\"\x97\x05\n" +
+	"request_id\x18\x01 \x01(\rR\trequestId\"\xd0\x05\n" +
 	"\fBattlePacket\x128\n" +
 	"\acommand\x18\x01 \x01(\v2\x1c.packets.RoundCommandMessageH\x00R\acommand\x12@\n" +
 	"\fattack_stats\x18\x02 \x01(\v2\x1b.packets.AttackStatsMessageH\x00R\vattackStats\x12@\n" +
@@ -4347,7 +4399,9 @@ const file_shared_packets_proto_rawDesc = "" +
 	"\n" +
 	"change_pet\x18\a \x01(\v2!.packets.ChangePetResponseMessageH\x00R\tchangePet\x12P\n" +
 	"\x12change_pet_request\x18\b \x01(\v2 .packets.ChangePetRequestMessageH\x00R\x10changePetRequest\x12_\n" +
-	"\x17sync_battle_information\x18\t \x01(\v2%.packets.SyncBattleInformationMessageH\x00R\x15syncBattleInformationB\x05\n" +
+	"\x17sync_battle_information\x18\t \x01(\v2%.packets.SyncBattleInformationMessageH\x00R\x15syncBattleInformation\x127\n" +
+	"\tround_end\x18\n" +
+	" \x01(\v2\x18.packets.RoundEndMessageH\x00R\broundEndB\x05\n" +
 	"\x03msg\"\xae\x01\n" +
 	"\x13RoundCommandMessage\x123\n" +
 	"\n" +
@@ -4384,7 +4438,8 @@ const file_shared_packets_proto_rawDesc = "" +
 	"\x06number\x18\x01 \x01(\x03R\x06number\x12\x1f\n" +
 	"\vplayer_name\x18\x02 \x01(\tR\n" +
 	"playerName\x126\n" +
-	"\fpet_messages\x18\x03 \x03(\v2\x13.packets.PetMessageR\vpetMessagesB\rZ\vpkg/packetsb\x06proto3"
+	"\fpet_messages\x18\x03 \x03(\v2\x13.packets.PetMessageR\vpetMessages\"\x11\n" +
+	"\x0fRoundEndMessageB\rZ\vpkg/packetsb\x06proto3"
 
 var (
 	file_shared_packets_proto_rawDescOnce sync.Once
@@ -4398,7 +4453,7 @@ func file_shared_packets_proto_rawDescGZIP() []byte {
 	return file_shared_packets_proto_rawDescData
 }
 
-var file_shared_packets_proto_msgTypes = make([]protoimpl.MessageInfo, 63)
+var file_shared_packets_proto_msgTypes = make([]protoimpl.MessageInfo, 64)
 var file_shared_packets_proto_goTypes = []any{
 	(*LoginRequestMessage)(nil),            // 0: packets.LoginRequestMessage
 	(*RegisterRequestMessage)(nil),         // 1: packets.RegisterRequestMessage
@@ -4463,6 +4518,7 @@ var file_shared_packets_proto_goTypes = []any{
 	(*ChangePetRequestMessage)(nil),        // 60: packets.ChangePetRequestMessage
 	(*ChangePetResponseMessage)(nil),       // 61: packets.ChangePetResponseMessage
 	(*SyncBattleInformationMessage)(nil),   // 62: packets.SyncBattleInformationMessage
+	(*RoundEndMessage)(nil),                // 63: packets.RoundEndMessage
 }
 var file_shared_packets_proto_depIdxs = []int32{
 	16, // 0: packets.MailMessage.items:type_name -> packets.ItemMessage
@@ -4523,17 +4579,18 @@ var file_shared_packets_proto_depIdxs = []int32{
 	61, // 55: packets.BattlePacket.change_pet:type_name -> packets.ChangePetResponseMessage
 	60, // 56: packets.BattlePacket.change_pet_request:type_name -> packets.ChangePetRequestMessage
 	62, // 57: packets.BattlePacket.sync_battle_information:type_name -> packets.SyncBattleInformationMessage
-	50, // 58: packets.RoundCommandMessage.change_pet:type_name -> packets.ChangePet
-	51, // 59: packets.RoundCommandMessage.runaway:type_name -> packets.RunAway
-	52, // 60: packets.RoundCommandMessage.attack:type_name -> packets.Attack
-	54, // 61: packets.AttackStatsMessage.buffs:type_name -> packets.Buff
-	27, // 62: packets.AttackStatsMessage.pet_stats:type_name -> packets.PetStatsMessage
-	26, // 63: packets.SyncBattleInformationMessage.pet_messages:type_name -> packets.PetMessage
-	64, // [64:64] is the sub-list for method output_type
-	64, // [64:64] is the sub-list for method input_type
-	64, // [64:64] is the sub-list for extension type_name
-	64, // [64:64] is the sub-list for extension extendee
-	0,  // [0:64] is the sub-list for field type_name
+	63, // 58: packets.BattlePacket.round_end:type_name -> packets.RoundEndMessage
+	50, // 59: packets.RoundCommandMessage.change_pet:type_name -> packets.ChangePet
+	51, // 60: packets.RoundCommandMessage.runaway:type_name -> packets.RunAway
+	52, // 61: packets.RoundCommandMessage.attack:type_name -> packets.Attack
+	54, // 62: packets.AttackStatsMessage.buffs:type_name -> packets.Buff
+	27, // 63: packets.AttackStatsMessage.pet_stats:type_name -> packets.PetStatsMessage
+	26, // 64: packets.SyncBattleInformationMessage.pet_messages:type_name -> packets.PetMessage
+	65, // [65:65] is the sub-list for method output_type
+	65, // [65:65] is the sub-list for method input_type
+	65, // [65:65] is the sub-list for extension type_name
+	65, // [65:65] is the sub-list for extension extendee
+	0,  // [0:65] is the sub-list for field type_name
 }
 
 func init() { file_shared_packets_proto_init() }
@@ -4599,6 +4656,7 @@ func file_shared_packets_proto_init() {
 		(*BattlePacket_ChangePet)(nil),
 		(*BattlePacket_ChangePetRequest)(nil),
 		(*BattlePacket_SyncBattleInformation)(nil),
+		(*BattlePacket_RoundEnd)(nil),
 	}
 	file_shared_packets_proto_msgTypes[49].OneofWrappers = []any{
 		(*RoundCommandMessage_ChangePet)(nil),
@@ -4611,7 +4669,7 @@ func file_shared_packets_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_shared_packets_proto_rawDesc), len(file_shared_packets_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   63,
+			NumMessages:   64,
 			NumExtensions: 0,
 			NumServices:   0,
 		},

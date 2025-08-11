@@ -77,7 +77,7 @@ func (r *BattleRoom) GetEvent(event int, target int) {
 		// 当宠物死亡后，检查是否全部阵亡
 		end := true
 		for _, v := range r.Players[target].EquippedPets() {
-			if v != nil && v.Stats().HP != 0 {
+			if v.Pet != nil && v.Stats().HP != 0 {
 				end = false
 			}
 		}
@@ -120,6 +120,8 @@ func (r *BattleRoom) GetEvent(event int, target int) {
 
 func (r *BattleRoom) Start() {
 	defer func() {
+		close(r.NextRoundChan)
+		close(r.CommandChan)
 		BattleManager.DeleteRoom(r.ID)
 		fmt.Println("stop room...")
 	}()
@@ -134,15 +136,18 @@ func (r *BattleRoom) Start() {
 	for {
 		r.SendEvent(2, 0)
 		r.ready[0], r.ready[1] = false, false
+		fmt.Println("开启新回合")
 		// 发送下一回合通知
 		nextRound := &packets.BattlePacket_StartNextRound{StartNextRound: &packets.StartNextRoundMessage{}}
 		for _, v := range r.Players {
 			v.ProcessMessage(nextRound)
 		}
 
+		fmt.Println("等待指令")
 		// 启动回合，等待玩家的指令
 		commands := r.WaitCommand()
 
+		fmt.Println("处理指令")
 		// 处理指令
 		r.ProcessCommand(commands)
 
@@ -151,6 +156,13 @@ func (r *BattleRoom) Start() {
 			return
 		}
 
+		// 当前回合已经结束
+		roundEnd := packets.BattlePacket_RoundEnd{RoundEnd: &packets.RoundEndMessage{}}
+		for _, v := range r.Players {
+			v.ProcessMessage(&roundEnd)
+		}
+
+		fmt.Println("等待下一回合")
 		// 等待玩家请求下一回合
 		r.WaitNextRound()
 
@@ -172,7 +184,6 @@ func (r *BattleRoom) SyncPlayerInformation(number int) {
 		PlayerName:  r.Players[number].UserName(),
 		PetMessages: petMessages,
 	}
-
 	r.Players[0].ProcessMessage(&packets.BattlePacket_SyncBattleInformation{SyncBattleInformation: &msg})
 	r.Players[1].ProcessMessage(&packets.BattlePacket_SyncBattleInformation{SyncBattleInformation: &msg})
 }

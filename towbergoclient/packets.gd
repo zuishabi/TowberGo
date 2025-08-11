@@ -8093,6 +8093,12 @@ class BattlePacket:
 		service.func_ref = Callable(self, "new_sync_battle_information")
 		data[__sync_battle_information.tag] = service
 		
+		__round_end = PBField.new("round_end", PB_DATA_TYPE.MESSAGE, PB_RULE.OPTIONAL, 10, true, DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE])
+		service = PBServiceField.new()
+		service.field = __round_end
+		service.func_ref = Callable(self, "new_round_end")
+		data[__round_end.tag] = service
+		
 	var data = {}
 	
 	var __command: PBField
@@ -8123,6 +8129,8 @@ class BattlePacket:
 		data[8].state = PB_SERVICE_STATE.UNFILLED
 		__sync_battle_information.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
 		data[9].state = PB_SERVICE_STATE.UNFILLED
+		__round_end.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
+		data[10].state = PB_SERVICE_STATE.UNFILLED
 		__command.value = RoundCommandMessage.new()
 		return __command.value
 	
@@ -8154,6 +8162,8 @@ class BattlePacket:
 		data[8].state = PB_SERVICE_STATE.UNFILLED
 		__sync_battle_information.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
 		data[9].state = PB_SERVICE_STATE.UNFILLED
+		__round_end.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
+		data[10].state = PB_SERVICE_STATE.UNFILLED
 		__attack_stats.value = AttackStatsMessage.new()
 		return __attack_stats.value
 	
@@ -8185,6 +8195,8 @@ class BattlePacket:
 		data[8].state = PB_SERVICE_STATE.UNFILLED
 		__sync_battle_information.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
 		data[9].state = PB_SERVICE_STATE.UNFILLED
+		__round_end.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
+		data[10].state = PB_SERVICE_STATE.UNFILLED
 		__deny_command.value = DenyCommandMessage.new()
 		return __deny_command.value
 	
@@ -8216,6 +8228,8 @@ class BattlePacket:
 		data[8].state = PB_SERVICE_STATE.UNFILLED
 		__sync_battle_information.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
 		data[9].state = PB_SERVICE_STATE.UNFILLED
+		__round_end.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
+		data[10].state = PB_SERVICE_STATE.UNFILLED
 		__start_next_round.value = StartNextRoundMessage.new()
 		return __start_next_round.value
 	
@@ -8247,6 +8261,8 @@ class BattlePacket:
 		data[8].state = PB_SERVICE_STATE.UNFILLED
 		__sync_battle_information.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
 		data[9].state = PB_SERVICE_STATE.UNFILLED
+		__round_end.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
+		data[10].state = PB_SERVICE_STATE.UNFILLED
 		__battle_end.value = BattleEndMessage.new()
 		return __battle_end.value
 	
@@ -8278,6 +8294,8 @@ class BattlePacket:
 		data[8].state = PB_SERVICE_STATE.UNFILLED
 		__sync_battle_information.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
 		data[9].state = PB_SERVICE_STATE.UNFILLED
+		__round_end.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
+		data[10].state = PB_SERVICE_STATE.UNFILLED
 		__round_confirm.value = RoundConfirmMessage.new()
 		return __round_confirm.value
 	
@@ -8309,6 +8327,8 @@ class BattlePacket:
 		data[8].state = PB_SERVICE_STATE.UNFILLED
 		__sync_battle_information.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
 		data[9].state = PB_SERVICE_STATE.UNFILLED
+		__round_end.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
+		data[10].state = PB_SERVICE_STATE.UNFILLED
 		__change_pet.value = ChangePetResponseMessage.new()
 		return __change_pet.value
 	
@@ -8340,6 +8360,8 @@ class BattlePacket:
 		data[8].state = PB_SERVICE_STATE.FILLED
 		__sync_battle_information.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
 		data[9].state = PB_SERVICE_STATE.UNFILLED
+		__round_end.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
+		data[10].state = PB_SERVICE_STATE.UNFILLED
 		__change_pet_request.value = ChangePetRequestMessage.new()
 		return __change_pet_request.value
 	
@@ -8371,8 +8393,43 @@ class BattlePacket:
 		__change_pet_request.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
 		data[8].state = PB_SERVICE_STATE.UNFILLED
 		data[9].state = PB_SERVICE_STATE.FILLED
+		__round_end.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
+		data[10].state = PB_SERVICE_STATE.UNFILLED
 		__sync_battle_information.value = SyncBattleInformationMessage.new()
 		return __sync_battle_information.value
+	
+	var __round_end: PBField
+	func has_round_end() -> bool:
+		if __round_end.value != null:
+			return true
+		return false
+	func get_round_end() -> RoundEndMessage:
+		return __round_end.value
+	func clear_round_end() -> void:
+		data[10].state = PB_SERVICE_STATE.UNFILLED
+		__round_end.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
+	func new_round_end() -> RoundEndMessage:
+		__command.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
+		data[1].state = PB_SERVICE_STATE.UNFILLED
+		__attack_stats.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
+		data[2].state = PB_SERVICE_STATE.UNFILLED
+		__deny_command.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
+		data[3].state = PB_SERVICE_STATE.UNFILLED
+		__start_next_round.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
+		data[4].state = PB_SERVICE_STATE.UNFILLED
+		__battle_end.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
+		data[5].state = PB_SERVICE_STATE.UNFILLED
+		__round_confirm.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
+		data[6].state = PB_SERVICE_STATE.UNFILLED
+		__change_pet.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
+		data[7].state = PB_SERVICE_STATE.UNFILLED
+		__change_pet_request.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
+		data[8].state = PB_SERVICE_STATE.UNFILLED
+		__sync_battle_information.value = DEFAULT_VALUES_3[PB_DATA_TYPE.MESSAGE]
+		data[9].state = PB_SERVICE_STATE.UNFILLED
+		data[10].state = PB_SERVICE_STATE.FILLED
+		__round_end.value = RoundEndMessage.new()
+		return __round_end.value
 	
 	func _to_string() -> String:
 		return PBPacker.message_to_string(data)
@@ -9114,6 +9171,33 @@ class SyncBattleInformationMessage:
 		var element = PetMessage.new()
 		__pet_messages.value.append(element)
 		return element
+	
+	func _to_string() -> String:
+		return PBPacker.message_to_string(data)
+		
+	func to_bytes() -> PackedByteArray:
+		return PBPacker.pack_message(data)
+		
+	func from_bytes(bytes : PackedByteArray, offset : int = 0, limit : int = -1) -> int:
+		var cur_limit = bytes.size()
+		if limit != -1:
+			cur_limit = limit
+		var result = PBPacker.unpack_message(data, bytes, offset, cur_limit)
+		if result == cur_limit:
+			if PBPacker.check_required(data):
+				if limit == -1:
+					return PB_ERR.NO_ERRORS
+			else:
+				return PB_ERR.REQUIRED_FIELDS
+		elif limit == -1 && result > 0:
+			return PB_ERR.PARSE_INCOMPLETE
+		return result
+	
+class RoundEndMessage:
+	func _init():
+		var service
+		
+	var data = {}
 	
 	func _to_string() -> String:
 		return PBPacker.message_to_string(data)

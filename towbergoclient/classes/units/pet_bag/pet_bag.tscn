@@ -1,4 +1,4 @@
-[gd_scene load_steps=30 format=3 uid="uid://blee2cbkjei1w"]
+[gd_scene load_steps=29 format=3 uid="uid://blee2cbkjei1w"]
 
 [ext_resource type="Script" uid="uid://drkpm7cur572c" path="res://classes/units/pet_bag/pet_bag.gd" id="1_b1t0f"]
 [ext_resource type="Texture2D" uid="uid://jwrp3m3e3k4p" path="res://assets/ui/UI assets (1x).png" id="2_yugfw"]
@@ -94,10 +94,6 @@ texture_margin_bottom = 9.0
 [sub_resource type="AtlasTexture" id="AtlasTexture_fuvrp"]
 atlas = ExtResource("2_yugfw")
 region = Rect2(179, 724, 10, 10)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_x85lc"]
-atlas = ExtResource("2_yugfw")
-region = Rect2(163, 724, 10, 10)
 
 [node name="PetBag" type="Window"]
 transparent_bg = true
@@ -657,20 +653,6 @@ texture = SubResource("AtlasTexture_fuvrp")
 expand_mode = 1
 
 [node name="Label" type="Label" parent="SkillDetail/VBoxContainer/Stats1/Cost"]
-layout_mode = 2
-theme_override_font_sizes/font_size = 12
-
-[node name="CoolDown" type="HBoxContainer" parent="SkillDetail/VBoxContainer/Stats1"]
-layout_mode = 2
-
-[node name="TextureRect" type="TextureRect" parent="SkillDetail/VBoxContainer/Stats1/CoolDown"]
-custom_minimum_size = Vector2(10, 10)
-layout_mode = 2
-size_flags_vertical = 4
-texture = SubResource("AtlasTexture_x85lc")
-expand_mode = 1
-
-[node name="Label" type="Label" parent="SkillDetail/VBoxContainer/Stats1/CoolDown"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 12
 

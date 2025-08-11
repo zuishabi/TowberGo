@@ -23,6 +23,7 @@ ItemManager="*res://item_manager.gd"
 PlayerManager="*res://player_manager.gd"
 SkillManager="*res://skill_manager.gd"
 PetManager="*res://pet_manager.gd"
+BattleManager="*res://battle_manager.gd"
 
 [display]
 

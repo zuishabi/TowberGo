@@ -4,7 +4,6 @@ extends PanelContainer
 @onready var _name_text = $VBoxContainer/HBoxContainer/Name
 @onready var _type = $VBoxContainer/HBoxContainer/Type
 @onready var _cost_label = $VBoxContainer/Stats1/Cost/Label
-@onready var _cooldown_label = $VBoxContainer/Stats1/CoolDown/Label
 @onready var _speed_label = $VBoxContainer/Stats1/Speed/Label
 @onready var _description = $VBoxContainer/description
 
@@ -26,7 +25,6 @@ func update(skill:BaseSkill):
 	_name_text.text = skill.skill_name
 	_description.text = skill.description
 	_cost_label.text = str(skill.cost)
-	_cooldown_label.text = str(skill.cool_down)
 	_speed_label.text = str(skill.speed)
 
 func update_hide():

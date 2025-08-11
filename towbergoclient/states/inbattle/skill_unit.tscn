@@ -1,41 +1,41 @@
-[gd_scene load_steps=8 format=3 uid="uid://cvj6a5ysy1q3u"]
+[gd_scene load_steps=8 format=3 uid="uid://bal1wnoxgrhh4"]
 
-[ext_resource type="Script" uid="uid://rngh2umgfo6j" path="res://classes/units/skill_slot/skill_slot.gd" id="1_bpvse"]
-[ext_resource type="Texture2D" uid="uid://jwrp3m3e3k4p" path="res://assets/ui/UI assets (1x).png" id="1_xut5j"]
-[ext_resource type="Texture2D" uid="uid://82k7w1mmedpt" path="res://assets/items/wand.tres" id="3_7lkyj"]
+[ext_resource type="Script" uid="uid://dibknmh7iylgn" path="res://states/inbattle/skill_unit.gd" id="1_lvoaa"]
+[ext_resource type="Texture2D" uid="uid://82k7w1mmedpt" path="res://assets/items/wand.tres" id="2_mdgfd"]
+[ext_resource type="Texture2D" uid="uid://jwrp3m3e3k4p" path="res://assets/ui/UI assets (1x).png" id="3_p8j34"]
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_7lkyj"]
-atlas = ExtResource("1_xut5j")
-region = Rect2(385, 70, 46, 17)
+[sub_resource type="AtlasTexture" id="AtlasTexture_mdgfd"]
+atlas = ExtResource("3_p8j34")
+region = Rect2(243, 3, 42, 42)
 
-[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_v7yte"]
-texture = SubResource("AtlasTexture_7lkyj")
-texture_margin_left = 5.0
-texture_margin_top = 5.0
-texture_margin_right = 5.0
-texture_margin_bottom = 5.0
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_p8j34"]
+texture = SubResource("AtlasTexture_mdgfd")
+texture_margin_left = 8.0
+texture_margin_top = 8.0
+texture_margin_right = 8.0
+texture_margin_bottom = 8.0
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_v7yte"]
-atlas = ExtResource("1_xut5j")
+[sub_resource type="AtlasTexture" id="AtlasTexture_23k4b"]
+atlas = ExtResource("3_p8j34")
 region = Rect2(163, 772, 10, 10)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_rhl70"]
-atlas = ExtResource("1_xut5j")
+[sub_resource type="AtlasTexture" id="AtlasTexture_0gaq8"]
+atlas = ExtResource("3_p8j34")
 region = Rect2(179, 724, 10, 10)
 
-[node name="SkillSlot" type="PanelContainer"]
-custom_minimum_size = Vector2(120, 50)
-offset_right = 22.0
-offset_bottom = 23.0
+[node name="SkillUnit" type="PanelContainer"]
+offset_right = 226.0
+offset_bottom = 102.0
 mouse_default_cursor_shape = 2
-theme_override_styles/panel = SubResource("StyleBoxTexture_v7yte")
-script = ExtResource("1_bpvse")
+theme_override_styles/panel = SubResource("StyleBoxTexture_p8j34")
+script = ExtResource("1_lvoaa")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
 layout_mode = 2
 theme_override_constants/separation = 0
 
 [node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
+custom_minimum_size = Vector2(0, 40)
 layout_mode = 2
 alignment = 1
 
@@ -43,14 +43,13 @@ alignment = 1
 custom_minimum_size = Vector2(20, 20)
 layout_mode = 2
 size_flags_vertical = 4
-texture = ExtResource("3_7lkyj")
+texture = ExtResource("2_mdgfd")
 expand_mode = 1
 
 [node name="Label" type="Label" parent="VBoxContainer/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
-theme_override_font_sizes/font_size = 12
-text = "dwadwa"
+theme_override_font_sizes/font_size = 24
 horizontal_alignment = 1
 vertical_alignment = 1
 
@@ -62,13 +61,14 @@ alignment = 1
 [node name="TextureRect" type="TextureRect" parent="VBoxContainer/HBoxContainer2"]
 custom_minimum_size = Vector2(10, 10)
 layout_mode = 2
+size_flags_horizontal = 4
 size_flags_vertical = 4
-texture = SubResource("AtlasTexture_v7yte")
+texture = SubResource("AtlasTexture_23k4b")
 expand_mode = 1
 
 [node name="SpeedText" type="Label" parent="VBoxContainer/HBoxContainer2"]
+custom_minimum_size = Vector2(50, 0)
 layout_mode = 2
-size_flags_horizontal = 3
 theme_override_font_sizes/font_size = 10
 horizontal_alignment = 1
 vertical_alignment = 1
@@ -78,17 +78,15 @@ text_overrun_behavior = 1
 custom_minimum_size = Vector2(10, 10)
 layout_mode = 2
 size_flags_vertical = 4
-texture = SubResource("AtlasTexture_rhl70")
+texture = SubResource("AtlasTexture_0gaq8")
 expand_mode = 1
 
 [node name="CostText" type="Label" parent="VBoxContainer/HBoxContainer2"]
+custom_minimum_size = Vector2(50, 0)
 layout_mode = 2
-size_flags_horizontal = 3
 theme_override_font_sizes/font_size = 10
 horizontal_alignment = 1
 vertical_alignment = 1
 text_overrun_behavior = 1
 
 [connection signal="gui_input" from="." to="." method="_on_gui_input"]
-[connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]
-[connection signal="mouse_exited" from="." to="." method="_on_mouse_exited"]
