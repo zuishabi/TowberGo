@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=3 uid="uid://cc083armwg684"]
+[gd_scene load_steps=26 format=3 uid="uid://cc083armwg684"]
 
 [ext_resource type="Script" uid="uid://dd0d3amb3xsju" path="res://states/ingame/ingame.gd" id="1_b7vyf"]
 [ext_resource type="PackedScene" uid="uid://7e1771outtfj" path="res://classes/windows/window.tscn" id="2_0uskn"]
@@ -19,6 +19,7 @@
 [ext_resource type="PackedScene" uid="uid://blee2cbkjei1w" path="res://classes/units/pet_bag/pet_bag.tscn" id="14_4a0li"]
 [ext_resource type="PackedScene" uid="uid://bb6t6tahripdy" path="res://classes/units/itemsitem_detail/item_detail.tscn" id="15_srvs0"]
 [ext_resource type="PackedScene" uid="uid://qdg4h5ru2jm7" path="res://classes/units/use_item_window/use_item_window.tscn" id="16_5a6q2"]
+[ext_resource type="Script" uid="uid://dbk1ea1sv75p3" path="res://states/ingame/npc_manager.gd" id="20_8sreh"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ube6o"]
 
@@ -250,6 +251,10 @@ y_sort_enabled = true
 script = ExtResource("4_wuwgw")
 
 [node name="PlayerManager" parent="." instance=ExtResource("3_q22go")]
+
+[node name="NPCManager" type="Node2D" parent="."]
+y_sort_enabled = true
+script = ExtResource("20_8sreh")
 
 [connection signal="pressed" from="UI/ChatBox/VBoxContainer/Close" to="UI/ChatBox" method="_on_close_pressed"]
 [connection signal="tab_changed" from="UI/ChatBox/VBoxContainer/TabBar" to="UI/ChatBox" method="_on_tab_bar_tab_changed"]

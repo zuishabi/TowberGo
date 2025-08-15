@@ -7,6 +7,7 @@ import (
 
 var BuroSkillList map[int]objects.Skill = map[int]objects.Skill{
 	1: &skills.Bite{},
+	5: &skills.TripleStrike{},
 }
 
 type Buro struct {
@@ -70,6 +71,10 @@ func (b *Buro) UnlockedSkillList() []objects.Skill {
 
 func (b *Buro) EquippedSkills() [4]objects.Skill {
 	return b.equippedSkills
+}
+
+func (b *Buro) SetSkill(pos int, skill objects.Skill) {
+	b.equippedSkills[pos] = skill
 }
 
 func (b *Buro) Initialize(exp int, equippedSkills []uint32, stats *objects.Stats, owner *objects.Player) objects.Pet {

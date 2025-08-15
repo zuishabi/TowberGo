@@ -14,6 +14,7 @@ type InBattle struct {
 	Num         int
 	currentPet  *objects.BattlePet
 	equippedPet [5]*objects.BattlePet
+	SavedState  internal.ClientStateHandler
 }
 
 func (i *InBattle) Name() string {
@@ -25,9 +26,10 @@ func (i *InBattle) SetClient(client internal.ClientInterface) {
 }
 
 func (i *InBattle) OnEnter() {
+	msg := packets.Packet_SyncState{SyncState: &packets.SyncState{State: 3}}
+	i.client.SocketSend(&msg)
 	i.Player.PetBagLock.RLock()
 	defer i.Player.PetBagLock.RUnlock()
-	fmt.Println("注册玩家装备宠物...")
 	for k, v := range i.Player.EquippedPets {
 		i.equippedPet[k] = &objects.BattlePet{
 			Pet:   v,
@@ -52,11 +54,8 @@ func (i *InBattle) ClearResources() {
 		i.Player.Area.RemovePlayer(i.Player.UID)
 	}
 	if i.BattleRoom != nil {
-		i.BattleRoom.Players[i.Num] = &objects.AutoBattlePlayer{
-			Number:        i.Num,
-			CommandChan:   i.BattleRoom.CommandChan,
-			NextRoundChan: i.BattleRoom.NextRoundChan,
-		}
+		// 替换自动
+		i.BattleRoom.ReplacePlayerAuto(i.Num)
 	}
 }
 
@@ -77,8 +76,9 @@ func (i *InBattle) ProcessMessage(message packets.BattleMsg) {
 			Number: i.Num,
 		}
 	case *packets.BattlePacket_BattleEnd:
+		fmt.Println(i.Player.UserName, "结束战斗")
 		i.client.SocketSend(&packets.Packet_BattlePacket{BattlePacket: &packets.BattlePacket{Msg: battleMsg}})
-		i.client.SetState(&InGame{Player: i.Player})
+		i.client.SetState(i.SavedState)
 	case *packets.BattlePacket_StartNextRound, *packets.BattlePacket_DenyCommand, *packets.BattlePacket_AttackStats,
 		*packets.BattlePacket_ChangePetRequest, *packets.BattlePacket_SyncBattleInformation, *packets.BattlePacket_RoundEnd:
 		i.client.SocketSend(&packets.Packet_BattlePacket{BattlePacket: &packets.BattlePacket{Msg: battleMsg}})
@@ -103,4 +103,8 @@ func (i *InBattle) SetBattleRoom(room *objects.BattleRoom) {
 
 func (i *InBattle) UserName() string {
 	return i.Player.UserName
+}
+
+func (i *InBattle) GetPlayer() *objects.Player {
+	return i.Player
 }

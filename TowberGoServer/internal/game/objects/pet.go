@@ -24,6 +24,7 @@ type Pet interface {
 	Level() int
 	UnlockedSkillList() []Skill
 	EquippedSkills() [4]Skill
+	SetSkill(pos int, skill Skill)
 	Initialize(exp int, equippedSkills []uint32, stats *Stats, owner *Player) Pet
 	Stats() *Stats
 	BaseStats() Stats
@@ -45,9 +46,9 @@ type Stats struct {
 	Defense      int
 }
 
-var MaxExp = 320
+var MaxExp = 1024
 var LevelList = []int{
-	20, 40, 80, 160, 320,
+	20, 40, 80, 160, 320, 480, 660, 860, 1080, 1024,
 }
 
 func ConvertExpToLevel(exp int) int {
@@ -350,6 +351,6 @@ func (p *PetManagerStruct) LearnSkill(pet Pet, skill uint32, position int) error
 	if position < 0 || position >= len(equippedSkills) {
 		return errors.New("error position")
 	}
-	equippedSkills[position] = s
+	pet.SetSkill(position, s)
 	return nil
 }

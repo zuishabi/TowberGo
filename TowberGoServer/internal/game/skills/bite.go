@@ -17,7 +17,7 @@ func (b *Bite) ID() uint32 {
 func (b *Bite) Use(self *objects.BattlePet, enemy *objects.BattlePet) []*objects.AttackInfo {
 	return []*objects.AttackInfo{
 		{
-			PhysicalDamage: 10,
+			PhysicalDamage: 50,
 			MagicDamage:    0,
 			Skill:          b.ID(),
 		},

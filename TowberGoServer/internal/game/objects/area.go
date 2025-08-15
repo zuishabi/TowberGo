@@ -16,6 +16,8 @@ type Area interface {
 	ProcessMessage(sender *Player, packet packets.Msg)
 	Initialize()
 	CheckCanEnter(player *Player) (bool, string)
+	GetAreaInfo(player *Player)
+	GetNPCs() []NPC
 }
 
 var AreaMgr *AreaManager
@@ -74,17 +76,6 @@ func (b *BaseArea) RemovePlayer(uid uint32) {
 }
 
 func (b *BaseArea) AddPlayer(player *Player, id uint32) {
-	msg := &packets.PlayerEnterAreaMessage{}
-	otherInfo := &packets.Packet_PlayerEnter{PlayerEnter: msg}
-	b.Players.ForEach(func(uid uint32, p *Player) {
-		if player == nil {
-			return
-		}
-		msg.X = p.Position.X
-		msg.Y = p.Position.Y
-		msg.Username = p.UserName
-		player.Client.SocketSendAs(otherInfo, uid)
-	})
 	b.Players.Set(player.UID, player)
 	player.Area = b.Expansion
 	pos := b.Expansion.GetEntrance(id)
@@ -95,7 +86,6 @@ func (b *BaseArea) AddPlayer(player *Player, id uint32) {
 		Y:        pos.Y,
 	}}}
 	b.BroadcastArea(&packet, true)
-	player.Client.SocketSend(packet.Msg)
 }
 
 func (b *BaseArea) ProcessMessage(sender *Player, message packets.Msg) bool {
@@ -109,4 +99,29 @@ func (b *BaseArea) ProcessMessage(sender *Player, message packets.Msg) bool {
 		processed = false
 	}
 	return processed
+}
+
+func (b *BaseArea) GetAreaInfo(player *Player) {
+	b.Players.ForEach(func(uid uint32, p *Player) {
+		if player == nil {
+			return
+		}
+		msg := &packets.PlayerEnterAreaMessage{}
+		msg.X = p.Position.X
+		msg.Y = p.Position.Y
+		msg.Username = p.UserName
+		player.Client.SocketSendAs(&packets.Packet_PlayerEnter{PlayerEnter: msg}, uid)
+	})
+
+	// 发送所有npc信息
+	npcs := make([]*packets.NPCInfoMessage, 0)
+	for _, v := range b.Expansion.GetNPCs() {
+		info := &packets.NPCInfoMessage{
+			Id: v.ID(),
+			X:  v.GetPos().X,
+			Y:  v.GetPos().Y,
+		}
+		npcs = append(npcs, info)
+	}
+	player.Client.SocketSend(&packets.Packet_GetAreaNpcs{GetAreaNpcs: &packets.GetAreaNPCsMessage{NpcInfo: npcs}})
 }

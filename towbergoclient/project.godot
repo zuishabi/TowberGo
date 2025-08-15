@@ -19,11 +19,11 @@ config/icon="res://icon.svg"
 
 WS="*res://websocket.gd"
 GameManager="*res://game_manager.gd"
-ItemManager="*res://item_manager.gd"
+ItemManager="*res://classes/items/item_manager.gd"
 PlayerManager="*res://player_manager.gd"
-SkillManager="*res://skill_manager.gd"
-PetManager="*res://pet_manager.gd"
-BattleManager="*res://battle_manager.gd"
+SkillManager="*res://classes/skills/skill_manager.gd"
+PetManager="*res://classes/pets/pet_manager.gd"
+BattleManager="*res://states/inbattle/battle_manager.gd"
 
 [display]
 

@@ -3,6 +3,9 @@ extends Node
 var loaded:bool = false
 var item_bag:Dictionary[int,BaseItem]
 var pet_item_bag:Dictionary[int,BasePetItem]
+var id:int
+var username:String
+var can_move:bool = true
 
 func delete_item(id:int,count:int):
 	item_bag[id].item_count -= count

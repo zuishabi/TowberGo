@@ -14,6 +14,11 @@ func _ready():
 func _on_ws_packted_received(msg:packets.Packet):
 	if msg.has_battle_packet():
 		_process_battle_packet(msg.get_battle_packet())
+	elif msg.has_sync_state():
+		if msg.get_sync_state().get_state() == 1:
+			GameManager.set_state(GameManager.State.ENTERED)
+		elif msg.get_sync_state().get_state() == 2:
+			GameManager.set_state(GameManager.State.INGAME)
 
 
 func _process_battle_packet(msg:packets.BattlePacket):

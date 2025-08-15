@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="BaseSkill" load_steps=2 format=3 uid="uid://bk5s6jy1rj83m"]
+
+[ext_resource type="Script" uid="uid://dwjntohumbn67" path="res://classes/skills/base_skill.gd" id="1_w2p6k"]
+
+[resource]
+script = ExtResource("1_w2p6k")
+skill_id = 2
+skill_name = "TripleStrike"
+cost = 10
+speed = 2
+description = "..."
+type = 1
+metadata/_custom_type_script = "uid://dwjntohumbn67"

@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="BaseNPC" load_steps=4 format=3 uid="uid://duqe57rluxx3i"]
+
+[ext_resource type="Script" uid="uid://dtos5w4cbbp3o" path="res://classes/npcs/base_npc.gd" id="1_nmg2m"]
+[ext_resource type="Texture2D" uid="uid://npqgns8lq3by" path="res://assets/character/01 - Full spritesheet (16x24).png" id="1_tqmb3"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7msii"]
+atlas = ExtResource("1_tqmb3")
+region = Rect2(0, 3, 16, 24)
+
+[resource]
+script = ExtResource("1_nmg2m")
+npc_name = "InitialVillageHead"
+npc_id = 1
+npc_texture = SubResource("AtlasTexture_7msii")
+metadata/_custom_type_script = "uid://dtos5w4cbbp3o"

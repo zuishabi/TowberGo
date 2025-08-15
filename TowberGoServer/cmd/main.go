@@ -81,6 +81,9 @@ func main() {
 	// 创建SkillManager并进行初始化
 	objects.SkillManager = &objects.SkillManagerStruct{SkillList: list.SkillsList}
 
+	// 创建LootManager并进行初始化
+	objects.LootManager = &objects.LootManagerStruct{}
+
 	// 定义websocket处理
 	http.HandleFunc("/ws", func(w http.ResponseWriter, r *http.Request) {
 		hub.Serve(clients.NewWebSocketClient, w, r)

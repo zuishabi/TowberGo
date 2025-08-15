@@ -201,3 +201,7 @@ func (c *WebSocketClient) Lock() {
 func (c *WebSocketClient) UnLock() {
 	c.lock.Unlock()
 }
+
+func (c *WebSocketClient) GetState() internal.ClientStateHandler {
+	return c.state
+}

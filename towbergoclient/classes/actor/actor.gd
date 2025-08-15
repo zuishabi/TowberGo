@@ -6,14 +6,17 @@ const packets := preload("res://packets.gd")
 var is_self:bool
 var uid:int
 var _target_pos:Vector2
+var user_name:String
 
 @onready var _move_ray = $MoveRay
 @onready var _body = $Sprites/Body
 @onready var _camera_2d:Camera2D = $Camera2D
+@onready var _name_text = $Name
 
 func _ready():
-	if uid == 0:
+	if uid == PlayerManager.id:
 		_camera_2d.enabled = true
+	_name_text.text = user_name
 
 func move_towards(from:Vector2,to:Vector2):
 	self.global_position = from
@@ -30,7 +33,7 @@ func _process(delta):
 	move_and_slide()
 
 func _unhandled_input(event:InputEvent):
-	if GameManager.can_move && is_self && event.is_action_pressed("left_mouse"):
+	if PlayerManager.can_move && is_self && event.is_action_pressed("left_mouse"):
 		var target:Vector2 = get_global_mouse_position()
 		_move_ray.target_position = to_local(target)
 		_move_ray.force_raycast_update()

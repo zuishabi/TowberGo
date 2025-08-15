@@ -53,3 +53,7 @@ func (a *AdventureHub) ProcessMessage(sender *objects.Player, message packets.Ms
 func (a *AdventureHub) CheckCanEnter(player *objects.Player) (bool, string) {
 	return true, ""
 }
+
+func (a *AdventureHub) GetNPCs() []objects.NPC {
+	return nil
+}

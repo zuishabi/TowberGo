@@ -24,10 +24,8 @@ signal use_pet_item_success
 signal use_item_success
 signal update_equipped_pet_info(pet:BasePet,id:int)
 
-var id:int
-var username:String
+
 var _current_scene_root:Node
-var can_move:bool = true
 const packets := preload("res://packets.gd")
 
 func set_state(state:State):

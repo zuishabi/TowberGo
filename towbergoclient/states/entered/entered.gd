@@ -38,8 +38,8 @@ func _on_ws_packted_received(msg:packets.Packet):
 	elif msg.has_deny_response():
 		_window.show_confirm(msg.get_deny_response().get_reason())
 	elif msg.has_login_success():
-		GameManager.id = msg.get_login_success().get_uid()
-		GameManager.username = msg.get_login_success().get_username()
+		PlayerManager.id = msg.get_login_success().get_uid()
+		PlayerManager.username = msg.get_login_success().get_username()
 		GameManager.set_state(GameManager.State.INGAME)
 
 func set_ok_callable(callable:Callable):

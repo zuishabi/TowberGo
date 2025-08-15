@@ -27,6 +27,8 @@ func (g *InGame) SetClient(client internal.ClientInterface) {
 
 // OnEnter 每次状态改变时调用
 func (g *InGame) OnEnter() {
+	msg := packets.Packet_SyncState{SyncState: &packets.SyncState{State: 2}}
+	g.client.SocketSend(&msg)
 	if !g.hasEntered {
 		g.Player.EquippedPets = objects.PetManager.GetPetBag(g.Player)
 		g.hasEntered = true
@@ -34,6 +36,9 @@ func (g *InGame) OnEnter() {
 			AreaName:   "InitialVillage",
 			EntranceId: 0,
 		}})
+	} else {
+		rsp := utils.NewPlayerEnterAreaResponse(true, "", g.Player.Area.Name())
+		g.client.SocketSend(rsp)
 	}
 }
 
@@ -60,12 +65,12 @@ func (g *InGame) HandleMessage(senderID uint32, message packets.Msg) {
 			return
 		}
 		success, reason := area.CheckCanEnter(g.Player)
-		rsp := utils.NewPlayerEnterAreaResponse(success, reason, area.Name())
-		g.client.SocketSend(rsp)
 		if g.Player.Area != nil {
 			g.Player.Area.RemovePlayer(g.Player.UID)
 		}
 		area.AddPlayer(g.Player, message.PlayerEnterRequest.EntranceId)
+		rsp := utils.NewPlayerEnterAreaResponse(success, reason, area.Name())
+		g.client.SocketSend(rsp)
 	case *packets.Packet_Chat:
 		if message.Chat.Type == 1 {
 			g.handleChatMessage(senderID, message)
@@ -102,6 +107,10 @@ func (g *InGame) HandleMessage(senderID uint32, message packets.Msg) {
 		g.handleUsePetItemRequest(message.UsePetItemRequest)
 	case *packets.Packet_EquippedPetInfoRequest:
 		g.handleEquippedPetInfoRequest(message.EquippedPetInfoRequest.Id)
+	case *packets.Packet_StartBattle:
+		g.client.SocketSend(message)
+	case *packets.Packet_GetAreaRequest:
+		g.Player.Area.GetAreaInfo(g.Player)
 	default:
 		if g.Player.Area == nil {
 			return

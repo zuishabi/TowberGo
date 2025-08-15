@@ -115,6 +115,32 @@ message UseBagItemResponseMessage{
   string reason = 2;
 }
 
+
+// 刷新当前所在area的全部信息
+message GetAreaRequest{}
+
+// 同步客户端和服务器的状态
+message SyncState{
+  uint32 state = 1;// 1=Connect,2=InGame,3=InBattle
+}
+
+// 同步区域内npc信息
+message GetAreaNPCsMessage{
+  repeated NPCInfoMessage npc_info = 1;
+}
+
+// NPC信息
+message NPCInfoMessage{
+  uint32 id = 1;
+  float x = 3;
+  float y = 4;
+}
+
+message InteractNPCRequestMessage{
+  uint32 id = 1;
+}
+
+
 //----------------------------------------宠物背包-----------------------
 
 message GetPetMessage{
@@ -272,6 +298,10 @@ message Packet{
     BattleInvitingResponseMessage battle_inviting_response = 41;
     BattleInvitingMessage battle_inviting = 42;
     StartBattleMessage start_battle = 43;
+    GetAreaRequest get_area_request = 44;
+    SyncState sync_state = 45;
+    GetAreaNPCsMessage get_area_npcs = 46;
+    InteractNPCRequestMessage interact_npc_request = 47;
   }
 }
 
@@ -369,3 +399,5 @@ message SyncBattleInformationMessage{
 }
 
 message RoundEndMessage{}
+
+//---------------------------------NPC互动----------------------------

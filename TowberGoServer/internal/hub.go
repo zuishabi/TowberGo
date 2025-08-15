@@ -31,6 +31,7 @@ type ClientInterface interface {
 	// ProcessMessage 处理消息
 	ProcessMessage(senderID uint32, message packets.Msg)
 	SetState(newState ClientStateHandler)
+	GetState() ClientStateHandler
 	// SocketSend 将数据写入write pump中
 	SocketSend(message packets.Msg)
 	// SocketSendAs 从其他客户端那里转发数据到write pump

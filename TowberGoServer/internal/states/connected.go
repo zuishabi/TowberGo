@@ -24,7 +24,10 @@ func (c *Connected) SetClient(client internal.ClientInterface) {
 	c.logger = log.New(log.Writer(), loggingPrefix, log.LstdFlags)
 }
 
-func (c *Connected) OnEnter() {}
+func (c *Connected) OnEnter() {
+	msg := packets.Packet_SyncState{SyncState: &packets.SyncState{State: 1}}
+	c.client.SocketSend(&msg)
+}
 
 func (c *Connected) HandleMessage(senderId uint32, message packets.Msg) {
 	switch message := message.(type) {

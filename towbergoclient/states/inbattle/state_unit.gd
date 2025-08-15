@@ -21,8 +21,6 @@ func update_pet(pet:BattleManager.BattlePet):
 	_texture_rect.texture = pet.pet.pet_texture
 	_name_text.text = pet.pet.pet_name + " lv." + str(pet.pet.level)
 	_hp.max_value = pet.pet.max_hp
-	_hp.value = pet.pet.hp
+	_hp.update_value(pet.pet.hp)
 	_mana.max_value = pet.pet.max_mana
-	_mana.value = pet.pet.mana
-	_hp_text.text = str(pet.pet.hp) + "/" + str(pet.pet.max_hp)
-	_mana_text.text = str(pet.pet.mana) + "/" + str(pet.pet.max_mana)
+	_mana.update_value(pet.pet.mana)

@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"math"
 	"sync"
+	"sync/atomic"
 	"time"
 )
 
@@ -46,6 +47,9 @@ type BattleRoom struct {
 	NextRoundChan chan int
 	CommandChan   chan *Command
 	End           bool
+	winner        int
+	CurrentStage  atomic.Int32
+	Looter        LootTable
 }
 
 func (r *BattleRoom) GetTheOtherPlayer(num int) int {
@@ -124,6 +128,20 @@ func (r *BattleRoom) Start() {
 		close(r.CommandChan)
 		BattleManager.DeleteRoom(r.ID)
 		fmt.Println("stop room...")
+		msg := &packets.BattlePacket_BattleEnd{BattleEnd: &packets.BattleEndMessage{Winner: int64(r.winner)}}
+		for _, v := range r.Players {
+			v.ProcessMessage(msg)
+		}
+
+		// 总结奖励
+		if r.Looter != nil && r.Players[r.winner].GetPlayer() != nil {
+			err := LootManager.GetLoot(r.Players[r.winner].GetPlayer(), r.Looter, 0.5)
+			if err != nil {
+				r.Players[r.winner].GetPlayer().Client.SocketSend(&packets.Packet_DenyResponse{
+					DenyResponse: &packets.DenyResponseMessage{Reason: err.Error()}},
+				)
+			}
+		}
 	}()
 	r.Players[0].SetBattleRoom(r)
 	r.Players[1].SetBattleRoom(r)
@@ -136,25 +154,17 @@ func (r *BattleRoom) Start() {
 	for {
 		r.SendEvent(2, 0)
 		r.ready[0], r.ready[1] = false, false
-		fmt.Println("开启新回合")
 		// 发送下一回合通知
 		nextRound := &packets.BattlePacket_StartNextRound{StartNextRound: &packets.StartNextRoundMessage{}}
 		for _, v := range r.Players {
 			v.ProcessMessage(nextRound)
 		}
 
-		fmt.Println("等待指令")
 		// 启动回合，等待玩家的指令
 		commands := r.WaitCommand()
 
-		fmt.Println("处理指令")
 		// 处理指令
 		r.ProcessCommand(commands)
-
-		// 检查战斗是否结束
-		if r.End {
-			return
-		}
 
 		// 当前回合已经结束
 		roundEnd := packets.BattlePacket_RoundEnd{RoundEnd: &packets.RoundEndMessage{}}
@@ -162,9 +172,13 @@ func (r *BattleRoom) Start() {
 			v.ProcessMessage(&roundEnd)
 		}
 
-		fmt.Println("等待下一回合")
 		// 等待玩家请求下一回合
 		r.WaitNextRound()
+
+		// 检查战斗是否结束
+		if r.End {
+			return
+		}
 
 		r.round++
 		r.SendEvent(3, 0)
@@ -189,6 +203,8 @@ func (r *BattleRoom) SyncPlayerInformation(number int) {
 }
 
 func (r *BattleRoom) WaitNextRound() {
+	r.CurrentStage.Store(2)
+	defer func() { r.CurrentStage.Store(0) }()
 	for {
 		select {
 		case num := <-r.NextRoundChan:
@@ -203,16 +219,15 @@ func (r *BattleRoom) WaitNextRound() {
 // EndBattle 结束战斗，销毁房间，发送战斗统计信息
 func (r *BattleRoom) EndBattle(winner int) {
 	r.End = true
-	msg := &packets.BattlePacket_BattleEnd{BattleEnd: &packets.BattleEndMessage{Winner: int64(winner)}}
-	for _, v := range r.Players {
-		v.ProcessMessage(msg)
-	}
+	r.winner = winner
 }
 
 func (r *BattleRoom) WaitCommand() [2]*Command {
 	commands := [2]*Command{}
 	valid := [2]bool{}
 	timer := time.After(15 * time.Second)
+	r.CurrentStage.Store(1)
+	defer func() { r.CurrentStage.Store(0) }()
 	for {
 		select {
 		case cmd := <-r.CommandChan:
@@ -255,6 +270,7 @@ func (r *BattleRoom) ProcessCommand(commands [2]*Command) {
 			skill := r.Players[i].CurrentPet().EquippedSkills()[command.Attack.SkillPos]
 			skills[i] = skill
 		case *packets.RoundCommandMessage_Runaway:
+			fmt.Println("逃跑")
 			r.EndBattle(r.GetTheOtherPlayer(commands[i].Number))
 			return
 		case *packets.RoundCommandMessage_ChangePet:
@@ -280,6 +296,9 @@ func (r *BattleRoom) ProcessCommand(commands [2]*Command) {
 			v.From = r.Players[first].CurrentPet()
 			v.To = r.Players[second].CurrentPet()
 			r.ProcessAttackInfo(v, first, second)
+			if r.End {
+				return
+			}
 		}
 
 		attack1 := skills[second].Use(r.Players[second].CurrentPet(), r.Players[first].CurrentPet())
@@ -287,6 +306,9 @@ func (r *BattleRoom) ProcessCommand(commands [2]*Command) {
 			v.From = r.Players[first].CurrentPet()
 			v.To = r.Players[second].CurrentPet()
 			r.ProcessAttackInfo(v, second, first)
+			if r.End {
+				return
+			}
 		}
 	} else {
 		for i, v := range skills {
@@ -296,6 +318,9 @@ func (r *BattleRoom) ProcessCommand(commands [2]*Command) {
 					k.From = r.Players[i].CurrentPet()
 					k.To = r.Players[r.GetTheOtherPlayer(i)].CurrentPet()
 					r.ProcessAttackInfo(k, i, r.GetTheOtherPlayer(i))
+					if r.End {
+						return
+					}
 				}
 			}
 		}
@@ -361,6 +386,7 @@ type BattlePlayer interface {
 	EquippedPets() [5]*BattlePet
 	SetBattleRoom(room *BattleRoom)
 	UserName() string
+	GetPlayer() *Player
 }
 
 type BattlePet struct {
@@ -402,7 +428,16 @@ type Command struct {
 
 func (r *BattleRoom) ReplacePlayerAuto(number int) {
 	r.Players[number] = &AutoBattlePlayer{CommandChan: r.CommandChan, NextRoundChan: r.NextRoundChan}
-	r.NextRoundChan <- number
+	if r.CurrentStage.Load() == 1 {
+		r.CommandChan <- &Command{
+			Msg: &packets.RoundCommandMessage{
+				Command: &packets.RoundCommandMessage_Runaway{},
+			},
+			Number: number,
+		}
+	} else if r.CurrentStage.Load() == 2 {
+		r.NextRoundChan <- number
+	}
 }
 
 type AutoBattlePlayer struct {
@@ -422,6 +457,8 @@ func (a *AutoBattlePlayer) ProcessMessage(message packets.BattleMsg) {
 			Number: a.Number,
 		}
 		a.CommandChan <- cmd
+	case *packets.BattlePacket_RoundEnd:
+		a.NextRoundChan <- a.Number
 	}
 	// 其它消息不处理
 }
@@ -435,7 +472,7 @@ func (a *AutoBattlePlayer) SetCurrentPet(pet *BattlePet) {
 }
 
 func (a *AutoBattlePlayer) EquippedPets() [5]*BattlePet {
-	return [5]*BattlePet{}
+	return [5]*BattlePet{&BattlePet{Pet: nil}, &BattlePet{Pet: nil}, &BattlePet{Pet: nil}, &BattlePet{Pet: nil}, &BattlePet{Pet: nil}}
 }
 
 func (a *AutoBattlePlayer) SetBattleRoom(room *BattleRoom) {
@@ -444,6 +481,10 @@ func (a *AutoBattlePlayer) SetBattleRoom(room *BattleRoom) {
 
 func (a *AutoBattlePlayer) UserName() string {
 	return "auto battle"
+}
+
+func (a *AutoBattlePlayer) GetPlayer() *Player {
+	return nil
 }
 
 func newPetMessage(pet Pet) *packets.PetMessage {

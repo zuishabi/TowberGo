@@ -21,3 +21,6 @@ func set_current_area(area:String):
 	player_manager.refresh()
 	add_child(new_scene)
 	current_area = new_scene
+	var get_area_info := GameManager.packets.Packet.new()
+	get_area_info.new_get_area_request()
+	WS.send(get_area_info)

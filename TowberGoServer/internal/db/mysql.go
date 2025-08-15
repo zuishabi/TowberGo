@@ -74,3 +74,12 @@ type EquippedPets struct {
 	Slot4 uint64
 	Slot5 uint64
 }
+
+type PlayerTaskProgress struct {
+	PlayerID   int64  `gorm:"primaryKey"`
+	TaskID     int    `gorm:"primaryKey"`
+	Status     int    // 0=未开始, 1=进行中, 2=已完成, 3=已领取奖励
+	Progress   string // JSON格式的进度数据
+	StartTime  time.Time
+	UpdateTime time.Time
+}

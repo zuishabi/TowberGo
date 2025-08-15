@@ -5,7 +5,7 @@ const packets := preload("res://packets.gd")
 var PetList:Dictionary[int,BasePet] = {
 	1:preload("res://classes/pets/buro.tres"),
 }
-var ExpList:PackedInt32Array = [20, 40, 80, 160, 320]
+var ExpList:PackedInt32Array = [20, 40, 80, 160, 320, 480, 660, 860, 1080, 1024]
 
 class Stats:
 	var max_hp:int

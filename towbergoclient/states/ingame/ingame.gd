@@ -12,6 +12,7 @@ const GET_WINDOW = preload("res://classes/units/get_window/get_window.tscn")
 @onready var _bag_window = $UI/Bag
 @onready var _ui = $UI
 @onready var _pet_bag = $UI/PetBag
+@onready var _npc_manager = $NPCManager
 
 
 func _ready():
@@ -104,13 +105,24 @@ func _on_ws_packted_received(msg:packets.Packet):
 	elif msg.has_start_battle():
 		print("切换至战斗状态")
 		BattleManager.refresh(msg.get_start_battle().get_number())
-		GameManager.set_state(GameManager.State.INBATTLE)
+	elif msg.has_sync_state():
+		if msg.get_sync_state().get_state() == 1:
+			GameManager.set_state(GameManager.State.ENTERED)
+		elif msg.get_sync_state().get_state() == 3:
+			GameManager.set_state(GameManager.State.INBATTLE)
+	elif msg.has_get_area_npcs():
+		_npc_manager.refresh()
+		for i in msg.get_get_area_npcs().get_npc_info():
+			var npc:NPC = _npc_manager.msg_to_npc(i)
+			_npc_manager.add_npc(npc,Vector2(i.get_x(),i.get_y()))
 
 
 func _handle_player_enter(sender_id:int,msg:packets.PlayerEnterAreaMessage):
+	print("玩家进入",msg.get_username(),msg.get_x(),":",msg.get_y())
 	var new_actor:Actor = ACTOR.instantiate()
 	new_actor.uid = sender_id
-	new_actor.is_self = sender_id == 0
+	new_actor.user_name = msg.get_username()
+	new_actor.is_self = sender_id == PlayerManager.id
 	new_actor.global_position = Vector2(msg.get_x(),msg.get_y())
 	new_actor._target_pos = new_actor.global_position
 	_player_manager.add_player(new_actor)

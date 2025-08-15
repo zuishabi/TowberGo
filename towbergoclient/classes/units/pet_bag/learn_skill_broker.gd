@@ -16,8 +16,8 @@ func update(pet:BasePet):
 	for i in _skill_list.get_children():
 		i.queue_free()
 	var unlocked_skills := pet.skill_list.duplicate()
-	for i in unlocked_skills:
-		if i > pet.level:
+	for i in unlocked_skills.keys():
+		if  i > pet.level:
 			unlocked_skills.erase(i)
 		if pet.skills.has(unlocked_skills[i]):
 			unlocked_skills.erase(i)
