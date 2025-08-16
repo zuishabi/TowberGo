@@ -44,7 +44,10 @@ func (v *InitialVillage) ProcessMessage(sender *objects.Player, message packets.
 }
 
 func (v *InitialVillage) Initialize() {
-	v.npcs = []objects.NPC{&npcs.InitialVillageHealer{}}
+	v.npcs = []objects.NPC{&npcs.InitialVillageHealer{}, &npcs.InitialVillageHeader{}}
+	for _, j := range v.npcs {
+		j.Initialize()
+	}
 	v.BaseArea.Initialize(v)
 }
 

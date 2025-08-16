@@ -111,6 +111,10 @@ func (g *InGame) HandleMessage(senderID uint32, message packets.Msg) {
 		g.client.SocketSend(message)
 	case *packets.Packet_GetAreaRequest:
 		g.Player.Area.GetAreaInfo(g.Player)
+	case *packets.Packet_NpcInteract:
+		if g.Player.CurrentInteractingNPC != nil {
+			g.Player.CurrentInteractingNPC.ProcessInteractPacket(g.Player, message.NpcInteract)
+		}
 	default:
 		if g.Player.Area == nil {
 			return

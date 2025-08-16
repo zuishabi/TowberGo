@@ -4,7 +4,8 @@ const packets := preload("res://packets.gd")
 const npc := preload("res://classes/npcs/npc.tscn")
 
 var npc_list:Dictionary[int,BaseNPC] = {
-	1:preload("res://classes/npcs/InitialVillageHead.tres")
+	1:preload("res://classes/npcs/InitialVillageHead.tres"),
+	2:preload("res://classes/npcs/IntitialVillageHealer.tres"),
 }
 
 func msg_to_npc(msg:packets.NPCInfoMessage)->NPC:

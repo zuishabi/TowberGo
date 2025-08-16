@@ -1449,50 +1449,6 @@ func (x *InteractNPCRequestMessage) GetId() uint32 {
 	return 0
 }
 
-type InteractNPCEndMessage struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	Id            uint32                 `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
-}
-
-func (x *InteractNPCEndMessage) Reset() {
-	*x = InteractNPCEndMessage{}
-	mi := &file_shared_packets_proto_msgTypes[28]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *InteractNPCEndMessage) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*InteractNPCEndMessage) ProtoMessage() {}
-
-func (x *InteractNPCEndMessage) ProtoReflect() protoreflect.Message {
-	mi := &file_shared_packets_proto_msgTypes[28]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use InteractNPCEndMessage.ProtoReflect.Descriptor instead.
-func (*InteractNPCEndMessage) Descriptor() ([]byte, []int) {
-	return file_shared_packets_proto_rawDescGZIP(), []int{28}
-}
-
-func (x *InteractNPCEndMessage) GetId() uint32 {
-	if x != nil {
-		return x.Id
-	}
-	return 0
-}
-
 type GetPetMessage struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Id            uint32                 `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
@@ -1503,7 +1459,7 @@ type GetPetMessage struct {
 
 func (x *GetPetMessage) Reset() {
 	*x = GetPetMessage{}
-	mi := &file_shared_packets_proto_msgTypes[29]
+	mi := &file_shared_packets_proto_msgTypes[28]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1515,7 +1471,7 @@ func (x *GetPetMessage) String() string {
 func (*GetPetMessage) ProtoMessage() {}
 
 func (x *GetPetMessage) ProtoReflect() protoreflect.Message {
-	mi := &file_shared_packets_proto_msgTypes[29]
+	mi := &file_shared_packets_proto_msgTypes[28]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1528,7 +1484,7 @@ func (x *GetPetMessage) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetPetMessage.ProtoReflect.Descriptor instead.
 func (*GetPetMessage) Descriptor() ([]byte, []int) {
-	return file_shared_packets_proto_rawDescGZIP(), []int{29}
+	return file_shared_packets_proto_rawDescGZIP(), []int{28}
 }
 
 func (x *GetPetMessage) GetId() uint32 {
@@ -1553,7 +1509,7 @@ type PetBagRequestMessage struct {
 
 func (x *PetBagRequestMessage) Reset() {
 	*x = PetBagRequestMessage{}
-	mi := &file_shared_packets_proto_msgTypes[30]
+	mi := &file_shared_packets_proto_msgTypes[29]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1565,7 +1521,7 @@ func (x *PetBagRequestMessage) String() string {
 func (*PetBagRequestMessage) ProtoMessage() {}
 
 func (x *PetBagRequestMessage) ProtoReflect() protoreflect.Message {
-	mi := &file_shared_packets_proto_msgTypes[30]
+	mi := &file_shared_packets_proto_msgTypes[29]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1578,7 +1534,7 @@ func (x *PetBagRequestMessage) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use PetBagRequestMessage.ProtoReflect.Descriptor instead.
 func (*PetBagRequestMessage) Descriptor() ([]byte, []int) {
-	return file_shared_packets_proto_rawDescGZIP(), []int{30}
+	return file_shared_packets_proto_rawDescGZIP(), []int{29}
 }
 
 type PetBagResponseMessage struct {
@@ -1590,7 +1546,7 @@ type PetBagResponseMessage struct {
 
 func (x *PetBagResponseMessage) Reset() {
 	*x = PetBagResponseMessage{}
-	mi := &file_shared_packets_proto_msgTypes[31]
+	mi := &file_shared_packets_proto_msgTypes[30]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1602,7 +1558,7 @@ func (x *PetBagResponseMessage) String() string {
 func (*PetBagResponseMessage) ProtoMessage() {}
 
 func (x *PetBagResponseMessage) ProtoReflect() protoreflect.Message {
-	mi := &file_shared_packets_proto_msgTypes[31]
+	mi := &file_shared_packets_proto_msgTypes[30]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1615,7 +1571,7 @@ func (x *PetBagResponseMessage) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use PetBagResponseMessage.ProtoReflect.Descriptor instead.
 func (*PetBagResponseMessage) Descriptor() ([]byte, []int) {
-	return file_shared_packets_proto_rawDescGZIP(), []int{31}
+	return file_shared_packets_proto_rawDescGZIP(), []int{30}
 }
 
 func (x *PetBagResponseMessage) GetPet() []*PetMessage {
@@ -1639,7 +1595,7 @@ type PetMessage struct {
 
 func (x *PetMessage) Reset() {
 	*x = PetMessage{}
-	mi := &file_shared_packets_proto_msgTypes[32]
+	mi := &file_shared_packets_proto_msgTypes[31]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1651,7 +1607,7 @@ func (x *PetMessage) String() string {
 func (*PetMessage) ProtoMessage() {}
 
 func (x *PetMessage) ProtoReflect() protoreflect.Message {
-	mi := &file_shared_packets_proto_msgTypes[32]
+	mi := &file_shared_packets_proto_msgTypes[31]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1664,7 +1620,7 @@ func (x *PetMessage) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use PetMessage.ProtoReflect.Descriptor instead.
 func (*PetMessage) Descriptor() ([]byte, []int) {
-	return file_shared_packets_proto_rawDescGZIP(), []int{32}
+	return file_shared_packets_proto_rawDescGZIP(), []int{31}
 }
 
 func (x *PetMessage) GetPetId() uint32 {
@@ -1725,7 +1681,7 @@ type PetStatsMessage struct {
 
 func (x *PetStatsMessage) Reset() {
 	*x = PetStatsMessage{}
-	mi := &file_shared_packets_proto_msgTypes[33]
+	mi := &file_shared_packets_proto_msgTypes[32]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1737,7 +1693,7 @@ func (x *PetStatsMessage) String() string {
 func (*PetStatsMessage) ProtoMessage() {}
 
 func (x *PetStatsMessage) ProtoReflect() protoreflect.Message {
-	mi := &file_shared_packets_proto_msgTypes[33]
+	mi := &file_shared_packets_proto_msgTypes[32]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1750,7 +1706,7 @@ func (x *PetStatsMessage) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use PetStatsMessage.ProtoReflect.Descriptor instead.
 func (*PetStatsMessage) Descriptor() ([]byte, []int) {
-	return file_shared_packets_proto_rawDescGZIP(), []int{33}
+	return file_shared_packets_proto_rawDescGZIP(), []int{32}
 }
 
 func (x *PetStatsMessage) GetMaxHp() int64 {
@@ -1817,7 +1773,7 @@ type SavePetMessage struct {
 
 func (x *SavePetMessage) Reset() {
 	*x = SavePetMessage{}
-	mi := &file_shared_packets_proto_msgTypes[34]
+	mi := &file_shared_packets_proto_msgTypes[33]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1829,7 +1785,7 @@ func (x *SavePetMessage) String() string {
 func (*SavePetMessage) ProtoMessage() {}
 
 func (x *SavePetMessage) ProtoReflect() protoreflect.Message {
-	mi := &file_shared_packets_proto_msgTypes[34]
+	mi := &file_shared_packets_proto_msgTypes[33]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1842,7 +1798,7 @@ func (x *SavePetMessage) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use SavePetMessage.ProtoReflect.Descriptor instead.
 func (*SavePetMessage) Descriptor() ([]byte, []int) {
-	return file_shared_packets_proto_rawDescGZIP(), []int{34}
+	return file_shared_packets_proto_rawDescGZIP(), []int{33}
 }
 
 type LearnSkillRequestMessage struct {
@@ -1856,7 +1812,7 @@ type LearnSkillRequestMessage struct {
 
 func (x *LearnSkillRequestMessage) Reset() {
 	*x = LearnSkillRequestMessage{}
-	mi := &file_shared_packets_proto_msgTypes[35]
+	mi := &file_shared_packets_proto_msgTypes[34]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1868,7 +1824,7 @@ func (x *LearnSkillRequestMessage) String() string {
 func (*LearnSkillRequestMessage) ProtoMessage() {}
 
 func (x *LearnSkillRequestMessage) ProtoReflect() protoreflect.Message {
-	mi := &file_shared_packets_proto_msgTypes[35]
+	mi := &file_shared_packets_proto_msgTypes[34]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1881,7 +1837,7 @@ func (x *LearnSkillRequestMessage) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use LearnSkillRequestMessage.ProtoReflect.Descriptor instead.
 func (*LearnSkillRequestMessage) Descriptor() ([]byte, []int) {
-	return file_shared_packets_proto_rawDescGZIP(), []int{35}
+	return file_shared_packets_proto_rawDescGZIP(), []int{34}
 }
 
 func (x *LearnSkillRequestMessage) GetPosition() int64 {
@@ -1915,7 +1871,7 @@ type LearnSkillResponseMessage struct {
 
 func (x *LearnSkillResponseMessage) Reset() {
 	*x = LearnSkillResponseMessage{}
-	mi := &file_shared_packets_proto_msgTypes[36]
+	mi := &file_shared_packets_proto_msgTypes[35]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1927,7 +1883,7 @@ func (x *LearnSkillResponseMessage) String() string {
 func (*LearnSkillResponseMessage) ProtoMessage() {}
 
 func (x *LearnSkillResponseMessage) ProtoReflect() protoreflect.Message {
-	mi := &file_shared_packets_proto_msgTypes[36]
+	mi := &file_shared_packets_proto_msgTypes[35]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1940,7 +1896,7 @@ func (x *LearnSkillResponseMessage) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use LearnSkillResponseMessage.ProtoReflect.Descriptor instead.
 func (*LearnSkillResponseMessage) Descriptor() ([]byte, []int) {
-	return file_shared_packets_proto_rawDescGZIP(), []int{36}
+	return file_shared_packets_proto_rawDescGZIP(), []int{35}
 }
 
 func (x *LearnSkillResponseMessage) GetSuccess() bool {
@@ -1966,7 +1922,7 @@ type EquippedPetInfoRequestMessage struct {
 
 func (x *EquippedPetInfoRequestMessage) Reset() {
 	*x = EquippedPetInfoRequestMessage{}
-	mi := &file_shared_packets_proto_msgTypes[37]
+	mi := &file_shared_packets_proto_msgTypes[36]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1978,7 +1934,7 @@ func (x *EquippedPetInfoRequestMessage) String() string {
 func (*EquippedPetInfoRequestMessage) ProtoMessage() {}
 
 func (x *EquippedPetInfoRequestMessage) ProtoReflect() protoreflect.Message {
-	mi := &file_shared_packets_proto_msgTypes[37]
+	mi := &file_shared_packets_proto_msgTypes[36]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1991,7 +1947,7 @@ func (x *EquippedPetInfoRequestMessage) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use EquippedPetInfoRequestMessage.ProtoReflect.Descriptor instead.
 func (*EquippedPetInfoRequestMessage) Descriptor() ([]byte, []int) {
-	return file_shared_packets_proto_rawDescGZIP(), []int{37}
+	return file_shared_packets_proto_rawDescGZIP(), []int{36}
 }
 
 func (x *EquippedPetInfoRequestMessage) GetId() uint64 {
@@ -2011,7 +1967,7 @@ type EquippedPetInfoResponseMessage struct {
 
 func (x *EquippedPetInfoResponseMessage) Reset() {
 	*x = EquippedPetInfoResponseMessage{}
-	mi := &file_shared_packets_proto_msgTypes[38]
+	mi := &file_shared_packets_proto_msgTypes[37]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2023,7 +1979,7 @@ func (x *EquippedPetInfoResponseMessage) String() string {
 func (*EquippedPetInfoResponseMessage) ProtoMessage() {}
 
 func (x *EquippedPetInfoResponseMessage) ProtoReflect() protoreflect.Message {
-	mi := &file_shared_packets_proto_msgTypes[38]
+	mi := &file_shared_packets_proto_msgTypes[37]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2036,7 +1992,7 @@ func (x *EquippedPetInfoResponseMessage) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use EquippedPetInfoResponseMessage.ProtoReflect.Descriptor instead.
 func (*EquippedPetInfoResponseMessage) Descriptor() ([]byte, []int) {
-	return file_shared_packets_proto_rawDescGZIP(), []int{38}
+	return file_shared_packets_proto_rawDescGZIP(), []int{37}
 }
 
 func (x *EquippedPetInfoResponseMessage) GetId() uint64 {
@@ -2065,7 +2021,7 @@ type AddPetItemMessage struct {
 
 func (x *AddPetItemMessage) Reset() {
 	*x = AddPetItemMessage{}
-	mi := &file_shared_packets_proto_msgTypes[39]
+	mi := &file_shared_packets_proto_msgTypes[38]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2077,7 +2033,7 @@ func (x *AddPetItemMessage) String() string {
 func (*AddPetItemMessage) ProtoMessage() {}
 
 func (x *AddPetItemMessage) ProtoReflect() protoreflect.Message {
-	mi := &file_shared_packets_proto_msgTypes[39]
+	mi := &file_shared_packets_proto_msgTypes[38]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2090,7 +2046,7 @@ func (x *AddPetItemMessage) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use AddPetItemMessage.ProtoReflect.Descriptor instead.
 func (*AddPetItemMessage) Descriptor() ([]byte, []int) {
-	return file_shared_packets_proto_rawDescGZIP(), []int{39}
+	return file_shared_packets_proto_rawDescGZIP(), []int{38}
 }
 
 func (x *AddPetItemMessage) GetId() uint32 {
@@ -2124,7 +2080,7 @@ type DeletePetItemMessage struct {
 
 func (x *DeletePetItemMessage) Reset() {
 	*x = DeletePetItemMessage{}
-	mi := &file_shared_packets_proto_msgTypes[40]
+	mi := &file_shared_packets_proto_msgTypes[39]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2136,7 +2092,7 @@ func (x *DeletePetItemMessage) String() string {
 func (*DeletePetItemMessage) ProtoMessage() {}
 
 func (x *DeletePetItemMessage) ProtoReflect() protoreflect.Message {
-	mi := &file_shared_packets_proto_msgTypes[40]
+	mi := &file_shared_packets_proto_msgTypes[39]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2149,7 +2105,7 @@ func (x *DeletePetItemMessage) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use DeletePetItemMessage.ProtoReflect.Descriptor instead.
 func (*DeletePetItemMessage) Descriptor() ([]byte, []int) {
-	return file_shared_packets_proto_rawDescGZIP(), []int{40}
+	return file_shared_packets_proto_rawDescGZIP(), []int{39}
 }
 
 func (x *DeletePetItemMessage) GetId() uint32 {
@@ -2176,7 +2132,7 @@ type PetItemMessage struct {
 
 func (x *PetItemMessage) Reset() {
 	*x = PetItemMessage{}
-	mi := &file_shared_packets_proto_msgTypes[41]
+	mi := &file_shared_packets_proto_msgTypes[40]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2188,7 +2144,7 @@ func (x *PetItemMessage) String() string {
 func (*PetItemMessage) ProtoMessage() {}
 
 func (x *PetItemMessage) ProtoReflect() protoreflect.Message {
-	mi := &file_shared_packets_proto_msgTypes[41]
+	mi := &file_shared_packets_proto_msgTypes[40]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2201,7 +2157,7 @@ func (x *PetItemMessage) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use PetItemMessage.ProtoReflect.Descriptor instead.
 func (*PetItemMessage) Descriptor() ([]byte, []int) {
-	return file_shared_packets_proto_rawDescGZIP(), []int{41}
+	return file_shared_packets_proto_rawDescGZIP(), []int{40}
 }
 
 func (x *PetItemMessage) GetId() uint32 {
@@ -2226,7 +2182,7 @@ type PetItemBagRequestMessage struct {
 
 func (x *PetItemBagRequestMessage) Reset() {
 	*x = PetItemBagRequestMessage{}
-	mi := &file_shared_packets_proto_msgTypes[42]
+	mi := &file_shared_packets_proto_msgTypes[41]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2238,7 +2194,7 @@ func (x *PetItemBagRequestMessage) String() string {
 func (*PetItemBagRequestMessage) ProtoMessage() {}
 
 func (x *PetItemBagRequestMessage) ProtoReflect() protoreflect.Message {
-	mi := &file_shared_packets_proto_msgTypes[42]
+	mi := &file_shared_packets_proto_msgTypes[41]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2251,7 +2207,7 @@ func (x *PetItemBagRequestMessage) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use PetItemBagRequestMessage.ProtoReflect.Descriptor instead.
 func (*PetItemBagRequestMessage) Descriptor() ([]byte, []int) {
-	return file_shared_packets_proto_rawDescGZIP(), []int{42}
+	return file_shared_packets_proto_rawDescGZIP(), []int{41}
 }
 
 type PetItemBagResponseMessage struct {
@@ -2264,7 +2220,7 @@ type PetItemBagResponseMessage struct {
 
 func (x *PetItemBagResponseMessage) Reset() {
 	*x = PetItemBagResponseMessage{}
-	mi := &file_shared_packets_proto_msgTypes[43]
+	mi := &file_shared_packets_proto_msgTypes[42]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2276,7 +2232,7 @@ func (x *PetItemBagResponseMessage) String() string {
 func (*PetItemBagResponseMessage) ProtoMessage() {}
 
 func (x *PetItemBagResponseMessage) ProtoReflect() protoreflect.Message {
-	mi := &file_shared_packets_proto_msgTypes[43]
+	mi := &file_shared_packets_proto_msgTypes[42]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2289,7 +2245,7 @@ func (x *PetItemBagResponseMessage) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use PetItemBagResponseMessage.ProtoReflect.Descriptor instead.
 func (*PetItemBagResponseMessage) Descriptor() ([]byte, []int) {
-	return file_shared_packets_proto_rawDescGZIP(), []int{43}
+	return file_shared_packets_proto_rawDescGZIP(), []int{42}
 }
 
 func (x *PetItemBagResponseMessage) GetId() []uint32 {
@@ -2317,7 +2273,7 @@ type UsePetItemRequestMessage struct {
 
 func (x *UsePetItemRequestMessage) Reset() {
 	*x = UsePetItemRequestMessage{}
-	mi := &file_shared_packets_proto_msgTypes[44]
+	mi := &file_shared_packets_proto_msgTypes[43]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2329,7 +2285,7 @@ func (x *UsePetItemRequestMessage) String() string {
 func (*UsePetItemRequestMessage) ProtoMessage() {}
 
 func (x *UsePetItemRequestMessage) ProtoReflect() protoreflect.Message {
-	mi := &file_shared_packets_proto_msgTypes[44]
+	mi := &file_shared_packets_proto_msgTypes[43]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2342,7 +2298,7 @@ func (x *UsePetItemRequestMessage) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use UsePetItemRequestMessage.ProtoReflect.Descriptor instead.
 func (*UsePetItemRequestMessage) Descriptor() ([]byte, []int) {
-	return file_shared_packets_proto_rawDescGZIP(), []int{44}
+	return file_shared_packets_proto_rawDescGZIP(), []int{43}
 }
 
 func (x *UsePetItemRequestMessage) GetId() uint32 {
@@ -2376,7 +2332,7 @@ type UsePetItemResponseMessage struct {
 
 func (x *UsePetItemResponseMessage) Reset() {
 	*x = UsePetItemResponseMessage{}
-	mi := &file_shared_packets_proto_msgTypes[45]
+	mi := &file_shared_packets_proto_msgTypes[44]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2388,7 +2344,7 @@ func (x *UsePetItemResponseMessage) String() string {
 func (*UsePetItemResponseMessage) ProtoMessage() {}
 
 func (x *UsePetItemResponseMessage) ProtoReflect() protoreflect.Message {
-	mi := &file_shared_packets_proto_msgTypes[45]
+	mi := &file_shared_packets_proto_msgTypes[44]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2401,7 +2357,7 @@ func (x *UsePetItemResponseMessage) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use UsePetItemResponseMessage.ProtoReflect.Descriptor instead.
 func (*UsePetItemResponseMessage) Descriptor() ([]byte, []int) {
-	return file_shared_packets_proto_rawDescGZIP(), []int{45}
+	return file_shared_packets_proto_rawDescGZIP(), []int{44}
 }
 
 func (x *UsePetItemResponseMessage) GetSuccess() bool {
@@ -2428,7 +2384,7 @@ type BattleRequestMessage struct {
 
 func (x *BattleRequestMessage) Reset() {
 	*x = BattleRequestMessage{}
-	mi := &file_shared_packets_proto_msgTypes[46]
+	mi := &file_shared_packets_proto_msgTypes[45]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2440,7 +2396,7 @@ func (x *BattleRequestMessage) String() string {
 func (*BattleRequestMessage) ProtoMessage() {}
 
 func (x *BattleRequestMessage) ProtoReflect() protoreflect.Message {
-	mi := &file_shared_packets_proto_msgTypes[46]
+	mi := &file_shared_packets_proto_msgTypes[45]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2453,7 +2409,7 @@ func (x *BattleRequestMessage) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use BattleRequestMessage.ProtoReflect.Descriptor instead.
 func (*BattleRequestMessage) Descriptor() ([]byte, []int) {
-	return file_shared_packets_proto_rawDescGZIP(), []int{46}
+	return file_shared_packets_proto_rawDescGZIP(), []int{45}
 }
 
 func (x *BattleRequestMessage) GetTarget() uint32 {
@@ -2473,7 +2429,7 @@ type BattleInvitingMessage struct {
 
 func (x *BattleInvitingMessage) Reset() {
 	*x = BattleInvitingMessage{}
-	mi := &file_shared_packets_proto_msgTypes[47]
+	mi := &file_shared_packets_proto_msgTypes[46]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2485,7 +2441,7 @@ func (x *BattleInvitingMessage) String() string {
 func (*BattleInvitingMessage) ProtoMessage() {}
 
 func (x *BattleInvitingMessage) ProtoReflect() protoreflect.Message {
-	mi := &file_shared_packets_proto_msgTypes[47]
+	mi := &file_shared_packets_proto_msgTypes[46]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2498,7 +2454,7 @@ func (x *BattleInvitingMessage) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use BattleInvitingMessage.ProtoReflect.Descriptor instead.
 func (*BattleInvitingMessage) Descriptor() ([]byte, []int) {
-	return file_shared_packets_proto_rawDescGZIP(), []int{47}
+	return file_shared_packets_proto_rawDescGZIP(), []int{46}
 }
 
 func (x *BattleInvitingMessage) GetRoomID() uint32 {
@@ -2525,7 +2481,7 @@ type BattleInvitingResponseMessage struct {
 
 func (x *BattleInvitingResponseMessage) Reset() {
 	*x = BattleInvitingResponseMessage{}
-	mi := &file_shared_packets_proto_msgTypes[48]
+	mi := &file_shared_packets_proto_msgTypes[47]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2537,7 +2493,7 @@ func (x *BattleInvitingResponseMessage) String() string {
 func (*BattleInvitingResponseMessage) ProtoMessage() {}
 
 func (x *BattleInvitingResponseMessage) ProtoReflect() protoreflect.Message {
-	mi := &file_shared_packets_proto_msgTypes[48]
+	mi := &file_shared_packets_proto_msgTypes[47]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2550,7 +2506,7 @@ func (x *BattleInvitingResponseMessage) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use BattleInvitingResponseMessage.ProtoReflect.Descriptor instead.
 func (*BattleInvitingResponseMessage) Descriptor() ([]byte, []int) {
-	return file_shared_packets_proto_rawDescGZIP(), []int{48}
+	return file_shared_packets_proto_rawDescGZIP(), []int{47}
 }
 
 func (x *BattleInvitingResponseMessage) GetRoomID() uint32 {
@@ -2576,7 +2532,7 @@ type StartBattleMessage struct {
 
 func (x *StartBattleMessage) Reset() {
 	*x = StartBattleMessage{}
-	mi := &file_shared_packets_proto_msgTypes[49]
+	mi := &file_shared_packets_proto_msgTypes[48]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2588,7 +2544,7 @@ func (x *StartBattleMessage) String() string {
 func (*StartBattleMessage) ProtoMessage() {}
 
 func (x *StartBattleMessage) ProtoReflect() protoreflect.Message {
-	mi := &file_shared_packets_proto_msgTypes[49]
+	mi := &file_shared_packets_proto_msgTypes[48]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2601,7 +2557,7 @@ func (x *StartBattleMessage) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use StartBattleMessage.ProtoReflect.Descriptor instead.
 func (*StartBattleMessage) Descriptor() ([]byte, []int) {
-	return file_shared_packets_proto_rawDescGZIP(), []int{49}
+	return file_shared_packets_proto_rawDescGZIP(), []int{48}
 }
 
 func (x *StartBattleMessage) GetNumber() int64 {
@@ -2663,7 +2619,7 @@ type Packet struct {
 	//	*Packet_SyncState
 	//	*Packet_GetAreaNpcs
 	//	*Packet_InteractNpcRequest
-	//	*Packet_InteractNpcEnd
+	//	*Packet_NpcInteract
 	Msg           isPacket_Msg `protobuf_oneof:"msg"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -2671,7 +2627,7 @@ type Packet struct {
 
 func (x *Packet) Reset() {
 	*x = Packet{}
-	mi := &file_shared_packets_proto_msgTypes[50]
+	mi := &file_shared_packets_proto_msgTypes[49]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2683,7 +2639,7 @@ func (x *Packet) String() string {
 func (*Packet) ProtoMessage() {}
 
 func (x *Packet) ProtoReflect() protoreflect.Message {
-	mi := &file_shared_packets_proto_msgTypes[50]
+	mi := &file_shared_packets_proto_msgTypes[49]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2696,7 +2652,7 @@ func (x *Packet) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use Packet.ProtoReflect.Descriptor instead.
 func (*Packet) Descriptor() ([]byte, []int) {
-	return file_shared_packets_proto_rawDescGZIP(), []int{50}
+	return file_shared_packets_proto_rawDescGZIP(), []int{49}
 }
 
 func (x *Packet) GetUid() uint32 {
@@ -3127,10 +3083,10 @@ func (x *Packet) GetInteractNpcRequest() *InteractNPCRequestMessage {
 	return nil
 }
 
-func (x *Packet) GetInteractNpcEnd() *InteractNPCEndMessage {
+func (x *Packet) GetNpcInteract() *NPCInteractPacket {
 	if x != nil {
-		if x, ok := x.Msg.(*Packet_InteractNpcEnd); ok {
-			return x.InteractNpcEnd
+		if x, ok := x.Msg.(*Packet_NpcInteract); ok {
+			return x.NpcInteract
 		}
 	}
 	return nil
@@ -3324,8 +3280,8 @@ type Packet_InteractNpcRequest struct {
 	InteractNpcRequest *InteractNPCRequestMessage `protobuf:"bytes,47,opt,name=interact_npc_request,json=interactNpcRequest,proto3,oneof"`
 }
 
-type Packet_InteractNpcEnd struct {
-	InteractNpcEnd *InteractNPCEndMessage `protobuf:"bytes,48,opt,name=interact_npc_end,json=interactNpcEnd,proto3,oneof"`
+type Packet_NpcInteract struct {
+	NpcInteract *NPCInteractPacket `protobuf:"bytes,48,opt,name=npc_interact,json=npcInteract,proto3,oneof"`
 }
 
 func (*Packet_LoginRequest) isPacket_Msg() {}
@@ -3420,7 +3376,7 @@ func (*Packet_GetAreaNpcs) isPacket_Msg() {}
 
 func (*Packet_InteractNpcRequest) isPacket_Msg() {}
 
-func (*Packet_InteractNpcEnd) isPacket_Msg() {}
+func (*Packet_NpcInteract) isPacket_Msg() {}
 
 type UiPacket struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
@@ -3435,7 +3391,7 @@ type UiPacket struct {
 
 func (x *UiPacket) Reset() {
 	*x = UiPacket{}
-	mi := &file_shared_packets_proto_msgTypes[51]
+	mi := &file_shared_packets_proto_msgTypes[50]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -3447,7 +3403,7 @@ func (x *UiPacket) String() string {
 func (*UiPacket) ProtoMessage() {}
 
 func (x *UiPacket) ProtoReflect() protoreflect.Message {
-	mi := &file_shared_packets_proto_msgTypes[51]
+	mi := &file_shared_packets_proto_msgTypes[50]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3460,7 +3416,7 @@ func (x *UiPacket) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use UiPacket.ProtoReflect.Descriptor instead.
 func (*UiPacket) Descriptor() ([]byte, []int) {
-	return file_shared_packets_proto_rawDescGZIP(), []int{51}
+	return file_shared_packets_proto_rawDescGZIP(), []int{50}
 }
 
 func (x *UiPacket) GetMsg() isUiPacket_Msg {
@@ -3513,7 +3469,7 @@ type OpenUIMessage struct {
 
 func (x *OpenUIMessage) Reset() {
 	*x = OpenUIMessage{}
-	mi := &file_shared_packets_proto_msgTypes[52]
+	mi := &file_shared_packets_proto_msgTypes[51]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -3525,7 +3481,7 @@ func (x *OpenUIMessage) String() string {
 func (*OpenUIMessage) ProtoMessage() {}
 
 func (x *OpenUIMessage) ProtoReflect() protoreflect.Message {
-	mi := &file_shared_packets_proto_msgTypes[52]
+	mi := &file_shared_packets_proto_msgTypes[51]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3538,7 +3494,7 @@ func (x *OpenUIMessage) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use OpenUIMessage.ProtoReflect.Descriptor instead.
 func (*OpenUIMessage) Descriptor() ([]byte, []int) {
-	return file_shared_packets_proto_rawDescGZIP(), []int{52}
+	return file_shared_packets_proto_rawDescGZIP(), []int{51}
 }
 
 func (x *OpenUIMessage) GetPath() string {
@@ -3557,7 +3513,7 @@ type InitialPetRequestMessage struct {
 
 func (x *InitialPetRequestMessage) Reset() {
 	*x = InitialPetRequestMessage{}
-	mi := &file_shared_packets_proto_msgTypes[53]
+	mi := &file_shared_packets_proto_msgTypes[52]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -3569,7 +3525,7 @@ func (x *InitialPetRequestMessage) String() string {
 func (*InitialPetRequestMessage) ProtoMessage() {}
 
 func (x *InitialPetRequestMessage) ProtoReflect() protoreflect.Message {
-	mi := &file_shared_packets_proto_msgTypes[53]
+	mi := &file_shared_packets_proto_msgTypes[52]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3582,7 +3538,7 @@ func (x *InitialPetRequestMessage) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use InitialPetRequestMessage.ProtoReflect.Descriptor instead.
 func (*InitialPetRequestMessage) Descriptor() ([]byte, []int) {
-	return file_shared_packets_proto_rawDescGZIP(), []int{53}
+	return file_shared_packets_proto_rawDescGZIP(), []int{52}
 }
 
 func (x *InitialPetRequestMessage) GetRequestId() uint32 {
@@ -3590,6 +3546,294 @@ func (x *InitialPetRequestMessage) GetRequestId() uint32 {
 		return x.RequestId
 	}
 	return 0
+}
+
+type NPCInteractPacket struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// Types that are valid to be assigned to Msg:
+	//
+	//	*NPCInteractPacket_Heal
+	//	*NPCInteractPacket_InitialVillageHeader
+	Msg           isNPCInteractPacket_Msg `protobuf_oneof:"msg"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *NPCInteractPacket) Reset() {
+	*x = NPCInteractPacket{}
+	mi := &file_shared_packets_proto_msgTypes[53]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *NPCInteractPacket) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*NPCInteractPacket) ProtoMessage() {}
+
+func (x *NPCInteractPacket) ProtoReflect() protoreflect.Message {
+	mi := &file_shared_packets_proto_msgTypes[53]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use NPCInteractPacket.ProtoReflect.Descriptor instead.
+func (*NPCInteractPacket) Descriptor() ([]byte, []int) {
+	return file_shared_packets_proto_rawDescGZIP(), []int{53}
+}
+
+func (x *NPCInteractPacket) GetMsg() isNPCInteractPacket_Msg {
+	if x != nil {
+		return x.Msg
+	}
+	return nil
+}
+
+func (x *NPCInteractPacket) GetHeal() *HealMessage {
+	if x != nil {
+		if x, ok := x.Msg.(*NPCInteractPacket_Heal); ok {
+			return x.Heal
+		}
+	}
+	return nil
+}
+
+func (x *NPCInteractPacket) GetInitialVillageHeader() *InitialVillageHeaderMessage {
+	if x != nil {
+		if x, ok := x.Msg.(*NPCInteractPacket_InitialVillageHeader); ok {
+			return x.InitialVillageHeader
+		}
+	}
+	return nil
+}
+
+type isNPCInteractPacket_Msg interface {
+	isNPCInteractPacket_Msg()
+}
+
+type NPCInteractPacket_Heal struct {
+	Heal *HealMessage `protobuf:"bytes,1,opt,name=heal,proto3,oneof"`
+}
+
+type NPCInteractPacket_InitialVillageHeader struct {
+	InitialVillageHeader *InitialVillageHeaderMessage `protobuf:"bytes,2,opt,name=initial_village_header,json=initialVillageHeader,proto3,oneof"`
+}
+
+func (*NPCInteractPacket_Heal) isNPCInteractPacket_Msg() {}
+
+func (*NPCInteractPacket_InitialVillageHeader) isNPCInteractPacket_Msg() {}
+
+type HealMessage struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *HealMessage) Reset() {
+	*x = HealMessage{}
+	mi := &file_shared_packets_proto_msgTypes[54]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *HealMessage) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*HealMessage) ProtoMessage() {}
+
+func (x *HealMessage) ProtoReflect() protoreflect.Message {
+	mi := &file_shared_packets_proto_msgTypes[54]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use HealMessage.ProtoReflect.Descriptor instead.
+func (*HealMessage) Descriptor() ([]byte, []int) {
+	return file_shared_packets_proto_rawDescGZIP(), []int{54}
+}
+
+type InitialVillageHeaderMessage struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// Types that are valid to be assigned to Section:
+	//
+	//	*InitialVillageHeaderMessage_NewRewardRequest
+	//	*InitialVillageHeaderMessage_UpdateInfo
+	Section       isInitialVillageHeaderMessage_Section `protobuf_oneof:"section"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *InitialVillageHeaderMessage) Reset() {
+	*x = InitialVillageHeaderMessage{}
+	mi := &file_shared_packets_proto_msgTypes[55]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *InitialVillageHeaderMessage) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*InitialVillageHeaderMessage) ProtoMessage() {}
+
+func (x *InitialVillageHeaderMessage) ProtoReflect() protoreflect.Message {
+	mi := &file_shared_packets_proto_msgTypes[55]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use InitialVillageHeaderMessage.ProtoReflect.Descriptor instead.
+func (*InitialVillageHeaderMessage) Descriptor() ([]byte, []int) {
+	return file_shared_packets_proto_rawDescGZIP(), []int{55}
+}
+
+func (x *InitialVillageHeaderMessage) GetSection() isInitialVillageHeaderMessage_Section {
+	if x != nil {
+		return x.Section
+	}
+	return nil
+}
+
+func (x *InitialVillageHeaderMessage) GetNewRewardRequest() *NewRewardRequest {
+	if x != nil {
+		if x, ok := x.Section.(*InitialVillageHeaderMessage_NewRewardRequest); ok {
+			return x.NewRewardRequest
+		}
+	}
+	return nil
+}
+
+func (x *InitialVillageHeaderMessage) GetUpdateInfo() *UpdateInitialVillageHeaderUIInfo {
+	if x != nil {
+		if x, ok := x.Section.(*InitialVillageHeaderMessage_UpdateInfo); ok {
+			return x.UpdateInfo
+		}
+	}
+	return nil
+}
+
+type isInitialVillageHeaderMessage_Section interface {
+	isInitialVillageHeaderMessage_Section()
+}
+
+type InitialVillageHeaderMessage_NewRewardRequest struct {
+	NewRewardRequest *NewRewardRequest `protobuf:"bytes,1,opt,name=new_reward_request,json=newRewardRequest,proto3,oneof"`
+}
+
+type InitialVillageHeaderMessage_UpdateInfo struct {
+	UpdateInfo *UpdateInitialVillageHeaderUIInfo `protobuf:"bytes,2,opt,name=update_info,json=updateInfo,proto3,oneof"`
+}
+
+func (*InitialVillageHeaderMessage_NewRewardRequest) isInitialVillageHeaderMessage_Section() {}
+
+func (*InitialVillageHeaderMessage_UpdateInfo) isInitialVillageHeaderMessage_Section() {}
+
+type NewRewardRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *NewRewardRequest) Reset() {
+	*x = NewRewardRequest{}
+	mi := &file_shared_packets_proto_msgTypes[56]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *NewRewardRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*NewRewardRequest) ProtoMessage() {}
+
+func (x *NewRewardRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_shared_packets_proto_msgTypes[56]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use NewRewardRequest.ProtoReflect.Descriptor instead.
+func (*NewRewardRequest) Descriptor() ([]byte, []int) {
+	return file_shared_packets_proto_rawDescGZIP(), []int{56}
+}
+
+type UpdateInitialVillageHeaderUIInfo struct {
+	state           protoimpl.MessageState `protogen:"open.v1"`
+	CanGetNewReward bool                   `protobuf:"varint,1,opt,name=can_get_new_reward,json=canGetNewReward,proto3" json:"can_get_new_reward,omitempty"`
+	CanChallenge    bool                   `protobuf:"varint,2,opt,name=can_challenge,json=canChallenge,proto3" json:"can_challenge,omitempty"`
+	unknownFields   protoimpl.UnknownFields
+	sizeCache       protoimpl.SizeCache
+}
+
+func (x *UpdateInitialVillageHeaderUIInfo) Reset() {
+	*x = UpdateInitialVillageHeaderUIInfo{}
+	mi := &file_shared_packets_proto_msgTypes[57]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *UpdateInitialVillageHeaderUIInfo) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*UpdateInitialVillageHeaderUIInfo) ProtoMessage() {}
+
+func (x *UpdateInitialVillageHeaderUIInfo) ProtoReflect() protoreflect.Message {
+	mi := &file_shared_packets_proto_msgTypes[57]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use UpdateInitialVillageHeaderUIInfo.ProtoReflect.Descriptor instead.
+func (*UpdateInitialVillageHeaderUIInfo) Descriptor() ([]byte, []int) {
+	return file_shared_packets_proto_rawDescGZIP(), []int{57}
+}
+
+func (x *UpdateInitialVillageHeaderUIInfo) GetCanGetNewReward() bool {
+	if x != nil {
+		return x.CanGetNewReward
+	}
+	return false
+}
+
+func (x *UpdateInitialVillageHeaderUIInfo) GetCanChallenge() bool {
+	if x != nil {
+		return x.CanChallenge
+	}
+	return false
 }
 
 // --------------------------------------战斗系统------------------------
@@ -3614,7 +3858,7 @@ type BattlePacket struct {
 
 func (x *BattlePacket) Reset() {
 	*x = BattlePacket{}
-	mi := &file_shared_packets_proto_msgTypes[54]
+	mi := &file_shared_packets_proto_msgTypes[58]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -3626,7 +3870,7 @@ func (x *BattlePacket) String() string {
 func (*BattlePacket) ProtoMessage() {}
 
 func (x *BattlePacket) ProtoReflect() protoreflect.Message {
-	mi := &file_shared_packets_proto_msgTypes[54]
+	mi := &file_shared_packets_proto_msgTypes[58]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3639,7 +3883,7 @@ func (x *BattlePacket) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use BattlePacket.ProtoReflect.Descriptor instead.
 func (*BattlePacket) Descriptor() ([]byte, []int) {
-	return file_shared_packets_proto_rawDescGZIP(), []int{54}
+	return file_shared_packets_proto_rawDescGZIP(), []int{58}
 }
 
 func (x *BattlePacket) GetMsg() isBattlePacket_Msg {
@@ -3817,7 +4061,7 @@ type RoundCommandMessage struct {
 
 func (x *RoundCommandMessage) Reset() {
 	*x = RoundCommandMessage{}
-	mi := &file_shared_packets_proto_msgTypes[55]
+	mi := &file_shared_packets_proto_msgTypes[59]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -3829,7 +4073,7 @@ func (x *RoundCommandMessage) String() string {
 func (*RoundCommandMessage) ProtoMessage() {}
 
 func (x *RoundCommandMessage) ProtoReflect() protoreflect.Message {
-	mi := &file_shared_packets_proto_msgTypes[55]
+	mi := &file_shared_packets_proto_msgTypes[59]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3842,7 +4086,7 @@ func (x *RoundCommandMessage) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use RoundCommandMessage.ProtoReflect.Descriptor instead.
 func (*RoundCommandMessage) Descriptor() ([]byte, []int) {
-	return file_shared_packets_proto_rawDescGZIP(), []int{55}
+	return file_shared_packets_proto_rawDescGZIP(), []int{59}
 }
 
 func (x *RoundCommandMessage) GetCommand() isRoundCommandMessage_Command {
@@ -3910,7 +4154,7 @@ type ChangePet struct {
 
 func (x *ChangePet) Reset() {
 	*x = ChangePet{}
-	mi := &file_shared_packets_proto_msgTypes[56]
+	mi := &file_shared_packets_proto_msgTypes[60]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -3922,7 +4166,7 @@ func (x *ChangePet) String() string {
 func (*ChangePet) ProtoMessage() {}
 
 func (x *ChangePet) ProtoReflect() protoreflect.Message {
-	mi := &file_shared_packets_proto_msgTypes[56]
+	mi := &file_shared_packets_proto_msgTypes[60]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3935,7 +4179,7 @@ func (x *ChangePet) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ChangePet.ProtoReflect.Descriptor instead.
 func (*ChangePet) Descriptor() ([]byte, []int) {
-	return file_shared_packets_proto_rawDescGZIP(), []int{56}
+	return file_shared_packets_proto_rawDescGZIP(), []int{60}
 }
 
 func (x *ChangePet) GetPetPosition() int64 {
@@ -3953,7 +4197,7 @@ type RunAway struct {
 
 func (x *RunAway) Reset() {
 	*x = RunAway{}
-	mi := &file_shared_packets_proto_msgTypes[57]
+	mi := &file_shared_packets_proto_msgTypes[61]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -3965,7 +4209,7 @@ func (x *RunAway) String() string {
 func (*RunAway) ProtoMessage() {}
 
 func (x *RunAway) ProtoReflect() protoreflect.Message {
-	mi := &file_shared_packets_proto_msgTypes[57]
+	mi := &file_shared_packets_proto_msgTypes[61]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3978,7 +4222,7 @@ func (x *RunAway) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use RunAway.ProtoReflect.Descriptor instead.
 func (*RunAway) Descriptor() ([]byte, []int) {
-	return file_shared_packets_proto_rawDescGZIP(), []int{57}
+	return file_shared_packets_proto_rawDescGZIP(), []int{61}
 }
 
 type Attack struct {
@@ -3990,7 +4234,7 @@ type Attack struct {
 
 func (x *Attack) Reset() {
 	*x = Attack{}
-	mi := &file_shared_packets_proto_msgTypes[58]
+	mi := &file_shared_packets_proto_msgTypes[62]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -4002,7 +4246,7 @@ func (x *Attack) String() string {
 func (*Attack) ProtoMessage() {}
 
 func (x *Attack) ProtoReflect() protoreflect.Message {
-	mi := &file_shared_packets_proto_msgTypes[58]
+	mi := &file_shared_packets_proto_msgTypes[62]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -4015,7 +4259,7 @@ func (x *Attack) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use Attack.ProtoReflect.Descriptor instead.
 func (*Attack) Descriptor() ([]byte, []int) {
-	return file_shared_packets_proto_rawDescGZIP(), []int{58}
+	return file_shared_packets_proto_rawDescGZIP(), []int{62}
 }
 
 func (x *Attack) GetSkillPos() int64 {
@@ -4039,7 +4283,7 @@ type AttackStatsMessage struct {
 
 func (x *AttackStatsMessage) Reset() {
 	*x = AttackStatsMessage{}
-	mi := &file_shared_packets_proto_msgTypes[59]
+	mi := &file_shared_packets_proto_msgTypes[63]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -4051,7 +4295,7 @@ func (x *AttackStatsMessage) String() string {
 func (*AttackStatsMessage) ProtoMessage() {}
 
 func (x *AttackStatsMessage) ProtoReflect() protoreflect.Message {
-	mi := &file_shared_packets_proto_msgTypes[59]
+	mi := &file_shared_packets_proto_msgTypes[63]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -4064,7 +4308,7 @@ func (x *AttackStatsMessage) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use AttackStatsMessage.ProtoReflect.Descriptor instead.
 func (*AttackStatsMessage) Descriptor() ([]byte, []int) {
-	return file_shared_packets_proto_rawDescGZIP(), []int{59}
+	return file_shared_packets_proto_rawDescGZIP(), []int{63}
 }
 
 func (x *AttackStatsMessage) GetNumber() int64 {
@@ -4119,7 +4363,7 @@ type Buff struct {
 
 func (x *Buff) Reset() {
 	*x = Buff{}
-	mi := &file_shared_packets_proto_msgTypes[60]
+	mi := &file_shared_packets_proto_msgTypes[64]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -4131,7 +4375,7 @@ func (x *Buff) String() string {
 func (*Buff) ProtoMessage() {}
 
 func (x *Buff) ProtoReflect() protoreflect.Message {
-	mi := &file_shared_packets_proto_msgTypes[60]
+	mi := &file_shared_packets_proto_msgTypes[64]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -4144,7 +4388,7 @@ func (x *Buff) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use Buff.ProtoReflect.Descriptor instead.
 func (*Buff) Descriptor() ([]byte, []int) {
-	return file_shared_packets_proto_rawDescGZIP(), []int{60}
+	return file_shared_packets_proto_rawDescGZIP(), []int{64}
 }
 
 func (x *Buff) GetId() uint32 {
@@ -4169,7 +4413,7 @@ type BattleEndStats struct {
 
 func (x *BattleEndStats) Reset() {
 	*x = BattleEndStats{}
-	mi := &file_shared_packets_proto_msgTypes[61]
+	mi := &file_shared_packets_proto_msgTypes[65]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -4181,7 +4425,7 @@ func (x *BattleEndStats) String() string {
 func (*BattleEndStats) ProtoMessage() {}
 
 func (x *BattleEndStats) ProtoReflect() protoreflect.Message {
-	mi := &file_shared_packets_proto_msgTypes[61]
+	mi := &file_shared_packets_proto_msgTypes[65]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -4194,7 +4438,7 @@ func (x *BattleEndStats) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use BattleEndStats.ProtoReflect.Descriptor instead.
 func (*BattleEndStats) Descriptor() ([]byte, []int) {
-	return file_shared_packets_proto_rawDescGZIP(), []int{61}
+	return file_shared_packets_proto_rawDescGZIP(), []int{65}
 }
 
 type DenyCommandMessage struct {
@@ -4206,7 +4450,7 @@ type DenyCommandMessage struct {
 
 func (x *DenyCommandMessage) Reset() {
 	*x = DenyCommandMessage{}
-	mi := &file_shared_packets_proto_msgTypes[62]
+	mi := &file_shared_packets_proto_msgTypes[66]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -4218,7 +4462,7 @@ func (x *DenyCommandMessage) String() string {
 func (*DenyCommandMessage) ProtoMessage() {}
 
 func (x *DenyCommandMessage) ProtoReflect() protoreflect.Message {
-	mi := &file_shared_packets_proto_msgTypes[62]
+	mi := &file_shared_packets_proto_msgTypes[66]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -4231,7 +4475,7 @@ func (x *DenyCommandMessage) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use DenyCommandMessage.ProtoReflect.Descriptor instead.
 func (*DenyCommandMessage) Descriptor() ([]byte, []int) {
-	return file_shared_packets_proto_rawDescGZIP(), []int{62}
+	return file_shared_packets_proto_rawDescGZIP(), []int{66}
 }
 
 func (x *DenyCommandMessage) GetReason() string {
@@ -4249,7 +4493,7 @@ type StartNextRoundMessage struct {
 
 func (x *StartNextRoundMessage) Reset() {
 	*x = StartNextRoundMessage{}
-	mi := &file_shared_packets_proto_msgTypes[63]
+	mi := &file_shared_packets_proto_msgTypes[67]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -4261,7 +4505,7 @@ func (x *StartNextRoundMessage) String() string {
 func (*StartNextRoundMessage) ProtoMessage() {}
 
 func (x *StartNextRoundMessage) ProtoReflect() protoreflect.Message {
-	mi := &file_shared_packets_proto_msgTypes[63]
+	mi := &file_shared_packets_proto_msgTypes[67]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -4274,7 +4518,7 @@ func (x *StartNextRoundMessage) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use StartNextRoundMessage.ProtoReflect.Descriptor instead.
 func (*StartNextRoundMessage) Descriptor() ([]byte, []int) {
-	return file_shared_packets_proto_rawDescGZIP(), []int{63}
+	return file_shared_packets_proto_rawDescGZIP(), []int{67}
 }
 
 type BattleEndMessage struct {
@@ -4286,7 +4530,7 @@ type BattleEndMessage struct {
 
 func (x *BattleEndMessage) Reset() {
 	*x = BattleEndMessage{}
-	mi := &file_shared_packets_proto_msgTypes[64]
+	mi := &file_shared_packets_proto_msgTypes[68]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -4298,7 +4542,7 @@ func (x *BattleEndMessage) String() string {
 func (*BattleEndMessage) ProtoMessage() {}
 
 func (x *BattleEndMessage) ProtoReflect() protoreflect.Message {
-	mi := &file_shared_packets_proto_msgTypes[64]
+	mi := &file_shared_packets_proto_msgTypes[68]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -4311,7 +4555,7 @@ func (x *BattleEndMessage) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use BattleEndMessage.ProtoReflect.Descriptor instead.
 func (*BattleEndMessage) Descriptor() ([]byte, []int) {
-	return file_shared_packets_proto_rawDescGZIP(), []int{64}
+	return file_shared_packets_proto_rawDescGZIP(), []int{68}
 }
 
 func (x *BattleEndMessage) GetWinner() int64 {
@@ -4330,7 +4574,7 @@ type RoundConfirmMessage struct {
 
 func (x *RoundConfirmMessage) Reset() {
 	*x = RoundConfirmMessage{}
-	mi := &file_shared_packets_proto_msgTypes[65]
+	mi := &file_shared_packets_proto_msgTypes[69]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -4342,7 +4586,7 @@ func (x *RoundConfirmMessage) String() string {
 func (*RoundConfirmMessage) ProtoMessage() {}
 
 func (x *RoundConfirmMessage) ProtoReflect() protoreflect.Message {
-	mi := &file_shared_packets_proto_msgTypes[65]
+	mi := &file_shared_packets_proto_msgTypes[69]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -4355,7 +4599,7 @@ func (x *RoundConfirmMessage) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use RoundConfirmMessage.ProtoReflect.Descriptor instead.
 func (*RoundConfirmMessage) Descriptor() ([]byte, []int) {
-	return file_shared_packets_proto_rawDescGZIP(), []int{65}
+	return file_shared_packets_proto_rawDescGZIP(), []int{69}
 }
 
 // 更换宠物请求
@@ -4367,7 +4611,7 @@ type ChangePetRequestMessage struct {
 
 func (x *ChangePetRequestMessage) Reset() {
 	*x = ChangePetRequestMessage{}
-	mi := &file_shared_packets_proto_msgTypes[66]
+	mi := &file_shared_packets_proto_msgTypes[70]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -4379,7 +4623,7 @@ func (x *ChangePetRequestMessage) String() string {
 func (*ChangePetRequestMessage) ProtoMessage() {}
 
 func (x *ChangePetRequestMessage) ProtoReflect() protoreflect.Message {
-	mi := &file_shared_packets_proto_msgTypes[66]
+	mi := &file_shared_packets_proto_msgTypes[70]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -4392,7 +4636,7 @@ func (x *ChangePetRequestMessage) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ChangePetRequestMessage.ProtoReflect.Descriptor instead.
 func (*ChangePetRequestMessage) Descriptor() ([]byte, []int) {
-	return file_shared_packets_proto_rawDescGZIP(), []int{66}
+	return file_shared_packets_proto_rawDescGZIP(), []int{70}
 }
 
 // 更换宠物
@@ -4405,7 +4649,7 @@ type ChangePetResponseMessage struct {
 
 func (x *ChangePetResponseMessage) Reset() {
 	*x = ChangePetResponseMessage{}
-	mi := &file_shared_packets_proto_msgTypes[67]
+	mi := &file_shared_packets_proto_msgTypes[71]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -4417,7 +4661,7 @@ func (x *ChangePetResponseMessage) String() string {
 func (*ChangePetResponseMessage) ProtoMessage() {}
 
 func (x *ChangePetResponseMessage) ProtoReflect() protoreflect.Message {
-	mi := &file_shared_packets_proto_msgTypes[67]
+	mi := &file_shared_packets_proto_msgTypes[71]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -4430,7 +4674,7 @@ func (x *ChangePetResponseMessage) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ChangePetResponseMessage.ProtoReflect.Descriptor instead.
 func (*ChangePetResponseMessage) Descriptor() ([]byte, []int) {
-	return file_shared_packets_proto_rawDescGZIP(), []int{67}
+	return file_shared_packets_proto_rawDescGZIP(), []int{71}
 }
 
 func (x *ChangePetResponseMessage) GetPetPosition() int64 {
@@ -4452,7 +4696,7 @@ type SyncBattleInformationMessage struct {
 
 func (x *SyncBattleInformationMessage) Reset() {
 	*x = SyncBattleInformationMessage{}
-	mi := &file_shared_packets_proto_msgTypes[68]
+	mi := &file_shared_packets_proto_msgTypes[72]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -4464,7 +4708,7 @@ func (x *SyncBattleInformationMessage) String() string {
 func (*SyncBattleInformationMessage) ProtoMessage() {}
 
 func (x *SyncBattleInformationMessage) ProtoReflect() protoreflect.Message {
-	mi := &file_shared_packets_proto_msgTypes[68]
+	mi := &file_shared_packets_proto_msgTypes[72]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -4477,7 +4721,7 @@ func (x *SyncBattleInformationMessage) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use SyncBattleInformationMessage.ProtoReflect.Descriptor instead.
 func (*SyncBattleInformationMessage) Descriptor() ([]byte, []int) {
-	return file_shared_packets_proto_rawDescGZIP(), []int{68}
+	return file_shared_packets_proto_rawDescGZIP(), []int{72}
 }
 
 func (x *SyncBattleInformationMessage) GetNumber() int64 {
@@ -4509,7 +4753,7 @@ type RoundEndMessage struct {
 
 func (x *RoundEndMessage) Reset() {
 	*x = RoundEndMessage{}
-	mi := &file_shared_packets_proto_msgTypes[69]
+	mi := &file_shared_packets_proto_msgTypes[73]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -4521,7 +4765,7 @@ func (x *RoundEndMessage) String() string {
 func (*RoundEndMessage) ProtoMessage() {}
 
 func (x *RoundEndMessage) ProtoReflect() protoreflect.Message {
-	mi := &file_shared_packets_proto_msgTypes[69]
+	mi := &file_shared_packets_proto_msgTypes[73]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -4534,7 +4778,7 @@ func (x *RoundEndMessage) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use RoundEndMessage.ProtoReflect.Descriptor instead.
 func (*RoundEndMessage) Descriptor() ([]byte, []int) {
-	return file_shared_packets_proto_rawDescGZIP(), []int{69}
+	return file_shared_packets_proto_rawDescGZIP(), []int{73}
 }
 
 var File_shared_packets_proto protoreflect.FileDescriptor
@@ -4625,8 +4869,6 @@ const file_shared_packets_proto_rawDesc = "" +
 	"\x01x\x18\x03 \x01(\x02R\x01x\x12\f\n" +
 	"\x01y\x18\x04 \x01(\x02R\x01y\"+\n" +
 	"\x19InteractNPCRequestMessage\x12\x0e\n" +
-	"\x02id\x18\x01 \x01(\rR\x02id\"'\n" +
-	"\x15InteractNPCEndMessage\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\rR\x02id\";\n" +
 	"\rGetPetMessage\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\rR\x02id\x12\x1a\n" +
@@ -4696,7 +4938,7 @@ const file_shared_packets_proto_rawDesc = "" +
 	"\x06roomID\x18\x01 \x01(\rR\x06roomID\x12\x1a\n" +
 	"\baccepted\x18\x02 \x01(\bR\baccepted\",\n" +
 	"\x12StartBattleMessage\x12\x16\n" +
-	"\x06number\x18\x01 \x01(\x03R\x06number\"\x93\x1b\n" +
+	"\x06number\x18\x01 \x01(\x03R\x06number\"\x88\x1b\n" +
 	"\x06Packet\x12\x10\n" +
 	"\x03uid\x18\x01 \x01(\rR\x03uid\x12C\n" +
 	"\rlogin_request\x18\x02 \x01(\v2\x1c.packets.LoginRequestMessageH\x00R\floginRequest\x12L\n" +
@@ -4751,8 +4993,8 @@ const file_shared_packets_proto_rawDesc = "" +
 	"\n" +
 	"sync_state\x18- \x01(\v2\x12.packets.SyncStateH\x00R\tsyncState\x12A\n" +
 	"\rget_area_npcs\x18. \x01(\v2\x1b.packets.GetAreaNPCsMessageH\x00R\vgetAreaNpcs\x12V\n" +
-	"\x14interact_npc_request\x18/ \x01(\v2\".packets.InteractNPCRequestMessageH\x00R\x12interactNpcRequest\x12J\n" +
-	"\x10interact_npc_end\x180 \x01(\v2\x1e.packets.InteractNPCEndMessageH\x00R\x0einteractNpcEndB\x05\n" +
+	"\x14interact_npc_request\x18/ \x01(\v2\".packets.InteractNPCRequestMessageH\x00R\x12interactNpcRequest\x12?\n" +
+	"\fnpc_interact\x180 \x01(\v2\x1a.packets.NPCInteractPacketH\x00R\vnpcInteractB\x05\n" +
 	"\x03msg\"\x99\x01\n" +
 	"\bUiPacket\x121\n" +
 	"\aopen_ui\x18\x01 \x01(\v2\x16.packets.OpenUIMessageH\x00R\x06openUi\x12S\n" +
@@ -4762,7 +5004,21 @@ const file_shared_packets_proto_rawDesc = "" +
 	"\x04path\x18\x01 \x01(\tR\x04path\"9\n" +
 	"\x18InitialPetRequestMessage\x12\x1d\n" +
 	"\n" +
-	"request_id\x18\x01 \x01(\rR\trequestId\"\xd0\x05\n" +
+	"request_id\x18\x01 \x01(\rR\trequestId\"\xa4\x01\n" +
+	"\x11NPCInteractPacket\x12*\n" +
+	"\x04heal\x18\x01 \x01(\v2\x14.packets.HealMessageH\x00R\x04heal\x12\\\n" +
+	"\x16initial_village_header\x18\x02 \x01(\v2$.packets.InitialVillageHeaderMessageH\x00R\x14initialVillageHeaderB\x05\n" +
+	"\x03msg\"\r\n" +
+	"\vHealMessage\"\xc1\x01\n" +
+	"\x1bInitialVillageHeaderMessage\x12I\n" +
+	"\x12new_reward_request\x18\x01 \x01(\v2\x19.packets.NewRewardRequestH\x00R\x10newRewardRequest\x12L\n" +
+	"\vupdate_info\x18\x02 \x01(\v2).packets.UpdateInitialVillageHeaderUIInfoH\x00R\n" +
+	"updateInfoB\t\n" +
+	"\asection\"\x12\n" +
+	"\x10NewRewardRequest\"t\n" +
+	" UpdateInitialVillageHeaderUIInfo\x12+\n" +
+	"\x12can_get_new_reward\x18\x01 \x01(\bR\x0fcanGetNewReward\x12#\n" +
+	"\rcan_challenge\x18\x02 \x01(\bR\fcanChallenge\"\xd0\x05\n" +
 	"\fBattlePacket\x128\n" +
 	"\acommand\x18\x01 \x01(\v2\x1c.packets.RoundCommandMessageH\x00R\acommand\x12@\n" +
 	"\fattack_stats\x18\x02 \x01(\v2\x1b.packets.AttackStatsMessageH\x00R\vattackStats\x12@\n" +
@@ -4828,86 +5084,90 @@ func file_shared_packets_proto_rawDescGZIP() []byte {
 	return file_shared_packets_proto_rawDescData
 }
 
-var file_shared_packets_proto_msgTypes = make([]protoimpl.MessageInfo, 70)
+var file_shared_packets_proto_msgTypes = make([]protoimpl.MessageInfo, 74)
 var file_shared_packets_proto_goTypes = []any{
-	(*LoginRequestMessage)(nil),            // 0: packets.LoginRequestMessage
-	(*RegisterRequestMessage)(nil),         // 1: packets.RegisterRequestMessage
-	(*OKResponseMessage)(nil),              // 2: packets.OKResponseMessage
-	(*DenyResponseMessage)(nil),            // 3: packets.DenyResponseMessage
-	(*LoginSuccessMessage)(nil),            // 4: packets.LoginSuccessMessage
-	(*PlayerEnterAreaRequestMessage)(nil),  // 5: packets.PlayerEnterAreaRequestMessage
-	(*PlayerEnterAreaResponseMessage)(nil), // 6: packets.PlayerEnterAreaResponseMessage
-	(*PlayerEnterAreaMessage)(nil),         // 7: packets.PlayerEnterAreaMessage
-	(*PlayerLeaveAreaMessage)(nil),         // 8: packets.PlayerLeaveAreaMessage
-	(*PlayerMoveMessage)(nil),              // 9: packets.PlayerMoveMessage
-	(*ChatMessage)(nil),                    // 10: packets.ChatMessage
-	(*MailRequestMessage)(nil),             // 11: packets.MailRequestMessage
-	(*MailMessage)(nil),                    // 12: packets.MailMessage
-	(*MailCollectMessage)(nil),             // 13: packets.MailCollectMessage
-	(*MailCollectResponseMessage)(nil),     // 14: packets.MailCollectResponseMessage
-	(*MailDeleteMessage)(nil),              // 15: packets.MailDeleteMessage
-	(*ItemMessage)(nil),                    // 16: packets.ItemMessage
-	(*BagRequestMessage)(nil),              // 17: packets.BagRequestMessage
-	(*BagMessage)(nil),                     // 18: packets.BagMessage
-	(*AddBagItemMessage)(nil),              // 19: packets.AddBagItemMessage
-	(*DeleteBagItemMessage)(nil),           // 20: packets.DeleteBagItemMessage
-	(*UseBagItemRequestMessage)(nil),       // 21: packets.UseBagItemRequestMessage
-	(*UseBagItemResponseMessage)(nil),      // 22: packets.UseBagItemResponseMessage
-	(*GetAreaRequest)(nil),                 // 23: packets.GetAreaRequest
-	(*SyncState)(nil),                      // 24: packets.SyncState
-	(*GetAreaNPCsMessage)(nil),             // 25: packets.GetAreaNPCsMessage
-	(*NPCInfoMessage)(nil),                 // 26: packets.NPCInfoMessage
-	(*InteractNPCRequestMessage)(nil),      // 27: packets.InteractNPCRequestMessage
-	(*InteractNPCEndMessage)(nil),          // 28: packets.InteractNPCEndMessage
-	(*GetPetMessage)(nil),                  // 29: packets.GetPetMessage
-	(*PetBagRequestMessage)(nil),           // 30: packets.PetBagRequestMessage
-	(*PetBagResponseMessage)(nil),          // 31: packets.PetBagResponseMessage
-	(*PetMessage)(nil),                     // 32: packets.PetMessage
-	(*PetStatsMessage)(nil),                // 33: packets.PetStatsMessage
-	(*SavePetMessage)(nil),                 // 34: packets.SavePetMessage
-	(*LearnSkillRequestMessage)(nil),       // 35: packets.LearnSkillRequestMessage
-	(*LearnSkillResponseMessage)(nil),      // 36: packets.LearnSkillResponseMessage
-	(*EquippedPetInfoRequestMessage)(nil),  // 37: packets.EquippedPetInfoRequestMessage
-	(*EquippedPetInfoResponseMessage)(nil), // 38: packets.EquippedPetInfoResponseMessage
-	(*AddPetItemMessage)(nil),              // 39: packets.AddPetItemMessage
-	(*DeletePetItemMessage)(nil),           // 40: packets.DeletePetItemMessage
-	(*PetItemMessage)(nil),                 // 41: packets.PetItemMessage
-	(*PetItemBagRequestMessage)(nil),       // 42: packets.PetItemBagRequestMessage
-	(*PetItemBagResponseMessage)(nil),      // 43: packets.PetItemBagResponseMessage
-	(*UsePetItemRequestMessage)(nil),       // 44: packets.UsePetItemRequestMessage
-	(*UsePetItemResponseMessage)(nil),      // 45: packets.UsePetItemResponseMessage
-	(*BattleRequestMessage)(nil),           // 46: packets.BattleRequestMessage
-	(*BattleInvitingMessage)(nil),          // 47: packets.BattleInvitingMessage
-	(*BattleInvitingResponseMessage)(nil),  // 48: packets.BattleInvitingResponseMessage
-	(*StartBattleMessage)(nil),             // 49: packets.StartBattleMessage
-	(*Packet)(nil),                         // 50: packets.Packet
-	(*UiPacket)(nil),                       // 51: packets.UiPacket
-	(*OpenUIMessage)(nil),                  // 52: packets.OpenUIMessage
-	(*InitialPetRequestMessage)(nil),       // 53: packets.InitialPetRequestMessage
-	(*BattlePacket)(nil),                   // 54: packets.BattlePacket
-	(*RoundCommandMessage)(nil),            // 55: packets.RoundCommandMessage
-	(*ChangePet)(nil),                      // 56: packets.ChangePet
-	(*RunAway)(nil),                        // 57: packets.RunAway
-	(*Attack)(nil),                         // 58: packets.Attack
-	(*AttackStatsMessage)(nil),             // 59: packets.AttackStatsMessage
-	(*Buff)(nil),                           // 60: packets.Buff
-	(*BattleEndStats)(nil),                 // 61: packets.BattleEndStats
-	(*DenyCommandMessage)(nil),             // 62: packets.DenyCommandMessage
-	(*StartNextRoundMessage)(nil),          // 63: packets.StartNextRoundMessage
-	(*BattleEndMessage)(nil),               // 64: packets.BattleEndMessage
-	(*RoundConfirmMessage)(nil),            // 65: packets.RoundConfirmMessage
-	(*ChangePetRequestMessage)(nil),        // 66: packets.ChangePetRequestMessage
-	(*ChangePetResponseMessage)(nil),       // 67: packets.ChangePetResponseMessage
-	(*SyncBattleInformationMessage)(nil),   // 68: packets.SyncBattleInformationMessage
-	(*RoundEndMessage)(nil),                // 69: packets.RoundEndMessage
+	(*LoginRequestMessage)(nil),              // 0: packets.LoginRequestMessage
+	(*RegisterRequestMessage)(nil),           // 1: packets.RegisterRequestMessage
+	(*OKResponseMessage)(nil),                // 2: packets.OKResponseMessage
+	(*DenyResponseMessage)(nil),              // 3: packets.DenyResponseMessage
+	(*LoginSuccessMessage)(nil),              // 4: packets.LoginSuccessMessage
+	(*PlayerEnterAreaRequestMessage)(nil),    // 5: packets.PlayerEnterAreaRequestMessage
+	(*PlayerEnterAreaResponseMessage)(nil),   // 6: packets.PlayerEnterAreaResponseMessage
+	(*PlayerEnterAreaMessage)(nil),           // 7: packets.PlayerEnterAreaMessage
+	(*PlayerLeaveAreaMessage)(nil),           // 8: packets.PlayerLeaveAreaMessage
+	(*PlayerMoveMessage)(nil),                // 9: packets.PlayerMoveMessage
+	(*ChatMessage)(nil),                      // 10: packets.ChatMessage
+	(*MailRequestMessage)(nil),               // 11: packets.MailRequestMessage
+	(*MailMessage)(nil),                      // 12: packets.MailMessage
+	(*MailCollectMessage)(nil),               // 13: packets.MailCollectMessage
+	(*MailCollectResponseMessage)(nil),       // 14: packets.MailCollectResponseMessage
+	(*MailDeleteMessage)(nil),                // 15: packets.MailDeleteMessage
+	(*ItemMessage)(nil),                      // 16: packets.ItemMessage
+	(*BagRequestMessage)(nil),                // 17: packets.BagRequestMessage
+	(*BagMessage)(nil),                       // 18: packets.BagMessage
+	(*AddBagItemMessage)(nil),                // 19: packets.AddBagItemMessage
+	(*DeleteBagItemMessage)(nil),             // 20: packets.DeleteBagItemMessage
+	(*UseBagItemRequestMessage)(nil),         // 21: packets.UseBagItemRequestMessage
+	(*UseBagItemResponseMessage)(nil),        // 22: packets.UseBagItemResponseMessage
+	(*GetAreaRequest)(nil),                   // 23: packets.GetAreaRequest
+	(*SyncState)(nil),                        // 24: packets.SyncState
+	(*GetAreaNPCsMessage)(nil),               // 25: packets.GetAreaNPCsMessage
+	(*NPCInfoMessage)(nil),                   // 26: packets.NPCInfoMessage
+	(*InteractNPCRequestMessage)(nil),        // 27: packets.InteractNPCRequestMessage
+	(*GetPetMessage)(nil),                    // 28: packets.GetPetMessage
+	(*PetBagRequestMessage)(nil),             // 29: packets.PetBagRequestMessage
+	(*PetBagResponseMessage)(nil),            // 30: packets.PetBagResponseMessage
+	(*PetMessage)(nil),                       // 31: packets.PetMessage
+	(*PetStatsMessage)(nil),                  // 32: packets.PetStatsMessage
+	(*SavePetMessage)(nil),                   // 33: packets.SavePetMessage
+	(*LearnSkillRequestMessage)(nil),         // 34: packets.LearnSkillRequestMessage
+	(*LearnSkillResponseMessage)(nil),        // 35: packets.LearnSkillResponseMessage
+	(*EquippedPetInfoRequestMessage)(nil),    // 36: packets.EquippedPetInfoRequestMessage
+	(*EquippedPetInfoResponseMessage)(nil),   // 37: packets.EquippedPetInfoResponseMessage
+	(*AddPetItemMessage)(nil),                // 38: packets.AddPetItemMessage
+	(*DeletePetItemMessage)(nil),             // 39: packets.DeletePetItemMessage
+	(*PetItemMessage)(nil),                   // 40: packets.PetItemMessage
+	(*PetItemBagRequestMessage)(nil),         // 41: packets.PetItemBagRequestMessage
+	(*PetItemBagResponseMessage)(nil),        // 42: packets.PetItemBagResponseMessage
+	(*UsePetItemRequestMessage)(nil),         // 43: packets.UsePetItemRequestMessage
+	(*UsePetItemResponseMessage)(nil),        // 44: packets.UsePetItemResponseMessage
+	(*BattleRequestMessage)(nil),             // 45: packets.BattleRequestMessage
+	(*BattleInvitingMessage)(nil),            // 46: packets.BattleInvitingMessage
+	(*BattleInvitingResponseMessage)(nil),    // 47: packets.BattleInvitingResponseMessage
+	(*StartBattleMessage)(nil),               // 48: packets.StartBattleMessage
+	(*Packet)(nil),                           // 49: packets.Packet
+	(*UiPacket)(nil),                         // 50: packets.UiPacket
+	(*OpenUIMessage)(nil),                    // 51: packets.OpenUIMessage
+	(*InitialPetRequestMessage)(nil),         // 52: packets.InitialPetRequestMessage
+	(*NPCInteractPacket)(nil),                // 53: packets.NPCInteractPacket
+	(*HealMessage)(nil),                      // 54: packets.HealMessage
+	(*InitialVillageHeaderMessage)(nil),      // 55: packets.InitialVillageHeaderMessage
+	(*NewRewardRequest)(nil),                 // 56: packets.NewRewardRequest
+	(*UpdateInitialVillageHeaderUIInfo)(nil), // 57: packets.UpdateInitialVillageHeaderUIInfo
+	(*BattlePacket)(nil),                     // 58: packets.BattlePacket
+	(*RoundCommandMessage)(nil),              // 59: packets.RoundCommandMessage
+	(*ChangePet)(nil),                        // 60: packets.ChangePet
+	(*RunAway)(nil),                          // 61: packets.RunAway
+	(*Attack)(nil),                           // 62: packets.Attack
+	(*AttackStatsMessage)(nil),               // 63: packets.AttackStatsMessage
+	(*Buff)(nil),                             // 64: packets.Buff
+	(*BattleEndStats)(nil),                   // 65: packets.BattleEndStats
+	(*DenyCommandMessage)(nil),               // 66: packets.DenyCommandMessage
+	(*StartNextRoundMessage)(nil),            // 67: packets.StartNextRoundMessage
+	(*BattleEndMessage)(nil),                 // 68: packets.BattleEndMessage
+	(*RoundConfirmMessage)(nil),              // 69: packets.RoundConfirmMessage
+	(*ChangePetRequestMessage)(nil),          // 70: packets.ChangePetRequestMessage
+	(*ChangePetResponseMessage)(nil),         // 71: packets.ChangePetResponseMessage
+	(*SyncBattleInformationMessage)(nil),     // 72: packets.SyncBattleInformationMessage
+	(*RoundEndMessage)(nil),                  // 73: packets.RoundEndMessage
 }
 var file_shared_packets_proto_depIdxs = []int32{
 	16, // 0: packets.MailMessage.items:type_name -> packets.ItemMessage
-	41, // 1: packets.MailMessage.pet_items:type_name -> packets.PetItemMessage
+	40, // 1: packets.MailMessage.pet_items:type_name -> packets.PetItemMessage
 	26, // 2: packets.GetAreaNPCsMessage.npc_info:type_name -> packets.NPCInfoMessage
-	32, // 3: packets.PetBagResponseMessage.pet:type_name -> packets.PetMessage
-	33, // 4: packets.PetMessage.pet_stats:type_name -> packets.PetStatsMessage
-	32, // 5: packets.EquippedPetInfoResponseMessage.pet:type_name -> packets.PetMessage
+	31, // 3: packets.PetBagResponseMessage.pet:type_name -> packets.PetMessage
+	32, // 4: packets.PetMessage.pet_stats:type_name -> packets.PetStatsMessage
+	31, // 5: packets.EquippedPetInfoResponseMessage.pet:type_name -> packets.PetMessage
 	0,  // 6: packets.Packet.login_request:type_name -> packets.LoginRequestMessage
 	1,  // 7: packets.Packet.register_request:type_name -> packets.RegisterRequestMessage
 	2,  // 8: packets.Packet.ok_response:type_name -> packets.OKResponseMessage
@@ -4930,54 +5190,58 @@ var file_shared_packets_proto_depIdxs = []int32{
 	20, // 25: packets.Packet.delete_bag_item:type_name -> packets.DeleteBagItemMessage
 	21, // 26: packets.Packet.use_bag_item_request:type_name -> packets.UseBagItemRequestMessage
 	22, // 27: packets.Packet.use_bag_item_response:type_name -> packets.UseBagItemResponseMessage
-	51, // 28: packets.Packet.ui_packet:type_name -> packets.UiPacket
-	29, // 29: packets.Packet.get_pet:type_name -> packets.GetPetMessage
-	30, // 30: packets.Packet.pet_bag_request:type_name -> packets.PetBagRequestMessage
-	31, // 31: packets.Packet.pet_bag_response:type_name -> packets.PetBagResponseMessage
-	34, // 32: packets.Packet.save_pet:type_name -> packets.SavePetMessage
-	35, // 33: packets.Packet.learn_skill_request:type_name -> packets.LearnSkillRequestMessage
-	36, // 34: packets.Packet.learn_skill_response:type_name -> packets.LearnSkillResponseMessage
-	39, // 35: packets.Packet.add_pet_item:type_name -> packets.AddPetItemMessage
-	40, // 36: packets.Packet.delete_pet_item:type_name -> packets.DeletePetItemMessage
-	42, // 37: packets.Packet.pet_item_bag_request:type_name -> packets.PetItemBagRequestMessage
-	44, // 38: packets.Packet.use_pet_item_request:type_name -> packets.UsePetItemRequestMessage
-	45, // 39: packets.Packet.use_pet_item_response:type_name -> packets.UsePetItemResponseMessage
-	43, // 40: packets.Packet.pet_item_bag_response:type_name -> packets.PetItemBagResponseMessage
-	37, // 41: packets.Packet.equipped_pet_info_request:type_name -> packets.EquippedPetInfoRequestMessage
-	38, // 42: packets.Packet.equipped_pet_info_response:type_name -> packets.EquippedPetInfoResponseMessage
-	54, // 43: packets.Packet.battle_packet:type_name -> packets.BattlePacket
-	46, // 44: packets.Packet.battle_request:type_name -> packets.BattleRequestMessage
-	48, // 45: packets.Packet.battle_inviting_response:type_name -> packets.BattleInvitingResponseMessage
-	47, // 46: packets.Packet.battle_inviting:type_name -> packets.BattleInvitingMessage
-	49, // 47: packets.Packet.start_battle:type_name -> packets.StartBattleMessage
+	50, // 28: packets.Packet.ui_packet:type_name -> packets.UiPacket
+	28, // 29: packets.Packet.get_pet:type_name -> packets.GetPetMessage
+	29, // 30: packets.Packet.pet_bag_request:type_name -> packets.PetBagRequestMessage
+	30, // 31: packets.Packet.pet_bag_response:type_name -> packets.PetBagResponseMessage
+	33, // 32: packets.Packet.save_pet:type_name -> packets.SavePetMessage
+	34, // 33: packets.Packet.learn_skill_request:type_name -> packets.LearnSkillRequestMessage
+	35, // 34: packets.Packet.learn_skill_response:type_name -> packets.LearnSkillResponseMessage
+	38, // 35: packets.Packet.add_pet_item:type_name -> packets.AddPetItemMessage
+	39, // 36: packets.Packet.delete_pet_item:type_name -> packets.DeletePetItemMessage
+	41, // 37: packets.Packet.pet_item_bag_request:type_name -> packets.PetItemBagRequestMessage
+	43, // 38: packets.Packet.use_pet_item_request:type_name -> packets.UsePetItemRequestMessage
+	44, // 39: packets.Packet.use_pet_item_response:type_name -> packets.UsePetItemResponseMessage
+	42, // 40: packets.Packet.pet_item_bag_response:type_name -> packets.PetItemBagResponseMessage
+	36, // 41: packets.Packet.equipped_pet_info_request:type_name -> packets.EquippedPetInfoRequestMessage
+	37, // 42: packets.Packet.equipped_pet_info_response:type_name -> packets.EquippedPetInfoResponseMessage
+	58, // 43: packets.Packet.battle_packet:type_name -> packets.BattlePacket
+	45, // 44: packets.Packet.battle_request:type_name -> packets.BattleRequestMessage
+	47, // 45: packets.Packet.battle_inviting_response:type_name -> packets.BattleInvitingResponseMessage
+	46, // 46: packets.Packet.battle_inviting:type_name -> packets.BattleInvitingMessage
+	48, // 47: packets.Packet.start_battle:type_name -> packets.StartBattleMessage
 	23, // 48: packets.Packet.get_area_request:type_name -> packets.GetAreaRequest
 	24, // 49: packets.Packet.sync_state:type_name -> packets.SyncState
 	25, // 50: packets.Packet.get_area_npcs:type_name -> packets.GetAreaNPCsMessage
 	27, // 51: packets.Packet.interact_npc_request:type_name -> packets.InteractNPCRequestMessage
-	28, // 52: packets.Packet.interact_npc_end:type_name -> packets.InteractNPCEndMessage
-	52, // 53: packets.UiPacket.open_ui:type_name -> packets.OpenUIMessage
-	53, // 54: packets.UiPacket.initial_pet_request:type_name -> packets.InitialPetRequestMessage
-	55, // 55: packets.BattlePacket.command:type_name -> packets.RoundCommandMessage
-	59, // 56: packets.BattlePacket.attack_stats:type_name -> packets.AttackStatsMessage
-	62, // 57: packets.BattlePacket.deny_command:type_name -> packets.DenyCommandMessage
-	63, // 58: packets.BattlePacket.start_next_round:type_name -> packets.StartNextRoundMessage
-	64, // 59: packets.BattlePacket.battle_end:type_name -> packets.BattleEndMessage
-	65, // 60: packets.BattlePacket.round_confirm:type_name -> packets.RoundConfirmMessage
-	67, // 61: packets.BattlePacket.change_pet:type_name -> packets.ChangePetResponseMessage
-	66, // 62: packets.BattlePacket.change_pet_request:type_name -> packets.ChangePetRequestMessage
-	68, // 63: packets.BattlePacket.sync_battle_information:type_name -> packets.SyncBattleInformationMessage
-	69, // 64: packets.BattlePacket.round_end:type_name -> packets.RoundEndMessage
-	56, // 65: packets.RoundCommandMessage.change_pet:type_name -> packets.ChangePet
-	57, // 66: packets.RoundCommandMessage.runaway:type_name -> packets.RunAway
-	58, // 67: packets.RoundCommandMessage.attack:type_name -> packets.Attack
-	60, // 68: packets.AttackStatsMessage.buffs:type_name -> packets.Buff
-	33, // 69: packets.AttackStatsMessage.pet_stats:type_name -> packets.PetStatsMessage
-	32, // 70: packets.SyncBattleInformationMessage.pet_messages:type_name -> packets.PetMessage
-	71, // [71:71] is the sub-list for method output_type
-	71, // [71:71] is the sub-list for method input_type
-	71, // [71:71] is the sub-list for extension type_name
-	71, // [71:71] is the sub-list for extension extendee
-	0,  // [0:71] is the sub-list for field type_name
+	53, // 52: packets.Packet.npc_interact:type_name -> packets.NPCInteractPacket
+	51, // 53: packets.UiPacket.open_ui:type_name -> packets.OpenUIMessage
+	52, // 54: packets.UiPacket.initial_pet_request:type_name -> packets.InitialPetRequestMessage
+	54, // 55: packets.NPCInteractPacket.heal:type_name -> packets.HealMessage
+	55, // 56: packets.NPCInteractPacket.initial_village_header:type_name -> packets.InitialVillageHeaderMessage
+	56, // 57: packets.InitialVillageHeaderMessage.new_reward_request:type_name -> packets.NewRewardRequest
+	57, // 58: packets.InitialVillageHeaderMessage.update_info:type_name -> packets.UpdateInitialVillageHeaderUIInfo
+	59, // 59: packets.BattlePacket.command:type_name -> packets.RoundCommandMessage
+	63, // 60: packets.BattlePacket.attack_stats:type_name -> packets.AttackStatsMessage
+	66, // 61: packets.BattlePacket.deny_command:type_name -> packets.DenyCommandMessage
+	67, // 62: packets.BattlePacket.start_next_round:type_name -> packets.StartNextRoundMessage
+	68, // 63: packets.BattlePacket.battle_end:type_name -> packets.BattleEndMessage
+	69, // 64: packets.BattlePacket.round_confirm:type_name -> packets.RoundConfirmMessage
+	71, // 65: packets.BattlePacket.change_pet:type_name -> packets.ChangePetResponseMessage
+	70, // 66: packets.BattlePacket.change_pet_request:type_name -> packets.ChangePetRequestMessage
+	72, // 67: packets.BattlePacket.sync_battle_information:type_name -> packets.SyncBattleInformationMessage
+	73, // 68: packets.BattlePacket.round_end:type_name -> packets.RoundEndMessage
+	60, // 69: packets.RoundCommandMessage.change_pet:type_name -> packets.ChangePet
+	61, // 70: packets.RoundCommandMessage.runaway:type_name -> packets.RunAway
+	62, // 71: packets.RoundCommandMessage.attack:type_name -> packets.Attack
+	64, // 72: packets.AttackStatsMessage.buffs:type_name -> packets.Buff
+	32, // 73: packets.AttackStatsMessage.pet_stats:type_name -> packets.PetStatsMessage
+	31, // 74: packets.SyncBattleInformationMessage.pet_messages:type_name -> packets.PetMessage
+	75, // [75:75] is the sub-list for method output_type
+	75, // [75:75] is the sub-list for method input_type
+	75, // [75:75] is the sub-list for extension type_name
+	75, // [75:75] is the sub-list for extension extendee
+	0,  // [0:75] is the sub-list for field type_name
 }
 
 func init() { file_shared_packets_proto_init() }
@@ -4985,7 +5249,7 @@ func file_shared_packets_proto_init() {
 	if File_shared_packets_proto != nil {
 		return
 	}
-	file_shared_packets_proto_msgTypes[50].OneofWrappers = []any{
+	file_shared_packets_proto_msgTypes[49].OneofWrappers = []any{
 		(*Packet_LoginRequest)(nil),
 		(*Packet_RegisterRequest)(nil),
 		(*Packet_OkResponse)(nil),
@@ -5032,13 +5296,21 @@ func file_shared_packets_proto_init() {
 		(*Packet_SyncState)(nil),
 		(*Packet_GetAreaNpcs)(nil),
 		(*Packet_InteractNpcRequest)(nil),
-		(*Packet_InteractNpcEnd)(nil),
+		(*Packet_NpcInteract)(nil),
 	}
-	file_shared_packets_proto_msgTypes[51].OneofWrappers = []any{
+	file_shared_packets_proto_msgTypes[50].OneofWrappers = []any{
 		(*UiPacket_OpenUi)(nil),
 		(*UiPacket_InitialPetRequest)(nil),
 	}
-	file_shared_packets_proto_msgTypes[54].OneofWrappers = []any{
+	file_shared_packets_proto_msgTypes[53].OneofWrappers = []any{
+		(*NPCInteractPacket_Heal)(nil),
+		(*NPCInteractPacket_InitialVillageHeader)(nil),
+	}
+	file_shared_packets_proto_msgTypes[55].OneofWrappers = []any{
+		(*InitialVillageHeaderMessage_NewRewardRequest)(nil),
+		(*InitialVillageHeaderMessage_UpdateInfo)(nil),
+	}
+	file_shared_packets_proto_msgTypes[58].OneofWrappers = []any{
 		(*BattlePacket_Command)(nil),
 		(*BattlePacket_AttackStats)(nil),
 		(*BattlePacket_DenyCommand)(nil),
@@ -5050,7 +5322,7 @@ func file_shared_packets_proto_init() {
 		(*BattlePacket_SyncBattleInformation)(nil),
 		(*BattlePacket_RoundEnd)(nil),
 	}
-	file_shared_packets_proto_msgTypes[55].OneofWrappers = []any{
+	file_shared_packets_proto_msgTypes[59].OneofWrappers = []any{
 		(*RoundCommandMessage_ChangePet)(nil),
 		(*RoundCommandMessage_Runaway)(nil),
 		(*RoundCommandMessage_Attack)(nil),
@@ -5061,7 +5333,7 @@ func file_shared_packets_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_shared_packets_proto_rawDesc), len(file_shared_packets_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   70,
+			NumMessages:   74,
 			NumExtensions: 0,
 			NumServices:   0,
 		},

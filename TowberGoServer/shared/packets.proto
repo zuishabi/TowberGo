@@ -302,6 +302,7 @@ message Packet{
     SyncState sync_state = 45;
     GetAreaNPCsMessage get_area_npcs = 46;
     InteractNPCRequestMessage interact_npc_request = 47;
+    NPCInteractPacket npc_interact = 48;
   }
 }
 
@@ -318,6 +319,29 @@ message OpenUIMessage{
 
 message InitialPetRequestMessage{
   uint32 request_id = 1;
+}
+
+message NPCInteractPacket{
+  oneof msg{
+    HealMessage heal = 1;
+    InitialVillageHeaderMessage initial_village_header = 2;
+  }
+}
+
+message HealMessage{}
+
+message InitialVillageHeaderMessage{
+  oneof section{
+    NewRewardRequest new_reward_request = 1;
+    UpdateInitialVillageHeaderUIInfo update_info = 2;
+  }
+}
+
+message NewRewardRequest{}
+
+message UpdateInitialVillageHeaderUIInfo{
+  bool can_get_new_reward = 1;
+  bool can_challenge = 2;
 }
 
 //--------------------------------------战斗系统------------------------

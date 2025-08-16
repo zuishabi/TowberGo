@@ -22,6 +22,7 @@ initial_position = 1
 size = Vector2i(700, 450)
 transient = true
 exclusive = true
+unresizable = true
 borderless = true
 always_on_top = true
 script = ExtResource("1_w5jii")

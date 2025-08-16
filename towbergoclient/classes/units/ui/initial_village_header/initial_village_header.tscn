@@ -1,0 +1,14 @@
+[gd_scene load_steps=2 format=3 uid="uid://folp2hy8rql2"]
+
+[ext_resource type="Script" uid="uid://cotxt7oacbarh" path="res://classes/units/ui/initial_village_header/initial_village_header.gd" id="1_l4el2"]
+
+[node name="InitialVillageHeader" type="Window"]
+initial_position = 1
+size = Vector2i(400, 300)
+transient = true
+exclusive = true
+unresizable = true
+always_on_top = true
+script = ExtResource("1_l4el2")
+
+[connection signal="close_requested" from="." to="." method="_on_close_requested"]

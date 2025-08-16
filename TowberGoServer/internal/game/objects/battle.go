@@ -50,6 +50,12 @@ type BattleRoom struct {
 	winner        int
 	CurrentStage  atomic.Int32
 	Looter        LootTable
+	EndChan       []chan *BattleSummary
+}
+
+type BattleSummary struct {
+	Winner *Player
+	Loser  *Player
 }
 
 func (r *BattleRoom) GetTheOtherPlayer(num int) int {
@@ -142,6 +148,16 @@ func (r *BattleRoom) Start() {
 				)
 			}
 		}
+
+		// 发送战斗结束信号
+		battleSummary := BattleSummary{
+			Winner: r.Players[r.winner].GetPlayer(),
+			Loser:  r.Players[r.GetTheOtherPlayer(r.winner)].GetPlayer(),
+		}
+		for _, v := range r.EndChan {
+			v <- &battleSummary
+		}
+
 	}()
 	r.Players[0].SetBattleRoom(r)
 	r.Players[1].SetBattleRoom(r)

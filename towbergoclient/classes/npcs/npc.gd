@@ -10,7 +10,7 @@ var can_interact:bool
 
 func _ready():
 	body.texture = current_npc.npc_texture
-	name_text.text = "ncp:" + current_npc.npc_name
+	name_text.text = "npc:" + current_npc.npc_name
 
 func load_npc(npc:BaseNPC):
 	current_npc = npc

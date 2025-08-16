@@ -6,6 +6,8 @@ var pet_item_bag:Dictionary[int,BasePetItem]
 var id:int
 var username:String
 var can_move:bool = true
+var current_interacting_npc:BaseNPC
+var bind_npc_processor:Callable
 
 func delete_item(id:int,count:int):
 	item_bag[id].item_count -= count

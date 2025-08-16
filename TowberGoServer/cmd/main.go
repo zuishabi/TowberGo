@@ -14,6 +14,7 @@ import (
 	"os"
 	"strconv"
 	"strings"
+	"time"
 )
 
 type config struct {
@@ -84,6 +85,9 @@ func main() {
 	// 创建LootManager并进行初始化
 	objects.LootManager = &objects.LootManagerStruct{}
 
+	// 开启定时任务
+	runAtMidnight()
+
 	// 定义websocket处理
 	http.HandleFunc("/ws", func(w http.ResponseWriter, r *http.Request) {
 		hub.Serve(clients.NewWebSocketClient, w, r)
@@ -108,4 +112,23 @@ func addHeaders(next http.Handler) http.Handler {
 		w.Header().Set("X-Content-Type-Options", "nosniff")
 		next.ServeHTTP(w, r)
 	})
+}
+
+func runAtMidnight() {
+	go func() {
+		for {
+			now := time.Now()
+			// 计算下一个 0 点
+			next := now.Add(24 * time.Hour).Truncate(24 * time.Hour)
+			duration := next.Sub(now)
+
+			// 创建一个定时器等待到 0 点
+			timer := time.NewTimer(duration)
+			<-timer.C
+
+			// 执行任务
+			// 1、清除所有用户的每日挑战记录
+
+		}
+	}()
 }
